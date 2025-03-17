@@ -1,0 +1,983 @@
+@media only screen and (max-width: 1199px) {
+    .login-sec .left .image img {
+        object-fit: fill;
+    }
+    .db-header {
+        text-align: center;
+    }
+
+
+
+    /* .db-h-right*/
+    .db-h-right {
+        width: auto;
+    }
+
+    .db-h-right .db-middle {
+        display: block;
+        width: auto;
+    }
+
+    .db-h-right .db-middle p {
+        text-align: center;
+    }
+
+    .db-h-right .db-right-block {
+        display: block;
+        width: auto;
+    }
+
+    /* .db-h-right*/
+    /*.inline-form*/
+    .inline-form ul li:first-child {
+        padding: 0;
+    }
+
+    .inline-form ul li {
+        padding: 0;
+    }
+
+    /*.inline-form*/
+    .patient .db-patientprofile-detail .block-first {
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .db-box .card .form-group{
+        text-align: center;
+    }
+    .db-box .card .btn-success{
+        min-width: 190px;
+    }
+    .db-box .card .select select{
+        font-family: 'Open Sans';
+        font-weight: 400;
+        font-size: 13px;
+        color: #2e2e2f;
+    }
+    .db-logo {
+        display: block;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .login-sec .left {
+        min-height: 0;
+    }
+    .login-form h3 {
+        text-align: center;
+    }
+    .login-sec .left .image {
+        display: none;
+    }
+    .login-sec .left p.copyright {
+        position: static;
+        color: #00cccf;
+    }
+
+    .db-date .db-content {
+        width: calc(100% - 20px);
+        text-align: left;
+    }
+
+    .inline-form ul.list-btn li {
+        display: block;
+    }
+
+    .mainMenu .menu ul li {
+        padding: 5px 2px;
+    }
+
+    .application-sec img {
+        max-width: none;
+        float: none;
+        margin-bottom: 20px;
+    }
+
+    .advantage-sec .image {
+        margin-bottom: 20px;
+    }
+
+    /*Dashboard*/
+    /*.serviceSec*/
+    .serviceSec .left {
+        flex: 0 0 175px;
+        max-width: 175px;
+    }
+
+    .serviceSec .right {
+        flex: 0 0 calc(100% - 175px);
+        max-width: calc(100% - 175px);
+    }
+
+    .serviceSec .right .single {
+        padding: 15px;
+    }
+
+    .serviceSec .right .single:before {
+        display: none;
+    }
+
+    /*.serviceSec*/
+    /*.db-sidebar*/
+    .db-sidebar {
+        width: 100%;
+        height: 100%;
+        display: none;
+        flex: 0 0 100%;
+        max-width: 100%;
+        box-shadow: 5px 0px 5px rgba(0, 0, 0, .1);
+        overflow: auto;
+        position: fixed;
+        z-index: 9;
+        left: 0;
+        top: 0;
+    }
+
+    .db-sidebar .side-content {
+        width: 215px;
+        position: absolute;
+        left: -215px;
+    }
+
+    .db-sidebar.active .side-content {
+        left: 0;
+        overflow: auto;
+    }
+
+    /*.db-sidebar*/
+    /*.db-menu-toggle*/
+    .db-menu-toggle {
+        display: block;
+    }
+
+    /*.db-menu-toggle*/
+    .db-box {
+        height: auto;
+    }
+
+    .db-s-user {
+        background: #3574a7;
+        color: #fff;
+    }
+
+    .db-heading .db-s-user {
+        background: none;
+        color: #424242;
+    }
+
+    .db-container {
+        flex: 0 0 calc(100%);
+        max-width: calc(100%);
+    }
+
+    /*.db-content*/
+    .db-content .db-health .mail-right .mail-right-inr form ul {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .db-content .db-health .mail-left {
+        float: none;
+        width: auto;
+    }
+
+    .db-content .db-health .mail-right {
+        float: none;
+        width: auto;
+        padding-left: 0;
+    }
+
+    .db-content .db-health .mail-right ul li {
+        display: block;
+    }
+
+    .db-content .db-health .mail-right ul li a {
+        display: block;
+    }
+
+    .db-content .db-health .mail-right ul li {
+        display: block;
+    }
+
+    .db-content .db-health .mail-right ul li a {
+        display: block;
+    }
+
+    .db-content .db-health .mail-right .form-mail-textnew .mail-content .time {
+        float: none;
+    }
+
+    .db-content .db-health .mail-right .mail-right-inr .more-btn {
+        float: none;
+        padding-right: 0;
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .db-content .db-health .mail-right .mail-right-inr table a.btn {
+        display: block;
+    }
+
+    .db-content .db-health .mail-right .mail-right-inr .db-search {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    /*.db-content*/
+    /*.db-heading*/
+    .db-heading .icon-btns {
+        float: none;
+    }
+
+    .db-heading .icon-btns li span {
+        display: none;
+    }
+
+    .db-heading ul li {
+        padding: 0 10px;
+    }
+
+    .db-heading ul li a {
+        font-size: 15px;
+    }
+
+    /*.db-heading*/
+    /*.db-form-toggle*/
+    .db-form-toggle .toggle-head .medication-btn {
+        float: none;
+        margin-top: 0;
+        padding-bottom: 10px;
+    }
+
+    .db-form-toggle .toggle-head .medication-btn ul {
+        float: none;
+    }
+
+    /*.db-form-toggle*/
+    /*.inline-form */
+    .inline-form ul li {
+        display: block;
+        padding: 0;
+    }
+
+    .inline-form .single-inp .inp-btn {
+        max-width: none;
+    }
+
+    .inline-form .single-calendar .inp {
+        flex: none;
+        max-width: none;
+    }
+
+    .inline-form ul li:first-child {
+        padding: 0;
+    }
+
+    .inline-form .single-inp .inp ul.list-btn {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    /*.inline-form */
+    /*.db-appbox*/
+    .db-appbox .inline-form .single-inp .inp {
+        flex: none;
+        max-width: none;
+        width: 100%;
+    }
+
+    .db-appbox .bottom .inline-form .single-inp .inp {
+        max-width: none;
+    }
+
+    /*.db-appbox*/
+    /*.db-discussion-detail*/
+    .db-discussion-detail .block .left-sec {
+        width: auto;
+        float: none;
+    }
+
+    .db-discussion-detail .block .middle-sec {
+        width: auto;
+        float: none;
+        display: none;
+    }
+
+    .db-discussion-detail .block .right-sec {
+        width: auto;
+        float: none;
+    }
+
+    .db-discussion-detail .description .left {
+        width: auto;
+        float: none;
+    }
+
+    .db-discussion-detail .description .right {
+        padding-left: 0;
+    }
+
+    .db-discussion-detail .left {
+        width: auto;
+        float: none;
+    }
+
+    .db-discussion-detail .right {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .db-discussion-detail .db-attachment .left {
+        float: none;
+        width: auto;
+    }
+
+    .db-discussion-detail .db-attachment .right {
+        padding-left: 0;
+    }
+
+    .db-discussion-detail .db-appbox .inline-form {
+        padding: 0;
+    }
+
+    .db-discussion-detail .right .db-date .db-heading .icon-btns {
+        text-align: center;
+    }
+
+    .db-discussion-detail .right .db-date .db-heading .icon-btns li {
+        padding: 0 10px;
+    }
+
+    .db-discussion-detail .right .db-date .db-heading .icon-btns li:first-child {
+        padding: 0 15px 0 0;
+    }
+
+    .db-discussion-detail .right .db-date .db-heading .icon-btns li:not(:last-child) {
+        border-right: none;
+    }
+
+    .db-discussion-detail .db-attachment .right p {
+        padding-top: 0;
+        margin-bottom: 10px;
+    }
+
+    /*.db-discussion-detail*/
+    /*.db-patientref*/
+    .db-patientref .top {
+        padding: 10px;
+    }
+
+    .db-patientref .bottom {
+        padding: 10px;
+    }
+
+    .db-patientref .bottom .inr {
+        padding: 35px 0;
+    }
+
+    .db-patientref .bottom-new {
+        padding: 5px;
+    }
+
+    /*.db-patientref*/
+    /*.db-dscreply-detail */
+    .db-dscreply-detail .right {
+        padding-left: 0;
+    }
+
+    /*.db-dscreply-detail */
+    /*.db-dsccreate-detail*/
+    .db-dsccreate-detail .reply-btn {
+        margin: 0;
+        margin-bottom: 30px;
+    }
+
+    .db-dsccreate-detail .db-appbox .inline-form {
+        padding: 0;
+    }
+
+    .db-dsccreate-detail .db-s-user {
+        background: none;
+    }
+
+    /*.db-dsccreate-detail*/
+    /*.db-examform-toggle*/
+    .db-examform-toggle .toggle-head h3 a {
+        margin-top: 0;
+        float: none;
+    }
+
+    /*.db-examform-toggle*/
+    .db-appreqform .top {
+        padding: 5px;
+    }
+
+    /*.db-app-detail*/
+    .db-app-detail .left {
+        float: none;
+        width: auto;
+    }
+
+    .db-app-detail .right {
+        max-width: none;
+        padding-left: 0;
+    }
+
+    .db-app-detail .right .discussion-head {
+        text-align: center;
+    }
+
+    .db-app-detail .db-appbox .inline-form {
+        padding: 5px;
+    }
+
+    /*.db-app-detail*/
+    /*.db-user-profile*/
+    .db-user-profile .referrals a.db-user-left {
+        display: block;
+        margin-bottom: 28px;
+    }
+
+    .db-user-profile .referrals ul.icon-btns {
+        width: calc(100% - 20px);
+        display: inline-block;
+    }
+
+    .db-user-profile .referrals ul.icon-btns li {
+        padding: 0 10px;
+    }
+
+    /*.db-user-profile*/
+    /*.db-form-toggle*/
+    .db-form-toggle .tab-content .card-body {
+        padding: 0.5rem;
+    }
+
+    /*.db-form-toggle*/
+    /*.db-appoinments*/
+    .db-appoinments .single .cntnt .c-left {
+        width: auto;
+        display: block;
+    }
+
+    .db-appoinments .single .image {
+        width: auto;
+        display: block;
+    }
+
+    .db-appoinments .single .cntnt {
+        width: auto;
+        display: block;
+        text-align: center;
+    }
+
+    /*.db-appoinments*/
+    /*.db-user-profile*/
+    .db-user-profile .referrals .db-user-leftdirectory {
+        display: inline-block;
+        width: auto;
+    }
+
+    .db-user-profile .referrals .db-user-leftdirectory h3 {
+        display: inline-block;
+    }
+
+    .db-user-profile .referrals .db-user-floatrt {
+        padding-top: 0;
+    }
+
+    /*.db-user-profile*/
+    /*db-patientprofile-detail*/
+    .patient .db-patientprofile-detail .left {
+        text-align: center;
+        width: auto;
+    }
+
+    .patient .db-patientprofile-detail .right {
+        padding-left: 0;
+    }
+
+    /*db-patientprofile-detail*/
+    /*+++++++++++++++++++++++++++Patient++++++++++++++++++++++++++++++++++++++++++*/
+    .patient .db-scanner-head .left {
+        display: block;
+    }
+
+    .patient .db-scanner-head .right {
+        width: auto;
+        display: block;
+    }
+
+    /*+++++++++++++++++++++++++++Patient++++++++++++++++++++++++++++++++++++++++++*/
+    .mainBanner .bannerContent .b-left {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .mainBanner .bannerContent .b-right {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .check.active-toggle span{
+        font-size: 15px;
+    }
+
+    /*header*/
+    header .header {
+        padding: 20px 0;
+    }
+
+    .toggle-btn {
+        display: inline-block;
+    }
+
+    /*header*/
+    /*mainMenu*/
+    .mainMenu {
+        border-radius: 0;
+    }
+
+    .mainMenu .logo {
+        text-align: left;
+    }
+
+    .mainMenu .menu {
+        width: 100%;
+        display: block;
+        display: none;
+    }
+
+    .mainMenu .menu nav {
+        padding-top: 10px;
+    }
+
+    .mainMenu .menu nav ul {
+        background: rgba(0, 0, 0, .1);
+    }
+
+    .mainMenu .menu nav ul li {
+        display: block;
+        padding: 2px 5px;
+    }
+
+    .mainMenu .menu ul li a {
+        padding: 5px 10px;
+        border-radius: 0;
+    }
+
+    /*mainMenu*/
+    /*mainBanner*/
+    .mainBanner,
+    .providerHome .mainBanner {
+        padding: 0;
+    }
+
+    .mainBanner .bannerContent {
+        position: relative;
+        background: rgba(0, 0, 0, .5);
+        color: #fff;
+        padding: 30px 0;
+    }
+
+    .forPatient .mainBanner .bannerContent {
+        bottom: auto;
+        padding-top: 160px;
+    }
+
+    .mainBanner .bg-image img {
+        min-height: 0;
+    }
+
+    .mainBanner .bannerContent h2 {
+        max-width: none;
+        font-size: 36px;
+        line-height: 40px;
+        font-weight: 600;
+        text-shadow: none;
+    }
+
+    .mainBanner .bg-image {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
+    /*mainBanner*/
+    /*serviceSec*/
+    .serviceSec .right .inner {
+        padding: 15px;
+    }
+
+    .serviceSec .right .single {
+        width: 100%;
+        padding: 5px;
+    }
+
+    /*serviceSec*/
+    /*testimonial-sec*/
+    .testimonial-sec .left,
+    .testimonial-sec .right,
+    .med-search .det,
+    .med-search .place,
+    .med-search button {
+        width: 100%;
+    }
+
+    .med-search .det,
+    .med-search .place,
+    .med-search button {
+        height: 50px;
+        border: none;
+        margin: 2px;
+    }
+
+    .med-search {
+        height: auto;
+    }
+
+    .testimonial-sec .left {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    /*testimonial-sec*/
+    .benifit-sec .inner {
+        background: rgba(0, 0, 0, .1);
+    }
+
+    .footer-top .contact-form {
+        margin-bottom: 20px;
+    }
+
+    .social-icon {
+        text-align: center;
+    }
+
+    .db-logo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .db-h-right {
+        width: 100%;
+        text-align: center;
+    }
+
+    /*+++++++++++++++++++++++++Patient++++++++++++++++++++++++++++++++++++++++*/
+    /*scanner*/
+    .patient .db-discussion-detail .scanner-block .left {
+        width: auto;
+        display: block;
+    }
+
+    .patient .db-discussion-detail .scanner-block .left p {
+        text-align: center;
+    }
+
+    .patient .db-discussion-detail .scanner-block .right {
+        width: auto;
+        display: block;
+    }
+
+    /*db-form-toggle*/
+    .db-form-toggle .back-btn .add-medi {
+        display: block;
+        width: auto;
+        text-align: left;
+    }
+
+    .inline-form .single-inp .inp,
+    .inline-form .single-inp > label {
+        width: 100%;
+        max-width: none;
+        flex: none;
+    }
+
+    .inline-form .single-inp > label {
+        margin-bottom: 5px;
+    }
+
+    .multiple-add .right {
+        vertical-align: top;
+    }
+
+    .multiple-add .right a {
+        margin: auto;
+        margin-top: 30px;
+    }
+    .login-form {
+        padding: 10px;
+    }
+    .login-form .inr {
+        padding: 50px 20px;
+    }
+
+    /*+++++++++++++++++++++++++Patient++++++++++++++++++++++++++++++++++++++++*/
+}
+
+@media only screen and (max-width: 710px) {
+
+    /*.db-box*/
+    .db-box .db-form-toggle .health-form-block .single-inp .inp ul {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .db-box .db-form-toggle .health-form-block .single-inp .inp ul li {
+        display: block;
+    }
+
+    /*.db-box*/
+}
+
+@media only screen and (max-width: 575px) {
+
+    /*.db-form-toggle*/
+    .db-form-toggle .health-blck .health-form-btn {
+        float: none;
+    }
+
+    .db-form-toggle .health-blck .content {
+        width: auto;
+    }
+
+    .db-form-toggle .health-blck .health-form-btn a.btn-angl-dwn {
+        width: auto;
+        display: block;
+        float: right;
+    }
+
+    .db-box .db-form-toggle .health-form-block .health-blck .content {
+        margin-bottom: 10px;
+    }
+
+    /*.db-form-toggle*/
+    /*.side-content*/
+    .side-content aside {
+        width: 100%;
+        min-height: 0;
+        margin-bottom: 30px;
+    }
+
+    .side-content aside .v-text {
+        display: block;
+        transform: none;
+        white-space: normal;
+    }
+
+    .side-content aside h3 {
+        font-size: 32px;
+        margin-bottom: 5px;
+    }
+
+    .side-content aside h4 {
+        font-size: 18px;
+    }
+
+    .side-content .inner-sec {
+        padding-left: 0;
+    }
+
+    /*.side-content*/
+    /*.advantage-sec*/
+    .advantage-sec .number-text li {
+        padding: 0 !important;
+    }
+
+    /*.advantage-sec*/
+    /*.serviceSec-sec*/
+    .serviceSec .left,
+    .serviceSec .right {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .serviceSec .left .inner {
+        width: 100%;
+    }
+
+    /*.serviceSec-sec*/
+    .db-content .db-health li a span {
+        float: none;
+    }
+
+    .advantage-sec .number-text .text .inr {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 525px) {
+
+    /*+++++++++++++++++Patient++++++++++++++++++++++*/
+    .patient .db-filter-sort-new .db-searchnew {
+        margin-bottom: 10px;
+    }
+    
+    .file-upload{
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+
+    /*+++++++++++++++++Patient++++++++++++++++++++++*/
+}
+
+@media only screen and (max-width: 400px) {
+
+    /*.db-appoinments*/
+    .db-appoinments .single .cntnt .c-left {
+        width: 100%;
+    }
+
+    .db-appoinments .single {
+        padding: 5px;
+    }
+
+    /*.db-appoinments*/
+    /*.db-form-toggle*/
+    .db-form-toggle .card-body {
+        padding: 0;
+    }
+
+    .db-form-toggle .toggle-head a.btn-healthform {
+        float: none;
+        margin: 0 0 5px 0;
+    }
+
+    /*.db-form-toggle*/
+    .db-presbox form {
+        padding: 10px;
+    }
+
+    .footer-top .contact-form {
+        padding: 20px;
+    }
+
+    .db-search {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .db-container {
+        padding: 10px 10px 0;
+        overflow: hidden;
+    }
+
+
+    /*+++++++++++++++++Patient++++++++++++++++++++++*/
+    .patient .db-box .nav-tabs-inr ul.nav-tabs {
+        display: block;
+        width: auto;
+    }
+
+    .patient .db-box .nav-tabs-inr .add-medi {
+        display: block;
+        width: auto;
+    }
+
+    /*+++++++++++++++++Patient++++++++++++++++++++++*/
+}
+
+
+/*25.02.2019---debasmita*/
+
+@media only screen and (max-width: 991px) {
+    .db-logo {
+        width: 100%;
+    }
+    .db-header .inner {
+        padding-left: 0;
+    }
+    .db-header-right {
+        width: 100%;
+        text-align: center;
+        padding: 0 10px;
+
+
+    }
+    .db-header .inner h2 {
+        display: block;
+        width: 100%;
+        font-size: 20px;
+        margin: auto;
+        margin-bottom: 20px;
+        float: none;
+    }
+    .db-header .h-user-top {
+        margin-bottom: 10px;
+        display: block;
+        width: auto;
+    }
+    .db-header-right .h-logout,
+    .db-header-right .h-user {
+        padding: 0 2px;
+    }
+    .box-inner-admin h4 {
+        font-size: 16px;
+    }
+    .form-section .single-inp label {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .dashboard-table .table-responsive {
+        height: auto;
+    }
+    .form-section .form-control,
+    .form-section .single-inp input {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .form-section {
+        padding: 20px 15px;
+    }
+}
+
+
+/*05.03.2019*/
+
+@media only screen and (max-width: 991px) {
+    .mentee-btn {
+        padding: 0 20px;
+        text-align: center;
+    }
+    .mentee-btn .text-right {
+        text-align: center !important;
+    }
+    .mentee-btn .btn-success {
+        min-width: 0;
+        width: 100%;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .db-box .box-footer .btn {
+        display: block;
+        margin: auto;
+        margin-bottom: 15px;
+    }
+
+    .db-box .box-footer .btn-danger {
+        width: 100%;
+        max-width: 235px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .db-container .select {
+        margin-bottom: 35px;
+    }
+}

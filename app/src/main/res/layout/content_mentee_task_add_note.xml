@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<import type="android.view.View" />
+
+		<variable
+				name="viewModel"
+				type="com.tsic.ui.screen.mentee_drawer_menu.task.pending_task.add_note.MenteePendingTaskAddNoteViewModel"
+				/>
+	</data>
+
+
+	<LinearLayout
+			android:id="@+id/root_content_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fillViewport="true"
+			android:orientation="vertical"
+			android:padding="10dp"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior"
+			tools:context=".ui.screen.mentee_drawer_menu.task.pending_task.MenteePendingTaskDetailsViewModel"
+			tools:showIn="@layout/activity_mentee_add_note"
+			>
+
+		<androidx.cardview.widget.CardView
+				android:id="@+id/cardView3"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginEnd="8dp"
+				android:layout_marginBottom="6dp"
+				android:backgroundTint="@color/colorNavy"
+				app:cardCornerRadius="10dp"
+				app:cardElevation="11dp"
+				app:contentPadding="3dp"
+				>
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="0dp"
+					android:text="Notice: System data, video, audio, and chats are recorded, actively monitored, and archived for safety and security purposes. Not for public distribution."
+					android:textAlignment="center"
+					android:textColor="@color/quantum_white_100"
+					android:textSize="10sp"
+					/>
+
+		</androidx.cardview.widget.CardView>
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				>
+
+			<androidx.cardview.widget.CardView
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					app:cardBackgroundColor="@color/colorCardBackground"
+					app:cardCornerRadius="5dp"
+					app:contentPadding="10dp"
+					>
+
+				<EditText
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="center_vertical"
+						android:background="@android:color/transparent"
+						android:hint="Title"
+						android:textColor="@color/colorText"
+						android:textColorHint="@color/colorSubText"
+						android:text="@={viewModel.title}"
+						android:textSize="16dp"
+						android:textStyle="normal"
+						android:maxLength="30"
+						/>
+			</androidx.cardview.widget.CardView>
+
+			<ImageView
+					android:id="@+id/save_note"
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:layout_marginStart="5dp"
+					android:background="@drawable/ic_save_journal"
+					/>
+
+		</LinearLayout>
+
+		<androidx.cardview.widget.CardView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginTop="5dp"
+				app:cardBackgroundColor="@color/colorCardBackground"
+				app:cardCornerRadius="5dp"
+				app:contentPadding="10dp"
+				>
+
+			<EditText
+					android:id="@+id/jounal_note"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="@android:color/transparent"
+					android:gravity="top|start"
+					android:textColor="@color/colorText"
+					android:textColorHint="@color/colorSubText"
+					android:hint="Note"
+					android:inputType="textMultiLine"
+					android:maxLength="400"
+					android:text="@={viewModel.description}"
+					/>
+		</androidx.cardview.widget.CardView>
+
+
+	</LinearLayout>
+</layout>

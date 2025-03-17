@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">@color/quantum_orange600</color>
+	<color name="colorPrimaryDark">@color/quantum_orange800</color>
+	<color name="colorAccent">@color/colorPrimaryDark</color>
+	<color name="colorAccent2">#f07621</color>
+	<color name="colorYellowishGreen">#bef608</color>
+	<color name="ColorYellow">#ffffff00 </color>
+	<color name="colorLightGreen">@color/quantum_lime700</color>
+	<color name="colorDarkGreen">@color/quantum_lime900</color>
+	<color name="colorTabDarkGreen">#FFFFFF</color>
+	<color name="colorLightBlack">#FFFFFF</color>
+	<color name="colorLightGrey">@color/quantum_grey500</color>
+	<color name="colorUltraLightGrey">@color/quantum_grey100</color>
+	<color name="colorText">#FFFFFF</color>
+	<color name="grey">#5b5b5d</color>
+	<color name="colorSubText">#D5FFFFFF</color>
+	<color name="whiteBottomBackground">#050618</color>
+	<color name="colorToolbarTranslucentGreen">#232137</color>
+	<color name="colorToolbarGreen">#050618</color>
+	<color name="colorStatusTranslucentGreen">#05040C</color>
+	<color name="colorDividerNavMenu">#050618</color>
+	<color name="colorDarkCard">#232137</color>
+	<color name="colorCardBackground">#232137</color>
+	<color name="colorBackGround">#0E0E26</color>
+	<color name="colorBlue">#36eedf</color>
+	<color name="colorOrange">#ff8216</color>
+	<color name="colorGreen">#bef608</color>
+	<color name="colorNavy">#0c101b</color>
+
+	<color name="sinch_purple">#ff63029d</color>
+	<color name="off_white">#fffafafa</color>
+	<color name="dark_gray">#ffb3b3b3</color>
+	<color name="very_dark_gray">#636363</color>
+	<color name="login_tf_group_gray">#AEB0B3</color>
+	<color name="login_tf_background_gray">#E0E1E2</color>
+	<color name="login_button_background">#2A0C0A</color>
+	<color name="twilio_red_text">#F88E80</color>
+	<color name="login_text_edit_background">#E0E1E2</color>
+	<color name="menu_username_color">#380604</color>
+	<color name="message_date_color">#BA9E9E</color>
+	<color name="message_text_color">#5B4F51</color>
+	<color name="status_text_color">#939598</color>
+	<!--
+	 <color name="colorDarkBottom">#050618</color>
+	 <color name="colorDarkStatusTranslucentGreen">#05040C</color>
+	 <color name="colorDarkDividerNavMenu">@color/quantum_grey300</color>-->
+</resources>

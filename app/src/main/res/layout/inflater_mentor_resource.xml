@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="model"
+				type="com.tsic.data.model.mentor_api.ELearning"
+				/>
+
+		<variable
+				name="viewModel"
+				type="com.tsic.ui.screen.mentor_drawer_menu.resource.MentorResourceViewModel"
+				/>
+
+		<import type="android.view.View" />
+
+
+	</data>
+
+	<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			>
+
+		<androidx.cardview.widget.CardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				app:cardBackgroundColor="@color/colorCardBackground"
+				app:cardCornerRadius="10dp"
+				app:cardElevation="10dp"
+				>
+
+			<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					>
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:layout_marginStart="10dp"
+						android:layout_marginTop="10dp"
+						android:layout_marginEnd="10dp"
+						android:singleLine="true"
+						android:text="@{model.name}"
+						android:textColor="@color/colorText"
+						android:textSize="16sp"
+						tools:text="Title"
+						/>
+
+				<FrameLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_horizontal"
+						>
+
+					<!--						android:visibility="@{model.type == `image`? View.VISIBLE: View.INVISIBLE}"
+-->
+
+					<ImageView
+							android:layout_width="80dp"
+							android:layout_height="80dp"
+							android:layout_gravity="center_horizontal"
+							android:layout_margin="10dp"
+							android:elevation="10dp"
+							android:scaleType="fitXY"
+							app:image_url_circular="@{model.file}"
+							tools:src="@drawable/ic_avatar_all"
+							/>
+
+					<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:layout_margin="10dp"
+							android:elevation="10dp"
+							android:src="@android:drawable/ic_media_play"
+							android:visibility="@{model.type == `video`? View.VISIBLE: View.INVISIBLE}"
+							/>
+
+				</FrameLayout>
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_margin="10dp"
+						android:ellipsize="end"
+						android:lines="3"
+						app:html_text="@{model.description}"
+						android:textColor="@color/colorText"
+						android:textSize="14sp"
+						tools:text="@tools:sample/lorem/random"
+						/>
+
+				<Button
+						android:id="@+id/detailId"
+						android:layout_width="wrap_content"
+						android:layout_height="32dp"
+						android:layout_gravity="center"
+						android:layout_margin="16dp"
+						android:background="@drawable/bg_all_curved"
+						android:backgroundTint="@color/colorToolbarGreen"
+						android:text="Details"
+						android:textColor="@android:color/white"
+						android:textSize="14sp"
+						/>
+
+
+			</LinearLayout>
+
+
+		</androidx.cardview.widget.CardView>
+	</FrameLayout>
+</layout>

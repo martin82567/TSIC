@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="model"
+				type="com.tsic.data.model.mentor_api.MentorReport"
+				/>
+
+
+	</data>
+
+
+	<androidx.cardview.widget.CardView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="5dp"
+			>
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				>
+
+			<ImageView
+					image_url="@{model.image}"
+					android:layout_width="match_parent"
+					android:layout_height="120dp"
+					android:scaleType="fitXY"
+					android:src="@drawable/ic_card"
+					/>
+
+			<!--
+-->
+
+
+			<TextView
+					android:id="@+id/title_upload"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:text="@{model.name}"
+					android:textColor="@color/cardview_dark_background"
+					android:textSize="14sp"
+					/>
+
+			<!--
+-->
+
+			<TextView
+					android:id="@+id/date_upload"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:text="@{model.createdDate}"
+					android:textSize="12sp"
+					tools:text="Created date"
+					/>
+
+			<!--					a
+-->
+
+
+		</LinearLayout>
+
+
+	</androidx.cardview.widget.CardView>
+
+
+</layout>

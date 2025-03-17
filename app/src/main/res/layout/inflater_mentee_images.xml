@@ -1,0 +1,46 @@
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        >
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.tsic.data.model.mentee_api.Uploadedfile" />
+    </data>
+
+    <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                >
+
+            <ImageView
+                android:id="@+id/iv_tipImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                    android:onClick="showPic"
+                    app:image_url="@{model.fileName}"
+                    tools:src="@drawable/ic_avatar_all"
+                    />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_cancel"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/ic_minus"
+                />
+    </RelativeLayout>
+</layout>

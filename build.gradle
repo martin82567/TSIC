@@ -1,0 +1,77 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+     repositories {
+        google()
+         //jcenter()
+        mavenCentral()
+        maven {
+            url 'https://jitpack.io'
+        }
+         maven { url 'https://maven.aliyun.com/repository/public' }
+         maven { url 'https://maven.aliyun.com/repository/central' }
+         maven { url 'https://maven.aliyun.com/repository/google' }
+         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+         maven { url 'https://maven.aliyun.com/repository/apache-snapshots' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10'
+        // classpath 'com.google.gms:google-services:4.2.0'
+        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        //jcenter()
+        mavenCentral()
+        maven {
+            url 'https://jitpack.io'
+        }
+        maven {
+             url 'https://maven.google.com/'
+        }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/repository/apache-snapshots' }
+
+    }
+
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+/*
+
+* content {
+                includeModule("org.jetbrains.anko", "anko-appcompat-v7-commons")
+                includeModule("org.jetbrains.anko", "anko-commons")
+                includeModule("org.jetbrains.anko", "anko-support-v4-commons")
+                includeModule("org.jetbrains.anko", "anko-design")
+                includeModule("org.jetbrains.anko", "anko-sdk25")
+                includeModule("org.jetbrains.anko", "anko-appcompat-v7")
+                includeModule("org.jetbrains.anko", "appcompatV7-base")
+                includeModule("org.jetbrains.anko", "commons-base")
+                includeModule("org.jetbrains.anko", "supportV4-base")
+                includeModule("org.jetbrains.anko", "design-base")
+                includeModule("org.jetbrains.anko", "anko-support-v4")
+                includeModule("org.jetbrains.anko", "platform-base")
+                includeModule("com.getkeepsafe.relinker", "relinker")
+                includeModule("com.google.android.exoplayer", "exoplayer-core")
+                includeModule("com.google.android.exoplayer", "exoplayer-dash")
+                includeModule("com.google.android.exoplayer", "exoplayer-ui")
+                includeModule("com.google.android.exoplayer", "exoplayer-common")
+                includeModule("com.google.android.exoplayer", "exoplayer-extractor")
+                includeModule("com.mindorks.android", "prdownloader")
+                includeModule("com.marlonmafra.android.widget", "edittext-password")
+            }*/

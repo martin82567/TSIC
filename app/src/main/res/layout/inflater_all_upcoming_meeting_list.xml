@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<import type="android.view.View" />
+
+		<variable
+				name="model"
+				type="com.tsic.data.model.mentee_api.MenteeAllList.Data.Upcoming"
+				/>
+	</data>
+
+
+	<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			>
+
+		<androidx.cardview.widget.CardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				app:cardBackgroundColor="@color/colorCardBackground"
+				app:cardCornerRadius="10dp"
+				app:cardElevation="5dp"
+				>
+
+
+			<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="10dp"
+					android:orientation="vertical"
+					>
+
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Session requested by:"
+						android:textColor="@color/colorSubText"
+						android:textSize="14sp"
+						/>
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						>
+
+					<ImageView
+							android:id="@+id/btn_video"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="16dp"
+							android:padding="4dp"
+							app:layout_constraintBottom_toBottomOf="parent"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintTop_toTopOf="parent"
+							app:srcCompat="@drawable/ic_baseline_videocam_green_24"
+							/>
+
+					<TextView
+							android:id="@+id/tv_mentor_title"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:text="@{model.createdByType}"
+							android:textColor="@color/quantum_deeporange900"
+							android:textSize="18sp"
+							app:layout_constraintBottom_toBottomOf="parent"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="parent"
+							tools:text="Test Name"
+							/>
+				</androidx.constraintlayout.widget.ConstraintLayout>
+				<!--<TextView
+						android:id="@+id/tv_mentor_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:layout_marginTop="2dp"
+						android:layout_marginBottom="3dp"
+						android:text="@{model.creatorName}"
+						android:textColor="@color/colorLightGreen"
+						android:textSize="18sp"
+						tools:text="Test Name"
+						/>-->
+
+				<View
+						android:layout_width="match_parent"
+						android:layout_height="1dp"
+						android:background="@color/colorSubText"
+						/>
+
+
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_margin="10dp"
+						android:orientation="vertical"
+						>
+
+
+					<TextView
+							android:id="@+id/tv_mentor_name"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:text="@{model.title}"
+							android:textColor="@color/colorPrimaryDark"
+							android:textSize="18sp"
+							tools:text="Name"
+
+
+							/>
+
+				</LinearLayout>
+
+
+				<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_margin="10dp"
+						android:orientation="horizontal"
+						>
+
+					<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:src="@drawable/ic_location_orange"
+							/>
+
+
+					<TextView
+							android:id="@+id/tv_mentor_last"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="10dp"
+							android:textColor="@color/colorSubText"
+							android:textSize="15sp"
+							tools:text="address"
+
+							/>
+
+				</LinearLayout>
+
+				<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_margin="10dp"
+						android:orientation="horizontal"
+						>
+
+					<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:src="@drawable/ic_calendar"
+							/>
+
+
+					<TextView
+							android:id="@+id/tv_mentor_date"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="10dp"
+							android:text="@{model.date}"
+							android:textColor="@color/colorSubText"
+							android:textSize="15sp"
+							tools:text="Time"
+							/>
+
+					<TextView
+							android:id="@+id/tv_mentor_time"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:text="@{model.time}"
+							android:textColor="@color/colorSubText"
+							android:textSize="15sp"
+							tools:text="Time"
+							/>
+
+				</LinearLayout>
+
+				<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+
+					<!--<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:src="@drawable/ic_job_item_bulb"
+							/>
+
+					<TextView
+
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="6dp"
+							android:drawablePadding="10dp"
+							android:gravity="center_vertical"
+							android:text="@{model.methodValue}"
+							android:textColor="@color/colorSubText"
+
+							/>-->
+					<TextView
+
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="6dp"
+							android:drawableStart="@drawable/ic_job_item_bulb"
+							android:drawablePadding="10dp"
+							android:drawableTint="@color/colorOrange"
+							android:gravity="center_vertical"
+							android:text="@{model.methodValue}"
+							android:textColor="@color/colorText"/>
+
+
+				</LinearLayout>
+
+				<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_margin="10dp"
+						android:orientation="horizontal"
+						android:visibility="@{model.description.length()==0?View.GONE:View.VISIBLE}"
+						>
+
+					<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:src="@drawable/ic_journal_menu"
+							/>
+
+
+					<TextView
+							android:id="@+id/tv_mentor_description"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="10dp"
+							android:text="@{model.description}"
+							android:textColor="@color/colorSubText"
+							android:textSize="15sp"
+							tools:text="description"
+
+							/>
+
+				</LinearLayout>
+
+
+			</LinearLayout>
+
+		</androidx.cardview.widget.CardView>
+	</FrameLayout>
+</layout>

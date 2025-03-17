@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="pic"
+				type="String"
+				/>
+
+		<variable
+				name="name"
+				type="String"
+				/>
+
+		<variable
+				name="email"
+				type="String"
+				/>
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="250dp"
+			android:gravity="bottom"
+			android:orientation="vertical"
+			android:paddingLeft="10dp"
+			android:paddingTop="10dp"
+			android:paddingRight="10dp"
+			android:paddingBottom="8dp"
+			android:background="@color/whiteBottomBackground"
+			android:theme="@style/ThemeOverlay.AppCompat.Dark"
+			>
+
+		<ImageView
+				android:id="@+id/iV_nav_header_pic"
+				android:layout_width="100dp"
+				android:layout_height="100dp"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="8dp"
+				tools:src="@drawable/ic_avatar_all"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_bias="1"
+				app:layout_constraintBottom_toTopOf="@+id/tV_nav_header_name"
+				app:image_url_circular_profile="@{pic}"
+				/>
+
+		<!--bind:image_url="@{profileVM.profilePic}"
+		android:text="@{profileVM.name}"
+		android:text="@{profileVM.personEmail}"-->
+		<TextView
+				android:id="@+id/tV_nav_header_name"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginEnd="8dp"
+				android:gravity="center|bottom"
+				tools:text="Name"
+				android:text="@{name}"
+				android:textColor="@color/colorLightBlack"
+				android:textSize="18sp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintBottom_toTopOf="@+id/tV_nav_header_email"
+				/>
+
+		<TextView
+				android:id="@+id/tV_nav_header_email"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="8dp"
+				android:textSize="12sp"
+				android:gravity="center|top"
+				tools:text="Email"
+				android:text="@{email}"
+				android:textColor="@color/colorLightBlack"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				android:layout_marginBottom="18dp"
+				app:layout_constraintBottom_toTopOf="@+id/view"
+				/>
+
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="@color/colorDividerNavMenu"
+				android:layout_marginBottom="8dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				android:layout_marginStart="16dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				android:layout_marginEnd="16dp"
+				android:id="@+id/view"
+				/>
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

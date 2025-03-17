@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<dimen name="fab_margin">16dp</dimen>
+	<dimen name="design_tab_text_size_2line" tools:override="true">9sp</dimen>
+
+</resources>

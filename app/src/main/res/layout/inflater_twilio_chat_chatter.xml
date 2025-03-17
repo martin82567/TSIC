@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<import type="android.view.View" />
+
+		<import type="android.view.Gravity" />
+
+		<variable
+				name="model"
+				type="com.tsic.ui.screen.chat.ChatMessage"
+				/>
+
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:background="@android:color/transparent"
+			>
+
+
+		<androidx.cardview.widget.CardView
+				android:id="@+id/cardView2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="32dp"
+				android:layout_marginEnd="64dp"
+				android:minHeight="50dp"
+				app:cardBackgroundColor="@color/colorUltraLightGrey"
+				app:cardCornerRadius="8dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.0"
+				app:layout_constraintStart_toStartOf="@+id/image"
+				app:layout_constraintTop_toTopOf="@+id/image"
+				>
+
+			<TextView
+					android:id="@+id/msg"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:gravity="center_vertical"
+					android:minHeight="30dp"
+					android:paddingStart="30dp"
+					android:paddingLeft="8dp"
+					android:paddingTop="8dp"
+					android:paddingRight="32dp"
+					android:paddingBottom="8dp"
+					android:text="@{model.message.trim()}"
+					android:textColor="@android:color/black"
+					android:textSize="14sp"
+					tools:text="model"
+					/>
+
+		</androidx.cardview.widget.CardView>
+
+		<ImageView
+				android:id="@+id/image"
+				android:layout_width="50dp"
+				android:layout_height="50dp"
+				android:layout_alignParentStart="true"
+				android:layout_alignParentTop="true"
+				android:elevation="10dp"
+
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:srcCompat="@drawable/ic_avatar_all"
+				/>
+		<!--		app:image_url_circular_profile="@{model.chatterServerPic}"-->
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="start"
+				android:minWidth="100dp"
+				android:paddingStart="30dp"
+				android:paddingBottom="5dp"
+				android:textColor="@color/colorSubText"
+				android:textSize="11sp"
+				app:layout_constraintStart_toStartOf="@+id/cardView2"
+				app:layout_constraintTop_toBottomOf="@+id/cardView2"
+				app:set_date="@{model.date}"
+				tools:text="date"
+				/>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

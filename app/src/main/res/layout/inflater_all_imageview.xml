@@ -1,0 +1,23 @@
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="url"
+				type="String"
+				/>
+	</data>
+
+	<ImageView
+			android:id="@+id/imageView"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_margin="5dp"
+			app:image_url="@{url}"
+			tools:src="@tools:sample/avatars"
+			/>
+</layout>

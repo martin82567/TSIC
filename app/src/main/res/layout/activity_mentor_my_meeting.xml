@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="vm"
+				type="com.tsic.ui.screen.mentor_drawer_menu.meetings.MentorMyMeetingViewModel"
+				/>
+
+		<variable
+				name="activity"
+				type="com.tsic.ui.screen.mentor_drawer_menu.meetings.MentorMyMeetingActivity"
+				/>
+	</data>
+
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+			android:id="@+id/root_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@drawable/bg_all_white"
+			tools:context=".ui.MyMeetingActivity"
+			>
+
+
+		<LinearLayout
+				android:id="@+id/linearLayout2"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginTop="?android:attr/actionBarSize"
+				android:orientation="vertical"
+				>
+
+			<include
+					android:id="@+id/content_layout"
+					layout="@layout/content_mentor_my_meeting"
+					app:viewModel="@{vm}"
+					/>
+
+		</LinearLayout>
+
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+				android:id="@+id/btn_add_meeting"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="end|bottom"
+				android:layout_margin="20dp"
+				android:backgroundTint="@color/colorOrange"
+				android:src="@drawable/ic_add1"
+				app:elevation="10dp"
+				android:visibility="gone"
+				/>
+
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

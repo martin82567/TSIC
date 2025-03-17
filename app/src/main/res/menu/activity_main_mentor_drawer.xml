@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		tools:showIn="navigation_view"
+		>
+
+
+	<group
+			android:id="@+id/group_job"
+			android:checkableBehavior="single"
+			>
+<!--
+		<item
+				android:id="@+id/nav_mentor_goal"
+				android:icon="@drawable/ic_goal_menu"
+				android:title="Mentee Goal"
+				/>-->
+
+		<!--<item
+				android:id="@+id/nav_mentor_meeting"
+				android:icon="@drawable/ic_meeting"
+				android:title="Session"
+				/>
+-->
+
+		<item
+				android:id="@+id/nav_mentor_resource"
+				android:icon="@drawable/ic_resource_menu"
+				android:title="Resources"
+				/>
+
+		<item
+				android:id="@+id/nav_mentor_toolkit"
+				android:title="@string/menu_mentor_toolkit"
+				android:icon="@drawable/ic_mentor_toolkit_menu"
+				/>
+		<item
+				android:id="@+id/nav_mentor_msg_center"
+				android:icon="@drawable/ic_baseline_message_24"
+				android:title="@string/menu_announcement"
+				/>
+
+		<item
+				android:id="@+id/nav_mentor_dark_mode"
+				android:icon="@drawable/day_and_night"
+				android:title="Light/Dark Mode"
+				android:visible="false"
+				/>
+		<item
+				android:id="@+id/nav_mentor_change_password"
+				android:title="Change Password"
+				android:icon="@drawable/ic_password_rset"
+				/>
+
+
+		<item
+				android:id="@+id/nav_mentor_help"
+				android:icon="@drawable/ic_help_menu"
+				android:iconTint="@color/whiteBottomBackground"
+				android:title="App Help"
+				/>
+
+		<item
+				android:id="@+id/nav_mentor_notification"
+				android:icon="@drawable/ic_notifications"
+				android:iconTint="@color/whiteBottomBackground"
+				android:title="Notification"
+				/>
+
+
+
+		<item
+				android:id="@+id/nav_mentor_logout"
+				android:icon="@drawable/ic_logout_menu"
+				android:title="@string/menu_logout"
+				/>
+
+	</group>
+
+
+	<group
+			android:id="@+id/second"
+			android:checkableBehavior="single">
+		<item xmlns:app="http://schemas.android.com/apk/res-auto"
+				android:id="@+id/version"
+				android:title="@string/version"
+				app:showAsAction="always" />
+
+	</group>
+
+</menu>

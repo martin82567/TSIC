@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<import type="android.view.View"/>
+		<variable
+				name="activity"
+				type="com.tsic.ui.screen.mentee_drawer_menu.goal.MenteeGoalActivity"
+				/>
+	</data>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fillViewport="true"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior"
+			tools:context=".ui.screen.mentee_drawer_menu.goal.MenteeGoalActivity"
+			tools:showIn="@layout/activity_mentee_goal"
+			android:orientation="vertical"
+			>
+
+		<com.google.android.material.appbar.AppBarLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:theme="@style/Theme.Design.Light.NoActionBar"
+				>
+
+			<com.google.android.material.tabs.TabLayout
+					android:id="@+id/tabs_goals"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/colorCardBackground"
+					app:tabMode="fixed"
+					app:tabIndicatorColor="@color/colorOrange"
+					app:tabTextColor="@color/colorOrange"
+					app:tabGravity="fill"
+					/>
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<androidx.cardview.widget.CardView
+				android:id="@+id/cardView3"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="4dp"
+				android:backgroundTint="@color/colorNavy"
+				app:cardCornerRadius="10dp"
+				app:cardElevation="11dp"
+				app:contentPadding="5dp"
+				app:layout_constraintBottom_toTopOf="@+id/imageView8"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				>
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="0dp"
+					android:text="Notice: System data, video, audio, and chats are recorded, actively monitored, and archived for safety and security purposes. Not for public distribution."
+					android:textAlignment="center"
+					android:textColor="@color/quantum_white_100"
+					android:textSize="10sp"
+					/>
+
+		</androidx.cardview.widget.CardView>
+
+		<androidx.viewpager.widget.ViewPager
+				android:id="@+id/viewPager_goals"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:layout_constraintBottom_toBottomOf="parent"
+				/>
+	</LinearLayout>
+</layout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="model"
+				type="com.tsic.data.model.mentee_api.TaskDatalist"
+				/>
+
+		<import type="android.view.View" />
+	</data>
+
+	<androidx.cardview.widget.CardView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp"
+			app:cardBackgroundColor="@color/colorCardBackground"
+			app:cardCornerRadius="18dp"
+			app:cardElevation="5dp"
+			>
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				>
+
+			<ImageView
+					android:id="@+id/image"
+					android:layout_width="100dp"
+					android:layout_height="match_parent"
+					android:background="@drawable/task"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					/>
+
+			<TextView
+					android:id="@+id/title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="8dp"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:text="@{model.name}"
+					android:textColor="@color/colorText"
+					android:textSize="20sp"
+					app:layout_constraintBottom_toTopOf="@+id/tv_mentor_name"
+					app:layout_constraintStart_toEndOf="@+id/image"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintVertical_chainStyle="packed"
+					tools:text="@tools:sample/full_names"
+					/>
+
+			<TextView
+					android:id="@+id/tv_mentor_name"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="32dp"
+					android:text="@{model.mentorName}"
+					android:textColor="@color/colorSubText"
+					app:layout_constraintBottom_toTopOf="@+id/desc"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0.5"
+					app:layout_constraintStart_toStartOf="@+id/title"
+					app:layout_constraintTop_toBottomOf="@+id/title"
+					tools:text="@tools:sample/lorem[4:10]"
+					/>
+
+			<TextView
+					android:id="@+id/desc"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="16dp"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="@color/colorSubText"
+					android:text="@{model.description}"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0.5"
+					app:layout_constraintStart_toStartOf="@+id/title"
+					app:layout_constraintTop_toBottomOf="@+id/tv_mentor_name"
+					tools:text="@tools:sample/lorem[4:10]"
+					/>
+
+			<ImageView
+					android:id="@+id/badge"
+					android:layout_width="32dp"
+					android:layout_height="32dp"
+					android:layout_marginTop="8dp"
+					android:layout_marginEnd="16dp"
+					android:src="@drawable/ic_goal_completed"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					/>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.cardview.widget.CardView>
+</layout>

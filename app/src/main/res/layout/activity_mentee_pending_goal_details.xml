@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="vm"
+				type="com.tsic.ui.screen.mentee_drawer_menu.goal.pending_details.MenteePendingGoalDetailsViewModel"
+				/>
+
+		<variable
+				name="activity"
+				type="com.tsic.ui.screen.mentee_drawer_menu.goal.pending_details.MenteePendingGoalDetailsActivity"
+				/>
+	</data>
+
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+			android:id="@+id/root_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".ui.screen.mentee_drawer_menu.goal.pending_details.MenteePendingGoalDetailsActivity"
+			android:fitsSystemWindows="true"
+			>
+
+		<com.google.android.material.appbar.AppBarLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:theme="@style/AppTheme.AppBarOverlay.Local"
+				android:background="@null"
+				>
+
+			<androidx.appcompat.widget.Toolbar
+					android:id="@+id/toolbar"
+					android:layout_width="match_parent"
+					app:title="@string/app_name"
+					android:layout_height="?android:attr/actionBarSize"
+					android:background="@color/colorToolbarTranslucentGreen"
+					app:popupTheme="@style/AppTheme.PopupOverlay"
+					/>
+
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				>
+
+			<include
+					android:id="@+id/content_layout"
+					layout="@layout/content_mentee_pending_goal_details"
+					app:viewModel="@{vm}"
+					app:activity="@{activity}"
+					/>
+		</LinearLayout>
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="vm"
+				type="com.tsic.ui.screen.mentee_bottom_menu.myprofile.MenteeMyProfileViewModel"
+				/>
+		<variable
+				name="activity"
+				type="com.tsic.ui.screen.mentee_bottom_menu.myprofile.MenteeMyProfileActivity"
+				/>
+	</data>
+
+	<LinearLayout
+			android:id="@+id/root_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".ui.MyProfileActivity"
+			>
+
+		<include
+				android:id="@+id/content_layout"
+				layout="@layout/content_mentee_my_profile"
+				app:viewModel="@{vm}"
+				app:activity="@{activity}"
+				/>
+
+	</LinearLayout>
+</layout>

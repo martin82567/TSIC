@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/_10sdp"
+		android:padding="@dimen/_15sdp"
+		android:orientation="vertical"
+
+		>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			>
+
+		<TextView
+				android:id="@+id/tvDialogHeader"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/_15ssp"
+				android:textStyle="bold"
+				/>
+
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="0.1dp"
+				android:layout_marginTop="@dimen/_10sdp"
+				android:background="@color/status_text_color"
+				/>
+
+		<TextView
+				android:id="@+id/tvSessionDialog"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginVertical="@dimen/_15sdp"
+				android:text="hello  nevrio , "
+				android:textSize="@dimen/_10ssp"
+				android:textStyle="bold"
+				/>
+
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="0.2dp"
+				android:background="@color/status_text_color"
+				/>
+	</LinearLayout>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:orientation="horizontal"
+			android:padding="@dimen/_8sdp"
+			>
+
+		<Button
+				android:id="@+id/btnLogNow"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/_4sdp"
+				android:textAllCaps="false"
+				android:text="@string/log_now"
+				android:backgroundTint="@color/teal_11"
+				/>
+
+		<Button
+				android:id="@+id/btnAlreadyDone"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/_4sdp"
+				android:text="@string/already_done"
+				android:textColor="@color/black"
+				android:textAllCaps="false"
+				android:backgroundTint="@color/white"
+				/>
+	</LinearLayout>
+
+</LinearLayout>

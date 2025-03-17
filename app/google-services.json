@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "393481861829",
+    "firebase_url": "https://takestockinchildren-427bb.firebaseio.com",
+    "project_id": "takestockinchildren-427bb",
+    "storage_bucket": "takestockinchildren-427bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393481861829:android:38a4e2b511fcc73f",
+        "android_client_info": {
+          "package_name": "com.tsic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393481861829-3i9psji2kvul66dp5sk5c99pg0m3drr1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tsic",
+            "certificate_hash": "765f0c54f75c14c17365408aa5aab643a82d47d8"
+          }
+        },
+        {
+          "client_id": "393481861829-e18rvf9sr98pmji78g5tra8hidnl1ao5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAccQ1C2DN-l1Ihyj7yftxbPAu0IRfBI2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393481861829-e18rvf9sr98pmji78g5tra8hidnl1ao5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "393481861829-bfjck366618umhru8484ftscr2sgskj2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.TakeStockInChildren"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

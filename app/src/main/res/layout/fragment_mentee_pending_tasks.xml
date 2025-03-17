@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="vm"
+				type="com.tsic.ui.screen.mentee_drawer_menu.task.pending.MenteePendingTasksViewModel"
+				/>
+
+		<variable
+				name="fragment"
+				type="com.tsic.ui.screen.mentee_drawer_menu.task.pending.MenteePendingTasksFrag"
+				/>
+
+		<import type="android.view.View" />
+	</data>
+
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+			android:id="@+id/swipeRefreshLayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".ui.screen.mentee_drawer_menu.task.pending.MenteePendingTasksFrag"
+			>
+
+		<androidx.recyclerview.widget.RecyclerView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:clipToPadding="false"
+				android:paddingBottom="10dp"
+				app:fragment="@{fragment}"
+				app:list_pending_tasks="@{vm.listPending}"
+				tools:itemCount="5"
+				tools:listitem="@layout/inflater_mentee_pending_tasks"
+				/>
+
+
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

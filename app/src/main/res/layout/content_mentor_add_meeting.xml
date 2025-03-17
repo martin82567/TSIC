@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		>
+
+	<data>
+
+		<import type="android.view.View" />
+
+		<variable
+				name="viewModel"
+				type="com.tsic.ui.screen.mentor_drawer_menu.meetings.requested.addMeeting.MentorAddMeetingViewModel"
+				/>
+
+
+	</data>
+
+
+	<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			>
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				>
+
+			<androidx.cardview.widget.CardView
+					android:id="@+id/cardView3"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dp"
+					android:backgroundTint="@color/colorNavy"
+					app:cardCornerRadius="10dp"
+					app:cardElevation="11dp"
+					app:contentPadding="3dp"
+					>
+
+				<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="0dp"
+						android:text="Notice: System data, video, audio, and chats are recorded, actively monitored, and archived for safety and security purposes. Not for public distribution."
+						android:textAlignment="center"
+						android:textColor="@color/quantum_white_100"
+						android:textSize="10sp"
+						/>
+
+			</androidx.cardview.widget.CardView>
+
+			<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="20dp"
+					>
+
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Agenda Name"
+						android:textColor="@color/colorText"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						>
+
+					<EditText
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:background="@null"
+							android:hint="Agenda Name"
+							android:padding="10dp"
+							android:text="@={viewModel.title}"
+							android:textColor="@color/colorText"
+							android:textColorHint="@color/colorSubText"
+
+							/>
+
+
+				</androidx.cardview.widget.CardView>
+
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="20dp"
+						android:text="Description (Optional)"
+						android:textColor="@color/colorText"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						>
+
+					<EditText
+							android:id="@+id/session_note"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:background="@null"
+							android:gravity="top|start"
+							android:hint="Write Note"
+							android:inputType="textMultiLine"
+							android:lines="5"
+							android:padding="10dp"
+							android:scrollbars="vertical"
+							android:text="@={viewModel.description}"
+							android:textColor="@color/colorText"
+							android:textColorHint="@color/colorSubText"
+							android:textSize="14sp"
+
+
+							/>
+
+				</androidx.cardview.widget.CardView>
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="20dp"
+						android:text="Assign To"
+						android:textColor="@color/colorText"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						>
+
+
+					<TextView
+							android:id="@+id/mentee_name"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:drawableRight="@drawable/ic_round_arrow_drop_down"
+							android:drawableTint="@color/colorText"
+							android:hint="Select Mentee Name"
+							android:onClick="menteeFetchList"
+							android:padding="10dp"
+							android:text="@={viewModel.menteeName}"
+							android:textColor="@color/colorText"
+							android:textColorHint="@color/colorSubText"
+
+							/>
+
+				</androidx.cardview.widget.CardView>
+
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="20dp"
+						android:text="Session Location"
+						android:textColor="@color/colorText"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						>
+
+
+					<TextView
+							android:id="@+id/school_adress"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:drawableRight="@drawable/ic_round_arrow_drop_down"
+							android:drawableTint="@color/colorText"
+							android:hint="Select Session Location"
+							android:inputType="time"
+							android:maxLines="1"
+							android:onClick="schoolList"
+							android:padding="10dp"
+							android:singleLine="true"
+							android:text="@{viewModel.schoolLocation}"
+							android:textColor="@color/colorText"
+							android:textColorHint="@color/colorSubText"
+
+							/>
+
+				</androidx.cardview.widget.CardView>
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="20dp"
+						android:text="Session Method/Location"
+						android:textColor="@color/colorText"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						>
+
+
+					<TextView
+							android:id="@+id/session_method_location"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:drawableRight="@drawable/ic_round_arrow_drop_down"
+							android:drawableTint="@color/colorText"
+							android:hint="Select Session Method/Location"
+							android:inputType="time"
+							android:padding="10dp"
+							android:text="@={viewModel.sessionMethodLocationKey}"
+							android:textColorHint="@color/colorSubText"
+							/>
+
+				</androidx.cardview.widget.CardView>
+
+				<TextView
+						android:id="@+id/session_space_label"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="20dp"
+						android:text="Session Space (Optional)"
+						android:textColor="@color/colorText"
+						android:visibility="gone"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:id="@+id/session_space_card"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						android:visibility="gone"
+						>
+
+					<EditText
+							android:id="@+id/session_space"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:background="@null"
+							android:hint="Enter Session Space"
+							android:lines="1"
+							android:padding="10dp"
+							android:singleLine="true"
+							android:text="@={viewModel.schoolSpace}"
+							android:textColor="@color/colorText"
+							android:textColorHint="@color/colorSubText"
+							/>
+
+				</androidx.cardview.widget.CardView>
+
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="20dp"
+						android:text="Date"
+						android:textColor="@color/colorText"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						>
+
+					<TextView
+							android:id="@+id/session_date"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="Select Date"
+							android:inputType="date"
+							android:padding="10dp"
+							android:text="@={viewModel.date}"
+							android:textColor="@color/colorText"
+							android:textColorHint="@color/colorSubText"
+							/>
+
+				</androidx.cardview.widget.CardView>
+
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="20dp"
+						android:text="Time"
+						android:textColor="@color/colorText"
+						/>
+
+				<androidx.cardview.widget.CardView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:cardBackgroundColor="@color/colorCardBackground"
+						app:cardCornerRadius="5dp"
+						>
+
+
+					<TextView
+							android:id="@+id/session_time_from"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:hint="Select Time"
+							android:inputType="time"
+							android:padding="10dp"
+							android:text="@{viewModel.time12h}"
+							android:textColor="@color/colorText"
+							android:textColorHint="@color/colorSubText"
+
+							/>
+
+				</androidx.cardview.widget.CardView>
+
+
+				<Button
+						android:id="@+id/save_session"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_margin="25dp"
+						android:background="@drawable/bg_all_curved"
+						android:backgroundTint="@color/colorAccent"
+						android:text="Schedule Session"
+						android:textColor="@color/cardview_light_background"
+						/>
+
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</layout>

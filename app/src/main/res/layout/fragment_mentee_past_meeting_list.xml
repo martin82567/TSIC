@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<variable
+				name="fragment"
+				type="com.tsic.ui.screen.mentee_bottom_menu.mymeeting.past.MenteePastMeetingListFrag"
+				/>
+
+		<variable
+				name="vm"
+				type="com.tsic.ui.screen.mentee_bottom_menu.mymeeting.past.MenteePastMeetingListViewModel"
+				/>
+	</data>
+
+
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+			android:id="@+id/swipeRefreshLayout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			tools:context=".ui.screen.mentee_bottom_menu.mymeeting.past.MenteePastMeetingListViewModel"
+			>
+
+		<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				>
+
+			<TextView
+					android:id="@+id/no_session_found"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_horizontal"
+					android:layout_marginTop="8dp"
+					android:text="No Sessions Found "
+					android:visibility="gone"
+					/>
+
+
+			<androidx.recyclerview.widget.RecyclerView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:clipToPadding="false"
+					android:orientation="vertical"
+					android:paddingTop="20dp"
+					android:paddingBottom="20dp"
+					app:fragment="@{fragment}"
+					app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+					app:past_meeting="@{vm.listPastMeeting}"
+					tools:itemCount="5"
+					tools:listitem="@layout/inflater_mentee_past_meeting_list"
+					/>
+
+		</FrameLayout>
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</layout>

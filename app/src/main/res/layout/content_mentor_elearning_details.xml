@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+
+	<data>
+
+		<import type="android.view.View" />
+
+
+		<variable
+				name="model"
+				type="com.tsic.data.model.mentor_api.ELearning"
+				/>
+
+	</data>
+
+	<ScrollView
+			android:id="@+id/swipeRefreshLayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="50dp"
+			android:clipToPadding="false"
+			android:fillViewport="true"
+			android:paddingBottom="30dp"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior"
+			tools:context=".ui.screen.mentee_drawer_menu.learning.details.MenteeElearningDetailsActivity"
+			tools:showIn="@layout/activity_mentee_elearning_details"
+			>
+
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				>
+
+			<androidx.cardview.widget.CardView
+					android:id="@+id/cardView3"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dp"
+					android:layout_marginStart="4dp"
+					android:layout_marginTop="8dp"
+					android:layout_marginEnd="4dp"
+					android:backgroundTint="@color/colorNavy"
+					app:cardCornerRadius="10dp"
+					app:cardElevation="11dp"
+					app:contentPadding="3dp"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					>
+
+				<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="0dp"
+						android:text="Notice: System data, video, audio, and chats are recorded, actively monitored, and archived for safety and security purposes. Not for public distribution."
+						android:textAlignment="center"
+						android:textColor="@color/quantum_white_100"
+						android:textSize="10sp"
+						/>
+
+			</androidx.cardview.widget.CardView>
+
+			<ImageView
+					android:id="@+id/iV_learning_module_image"
+					android:layout_width="0dp"
+					android:layout_height="0dp"
+					android:layout_marginTop="8dp"
+					android:elevation="5dp"
+					android:scaleType="fitXY"
+					app:image_url="@{model.file}"
+					app:layout_constraintDimensionRatio="w,1:1.5"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0.45"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/cardView3"
+					tools:src="@drawable/logo_3x"
+					/>
+
+			<ImageView
+					android:id="@+id/video_learning_module"
+					android:layout_width="0dp"
+					android:layout_height="0dp"
+					android:layout_marginTop="8dp"
+					android:scaleType="fitXY"
+					app:layout_constraintDimensionRatio="w,1:1.6"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0.45"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/cardView3"
+					/>
+
+
+			<androidx.cardview.widget.CardView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="10dp"
+					android:layout_marginTop="20dp"
+					android:layout_marginEnd="10dp"
+					android:layout_marginBottom="20dp"
+					app:cardBackgroundColor="@color/colorCardBackground"
+					app:cardCornerRadius="10dp"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/video_learning_module"
+					>
+
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						>
+
+					<ImageView
+							android:id="@+id/video_learning_module2"
+							android:layout_width="100dp"
+							android:layout_height="100dp"
+							android:layout_gravity="center_horizontal"
+							android:layout_margin="8dp"
+							android:layout_marginTop="5dp"
+							android:elevation="5dp"
+							android:scaleType="fitXY"
+							android:src="@drawable/video_play_icon"
+							/>
+
+					<TextView
+							android:id="@+id/tV_learning_module_title"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="8dp"
+							android:layout_marginTop="8dp"
+							android:layout_marginEnd="8dp"
+							android:gravity="center"
+							android:text="@{model.name}"
+							android:textColor="@color/colorSubText"
+							android:textSize="18sp"
+							tools:text="LearningDetailsViewModel title"
+							/>
+
+					<View
+							android:id="@+id/view_learning_module"
+							android:layout_width="100dp"
+							android:layout_height="2dp"
+							android:layout_gravity="center"
+							android:layout_margin="5dp"
+							android:background="@android:color/darker_gray"
+							/>
+
+
+					<TextView
+							android:id="@+id/tV_learning_module_url"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="38dp"
+							android:layout_marginTop="8dp"
+							android:layout_marginEnd="38dp"
+							android:gravity="center"
+							android:linksClickable="true"
+							android:singleLine="false"
+							android:textColor="@color/colorDarkGreen"
+							app:html_text="@{model.url}"
+							tools:text="LearningDetailsViewModel url"
+							/>
+
+
+					<TextView
+							android:id="@+id/tV_learning_module_desc"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="38dp"
+							android:layout_marginTop="8dp"
+							android:layout_marginEnd="38dp"
+							android:gravity="center"
+							android:linksClickable="true"
+							android:paddingBottom="20dp"
+							android:singleLine="false"
+							android:textColorLink="@color/colorDarkGreen"
+							android:textColor="@color/colorSubText"
+							app:html_text="@{model.description}"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/tV_learning_module_url"
+							tools:text="Desc"
+							/>
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</ScrollView>
+</layout>
+
+
+

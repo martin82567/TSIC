@@ -110,7 +110,7 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
     private fun setSeesionDeniedBroadcastReceiver() {
         val filter = IntentFilter(BROADCAST_END_CALL)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(deniedCallBroadcastReceiver, filter, RECEIVER_NOT_EXPORTED)
+            registerReceiver(deniedCallBroadcastReceiver, filter, RECEIVER_EXPORTED)
         } else {
             registerReceiver(deniedCallBroadcastReceiver, filter)
         }

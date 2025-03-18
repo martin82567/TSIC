@@ -3,6 +3,7 @@ package com.tsic.ui.screen.receivevideocall
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
+import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -53,14 +54,9 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
     val userPrefs by lazy {
         PreferenceHelper.getSharedPrefs(this)
     }
-    private val notification: Uri by lazy { RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE) }
-    private val r by lazy {
-        RingtoneManager.getRingtone(applicationContext, notification).apply {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-                isLooping = true
-            }
-        }
-    }
+
+    private var ringtone: Ringtone? = null
+
     val SENDER_TYPE = 0
     val SENDER_ID = 1
     val RECEIVER_TYPE = 2
@@ -92,6 +88,20 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
         override fun onVideoTrackSubscribed(userId: String) {
         }
     }
+
+    private fun createRingtone() {
+        try {
+            val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+            ringtone = RingtoneManager.getRingtone(applicationContext, notification)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                ringtone?.isLooping = true
+            }
+            ringtone?.play()
+        } catch (e: Exception) {
+            Log.e("ReceiveVideoCallActivity", "Error creating ringtone: ${e.message}")
+        }
+    }
+
     private val initVideoCallRoom by lazy {
         InitVideoCallRoom(this, roomCallback)
     }
@@ -140,12 +150,17 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
         toast(msg)
     }
 
+    override fun onStart() {
+        super.onStart()
+        createRingtone()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setStatusBarColor(R.color.colorStatusTranslucentGreen)
         busy = true
-        r.play()
+        ringtone?.play()
         val name = intent?.getStringExtra("name") ?: ""
         token = intent?.getStringExtra("token") ?: ""
         roomName = intent?.getStringExtra("roomName") ?: ""
@@ -171,7 +186,7 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
                     it.putExtra("call_from", callFrom)
                     startActivity(it)
                 }
-                r.stop()
+                ringtone?.stop()
                 isClicked = true
                 finish()
 
@@ -181,7 +196,7 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
                 isClicked = true
                 isShowCallUIOneTime = 1
                 finishUI = true
-                r.stop()
+                ringtone?.stop()
                 disconnectToRoom(callFrom == "web")
             }
         }
@@ -270,7 +285,7 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
         object : CountDownTimer(remainingCounter, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 if (finishUI) {
-                    r.stop()
+                    ringtone?.stop()
                     busy = false
                     finish()
                 }
@@ -306,7 +321,7 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        r.stop()
+        ringtone?.stop()
     }
 
     override fun onBackPressed() {}
@@ -319,7 +334,7 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
             }
             finish()
         }
-        r.play()
+        ringtone?.play()
     }
 
     override fun onDestroy() {

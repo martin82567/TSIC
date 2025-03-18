@@ -60,7 +60,7 @@ class TwilioChatActivity : AppCompatActivity() {
             chatCode = intent?.getStringExtra(INTENT_KEY_CHAT_CODE) ?: ""
             chatSid = intent?.getStringExtra(INTENT_KEY_CHAT_SID) ?: ""
             // firebaseToken.set(intent?.getStringExtra(INTENT_KEY_FIREBASE_TOKEN) ?: "")
-            if (chatterType.get() == TYPE_MENTOR_STAFF || chatterType.get() == TYPE_MENTEE_STAFF || chatterType.get() == TYPE_MENTOR)
+            if (chatterType.get() == TYPE_MENTOR_STAFF || chatterType.get() == TYPE_MENTEE_STAFF)
                 videoButtonEnable.set(false)
         }
         Log.d("TAG", "onCreate: ${viewModel.chatSid} ${viewModel.chatCode}")

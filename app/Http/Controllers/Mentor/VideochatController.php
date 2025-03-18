@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Mentor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Traits\ZoomMeetingTrait;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -13,6 +14,8 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 class VideochatController extends Controller
 {
+    use ZoomMeetingTrait;
+
 	/**
      * Create a new controller instance.
      *
@@ -48,7 +51,14 @@ class VideochatController extends Controller
         $mentee_device_type = !empty($mentee_data->device_type)?$mentee_data->device_type:'';
         $mentee_firebase_id = !empty($mentee_data->firebase_id)?$mentee_data->firebase_id:'';
         $mentee_voip_device_token = !empty($mentee_data->voip_device_token)?$mentee_data->voip_device_token:'';
-        return view('mentor.videochat-initiate', compact('mentee_id','mentee_device_type','mentee_firebase_id','mentee_voip_device_token'));
+
+        // Generate Zoom JWT Access Token
+        $unique_name = 'mentor-' . Auth::user()->id . '-mentee-' . $mentee_id . '-' . time();
+        $signature = $this->generateMentorZoomToken($unique_name);
+        // $receiver_jwt = $this->generateMenteeZoomToken($unique_name);
+        // $room_sid = '';
+
+        return view('mentor.videochat-initiate', compact('mentee_id','mentee_device_type','mentee_firebase_id','mentee_voip_device_token', 'unique_name', 'signature'));
     }
 
 

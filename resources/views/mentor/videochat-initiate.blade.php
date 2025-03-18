@@ -57,6 +57,9 @@
             <button class="btn btn-secondary" id="roomConnectingBtn" disable style="display: none">Connecting <i class="fa fa-spinner fa-pulse"></i></button>
         </div>
 
+        
+        {{-- <div id="zoom-container"></div> --}}
+
     </div>
 </div>
 
@@ -116,9 +119,58 @@
         aspect-ratio: 16/9;
     }
 
+    #zmmtg-root {
+        height: 100vh;
+        width: 100vw;
+    }
+
 </style>
 
 <script type="text/javascript" src="{{ env('APP_URL') }}:3000/quickstart/index.js"></script>
+
+{{-- <script type="text/javascript" src="{{ env('APP_URL') }}/video/video-quickstart-js-1.x-new/quickstart/src/index.js"></script> --}}
+{{-- <script type="text/javascript" src="{{ env('APP_URL') }}:5173/index.js"></script> --}}
+
+{{-- <script src="https://source.zoom.us/2.16.0/lib/vendor/react.min.js"></script>
+<script src="https://source.zoom.us/2.16.0/lib/vendor/react-dom.min.js"></script>
+<script src="https://source.zoom.us/2.16.0/lib/vendor/redux.min.js"></script>
+<script src="https://source.zoom.us/2.16.0/lib/vendor/redux-thunk.min.js"></script>
+<script src="https://source.zoom.us/2.16.0/zoom-meeting-embedded-2.16.0.min.js"></script> --}}
+
+{{-- 
+<script src="https://source.zoom.us/3.0.0/lib/vendor/react.min.js"></script>
+<script src="https://source.zoom.us/3.0.0/lib/vendor/react-dom.min.js"></script>
+<script src="https://source.zoom.us/3.0.0/lib/vendor/redux.min.js"></script>
+<script src="https://source.zoom.us/3.0.0/lib/vendor/redux-thunk.min.js"></script>
+<script src="https://source.zoom.us/3.0.0/lib/vendor/lodash.min.js"></script>
+<script src="https://source.zoom.us/3.0.0/zoom-meeting-embedded-3.0.0.min.js"></script> --}}
+
+
+{{-- <script>
+    var zoomSDK = ZoomMtgEmbedded.createClient();
+    zoomSDK.init({
+        debug: true,
+        zoomAppRoot: document.getElementById("zoom-container"),
+        language: "en-US",
+    });
+
+    function joinZoomMeeting() {
+        zoomSDK.join({
+            sdkKey: "{{ env('ZOOM_API_KEY') }}",
+            signature: "{{ $signature }}",
+            meetingNumber: "{{ $unique_name }}",
+            password: "",
+            userName: "Guest User",
+            userEmail: "guest@example.com"
+        }).then(response => {
+            console.log("Joined successfully:", response);
+        }).catch(error => {
+            console.error("Join error:", error);
+        });
+    }
+
+    joinZoomMeeting();
+</script> --}}
 
 
 @endsection

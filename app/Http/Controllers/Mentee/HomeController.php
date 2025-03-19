@@ -45,9 +45,13 @@ class HomeController extends Controller
             }
         }
         $sessionLogCount = 0;
-        if (!empty($mentor_ids)) {
-            $sessionLogCount = DB::table('mentor_session_log_count')->whereIn('mentor_id', $mentor_ids)->sum('count');
-        }
+        // if (!empty($mentor_ids)) {
+        //     $sessionLogCount = DB::table('mentor_session_log_count')->whereIn('mentor_id', $mentor_ids)->sum('count');
+        // }
+
+        $sessionLogCount = DB::table('session')->whereIn('mentor_id', $mentor_ids)
+            ->where('status', 1)
+            ->count();
 
 
         $chat_time = !empty($request->chat_time) ? $request->chat_time : 'today';

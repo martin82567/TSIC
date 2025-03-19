@@ -38,11 +38,17 @@ class HomeController extends Controller
 //    	}else{
 //    		$sessionLogCount = 0;
 //    	}
+
         $sessionLogCount = 0;
-        $data = DB::table('mentor_session_log_count')->where('mentor_id', $user_id)->first();
-        if (!empty($data)) {
-            $sessionLogCount = $data->count;
-        }
+        // $data = DB::table('mentor_session_log_count')->where('mentor_id', $user_id)->first();
+        // if (!empty($data)) {
+        //     $sessionLogCount = $data->count;
+        // }
+
+        $sessionLogCount = DB::table('session')->where('mentor_id', $user_id)
+            ->where('status', 1)
+            ->count();
+
         $chat_time = !empty($request->chat_time) ? $request->chat_time : 'today';
 
 

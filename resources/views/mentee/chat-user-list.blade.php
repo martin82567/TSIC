@@ -80,6 +80,7 @@
                                     <a href="{{$chat_message_url}}" class="btn btn-success">Go</a>
                                     <?php if($type == 'mm'){?> 
                                     <!-- <a href="{{url('/mentee/videochat/initiate')}}?mentor_id={{$d->id}}" class="btn btn-success"><i class="fa fa-video-camera" aria-hidden="true"></i></a> -->
+                                        <a href="{{url('/mentee/videochat/initiate')}}?mentor_id={{ \Crypt::encrypt($d->id) }}" class="btn btn-success"><i class="fa fa-video-camera" aria-hidden="true"></i></a>
                                     <?php }?>
                                 </td>
                             </tr>

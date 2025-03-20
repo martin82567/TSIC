@@ -32,6 +32,20 @@ class HomeController extends Controller
             $sessionLogCount = 0;
         }
 
+        $user_id = Auth::user()->id;
+        $get_mentors = DB::table('assign_mentee')->select('assign_mentee.*', 'mentor.is_active', 'mentor.platform_status', 'mentor_status.view_in_application')->leftJoin('mentor', 'mentor.id', 'assign_mentee.assigned_by')->leftJoin('mentor_status', 'mentor_status.id', 'mentor.is_active')->where('mentor_status.view_in_application', 1)->where('mentor.platform_status', 1)->where('assign_mentee.mentee_id', $user_id)->get()->toarray();
+
+        $mentor_ids = array();
+        if (!empty($get_mentors)) {
+            foreach ($get_mentors as $gm) {
+                $mentor_ids[] = $gm->assigned_by;
+            }
+        }
+
+        $sessionLogCount = DB::table('session')->whereIn('mentor_id', $mentor_ids)
+            ->where('status', 1)
+            ->count();
+
 
         $chat_time = !empty($request->chat_time)?$request->chat_time:'today';
 

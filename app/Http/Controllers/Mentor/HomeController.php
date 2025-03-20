@@ -29,11 +29,15 @@ class HomeController extends Controller
     public function index(Request $request)
     {
     	$externalId = Auth::user()->externalId;
-    	if(!empty($externalId)){
-    		$sessionLogCount = 0;
-    	}else{
-    		$sessionLogCount = 0;
-    	}
+    	// if(!empty($externalId)){
+    	// 	$sessionLogCount = 0;
+    	// }else{
+    	// 	$sessionLogCount = 0;
+    	// }
+
+        $sessionLogCount = DB::table('session')->where('mentor_id', Auth::id())
+            ->where('status', 1)
+            ->count();
 
         $chat_time = !empty($request->chat_time)?$request->chat_time:'today';
 

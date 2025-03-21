@@ -25,7 +25,7 @@
         <?php } ?>
 
         <div class="box-inner">
-            <button class="btn btn-success" id="roomJoinBtn" style="display: none;">Start Call</button>
+            <button class="btn btn-success" id="roomJoinBtn">Start Call</button>
             <button class="btn btn-danger" id="roomLeftBtn" style="display: none">End Call</button>
             <button class="btn btn-secondary" id="roomConnectingBtn" disable style="display: none">Connecting <i class="fa fa-spinner fa-pulse"></i></button>
 
@@ -158,6 +158,7 @@
 
     var remainimgCallTime = 0;
     var countDownInterval;
+    var receiverInterval;
     var timerActive = false;
 
     var userType = "sender";
@@ -201,8 +202,6 @@
         receiver_firebase_id: otherFirebaseId,
         receiver_voip_token: otherVoipToken,
     };
-
-    // initiateCall();
 
     function initiateCall() {
         $.post(
@@ -268,8 +267,7 @@
                                 function(data, status) {
                                     roomCreateData = {};
                                     alert(data.message);
-                                    document.getElementById("roomConnectingBtn").style.display =
-                                        "none";
+                                    document.getElementById("roomConnectingBtn").style.display = "none";
                                     document.getElementById("roomJoinBtn").style.display = "inline";
                                 }
                             );
@@ -301,11 +299,10 @@
         let userList = {};
         callReceived = true;
 
+        clearInterval(receiverInterval);
+
         zoomSession = Video.getMediaStream();
         zoomSession.startAudio();
-        
-        // $("#countDownTime").show();
-        // countDownInterval = setInterval(countDown, 1000);
 
         if (zoomSession.isRenderSelfViewWithVideoElement()) {
             zoomSession
@@ -338,9 +335,9 @@
                                 socketConnect.emit("endBeforeReceived", inititateData);
                             }
 
-                            if (selfType.value === "mentor") {
+                            // if (selfType.value === "mentor") {
                                 document.getElementById("roomJoinBtn").style.display = "inline";
-                            }
+                            // }
                             document.getElementById("roomLeftBtn").style.display = "none";
                         }
                     });
@@ -370,9 +367,9 @@
                             Video.leave();
                             zoomSession.muteAudio();
 
-                            if (selfType.value === "mentor") {
+                            // if (selfType.value === "mentor") {
                                 document.getElementById("roomJoinBtn").style.display = "inline";
-                            }
+                            // }
                             document.getElementById("roomLeftBtn").style.display = "none";
 
                             if (callReceived == false) {
@@ -383,6 +380,10 @@
                             document.getElementById("roomJoinBtn").style.display = "inline";
                             document.getElementById("roomLeftBtn").style.display = "none";
                             document.getElementById("my-self-view-video").style.display = "none";
+
+                            // if (callReceived == true) {
+                            //     alert("The mentor has ended the video call.");
+                            // }
                         }
                     });
 
@@ -421,10 +422,6 @@
 
                         clearInterval(countDownInterval);
                         $("#countDownTime").hide();
-                        console.log("selfType", selfType.value);
-                        if (selfType.value === "mentor") {
-                            document.getElementById("roomJoinBtn").style.display = "inline";
-                        }
 
                         document.getElementById("roomLeftBtn").style.display = "none";
                         document.getElementById("roomJoinBtn").style.display = "inline";
@@ -458,6 +455,17 @@
                 .catch((error) => {
                     console.log(error);
                 });
+        }
+
+        
+        if (userType == "receiver") {
+            remainimgCallTime = roomCreateData.remaining_time;
+            $("#countDownTime").show();
+
+            if (!timerActive) {
+                timerActive = true;
+                countDownInterval = setInterval(countDown, 1000);
+            }
         }
 
         socketConnect = io.connect(mainUrl + ":3000", {
@@ -580,91 +588,89 @@
         return displayTime;
     }
 
+    receiverInterval = setInterval(function () {
+        $.post(
+            mainUrl + "/api/webvideochat/check_room",
+            roomCheckData,
+            function(roomData, status) {
+                if (roomData.status) {
+                    roomCreateData = roomData.data;
+                    roomName = roomCreateData.unique_name;
 
-    $.post(
-        mainUrl + "/api/webvideochat/check_room",
-        roomCheckData,
-        function(roomData, status) {
-            if (roomData.status) {
-                roomCreateData = roomData.data;
-                roomName = roomCreateData.unique_name;
+                    userType = "receiver";
 
-                userType = "receiver";
-
-                connectOptions.name = roomName;
-                if (roomCreateData.token) {
-                    tokenData = roomCreateData.token;
-                }
-
-                // // Add the specified video device ID to ConnectOptions.
-                // connectOptions.video.deviceId = { exact: deviceIds.video };
-
-                if (previewTracks) {
-                    connectOptions.tracks = previewTracks;
-                }
-
-                if (typeof navigator !== "undefined") {
-                    if (
-                        typeof navigator.getMedia === "undefined" &&
-                        typeof navigator.mediaDevices === "object" &&
-                        typeof navigator.mediaDevices.getUserMedia === "function"
-                    ) {
-                        navigator.mediaDevices
-                            .getUserMedia({
-                                video: true,
-                                audio: true
-                            })
-                            .then(function() {
-                                Video.init("en-US", "Global", {
-                                    patchJsMedia: true
-                                }).then(
-                                    () => {
-                                        Video.join(roomName, tokenData, identity).then(
-                                            roomJoined,
-                                            function(error) {
-                                                console.log("Video.connect");
-                                                console.log("error Here", error);
-                                            }
-                                        );
-                                    }
-                                );
-                            })
-                            .catch(function(err) {
-                                console.log("video, audio false");
-                                alert("Please allow permission for camera and microphone");
-                            });
-                    } else {
-                        navigator.getMedia({
-                                video: true,
-                                audio: true
-                            },
-                            function() {
-                                Video.init("en-US", "Global", {
-                                    patchJsMedia: true
-                                }).then(
-                                    () => {
-                                        Video.join(roomName, tokenData, identity).then(
-                                            roomJoined,
-                                            function(error) {
-                                                console.log("Video.connect");
-                                                console.log(error);
-                                            }
-                                        );
-                                    }
-                                );
-                            },
-                            function() {
-                                console.log("video, audio false");
-                                alert("Please allow permission for camera and microphone");
-                            }
-                        );
+                    connectOptions.name = roomName;
+                    if (roomCreateData.token) {
+                        tokenData = roomCreateData.token;
                     }
+
+                    if (previewTracks) {
+                        connectOptions.tracks = previewTracks;
+                    }
+
+                    if (typeof navigator !== "undefined") {
+                        if (
+                            typeof navigator.getMedia === "undefined" &&
+                            typeof navigator.mediaDevices === "object" &&
+                            typeof navigator.mediaDevices.getUserMedia === "function"
+                        ) {
+                            navigator.mediaDevices
+                                .getUserMedia({
+                                    video: true,
+                                    audio: true
+                                })
+                                .then(function() {
+                                    Video.init("en-US", "Global", {
+                                        patchJsMedia: true
+                                    }).then(
+                                        () => {
+                                            Video.join(roomName, tokenData, identity).then(
+                                                roomJoined,
+                                                function(error) {
+                                                    console.log("Video.connect");
+                                                    console.log("error Here", error);
+                                                }
+                                            );
+                                        }
+                                    );
+                                })
+                                .catch(function(err) {
+                                    console.log("video, audio false");
+                                    alert("Please allow permission for camera and microphone");
+                                });
+                        } else {
+                            navigator.getMedia({
+                                    video: true,
+                                    audio: true
+                                },
+                                function() {
+                                    Video.init("en-US", "Global", {
+                                        patchJsMedia: true
+                                    }).then(
+                                        () => {
+                                            Video.join(roomName, tokenData, identity).then(
+                                                roomJoined,
+                                                function(error) {
+                                                    console.log("Video.connect");
+                                                    console.log(error);
+                                                }
+                                            );
+                                        }
+                                    );
+                                },
+                                function() {
+                                    console.log("video, audio false");
+                                    alert("Please allow permission for camera and microphone");
+                                }
+                            );
+                        }
+                    }
+                } else {
+                    document.getElementById("roomJoinBtn").style.display = "inline";
                 }
-            } else {
-                document.getElementById("roomJoinBtn").style.display = "inline";
             }
-        }
-    );
+        );
+    }, 2000); // Poll every 5 seconds
 
     // Activity log.
     function log(message) {
@@ -725,13 +731,10 @@
     document.getElementById("roomLeftBtn").onclick = function() {
         log("Leaving room...");
         Video.leave();
-        if (selfType === 'mentor' || selfType.value === "mentor") {
-            document.getElementById("roomJoinBtn").style.display = "inline";
-            document.getElementById("roomLeftBtn").style.display = "none";
-            document.getElementById("my-self-view-video").style.display = "none";
-        } else {
-            window.location.reload();
-        }
+
+        document.getElementById("roomJoinBtn").style.display = "inline";
+        document.getElementById("roomLeftBtn").style.display = "none";
+        document.getElementById("my-self-view-video").style.display = "none";
 
         if (countDownInterval) {
             clearInterval(countDownInterval);
@@ -745,6 +748,7 @@
             function(data, status) {
                 roomCreateData = {};
                 alert(data.message);
+                window.location.reload();
                 // window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
             }
         );

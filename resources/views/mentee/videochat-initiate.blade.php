@@ -359,6 +359,8 @@
 
                     // session ended by host
                     Video.on("connection-change", (payload) => {
+                        console.log("payload: "+payload);
+                        
                         if (payload.state === "Closed") {
                             clearInterval(countDownInterval);
                             $("#countDownTime").hide();

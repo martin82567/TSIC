@@ -229,6 +229,7 @@ class WebhookController extends Controller
     public function zoom(Request $request)
     {
         $data = $request->all();
+        Log::debug("request: ".print_r($data, true));
 
         // Ensure that the request has been made with the correct event type
         if ($data['event'] === 'endpoint.url_validation') {
@@ -249,12 +250,41 @@ class WebhookController extends Controller
         }
 //        Log::info(json_encode($data['event']));
 
+        // User Join Time
+        if ($data['event'] == 'session.user_joined') {
+            $object = $data['payload']['object'];
+            $unique_name = $object['session_name'];
+            $join_time = Carbon::parse($object['user']['join_time']);
+            // Log::debug("join_time: ".print_r($join_time, true));
+            DB::table('video_chat_rooms')->where('unique_name', $unique_name)->update(['receiver_join_time' => $join_time]);
+        }
+
+        // User Leave Time
+        if ($data['event'] == 'session.user_left') {
+            $object = $data['payload']['object'];
+            $unique_name = $object['session_name'];
+            $leave_time = Carbon::parse($object['user']['leave_time']);
+            // Log::debug("leave_time: ".print_r($leave_time, true));
+
+            if (DB::table('video_chat_rooms')->where('unique_name', $unique_name)->whereNull('user_leave_time')->exists()) {
+                DB::table('video_chat_rooms')->where('unique_name', $unique_name)->update(['user_leave_time' => $leave_time]);
+            }
+        }
+
         if ($data['event'] == 'session.ended') {
             $object = $data['payload']['object'];
             $unique_name = $object['session_name'];
             $start_time = Carbon::parse($object['start_time']);
             $end_time = Carbon::parse($object['end_time']);
-            $diff = $end_time->diffInSeconds($start_time);
+            // $diff = $end_time->diffInSeconds($start_time);
+            
+            $video_chat_rooms = DB::table('video_chat_rooms')->where('unique_name', $unique_name)->first();
+
+            // Time Differece from participent join & leave
+            $user_join_time = Carbon::parse($video_chat_rooms->receiver_join_time);
+            $user_leave_time = Carbon::parse($video_chat_rooms->user_leave_time);
+            $diff = $user_leave_time->diffInSeconds($user_join_time);
+            // Log::debug("time diff: ".print_r($diff, true));
 
             if ($diff == 0) {
                 $status = 'Missed Call';
@@ -264,9 +294,8 @@ class WebhookController extends Controller
 
             DB::table('video_chat_rooms')->where('unique_name', $unique_name)->update(['duration' => $diff, 'status' => $status]);
 
-//            get_room_participants_new($room_sid);
+            // get_room_participants_new($room_sid);
 
-            $video_chat_rooms = DB::table('video_chat_rooms')->where('unique_name', $unique_name)->first();
             $chat_code = $video_chat_rooms->chat_code;
             $video_chat_user = DB::table('video_chat_user')->where('chat_code', $chat_code)->first();
             $remaining_time = $video_chat_user->remaining_time;

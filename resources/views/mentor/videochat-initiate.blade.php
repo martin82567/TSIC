@@ -415,10 +415,10 @@
                             
                             zoomSession.muteAudio();
 
-                            if (selfType.value === "mentor") {
-                                document.getElementById("roomJoinBtn").style.display = "inline";
-                            }
-                            document.getElementById("roomLeftBtn").style.display = "none";
+                            // if (selfType.value === "mentor") {
+                            //     document.getElementById("roomJoinBtn").style.display = "inline";
+                            // }
+                            // document.getElementById("roomLeftBtn").style.display = "none";
 
                             if (callReceived == false) {
                                 socketConnect.emit("endBeforeReceived", inititateData);

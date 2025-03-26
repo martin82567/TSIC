@@ -142,9 +142,9 @@ function getScholarsForOffice($office, $token, $baseURL)
     return $responseObject->data;
 }
 
-function getStudentMatchForMentor($studentId, $token, $baseURL)
+function getStudentMatchForMentor($token, $baseURL)
 {
-    $response = app(MiddlewareController::class)->getStudentMentorMatchFunc($token, $baseURL, $studentId);
+    $response = app(MiddlewareController::class)->getStudentMentorMatchFunc($token, $baseURL);
 
 //    $url = env('SF_MIDDLEWARE_BASE_URL') . "/getStudentMentorMatch?studentId=" . $studentId;
 //
@@ -184,6 +184,7 @@ function getProgramsAndServicesForAgency($agencyId, $token, $baseURL)
 
 function createSession($session, $token, $baseURL)
 {
+    sleep(2);
     $url = env('SF_MIDDLEWARE_BASE_URL') . "/createSession";
 
     $httpClient = new GuzzleClient();

@@ -95,35 +95,35 @@ class ProfileController extends Controller
         $session_log_count = "0";
         $label = "No star";
         $label_no = 1;
-        try {
-            if (!empty($this->externalId)) {
-                $getMentorStudentsCount = getMentorStudentsCount($this->externalId);
-                $session_log_count = (string)$getMentorStudentsCount;
-
-                if (($session_log_count >= 0 && $session_log_count <= 4)) {
-                    $label = 'No star';
-                    $label_no = 1;
-                } else if (($session_log_count >= 5 && $session_log_count <= 9)) {
-                    $label = 'Bronze';
-                    $label_no = 2;
-                } else if (($session_log_count >= 10 && $session_log_count <= 14)) {
-                    $label = 'Silver';
-                    $label_no = 3;
-                } else if (($session_log_count >= 15)) {
-                    $label = 'Gold Star';
-                    $label_no = 4;
-                }
-            }
-
-            $user_details->session_log_count = $session_log_count;
-            $user_details->session_log_label = $label;
-            $user_details->session_log_label_no = $label_no;
-        } catch (\Exception $e) {
+//        try {
+//            if (!empty($this->externalId)) {
+//                $getMentorStudentsCount = getMentorStudentsCount($this->externalId);
+//                $session_log_count = (string)$getMentorStudentsCount;
+//
+//                if (($session_log_count >= 0 && $session_log_count <= 4)) {
+//                    $label = 'No star';
+//                    $label_no = 1;
+//                } else if (($session_log_count >= 5 && $session_log_count <= 9)) {
+//                    $label = 'Bronze';
+//                    $label_no = 2;
+//                } else if (($session_log_count >= 10 && $session_log_count <= 14)) {
+//                    $label = 'Silver';
+//                    $label_no = 3;
+//                } else if (($session_log_count >= 15)) {
+//                    $label = 'Gold Star';
+//                    $label_no = 4;
+//                }
+//            }
+//
+//            $user_details->session_log_count = $session_log_count;
+//            $user_details->session_log_label = $label;
+//            $user_details->session_log_label_no = $label_no;
+//        } catch (\Exception $e) {
             $mentor_session_log_count = mentor_session_log_count($user_details->id);
             $user_details->session_log_count = $mentor_session_log_count['count'];
             $user_details->session_log_label = $mentor_session_log_count['label'];
             $user_details->session_log_label_no = $mentor_session_log_count['label_no'];
-        }
+//        }
 
         $today = date('Y-m-d H:i:s');
 

@@ -240,30 +240,30 @@ class UserController extends Controller
             ->first();
 
         $user->upcoming_meeting = $upcoming_meeting;
-        try {
-            if (!empty($this->externalId)) {
-                $getCountByStudentId = getCountByStudentId($this->externalId);
-                $sum_mentor_session_log_count = $getCountByStudentId;
-                if (($sum_mentor_session_log_count >= 0 && $sum_mentor_session_log_count <= 4)) {
-                    $label = 'No star';
-                    $label_no = 1;
-                } else if (($sum_mentor_session_log_count >= 5 && $sum_mentor_session_log_count <= 9)) {
-                    $label = 'Bronze';
-                    $label_no = 2;
-                } else if (($sum_mentor_session_log_count >= 10 && $sum_mentor_session_log_count <= 14)) {
-                    $label = 'Silver';
-                    $label_no = 3;
-                } else if (($sum_mentor_session_log_count >= 15)) {
-                    $label = 'Gold Star';
-                    $label_no = 4;
-                }
-            }
-
-
-            $user->sum_mentor_session_log_count = $sum_mentor_session_log_count;
-            $user->session_log_label = $label;
-            $user->session_log_label_no = $label_no;
-        } catch (\Exception $e) {
+//        try {
+//            if (!empty($this->externalId)) {
+//                $getCountByStudentId = getCountByStudentId($this->externalId);
+//                $sum_mentor_session_log_count = $getCountByStudentId;
+//                if (($sum_mentor_session_log_count >= 0 && $sum_mentor_session_log_count <= 4)) {
+//                    $label = 'No star';
+//                    $label_no = 1;
+//                } else if (($sum_mentor_session_log_count >= 5 && $sum_mentor_session_log_count <= 9)) {
+//                    $label = 'Bronze';
+//                    $label_no = 2;
+//                } else if (($sum_mentor_session_log_count >= 10 && $sum_mentor_session_log_count <= 14)) {
+//                    $label = 'Silver';
+//                    $label_no = 3;
+//                } else if (($sum_mentor_session_log_count >= 15)) {
+//                    $label = 'Gold Star';
+//                    $label_no = 4;
+//                }
+//            }
+//
+//
+//            $user->sum_mentor_session_log_count = $sum_mentor_session_log_count;
+//            $user->session_log_label = $label;
+//            $user->session_log_label_no = $label_no;
+//        } catch (\Exception $e) {
             if (!empty($mentor_ids)) {
                 $sum_mentor_session_log_count = DB::table('mentor_session_log_count')->whereIn('mentor_id', $mentor_ids)->sum('count');
 
@@ -284,7 +284,7 @@ class UserController extends Controller
             $user->sum_mentor_session_log_count = $sum_mentor_session_log_count;
             $user->session_log_label = $label;
             $user->session_log_label_no = $label_no;
-        }
+//        }
 
         /*+++++++++++++++++++++++++++++++++++++++++*/
         $today = date('Y-m-d H:i:s');

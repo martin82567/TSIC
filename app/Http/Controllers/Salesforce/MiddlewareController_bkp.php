@@ -92,13 +92,13 @@ class MiddlewareController extends Controller
 //        return response()->json($serviceResponse, $serviceResponse['code']);
 //    }
 
-    public function getStudentMentorMatchFunc($token, $baseURL)
+    public function getStudentMentorMatchFunc($token, $baseURL, $studentId)
     {
 
         $this->service->token = $token;
         $this->service->baseURL = $baseURL;
 
-        $serviceResponse = $this->service->getStudentMentorMatch();
+        $serviceResponse = $this->service->getStudentMentorMatch($studentId);
         return $serviceResponse;
     }
 

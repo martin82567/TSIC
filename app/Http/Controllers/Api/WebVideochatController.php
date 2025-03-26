@@ -156,7 +156,7 @@ class WebVideochatController extends Controller
                 $sender_id = $explode_unique_name[1];
                 $receiver_type = $explode_unique_name[2];
                 $receiver_id = $explode_unique_name[3];
-		$sender_name = '';
+                $sender_name = '';
 
 
                 DB::table(VIDEO_CHAT_ROOMS)->insert([
@@ -219,10 +219,9 @@ class WebVideochatController extends Controller
                     $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();;
                     $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
                 }
+                $fields = array();
 
-
-
-if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
+                if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
 
                     if ($receiver_device_type == 'android') {
 
@@ -256,6 +255,8 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
                     }
 
                 }
+
+
                 /*+++++++++++++++++++*/
 
                 return Response::json(['status' => true, 'message' => "Chat room created successfully", 'data' => array('room_sid' => $room_sid, 'unique_name' => $unique_name, 'sender_accesstoken' => $sender_accesstoken, 'receiver_accesstoken' => $receiver_accesstoken, 'created_at' => $created_at, 'remaining_time' => $remaining_time, 'videochat_total_duration' => $total_duration_seconds)]);
@@ -277,9 +278,16 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
     {
         $room_sid = '';
         $unique_name = !empty($request->unique_name) ? $request->unique_name : '';
+        $disconnect_type = !empty($request->disconnect_type) ? $request->disconnect_type : 'miss_call';
 
         if (empty($unique_name))
             return Response::json(['status' => false, 'message' => "Please mention the unique name", 'data' => (object)array()]);
+
+        if (!empty($disconnect_type)) {
+            if ($disconnect_type != 'miss_call' && $disconnect_type != 'end_call') {
+                return Response::json(['status' => false, 'message' => "Please mention disconnect type", 'data' => (object)array()]);
+            }
+        }
 
         $video_chat_rooms = DB::table(VIDEO_CHAT_ROOMS)->where('unique_name', $unique_name)->first();
         if (!empty($video_chat_rooms)) {
@@ -289,6 +297,8 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
         }
 
 //        twilio_disconnect_room($room_sid);
+
+        $video_chat_rooms = DB::table(VIDEO_CHAT_ROOMS)->where('unique_name', $unique_name)->first();
         $chat_code = !empty($video_chat_rooms) ? $video_chat_rooms->chat_code : '';
         $unique_name = !empty($video_chat_rooms) ? $video_chat_rooms->unique_name : '';
 
@@ -296,6 +306,8 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
         $sender_id = $video_chat_rooms->sender_id;
         $receiver_type = $video_chat_rooms->receiver_type;
         $receiver_id = $video_chat_rooms->receiver_id;
+        $receiver_firebase_id = '';
+        $sender_name = '';
 
         if ($receiver_type == 'mentee') {
             $receiver_data = DB::table(MENTEE)->where('id', $receiver_id)->first();
@@ -317,10 +329,34 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
             $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();
             $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
         }
+        $fields = array();
 
-        if (!empty($receiver_device_type)) {
 
-            if ($receiver_device_type == 'iOS') {
+        if (!empty($receiver_device_type) && !empty($receiver_firebase_id) && ($disconnect_type == 'miss_call')) {
+
+            if ($receiver_device_type == 'android') {
+                $message = "Video call has been cancelled";
+
+                $time = time();
+                $send_data = array('title' => "Missed video call", 'message' => $message, 'type' => $disconnect_type, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
+                $data_arr = array('meeting_data' => $send_data);
+
+                if ($receiver_device_type == "iOS") {
+                    $msg = array('message' => $message, 'title' => "Missed video call", 'sound' => "default");
+                    $fields = array('to' => $receiver_firebase_id, 'notification' => $msg, 'data' => $data_arr, 'priority' => "high");
+
+                } else if ($receiver_device_type == "android") {
+                    $fields = array('to' => $receiver_firebase_id, 'data' => $send_data, 'priority' => "high"); // For Android
+                }
+
+                $result = sendPushNotificationWithV1($fields);
+
+                if ($result) {
+                    if (!empty($result['name'])) {
+                        DB::table(VIDEO_CHAT_PUSH_NOTIFICATION)->insert(['notification_for' => 'disconnect_chat', 'room_sid' => '', 'receiver_id' => $receiver_id, 'receiver_type' => $receiver_type, 'receiver_device_type' => $receiver_device_type, 'receiver_firebase_id' => $receiver_firebase_id]);
+                    }
+                }
+            } else if ($receiver_device_type == 'iOS') {
                 if (!empty($receiver_voip_device_token)) {
                     $this->ios_voip_push_disconnect($receiver_voip_device_token, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid);
                 }
@@ -328,7 +364,6 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
             }
 
         }
-
 
         return Response::json(['status' => true, 'message' => "Video call has been ended", 'data' => array('room_sid' => '', 'unique_name' => $unique_name)]);
     }
@@ -375,8 +410,8 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
             stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
 
             $fp = stream_socket_client(
-//                'ssl://gateway.push.apple.com:2195', $err,
-                'ssl://gateway.sandbox.push.apple.com:2195', $err,
+                // 'ssl://gateway.push.apple.com:2195', $err,
+               'ssl://gateway.sandbox.push.apple.com:2195', $err,
                 $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
             if (!$fp)
@@ -423,8 +458,8 @@ if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
             stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
 
             $fp = stream_socket_client(
-//                'ssl://gateway.push.apple.com:2195', $err,
-                'ssl://gateway.sandbox.push.apple.com:2195', $err,
+                // 'ssl://gateway.push.apple.com:2195', $err,
+               'ssl://gateway.sandbox.push.apple.com:2195', $err,
                 $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
             if (!$fp)

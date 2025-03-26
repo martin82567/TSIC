@@ -178,6 +178,12 @@ Route::group(['prefix' => 'middleware', 'as' => 'middleware.', 'namespace' => 'S
     Route::get('/oneTimeOfficeMigration', function () {
         \App\Jobs\OneTimeMigration::dispatch();
     });
+    Route::get('/retryMissedSessions', function () {
+        \App\Jobs\RetryMissedSessions::dispatch();
+    });
+    Route::get('/deleteDuplicateSessions', function () {
+        \App\Jobs\DeleteDuplicateSessions::dispatch();
+    });
 
     Route::post('/login', 'MiddlewareController@login');
     Route::get('/getMentorsByOffice', 'MiddlewareController@getMentorsByOffice');

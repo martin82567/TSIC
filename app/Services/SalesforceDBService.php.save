@@ -208,50 +208,38 @@ class SalesforceDBService implements ExternalDBService
 
     public function createSession($sessionObject)
     {
-        try {
+
 //        Log::info(json_encode($sessionObject));
 
-            $session = [
-                "serviceID" => $sessionObject['serviceID'],
-                "studentID" => $sessionObject['studentID'],
-                "mentorID" => $sessionObject['mentorID'],
-                "sessionDate" => $sessionObject['sessionDate'],
-                "sessionDuration" => $sessionObject['sessionDuration'],
-                "sessionNote" => $sessionObject['sessionNote'],
-                "sessionTypeID" => self::SESSION_TYPE_MAPPING[$sessionObject['sessionTypeID']],
-                "sessionSourceID" => self::SESSION_SOURCE_MAPPING[$sessionObject['sessionSourceID']],
-                "sessionLocationID" => self::SESSION_LOCATION_MAPPING[$sessionObject['sessionLocationID']]
+        $session = [
+            "serviceID" => $sessionObject['serviceID'],
+            "studentID" => $sessionObject['studentID'],
+            "mentorID" => $sessionObject['mentorID'],
+            "sessionDate" => $sessionObject['sessionDate'],
+            "sessionDuration" => $sessionObject['sessionDuration'],
+            "sessionNote" => $sessionObject['sessionNote'],
+            "sessionTypeID" => self::SESSION_TYPE_MAPPING[$sessionObject['sessionTypeID']],
+            "sessionSourceID" => self::SESSION_SOURCE_MAPPING[$sessionObject['sessionSourceID']],
+            "sessionLocationID" => self::SESSION_LOCATION_MAPPING[$sessionObject['sessionLocationID']]
+        ];
+
+        $sessionId = $this->createSessionInSalesforce($session);
+
+        if ($sessionId) {
+            return [
+                'success' => true,
+                'data' => [
+                    'id' => $sessionId
+                ],
+                'code' => 200
             ];
-
-            $sessionId = $this->createSessionInSalesforce($session);
-
-            if ($sessionId) {
-                return [
-                    'success' => true,
-                    'data' => [
-                        'id' => $sessionId
-                    ],
-                    'code' => 200
-                ];
-            } else {
-                return [
-                    'success' => false,
-                    'data' => [
-                        'id' => null
-                    ],
-                    'code' => 400
-                ];
-            }
-        } catch (\Exception $e) {
-
-            Log::info('Salesforce Login API error response');
-            Log::info($e);
+        } else {
             return [
                 'success' => false,
                 'data' => [
-                    'id' => null,
+                    'id' => null
                 ],
-                'code' => 500,
+                'code' => 400
             ];
         }
     }
@@ -387,18 +375,20 @@ class SalesforceDBService implements ExternalDBService
         $settings = DB::table('settings')->where('id', 1)->first();
         $date = $settings->successful_updated_at;
         if (empty($date)) {
-            $date = Carbon::now()->subDay(7)->toIso8601ZuluString();
-        }
+            $date = Carbon::now()->subDay(30)->toIso8601ZuluString();
+        } else {
+	    $date = Carbon::now()->subDay(30)->toIso8601ZuluString();
+	}
         $matches = $this->queryData('Match__c', 'Active__c,CreatedDate,Primary_Mentor__c,Mentor_Level__c,Student__c'
             , "SystemModstamp>=$date");
-
+Log::info($date);
         if ($matches) {
             $converted = collect($matches)->map(function ($match) {
                 return [
                     'mentorAssignmentTypeID' => $match->Active__c ? 1 : 0,
                     'assignedDate' => $match->CreatedDate,
                     'mentorID' => $match->Primary_Mentor__c,
-                    'isPrimary' => $match->Mentor_Level__c === "Primary" ? "1" : "",
+                    'isPrimary' => $match->Mentor_Level__c === "PRIMARY" ? "" : "1",
                     'studentID' => $match->Student__c
                 ];
             });

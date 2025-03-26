@@ -17,8 +17,8 @@
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&Cross;</button>
             <h4 style="margin-bottom: 0"><i class="icon fa fa-check"></i>
                 <?php
-                echo session('success_message');
-                Session::forget('success_message');
+                    echo session('success_message');
+                    Session::forget('success_message');
                 ?>
             </h4>
         </div>
@@ -51,13 +51,13 @@
                 <input id="selfName" type="hidden" value="{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}">
                 <input id="otherType" type="hidden" value="mentor">
                 <input id="otherId" type="hidden" value="{{ $mentor_id }}">
-                <input id="otherDeviceType" type="hidden" value="{{ $mentor_device_type }}">
-                <input id="otherFirebaseId" type="hidden" value="{{ $mentor_firebase_id }}">
-                <input id="otherVoipToken" type="hidden" value="{{ $mentor_voip_device_token }}">
+                <input id="otherDeviceType" type="hidden" value="{{$mentor_device_type}}">
+                <input id="otherFirebaseId" type="hidden" value="{{$mentor_firebase_id}}">
+                <input id="otherVoipToken" type="hidden" value="{{$mentor_voip_device_token}}">
             </div>
 
             <!-- <button class="btn btn-success" id="roomJoinBtn" style="display: none; width: 0; height: 0; overflow: hidden; opacity: 0;">Start Call</button> -->
-            
+         
         </div>
 
     </div>
@@ -68,23 +68,20 @@
         min-height: 200px;
         position: relative;
         margin-bottom: 20px;
-        margin-top: 20px;
+        margin-top: 20px;   
     }
-
     .videoView #remote-media video {
         width: 100%;
         height: 600px;
         background: #000;
     }
-
-    .videoView #local-media {
+    .videoView #local-media{
         width: 200px;
         height: 150px;
         position: absolute;
         right: 10px;
         bottom: 10px;
     }
-
     .videoView #local-media video {
         width: 200px;
         height: 150px;
@@ -92,7 +89,6 @@
         right: 10px;
         bottom: 10px;
     }
-
     .videoView .countdown {
         font-size: 32px;
         color: #fff;
@@ -101,29 +97,16 @@
         right: 20px;
         top: 20px
     }
-
     .videoView .countdown.blinking {
         animation-name: blinkAnimation;
         animation-duration: 2s;
-        animation-iteration-count: infinite;
+        animation-iteration-count:infinite;
     }
-
     @keyframes blinkAnimation {
-        0% {
-            opacity: 1
-        }
-
-        33% {
-            opacity: 0
-        }
-
-        66% {
-            opacity: 1
-        }
-
-        100% {
-            opacity: 1
-        }
+        0%   {opacity: 1}
+        33%  {opacity: 0}
+        66%  {opacity: 1}
+        100% {opacity: 1}
     }
 
     video-player-container {
@@ -136,9 +119,11 @@
         height: 600px;
         aspect-ratio: 16/9;
     }
+
 </style>
 
 {{-- <script type="text/javascript" src="{{ env('APP_URL') }}:3000/quickstart/index.js"></script> --}}
+
 
 <script src="https://source.zoom.us/videosdk/zoom-video-2.1.10.min.js"></script>
 
@@ -243,8 +228,8 @@
                 sendRequest = true;
                 remainimgCallTime = roomCreateData.remaining_time;
 
-                $("#countDownTime").show();
-                countDownInterval = setInterval(countDown, 1000);
+                // $("#countDownTime").show();
+                // countDownInterval = setInterval(countDown, 1000);
 
                 Video.init("en-US", "Global", {
                     patchJsMedia: true
@@ -355,6 +340,9 @@
 
                     Video.on("user-added", (payload) => {
                         userList.userId = payload[0].userId;
+
+                        $("#countDownTime").show();
+                        countDownInterval = setInterval(countDown, 1000);
                     });
 
                     // session ended by host
@@ -470,44 +458,44 @@
             }
         }
 
-        socketConnect = io.connect(mainUrl + ":3000", {
-            transports: ["websocket", "polling", "flashsocket"],
-        });
+        // socketConnect = io.connect(mainUrl + ":3000", {
+        //     transports: ["websocket", "polling", "flashsocket"],
+        // });
 
-        socketConnect.on("connect", function() {
-            var det = {
-                id: inititateData.sender_id,
-                type: inititateData.sender_type,
-                status: "videoChat",
-            };
-            socketConnect.emit("connected", det);
+        // socketConnect.on("connect", function() {
+        //     var det = {
+        //         id: inititateData.sender_id,
+        //         type: inititateData.sender_type,
+        //         status: "videoChat",
+        //     };
+        //     socketConnect.emit("connected", det);
 
-            if (sendRequest) {
-                socketConnect.emit("reqSend", inititateData);
-            }
+        //     if (sendRequest) {
+        //         socketConnect.emit("reqSend", inititateData);
+        //     }
 
-            if (userType == "receiver") {
-                socketConnect.emit("getTimer", roomCheckData);
-            }
-        });
+        //     if (userType == "receiver") {
+        //         socketConnect.emit("getTimer", roomCheckData);
+        //     }
+        // });
 
-        socketMain.on("getTimerVal", function(data) {
-            data.remainimgCallTime = remainimgCallTime;
+        // socketMain.on("getTimerVal", function(data) {
+        //     data.remainimgCallTime = remainimgCallTime;
 
-            socketConnect.emit("setTimer", data);
-            callReceived = true;
-        });
+        //     socketConnect.emit("setTimer", data);
+        //     callReceived = true;
+        // });
 
-        socketMain.on("setTimerVal", function(data) {
-            remainimgCallTime = data.remainimgCallTime;
+        // socketMain.on("setTimerVal", function(data) {
+        //     remainimgCallTime = data.remainimgCallTime;
 
-            $("#countDownTime").show();
+        //     $("#countDownTime").show();
 
-            if (!timerActive) {
-                timerActive = true;
-                countDownInterval = setInterval(countDown, 1000);
-            }
-        });
+        //     if (!timerActive) {
+        //         timerActive = true;
+        //         countDownInterval = setInterval(countDown, 1000);
+        //     }
+        // });
     }
 
 
@@ -667,8 +655,8 @@
                             );
                         }
                     }
-                } else {
-                    document.getElementById("roomJoinBtn").style.display = "inline";
+                // } else {
+                //     document.getElementById("roomJoinBtn").style.display = "inline";
                 }
             }
         );
@@ -756,4 +744,5 @@
         );
     };
 </script>
+
 @endsection

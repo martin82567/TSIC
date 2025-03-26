@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -119,7 +118,7 @@ class DataimportController extends Controller
 
         ini_set("memory_limit", -1);
         ini_set('max_execution_time', 300);
-        $admins = DB::table('admins')->select('externalId', 'id', 'externalName', 'affiliateName')->where('creationmethod', 'salesforceapi')->where('is_inserted', 0)->limit(1)->get();
+        $admins = DB::table('admins')->select('externalId', 'id', 'externalName')->where('creationmethod', 'salesforceapi')->where('is_inserted', 0)->limit(1)->get();
 
         $schoollistarr = array();
         $inserted_data = array();
@@ -127,131 +126,111 @@ class DataimportController extends Controller
             foreach ($admins as $agency) {
                 // Mentor List
 
-                $mentorlist = collect(getMentorsForOffice($agency->affiliateName, $token, $baseURL));
-
+                $mentorlist = collect(getMentorsForOffice($agency->externalName, $token, $baseURL));
                 if (!empty($mentorlist)) {
                     foreach ($mentorlist as $mentor) {
 
-                        try {
+                        $school_exist = DB::table('mentor')->select('*')->where('externalId', $mentor->mentorID)->first();
+                        if (empty($school_exist)) {
 
-                            $school_exist = DB::table('mentor')->select('*')->where('externalId', $mentor->mentorID)->first();
-                            if (empty($school_exist)) {
+                            $inserted_data = array('created_by' => $agency->id, 'assigned_by' => $agency->id, 'password' => bcrypt("Welcome123"), 'firstname' => !empty($mentor->firstName) ? $mentor->firstName : '', 'middlename' => !empty($mentor->middleName) ? $mentor->middleName : '', 'lastname' => !empty($mentor->lastName) ? $mentor->lastName : '', 'email' => !empty($mentor->emailAddress) ? $mentor->emailAddress : '', 'is_active' => $mentor->mentorStatusID, 'stardbofficeID' => $mentor->officeID, 'externalId' => $mentor->mentorID, 'externalOfficeId' => $mentor->externalOfficeId, 'creationmethod' => 'salesforceapi', 'phone' => !empty($mentor->mobilePhoneNumber) ? $mentor->mobilePhoneNumber : '');
 
-                                $inserted_data = array('created_by' => $agency->id, 'assigned_by' => $agency->id, 'password' => bcrypt("Welcome123"), 'firstname' => !empty($mentor->firstName) ? $mentor->firstName : '', 'middlename' => !empty($mentor->middleName) ? $mentor->middleName : '', 'lastname' => !empty($mentor->lastName) ? $mentor->lastName : '', 'email' => !empty($mentor->emailAddress) ? $mentor->emailAddress : '', 'is_active' => $mentor->mentorStatusID, 'stardbofficeID' => $mentor->officeID, 'externalId' => $mentor->mentorID, 'externalOfficeId' => $mentor->externalOfficeId, 'creationmethod' => 'salesforceapi', 'phone' => !empty($mentor->mobilePhoneNumber) ? $mentor->mobilePhoneNumber : '');
+                            DB::table('mentor')->insert($inserted_data);
 
-                                DB::table('mentor')->insert($inserted_data);
+                            $data_insert = array('data' => json_encode($inserted_data), 'type' => 'create', 'table_name' => 'mentor');
+                            DB::table('crontracker')->insert($data_insert);
+                        } else {
+                            $inserted_data = array('created_by' => $agency->id, 'assigned_by' => $agency->id, 'stardbofficeID' => $mentor->officeID, 'externalOfficeId' => $mentor->externalOfficeId, 'firstname' => !empty($mentor->firstName) ? $mentor->firstName : '', 'middlename' => !empty($mentor->middleName) ? $mentor->middleName : '', 'lastname' => !empty($mentor->lastName) ? $mentor->lastName : '', 'email' => !empty($mentor->emailAddress) ? $mentor->emailAddress : '', 'phone' => !empty($mentor->mobilePhoneNumber) ? $mentor->mobilePhoneNumber : '', 'is_active' => $mentor->mentorStatusID);
 
-                                $data_insert = array('data' => json_encode($inserted_data), 'type' => 'create', 'table_name' => 'mentor');
+                            $affected = DB::table('mentor')
+                                ->where('externalId', $mentor->mentorID)
+                                ->update($inserted_data);
+
+                            if (($mentor->firstName != $school_exist->firstname) || ($mentor->middleName != $school_exist->middlename) || ($mentor->lastName != $school_exist->lastname) || ($mentor->emailAddress != $school_exist->email) || ($mentor->mobilePhoneNumber != $school_exist->phone) || ($agency->id != $school_exist->assigned_by) || ($mentor->officeID != $school_exist->stardbofficeID) || ($mentor->externalOfficeId != $school_exist->externalOfficeId) || ($mentor->mentorStatusID != $school_exist->is_active)) {
+                                $data_insert = array('data' => json_encode($inserted_data), 'type' => 'update', 'table_name' => 'mentor');
                                 DB::table('crontracker')->insert($data_insert);
-                            } else {
-                                $inserted_data = array('created_by' => $agency->id, 'assigned_by' => $agency->id, 'stardbofficeID' => $mentor->officeID, 'externalOfficeId' => $mentor->externalOfficeId, 'firstname' => !empty($mentor->firstName) ? $mentor->firstName : '', 'middlename' => !empty($mentor->middleName) ? $mentor->middleName : '', 'lastname' => !empty($mentor->lastName) ? $mentor->lastName : '', 'email' => !empty($mentor->emailAddress) ? $mentor->emailAddress : '', 'phone' => !empty($mentor->mobilePhoneNumber) ? $mentor->mobilePhoneNumber : '', 'is_active' => $mentor->mentorStatusID);
-
-                                $affected = DB::table('mentor')
-                                    ->where('externalId', $mentor->mentorID)
-                                    ->update($inserted_data);
-
-                                if (($mentor->firstName != $school_exist->firstname) || ($mentor->middleName != $school_exist->middlename) || ($mentor->lastName != $school_exist->lastname) || ($mentor->emailAddress != $school_exist->email) || ($mentor->mobilePhoneNumber != $school_exist->phone) || ($agency->id != $school_exist->assigned_by) || ($mentor->officeID != $school_exist->stardbofficeID) || ($mentor->externalOfficeId != $school_exist->externalOfficeId) || ($mentor->mentorStatusID != $school_exist->is_active)) {
-                                    $data_insert = array('data' => json_encode($inserted_data), 'type' => 'update', 'table_name' => 'mentor');
-                                    DB::table('crontracker')->insert($data_insert);
-                                }
                             }
-                        } catch (GuzzleException $e) {
-                            Log::info($e->getMessage());
                         }
                     }
                 }
 
                 // Student List
 
-                $studentList = collect(getStudentsForOffice($agency->affiliateName, $token, $baseURL));
+                $studentList = collect(getStudentsForOffice($agency->externalName, $token, $baseURL));
 
                 if (!empty($studentList)) {
                     foreach ($studentList as $student) {
 
-                        try {
-                            $mentee_data[] = $student->emailAddress;
-                            $school_exist = DB::table('school')->select('id')->where('externalId', $student->schoolID)->first();
-                            if (!empty($student->schoolID)) {
+                        $mentee_data[] = $student->emailAddress;
+                        $school_exist = DB::table('school')->select('id')->where('externalId', $student->schoolID)->first();
+                        if (!empty($student->schoolID)) {
 
-                                $mentee_exist = DB::table('mentee')->select('*')->where('externalId', $student->studentID)->first();
+                            $mentee_exist = DB::table('mentee')->select('*')->where('externalId', $student->studentID)->first();
 
-                                if (empty($mentee_exist)) {
-                                    $inserted_data = array('assigned_by' => $agency->id, 'password' => bcrypt("Welcome123"), 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'firstname' => !empty($student->firstName) ? $student->firstName : '', 'middlename' => !empty($student->middleName) ? $student->middleName : '', 'lastname' => !empty($student->lastName) ? $student->lastName : '', 'email' => !empty($student->emailAddress) ? $student->emailAddress : '', 'created_by' => 1, 'status' => $student->studentStatusID, 'externalId' => $student->studentID, 'schoolID' => $student->schoolID, 'creationmethod' => 'salesforceapi');
-                                    $mentee_id = DB::table('mentee')->insertGetId($inserted_data);
+                            if (empty($mentee_exist)) {
+                                $inserted_data = array('assigned_by' => $agency->id, 'password' => bcrypt("Welcome123"), 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'firstname' => !empty($student->firstName) ? $student->firstName : '', 'middlename' => !empty($student->middleName) ? $student->middleName : '', 'lastname' => !empty($student->lastName) ? $student->lastName : '', 'email' => !empty($student->emailAddress) ? $student->emailAddress : '', 'created_by' => 1, 'status' => $student->studentStatusID, 'externalId' => $student->studentID, 'schoolID' => $student->schoolID, 'creationmethod' => 'salesforceapi');
+                                $mentee_id = DB::table('mentee')->insertGetId($inserted_data);
 
-                                    $data_insert = array('data' => json_encode($inserted_data), 'type' => 'create', 'table_name' => 'mentee');
+                                $data_insert = array('data' => json_encode($inserted_data), 'type' => 'create', 'table_name' => 'mentee');
+                                DB::table('crontracker')->insert($data_insert);
+
+                            } else {
+                                $mentee_id = $mentee_exist->id;
+
+                                $inserted_data = array('firstname' => !empty($student->firstName) ? $student->firstName : '', 'assigned_by' => $agency->id, 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'schoolID' => $student->schoolID, 'middlename' => !empty($student->middleName) ? $student->middleName : '', 'lastname' => !empty($student->lastName) ? $student->lastName : '', 'email' => !empty($student->emailAddress) ? $student->emailAddress : '', 'status' => $student->studentStatusID);
+
+                                DB::table('mentee')
+                                    ->where('externalId', $student->studentID)
+                                    ->update($inserted_data);
+
+                                if (($student->firstName != $mentee_exist->firstname) || ($student->middleName != $mentee_exist->middlename) || ($student->lastName != $mentee_exist->lastname) || ($student->emailAddress != $mentee_exist->email)) {
+                                    $data_insert = array('data' => json_encode($inserted_data), 'type' => 'update', 'table_name' => 'mentee');
                                     DB::table('crontracker')->insert($data_insert);
-
-                                } else {
-                                    $mentee_id = $mentee_exist->id;
-
-                                    $inserted_data = array('firstname' => !empty($student->firstName) ? $student->firstName : '', 'assigned_by' => $agency->id, 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'schoolID' => $student->schoolID, 'middlename' => !empty($student->middleName) ? $student->middleName : '', 'lastname' => !empty($student->lastName) ? $student->lastName : '', 'email' => !empty($student->emailAddress) ? $student->emailAddress : '', 'status' => $student->studentStatusID);
-
-                                    DB::table('mentee')
-                                        ->where('externalId', $student->studentID)
-                                        ->update($inserted_data);
-
-                                    if (($student->firstName != $mentee_exist->firstname) || ($student->middleName != $mentee_exist->middlename) || ($student->lastName != $mentee_exist->lastname) || ($student->emailAddress != $mentee_exist->email)) {
-                                        $data_insert = array('data' => json_encode($inserted_data), 'type' => 'update', 'table_name' => 'mentee');
-                                        DB::table('crontracker')->insert($data_insert);
-                                    }
                                 }
                             }
-                        } catch (GuzzleException $e) {
-                            Log::info($e->getMessage());
                         }
                     }
                 }
 
                 // Scholar List
 
-                $scholarList = collect(getScholarsForOffice($agency->affiliateName, $token, $baseURL));
+                $scholarList = collect(getScholarsForOffice($agency->externalName, $token, $baseURL));
 
                 if (!empty($scholarList)) {
                     foreach ($scholarList as $scholar) {
 
-                        try {
-                            $mentee_data[] = $scholar->emailAddress;
-                            $school_exist = DB::table('school')->select('id')->where('externalId', $scholar->schoolID)->first();
-                            if (!empty($scholar->schoolID)) {
+                        $mentee_data[] = $scholar->emailAddress;
+                        $school_exist = DB::table('school')->select('id')->where('externalId', $scholar->schoolID)->first();
+                        if (!empty($scholar->schoolID)) {
 
-                                $mentee_exist = DB::table('mentee')->select('*')->where('externalId', $scholar->studentID)->first();
+                            $mentee_exist = DB::table('mentee')->select('*')->where('externalId', $scholar->studentID)->first();
 
-                                if (empty($mentee_exist)) {
-                                    $inserted_data = array('assigned_by' => $agency->id, 'password' => bcrypt("Welcome123"), 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'firstname' => !empty($scholar->firstName) ? $scholar->firstName : '', 'middlename' => !empty($scholar->middleName) ? $scholar->middleName : '', 'lastname' => !empty($scholar->lastName) ? $scholar->lastName : '', 'email' => !empty($scholar->emailAddress) ? $scholar->emailAddress : '', 'created_by' => 1, 'status' => $scholar->studentStatusID, 'externalId' => $scholar->studentID, 'schoolID' => $scholar->schoolID, 'creationmethod' => 'salesforceapi');
-                                    $mentee_id = DB::table('mentee')->insertGetId($inserted_data);
+                            if (empty($mentee_exist)) {
+                                $inserted_data = array('assigned_by' => $agency->id, 'password' => bcrypt("Welcome123"), 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'firstname' => !empty($scholar->firstName) ? $scholar->firstName : '', 'middlename' => !empty($scholar->middleName) ? $scholar->middleName : '', 'lastname' => !empty($scholar->lastName) ? $scholar->lastName : '', 'email' => !empty($scholar->emailAddress) ? $scholar->emailAddress : '', 'created_by' => 1, 'status' => $scholar->studentStatusID, 'externalId' => $scholar->studentID, 'schoolID' => $scholar->schoolID, 'creationmethod' => 'salesforceapi');
+                                $mentee_id = DB::table('mentee')->insertGetId($inserted_data);
 
-                                    $data_insert = array('data' => json_encode($inserted_data), 'type' => 'create', 'table_name' => 'mentee');
+                                $data_insert = array('data' => json_encode($inserted_data), 'type' => 'create', 'table_name' => 'mentee');
+                                DB::table('crontracker')->insert($data_insert);
+
+                            } else {
+                                $mentee_id = $mentee_exist->id;
+
+                                $inserted_data = array('firstname' => !empty($scholar->firstName) ? $scholar->firstName : '', 'assigned_by' => $agency->id, 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'schoolID' => $scholar->schoolID, 'middlename' => !empty($scholar->middleName) ? $scholar->middleName : '', 'lastname' => !empty($scholar->lastName) ? $scholar->lastName : '', 'email' => !empty($scholar->emailAddress) ? $scholar->emailAddress : '', 'status' => $scholar->studentStatusID);
+
+                                DB::table('mentee')
+                                    ->where('externalId', $scholar->studentID)
+                                    ->update($inserted_data);
+
+                                if (($scholar->firstName != $mentee_exist->firstname) || ($scholar->middleName != $mentee_exist->middlename) || ($scholar->lastName != $mentee_exist->lastname) || ($scholar->emailAddress != $mentee_exist->email)) {
+                                    $data_insert = array('data' => json_encode($inserted_data), 'type' => 'update', 'table_name' => 'mentee');
                                     DB::table('crontracker')->insert($data_insert);
-
-                                } else {
-                                    $mentee_id = $mentee_exist->id;
-
-                                    $inserted_data = array('firstname' => !empty($scholar->firstName) ? $scholar->firstName : '', 'assigned_by' => $agency->id, 'school_id' => !empty($school_exist->id) ? $school_exist->id : 0, 'schoolID' => $scholar->schoolID, 'middlename' => !empty($scholar->middleName) ? $scholar->middleName : '', 'lastname' => !empty($scholar->lastName) ? $scholar->lastName : '', 'email' => !empty($scholar->emailAddress) ? $scholar->emailAddress : '', 'status' => $scholar->studentStatusID);
-
-                                    DB::table('mentee')
-                                        ->where('externalId', $scholar->studentID)
-                                        ->update($inserted_data);
-
-                                    if (($scholar->firstName != $mentee_exist->firstname) || ($scholar->middleName != $mentee_exist->middlename) || ($scholar->lastName != $mentee_exist->lastname) || ($scholar->emailAddress != $mentee_exist->email)) {
-                                        $data_insert = array('data' => json_encode($inserted_data), 'type' => 'update', 'table_name' => 'mentee');
-                                        DB::table('crontracker')->insert($data_insert);
-                                    }
                                 }
                             }
-                        } catch (GuzzleException $e) {
-                            Log::info($e->getMessage());
                         }
                     }
                 }
 
                 DB::table('admins')->where('id', $agency->id)->update(['is_inserted' => 1]);
-
-                try {
-                    $this->mentee_mentor_data_import();
-                } catch (\Exception $e) {
-                    Log::info($e->getMessage());
-                }
             }
 
         } else {
@@ -271,39 +250,26 @@ class DataimportController extends Controller
 
         ini_set("memory_limit", -1);
         ini_set('max_execution_time', 300);
-//        $mentee = DB::table('mentee')->select('externalId', 'id')->where('creationmethod', 'salesforceapi')->where('externalId', '!=', '')->where('is_inserted', 0)->limit(1000)->get();
-        $studentList = collect(getStudentMatchForMentor($token, $baseURL));
-//        $schoollistarr = array();
-//        $inserted_data = array();
-//        if (!empty($mentee->toarray())) {
-//            foreach ($mentee as $student) {
-//                $studentList = collect(getStudentMatchForMentor($token, $baseURL));
-//
-//                $mentee_id = $student->id;
-//
-//                $currentAssignedMentors = DB::table('assign_mentee')
-//                    ->where('mentee_id', $mentee_id)
-//                    ->pluck('assigned_by')
-//                    ->toArray();
-//
-//                $activeMentorIDs = [];
-//
-        if (!empty($studentList)) {
-            foreach ($studentList as $assign_mentee) {
-                $mentee_external_id = $assign_mentee->studentID;
-                if (!empty($mentee_external_id)) {
-                    $mentee_id = DB::table('mentee')->where('externalId', $mentee_external_id)->first();
-                    if (!empty($mentee_id)) {
-                        $mentor_exist = DB::table('mentor')->select('id')->where('externalId', $assign_mentee->mentorID)->first();
-                        $created_date = date('Y-m-d h:i:s', strtotime($assign_mentee->assignedDate));
+        $mentee = DB::table('mentee')->select('externalId', 'id')->where('creationmethod', 'salesforceapi')->where('externalId', '!=', '')->where('is_inserted', 0)->limit(1000)->get();
 
-                        if (!empty($mentor_exist)) {
-                            if ($assign_mentee->mentorAssignmentTypeID == 1) {
+        $schoollistarr = array();
+        $inserted_data = array();
+        if (!empty($mentee->toarray())) {
+            foreach ($mentee as $student) {
+                $studentList = collect(getStudentMatchForMentor($student->externalId, $token, $baseURL));
 
-                                $assign_mentee_exist = DB::table('assign_mentee')->select('*')->where('mentee_id', $mentee_id->id)->where('assigned_by', $mentor_exist->id)->first();
+                $mentee_id = $student->id;
+
+                if (!empty($studentList)) {
+                    foreach ($studentList as $assign_mentee) {
+                        if ($assign_mentee->mentorAssignmentTypeID == 1) {
+                            $mentor_exist = DB::table('mentor')->select('id')->where('externalId', $assign_mentee->mentorID)->first();
+                            $created_date = date('Y-m-d h:i:s', strtotime($assign_mentee->assignedDate));
+                            if (!empty($mentor_exist)) {
+                                $assign_mentee_exist = DB::table('assign_mentee')->select('*')->where('mentee_id', $mentee_id)->where('assigned_by', $mentor_exist->id)->first();
 
                                 if (empty($assign_mentee_exist)) {
-                                    $inserted_data_assign = array('mentee_id' => $mentee_id->id, 'assigned_by' => $mentor_exist->id, 'created_date' => $created_date, 'is_primary' => !empty($assign_mentee->isPrimary) ? 1 : 0);
+                                    $inserted_data_assign = array('mentee_id' => $mentee_id, 'assigned_by' => $mentor_exist->id, 'created_date' => $created_date, 'is_primary' => !empty($assign_mentee->isPrimary) ? 1 : 0);
                                     DB::table('assign_mentee')->insert($inserted_data_assign);
 
                                     $data_insert = array('data' => json_encode($inserted_data_assign), 'type' => 'create', 'table_name' => 'assign_mentee');
@@ -317,56 +283,31 @@ class DataimportController extends Controller
                                         ->where('id', $assign_mentee_exist->id)
                                         ->update($inserted_data);
                                 }
-                            } else {
-                                $assign_mentee_exist = DB::table('assign_mentee')
-                                    ->where('mentee_id', $mentee_id->id)
-                                    ->where('assigned_by', $mentor_exist->id)
-                                    ->first();
-
+                            }
+                        } else {
+                            $mentor_exist = DB::table('mentor')->select('id')->where('externalId', $assign_mentee->mentorID)->first();
+                            if (!empty($mentor_exist)) {
+                                $assign_mentee_exist = DB::table('assign_mentee')->select('*')->where('mentee_id', $mentee_id)->where('assigned_by', $mentor_exist->id)->first();
                                 if (!empty($assign_mentee_exist)) {
-                                    // Delete the inactive assignment
                                     DB::table('assign_mentee')
                                         ->where('id', $assign_mentee_exist->id)
                                         ->delete();
-
-                                    // Track changes
-                                    $data_delete = [
-                                        'data' => json_encode($assign_mentee_exist),
-                                        'type' => 'delete',
-                                        'table_name' => 'assign_mentee',
-                                    ];
-                                    DB::table('crontracker')->insert($data_delete);
+                                    $data_insert = array('data' => json_encode($assign_mentee_exist), 'type' => 'delete', 'table_name' => 'assign_mentee');
+                                    DB::table('crontracker')->insert($data_insert);
                                 }
                             }
                         }
-//                        else {
-//                            $mentor_exist = DB::table('mentor')->select('id')->where('externalId', $assign_mentee->mentorID)->first();
-//                            if (!empty($mentor_exist)) {
-//                                $assign_mentee_exist = DB::table('assign_mentee')->select('*')->where('mentee_id', $mentee_id)->where('assigned_by', $mentor_exist->id)->first();
-//                                if (!empty($assign_mentee_exist)) {
-//                                    DB::table('assign_mentee')
-//                                        ->where('id', $assign_mentee_exist->id)
-//                                        ->delete();
-//                                    $data_insert = array('data' => json_encode($assign_mentee_exist), 'type' => 'delete', 'table_name' => 'assign_mentee');
-//                                    DB::table('crontracker')->insert($data_insert);
-//                                }
-//                            }
-//                        }
-
-                        DB::table('mentee')->where('id', $mentee_id->id)->update(['is_inserted' => 1]);
                     }
                 }
+                DB::table('mentee')->where('id', $mentee_id)->update(['is_inserted' => 1]);
             }
-            $successful_updated_at = Carbon::now()->toIso8601ZuluString();
-            DB::table('settings')->where('id', 1)->update(['successful_updated_at' => $successful_updated_at]);
             //DB::table('mentee')->update(['is_inserted' => 1]);
         } else {
             DB::table('mentee')->update(['is_inserted' => 0]);
         }
     }
 
-    public
-    function mentoringsessions()
+    public function mentoringsessions()
     {
         /* $url = 'https://unison.tsic.org/api/Authentication';
          $fields = array(
@@ -465,14 +406,12 @@ class DataimportController extends Controller
          } */
     }
 
-    public
-    function testroute()
+    public function testroute()
     {
         echo "testroute1";
     }
 
-    public
-    function syncAgencyPrograms()
+    public function syncAgencyPrograms()
     {
 
         $loginResponse = loginToSalesforce();

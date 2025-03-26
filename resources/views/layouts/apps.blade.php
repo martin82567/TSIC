@@ -26,7 +26,7 @@
 
     <script src="https://media.twiliocdn.com/sdk/js/chat/v4.0/twilio-chat.min.js"></script>
     {{-- <script src="https://source.zoom.us/videosdk/zoom-video-1.10.7.min.js"></script> --}}
-    {{-- <script src="https://source.zoom.us/videosdk/zoom-video-2.1.10.min.js"></script> --}}
+    <script src="https://source.zoom.us/videosdk/zoom-video-2.1.10.min.js"></script>
 
     <!-- SOCKET -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>

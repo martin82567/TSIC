@@ -80,7 +80,6 @@ class FCMServiceProvider
     public function sendNotification($payload)
     {
         $accessToken = $this->getOAuthToken();
-	Log::info(json_encode($payload));
 
         $notificationPayload = [
             'message' => [

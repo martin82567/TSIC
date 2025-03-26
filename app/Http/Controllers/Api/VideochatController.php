@@ -205,6 +205,7 @@ class VideochatController extends Controller
             $sender_id = $explode_unique_name[1];
             $receiver_type = $explode_unique_name[2];
             $receiver_id = $explode_unique_name[3];
+            $sender_name = '';
 
 
             DB::table(VIDEO_CHAT_ROOMS)->insert([
@@ -248,7 +249,7 @@ class VideochatController extends Controller
                 $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();;
                 $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
             }
-
+            $fields = array();
 
             if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
 
@@ -350,6 +351,8 @@ class VideochatController extends Controller
         $sender_id = $video_chat_rooms->sender_id;
         $receiver_type = $video_chat_rooms->receiver_type;
         $receiver_id = $video_chat_rooms->receiver_id;
+        $receiver_firebase_id = '';
+        $sender_name = '';
 
 
         // $video_chat_user = DB::table(VIDEO_CHAT_USER)->where('chat_code',$chat_code)->first();
@@ -373,6 +376,7 @@ class VideochatController extends Controller
             $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();
             $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
         }
+        $fields = array();
 
 
         if (!empty($receiver_device_type) && !empty($receiver_firebase_id) && ($disconnect_type == 'miss_call')) {
@@ -579,8 +583,8 @@ class VideochatController extends Controller
             stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
 
             $fp = stream_socket_client(
-//                'ssl://gateway.push.apple.com:2195', $err,
-                'ssl://gateway.sandbox.push.apple.com:2195', $err,
+                'ssl://gateway.push.apple.com:2195', $err,
+//                'ssl://gateway.sandbox.push.apple.com:2195', $err,
                 $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
             if (!$fp)
@@ -628,8 +632,8 @@ class VideochatController extends Controller
             stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
 
             $fp = stream_socket_client(
-//                'ssl://gateway.push.apple.com:2195', $err,
-                'ssl://gateway.sandbox.push.apple.com:2195', $err,
+                'ssl://gateway.push.apple.com:2195', $err,
+//                'ssl://gateway.sandbox.push.apple.com:2195', $err,
                 $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
             if (!$fp)
@@ -677,8 +681,8 @@ class VideochatController extends Controller
             stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
 
             $fp = stream_socket_client(
-//                'ssl://gateway.push.apple.com:2195', $err,
-                'ssl://gateway.sandbox.push.apple.com:2195', $err,
+                'ssl://gateway.push.apple.com:2195', $err,
+//                'ssl://gateway.sandbox.push.apple.com:2195', $err,
                 $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
             if (!$fp)

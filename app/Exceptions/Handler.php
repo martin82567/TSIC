@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -48,8 +48,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -58,25 +58,26 @@ class Handler extends ExceptionHandler
             // return response()->json(['status'=>false, 'message'=>"Page not found"]);
             return redirect('/404');
 
-        }else if($exception instanceof ModelNotFoundException){
-            return response()->json(['status'=>false, 'message'=>"Model not found"]);
+        } else if ($exception instanceof ModelNotFoundException) {
+            return response()->json(['status' => false, 'message' => "Model not found"]);
 
-        }else if($exception instanceof MethodNotAllowedHttpException){
-            return response()->json(['status'=>false, 'message'=>"Unknown method"]);
+        } else if ($exception instanceof MethodNotAllowedHttpException) {
+            return response()->json(['status' => false, 'message' => "Unknown method"]);
 
-        }else if($exception instanceof TokenMismatchException){
+        } else if ($exception instanceof TokenMismatchException) {
             // return view('token-error');
             // return response()->json(['status'=>false, 'message'=>"Timeout"]);
             return redirect('/404');
-        }else if($exception instanceof MaintenanceModeException){
+        } else if ($exception instanceof MaintenanceModeException) {
             // return view('token-error');
             // return response()->json(['status'=>false, 'message'=>"Timeout"]);
             if (starts_with($request->getRequestUri(), "/api/")) {
-                return response()->json(['status'=>false, 'message'=>"HOLIDAY MAINTENANCE SHUTDOWN NOTICE: The Take Stock App will be brought down for maintenance at 12:00 pm (EST) on Friday, June 14, 2024, and will go live at 8:00 am (EST) on Thursday, August 1, 2024."]);
+                return response()->json(['status' => false, 'message' => "HOLIDAY MAINTENANCE SHUTDOWN NOTICE: The Take Stock App will be brought down for maintenance at 8:00
+            pm (EST) on Friday, December 20, 2024, through 7:00 am (EST) on Monday, January 6, 2025."]);
             } else {
                 return parent::render($request, $exception);
             }
-        }else{
+        } else {
 
             return parent::render($request, $exception);
         }
@@ -86,8 +87,8 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -97,12 +98,12 @@ class Handler extends ExceptionHandler
         }
         $guard = array_get($exception->guards(), 0);
         switch ($guard) {
-       case 'admin':
-            $login = 'admin.login';
-            break;
-        default:
-            $login = 'login';
-            break;
+            case 'admin':
+                $login = 'admin.login';
+                break;
+            default:
+                $login = 'login';
+                break;
         }
         return redirect()->guest(route($login));
     }

@@ -54,16 +54,18 @@
 <body>
 <div class="flex-center position-ref full-height">
     <div class="content">
-        <img src="https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x.png" alt="" width="200px">
+        <img src="https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x.png"
+             alt="" width="200px">
         <br/>
         <br/>
         <br/>
         <div class="title">
-            Happy Summer Holidays!
+            Happy Winter Holidays!
         </div>
         <br/>
         <div class="desc">
-            <b>HOLIDAY MAINTENANCE SHUTDOWN NOTICE:</b> The Take Stock App will be brought down for maintenance at 12:00 pm (EST) on Friday, June 14, 2024, and will go live at 8:00 am (EST) on Thursday, August 1, 2024.
+            <b>HOLIDAY MAINTENANCE SHUTDOWN NOTICE:</b> The Take Stock App will be brought down for maintenance at 8:00
+            pm (EST) on Friday, December 20, 2024, through 7:00 am (EST) on Monday, January 6, 2025.
         </div>
     </div>
 </div>

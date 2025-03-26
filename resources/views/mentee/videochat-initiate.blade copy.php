@@ -1,6 +1,6 @@
 @extends('layouts.apps')
 @section('content')
-<!-- <p>Mentor</p> -->
+<!-- <p>Mentee</p> -->
 
 <div class="db-inner-content">
     <div class="db-box">
@@ -27,8 +27,7 @@
         <div class="box-inner">
             <button class="btn btn-success" id="roomJoinBtn">Start Call</button>
             <button class="btn btn-danger" id="roomLeftBtn" style="display: none">End Call</button>
-            <button class="btn btn-secondary" id="roomConnectingBtn" disable style="display: none">Connecting <i
-                    class="fa fa-spinner fa-pulse"></i></button>
+            <button class="btn btn-secondary" id="roomConnectingBtn" disable style="display: none">Connecting <i class="fa fa-spinner fa-pulse"></i></button>
 
             <div class="videoView">
                 <div id="remote-media">
@@ -47,20 +46,19 @@
             </div>
 
             <div>
-                <input id="selfType" type="hidden" value="mentor">
+                <input id="selfType" type="hidden" value="mentee">
                 <input id="selfId" type="hidden" value="{{ Auth::user()->id }}">
                 <input id="selfName" type="hidden" value="{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}">
-                <input id="otherType" type="hidden" value="mentee">
-                <input id="otherId" type="hidden" value="{{ $mentee_id }}">
-                <input id="otherDeviceType" type="hidden" value="{{ $mentee_device_type }}">
-                <input id="otherFirebaseId" type="hidden" value="{{ $mentee_firebase_id }}">
-                <input id="otherVoipToken" type="hidden" value="{{ $mentee_voip_device_token }}">
+                <input id="otherType" type="hidden" value="mentor">
+                <input id="otherId" type="hidden" value="{{ $mentor_id }}">
+                <input id="otherDeviceType" type="hidden" value="{{ $mentor_device_type }}">
+                <input id="otherFirebaseId" type="hidden" value="{{ $mentor_firebase_id }}">
+                <input id="otherVoipToken" type="hidden" value="{{ $mentor_voip_device_token }}">
             </div>
 
+            <!-- <button class="btn btn-success" id="roomJoinBtn" style="display: none; width: 0; height: 0; overflow: hidden; opacity: 0;">Start Call</button> -->
+            
         </div>
-
-
-        {{-- <div id="zoom-container"></div> --}}
 
     </div>
 </div>
@@ -138,50 +136,11 @@
         height: 600px;
         aspect-ratio: 16/9;
     }
-
-    #zmmtg-root {
-        height: 100vh;
-        width: 100vw;
-    }
 </style>
-
 
 {{-- <script type="text/javascript" src="{{ env('APP_URL') }}:3000/quickstart/index.js"></script> --}}
 
 <script src="https://source.zoom.us/videosdk/zoom-video-2.1.10.min.js"></script>
-
-{{-- <script>
-    document.addEventListener('DOMContentLoaded',function(){
-        const ZoomVideo = window.WebVideoSDK.default;
-        // console.log(ZoomVideo.createClient())
-
-        // Create Zoom Client
-        var client = ZoomVideo.createClient();
-        var stream
-
-        client.init('en-US', 'Global', { patchJsMedia: true }).then(() => {
-            client
-                .join('{{ $unique_name }}', '{{ $signature }}', '{{ Auth::user()->firstname .' '. Auth::user()->lastname }}')
-                .then(() => {
-                    stream = client.getMediaStream()
-                    // stream = zoomVideo.getMediaStream()
-                    client.getAllUser().forEach((user) => {
-                        console.log(user);
-                        // if (user.bVideoOn) {
-                            stream.attachVideo(user.userId, 16778240).then((userVideo) => {
-                                document.querySelector('video-player-container').appendChild(userVideo)
-                            })
-                        // }
-                    })
-            })
-        });
-
-        console.log("Zoom session started successfully");
-
-    });
-
-</script> --}}
-
 
 <script>
     var ZoomVideo = window.WebVideoSDK.default;
@@ -194,7 +153,6 @@
     var roomCreateData = {};
     var sendRequest = false;
     var callReceived = false;
-
     var roomCheckData = {};
     var inititateData = {};
 
@@ -244,8 +202,6 @@
         receiver_firebase_id: otherFirebaseId,
         receiver_voip_token: otherVoipToken,
     };
-
-    // initiateCall();
 
     function initiateCall() {
         $.post(
@@ -346,10 +302,7 @@
         clearInterval(receiverInterval);
 
         zoomSession = Video.getMediaStream();
-        // setMediaStream(zoomSession);
         zoomSession.startAudio();
-
-        // $("#countDownTime").show();
 
         if (zoomSession.isRenderSelfViewWithVideoElement()) {
             zoomSession
@@ -382,9 +335,9 @@
                                 socketConnect.emit("endBeforeReceived", inititateData);
                             }
 
-                            if (selfType.value === "mentor") {
+                            // if (selfType.value === "mentor") {
                                 document.getElementById("roomJoinBtn").style.display = "inline";
-                            }
+                            // }
                             document.getElementById("roomLeftBtn").style.display = "none";
                         }
                     });
@@ -406,19 +359,20 @@
 
                     // session ended by host
                     Video.on("connection-change", (payload) => {
+                        console.log("payload: "+payload);
+                        
                         if (payload.state === "Closed") {
                             clearInterval(countDownInterval);
                             $("#countDownTime").hide();
 
                             detachVideoElement(userList.userId);
                             Video.leave();
-                            
                             zoomSession.muteAudio();
 
                             // if (selfType.value === "mentor") {
-                            //     document.getElementById("roomJoinBtn").style.display = "inline";
+                                document.getElementById("roomJoinBtn").style.display = "inline";
                             // }
-                            // document.getElementById("roomLeftBtn").style.display = "none";
+                            document.getElementById("roomLeftBtn").style.display = "none";
 
                             if (callReceived == false) {
                                 socketConnect.emit("endBeforeReceived", inititateData);
@@ -430,7 +384,7 @@
                             document.getElementById("my-self-view-video").style.display = "none";
 
                             // if (callReceived == true) {
-                            //     alert("The mentee has ended the video call.");
+                            //     alert("The mentor has ended the video call.");
                             // }
                         }
                     });
@@ -471,14 +425,8 @@
                         clearInterval(countDownInterval);
                         $("#countDownTime").hide();
 
-                        console.log("selfType", selfType.value);
-
-                        if (selfType.value === "mentor") {
-                            document.getElementById("roomJoinBtn").style.display = "inline";
-                        }
-                        
-                        document.getElementById("roomJoinBtn").style.display = "inline";
                         document.getElementById("roomLeftBtn").style.display = "none";
+                        document.getElementById("roomJoinBtn").style.display = "inline";
                         document.getElementById("my-self-view-video").style.display = "none";
                     }
                 })
@@ -511,6 +459,7 @@
                 });
         }
 
+        
         if (userType == "receiver") {
             remainimgCallTime = roomCreateData.remaining_time;
             $("#countDownTime").show();
@@ -566,7 +515,6 @@
         if (remainimgCallTime < 2) {
             if (activeRoom) {
                 Video.leave();
-                
                 $.post(
                     mainUrl + "/api/webvideochat/disconnect_room", {
                         room_sid: roomCreateData.unique_name,
@@ -582,9 +530,10 @@
             $("#countDownTime").hide();
         }
 
-        // console.log(remainimgCallTime);
-        
-        if ( inititateData.remaining_time > remainimgCallTime + 50 && callReceived == false) {
+        if (
+            inititateData.remaining_time > remainimgCallTime + 50 &&
+            callReceived == false
+        ) {
             if (activeRoom) {
                 Video.leave();
                 $.post(
@@ -641,9 +590,7 @@
         return displayTime;
     }
 
-
     receiverInterval = setInterval(function () {
-        
         $.post(
             mainUrl + "/api/webvideochat/check_room",
             roomCheckData,
@@ -725,7 +672,7 @@
                 }
             }
         );
-    }, 2000); // Poll every 2 seconds
+    }, 2000); // Poll every 5 seconds
 
     // Activity log.
     function log(message) {
@@ -787,13 +734,9 @@
         log("Leaving room...");
         Video.leave();
 
-        if (selfType === 'mentor' || selfType.value === "mentor") {
-            document.getElementById("roomJoinBtn").style.display = "inline";
-            document.getElementById("roomLeftBtn").style.display = "none";
-            document.getElementById("my-self-view-video").style.display = "none";
-        // } else {
-        //     window.location.reload();
-        }
+        document.getElementById("roomJoinBtn").style.display = "inline";
+        document.getElementById("roomLeftBtn").style.display = "none";
+        document.getElementById("my-self-view-video").style.display = "none";
 
         if (countDownInterval) {
             clearInterval(countDownInterval);
@@ -813,5 +756,4 @@
         );
     };
 </script>
-
 @endsection

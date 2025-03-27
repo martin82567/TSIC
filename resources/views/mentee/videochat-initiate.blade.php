@@ -284,7 +284,7 @@
         let userList = {};
         callReceived = true;
 
-        clearInterval(receiverInterval);
+        // clearInterval(receiverInterval);
 
         zoomSession = Video.getMediaStream();
         zoomSession.startAudio();
@@ -317,7 +317,20 @@
                             $("#countDownTime").hide();
 
                             if (callReceived == false) {
-                                socketConnect.emit("endBeforeReceived", inititateData);
+                                // socketConnect.emit("endBeforeReceived", inititateData);
+                                Video.leave();
+                                $.post(
+                                    mainUrl + "/api/webvideochat/disconnect_room", {
+                                        unique_name: roomCreateData.unique_name,
+                                    },
+                                    function(data, status) {
+                                        roomCreateData = {};
+                                        alert("User did not received the call.");
+                                        // alert(data.message);
+                                        // window.location.reload();
+                                        window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
+                                    }
+                                );
                             }
 
                             // if (selfType.value === "mentor") {
@@ -341,6 +354,8 @@
                     Video.on("user-added", (payload) => {
                         userList.userId = payload[0].userId;
 
+                        clearInterval(receiverInterval);
+
                         $("#countDownTime").show();
                         countDownInterval = setInterval(countDown, 1000);
                     });
@@ -357,16 +372,23 @@
                             Video.leave();
                             zoomSession.muteAudio();
 
-                            // if (selfType.value === "mentor") {
-                                document.getElementById("roomJoinBtn").style.display = "inline";
-                            // }
-                            document.getElementById("roomLeftBtn").style.display = "none";
-
                             if (callReceived == false) {
-                                socketConnect.emit("endBeforeReceived", inititateData);
+                                // socketConnect.emit("endBeforeReceived", inititateData);
+                                Video.leave();
+                                $.post(
+                                    mainUrl + "/api/webvideochat/disconnect_room", {
+                                        unique_name: roomCreateData.unique_name,
+                                    },
+                                    function(data, status) {
+                                        roomCreateData = {};
+                                        alert("User did not received the call.");
+                                        // alert(data.message);
+                                        // window.location.reload();
+                                        window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
+                                    }
+                                );
                             }
 
-                            // window.location.reload();
                             document.getElementById("roomJoinBtn").style.display = "inline";
                             document.getElementById("roomLeftBtn").style.display = "none";
                             document.getElementById("my-self-view-video").style.display = "none";
@@ -374,6 +396,22 @@
                             // if (callReceived == true) {
                             //     alert("The mentor has ended the video call.");
                             // }
+
+                        }  else if(payload.state === 'Fail') {
+                            // session failed to reconnect after a few minutes
+                            // user flushed from Zoom Video SDK session
+                            Video.leave();
+                            $.post(
+                                mainUrl + "/api/webvideochat/disconnect_room", {
+                                    unique_name: roomCreateData.unique_name,
+                                },
+                                function(data, status) {
+                                    roomCreateData = {};
+                                    // alert(data.message);
+                                    // window.location.reload();
+                                    window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
+                                }
+                            );
                         }
                     });
 
@@ -385,7 +423,20 @@
                     function endCallAndCleanup(userId) {
                         delete userList[userId];
                         if (!callReceived) {
-                            socketConnect.emit("endBeforeReceived", inititateData);
+                            // socketConnect.emit("endBeforeReceived", inititateData);
+                            Video.leave();
+                            $.post(
+                                mainUrl + "/api/webvideochat/disconnect_room", {
+                                    unique_name: roomCreateData.unique_name,
+                                },
+                                function(data, status) {
+                                    roomCreateData = {};
+                                    alert("User did not received the call.");
+                                    // alert(data.message);
+                                    // window.location.reload();
+                                    window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
+                                }
+                            );
                         }
 
                         // Stop and detach video
@@ -400,7 +451,6 @@
                                 // console.log("Video detached successfully for user:", userId);
                                 detachVideoElement(userId);
                                 Video.leave();
-                                // window.location.reload();
                             })
                             .catch((error) => {
                                 console.error(
@@ -450,6 +500,7 @@
         
         if (userType == "receiver") {
             remainimgCallTime = roomCreateData.remaining_time;
+            clearInterval(receiverInterval);
             $("#countDownTime").show();
 
             if (!timerActive) {
@@ -532,7 +583,8 @@
                         roomCreateData = {};
                         alert("User did not received the call.");
                         // alert(data.message);
-                        window.location.reload();
+                        // window.location.reload();
+                        window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
                     }
                 );
             }
@@ -655,8 +707,11 @@
                             );
                         }
                     }
-                // } else {
-                //     document.getElementById("roomJoinBtn").style.display = "inline";
+                } else {
+                    Video.on('dialout-state-change', (payload) => {
+                        console.log("payload: "+payload);
+                        // zoomSession.hangup();
+                    });
                 }
             }
         );
@@ -738,8 +793,8 @@
             function(data, status) {
                 roomCreateData = {};
                 alert(data.message);
-                window.location.reload();
-                // window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
+                // window.location.reload();
+                window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
             }
         );
     };

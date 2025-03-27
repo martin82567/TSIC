@@ -453,85 +453,137 @@
     <!-- SOCKET CONNECTION -->
     <script type="application/javascript">
         var userType = "<?php echo $logged_in; ?>".toLowerCase();
-        var urlRedirect = "";
-        var recivedData = {};
+        // var urlRedirect = "";
+        // var recivedData = {};
 
-        var callingAudio = document.getElementById("videoCallingAudio");
+        // var callingAudio = document.getElementById("videoCallingAudio");
 
-        const socketMain = io.connect("{{ env('APP_URL') }}:3000", {
-            transports: ['websocket', 'polling', 'flashsocket']
-        });
-
-        socketMain.on('connect', function() {
-            var det = {
-                id: {{ Auth::user()->id }},
-                type: userType,
-                device: "web"
-            };
-            // console.log(det);
-
-            socketMain.emit('connected', det);
-        });
-
-        socketMain.on('reqReceived', function(data) {
-            // console.log("reqReceived");
-            // console.log(data);
-            // alert("success");
-            recivedData = data;
-
-            $("#videoCallPop").modal({backdrop: "static"});
-        });
-
-        socketMain.on('endVideo', function(data) {
-            console.log("endVideo");
-            console.log(data);
-
-            if(data.endBefore) {
-                $("#videoCallPop").modal("hide");
-                if(userType === 'mentor') {
-                    $('#logSessionModal').modal('show');
-                }
-            } else {
-                $("#roomLeftBtn").trigger("click");
-                alert("Call denied by receiver.");
-		window.location.reload()
-            };
-        });
-
-        $("#videoCallAccept").click(function() {
-            $("#videoCallPop").modal("hide");
-
-            if(userType == 'mentor') {
-                urlRedirect = "{{ env('APP_URL') }}/mentor/videochat/initiate?mentee_id=" + recivedData.sender_id;
-            };
-
-            if(userType == 'mentee') {
-                urlRedirect = "{{ env('APP_URL') }}/mentee/videochat/initiate?mentor_id=" + recivedData.sender_id;
-            };
-
-            window.location.href = urlRedirect;
-        });
-
-        $("#videoCallDeny").click(function() {
-            socketMain.emit('callDenied', recivedData);
-            $("#videoCallPop").modal("hide");
-        });
-
-        // $("#videoCallPop").on('show.bs.modal', function(){
-        //     // alert('The modal is about to be shown.');
-        //     callingAudio.load();
-        //     callingAudio.play();
+        // const socketMain = io.connect("{{ env('APP_URL') }}:3000", {
+        //     transports: ['websocket', 'polling', 'flashsocket']
         // });
 
-        // $("#videoCallPop").on('hide.bs.modal', function(){
-        //     // alert('The modal is about to be hide.');
-        //     callingAudio.pause();
+        // socketMain.on('connect', function() {
+        //     var det = {
+        //         id: {{ Auth::user()->id }},
+        //         type: userType,
+        //         device: "web"
+        //     };
+        //     // console.log(det);
+
+        //     socketMain.emit('connected', det);
         // });
 
-        function closeModalAndRefresh() {
-            $('#logSessionModal').modal('hide');
-            window.location.reload()
-        }
+        // socketMain.on('reqReceived', function(data) {
+        //     // console.log("reqReceived");
+        //     // console.log(data);
+        //     // alert("success");
+        //     recivedData = data;
+
+        //     $("#videoCallPop").modal({backdrop: "static"});
+        // });
+
+        // socketMain.on('endVideo', function(data) {
+        //     console.log("endVideo");
+        //     console.log(data);
+
+        //     if(data.endBefore) {
+        //         $("#videoCallPop").modal("hide");
+        //         if(userType === 'mentor') {
+        //             $('#logSessionModal').modal('show');
+        //         }
+        //     } else {
+        //         $("#roomLeftBtn").trigger("click");
+        //         alert("Call denied by receiver.");
+		// window.location.reload()
+        //     };
+        // });
+
+        // $("#videoCallAccept").click(function() {
+        //     $("#videoCallPop").modal("hide");
+
+        //     if(userType == 'mentor') {
+        //         urlRedirect = "{{ env('APP_URL') }}/mentor/videochat/initiate?mentee_id=" + recivedData.sender_id;
+        //     };
+
+        //     if(userType == 'mentee') {
+        //         urlRedirect = "{{ env('APP_URL') }}/mentee/videochat/initiate?mentor_id=" + recivedData.sender_id;
+        //     };
+
+        //     window.location.href = urlRedirect;
+        // });
+
+        // $("#videoCallDeny").click(function() {
+        //     socketMain.emit('callDenied', recivedData);
+        //     $("#videoCallPop").modal("hide");
+        // });
+
+        // // $("#videoCallPop").on('show.bs.modal', function(){
+        // //     // alert('The modal is about to be shown.');
+        // //     callingAudio.load();
+        // //     callingAudio.play();
+        // // });
+
+        // // $("#videoCallPop").on('hide.bs.modal', function(){
+        // //     // alert('The modal is about to be hide.');
+        // //     callingAudio.pause();
+        // // });
+
+        // function closeModalAndRefresh() {
+        //     $('#logSessionModal').modal('hide');
+        //     window.location.reload()
+        // }
+
+
+
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     var callingAudio = document.getElementById("videoCallingAudio");
+        //     var checkCallInterval;
+
+        //     function checkIncomingCall() {
+        //         fetch(`${env('APP_URL')}/api/webvideochat/check-video-call`, { method: "GET" })
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 if (data.data.has_call) {
+        //                     recivedData = data;
+        //                     $("#videoCallPop").modal({ backdrop: "static" });
+        //                 }
+        //             })
+        //             .catch(error => console.error("Error checking call:", error));
+        //     }
+
+        //     checkCallInterval = setInterval(checkIncomingCall, 5000); // Poll every 5 seconds
+
+        //     document.getElementById("videoCallAccept").addEventListener("click", function () {
+        //         $("#videoCallPop").modal("hide");
+
+        //         let urlRedirect = "";
+        //         if (userType === "mentor") {
+        //             urlRedirect = `${env('APP_URL')}/mentor/videochat/initiate?mentee_id=${recivedData.sender_id}`;
+        //         } else if (userType === "mentee") {
+        //             urlRedirect = `${env('APP_URL')}/mentee/videochat/initiate?mentor_id=${recivedData.sender_id}`;
+        //         }
+
+        //         window.location.href = urlRedirect;
+        //     });
+
+        //     document.getElementById("videoCallDeny").addEventListener("click", function () {
+        //         // fetch(`${env('APP_URL')}/deny-video-call`, {
+        //         //     method: "POST",
+        //         //     headers: { "Content-Type": "application/json" },
+        //         //     body: JSON.stringify({ call_id: recivedData.call_id }),
+        //         // })
+        //         //     .then(() => {
+        //                 $("#videoCallPop").modal("hide");
+        //             // })
+        //             // .catch(error => console.error("Error denying call:", error));
+        //     });
+
+        //     function closeModalAndRefresh() {
+        //         $("#logSessionModal").modal("hide");
+        //         window.location.reload();
+        //     }
+        // });
+
     </script>
 </body>
 </html>

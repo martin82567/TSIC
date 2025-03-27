@@ -29,6 +29,9 @@
             <button class="btn btn-danger" id="roomLeftBtn" style="display: none">End Call</button>
             <button class="btn btn-secondary" id="roomConnectingBtn" disable style="display: none">Connecting <i class="fa fa-spinner fa-pulse"></i></button>
         
+            {{-- <button class="btn btn-success" id="callJoinBtn">Join</button>
+            <button class="btn btn-danger" id="callDeclineBtn">Decline Call</button> --}}
+
             <div class="videoView">
                 <div id="remote-media">
                     <!-- <video id="remote-self-view-video" autoplay playsinline></video>
@@ -185,7 +188,6 @@
         receiver_voip_token: otherVoipToken,
     };
 
-    // initiateCall();
 
     function initiateCall() {
         $.post(
@@ -283,11 +285,18 @@
         let userList = {};
         callReceived = true;
 
-        clearInterval(receiverInterval);
+        // clearInterval(receiverInterval);
 
         zoomSession = Video.getMediaStream();
         // setMediaStream(zoomSession);
         zoomSession.startAudio();
+        
+        // Event listener to find out about the status of the call
+        Video.on('dialout-state-change', (payload) => {
+            console.log("payload: "+payload);
+            zoomSession.hangup();
+            endCallAndCleanup(payload[0].userId);
+        });
 
         if (zoomSession.isRenderSelfViewWithVideoElement()) {
             zoomSession
@@ -316,9 +325,13 @@
                             clearInterval(countDownInterval);
                             $("#countDownTime").hide();
 
+                            console.log(countDownInterval);
+                            
+
                             if (callReceived == false) {
                                 // socketConnect.emit("endBeforeReceived", inititateData);
                                 Video.leave();
+                                ZoomVideo.destroyClient();
                                 $.post(
                                     mainUrl + "/api/webvideochat/disconnect_room", {
                                         unique_name: roomCreateData.unique_name,
@@ -327,7 +340,8 @@
                                         roomCreateData = {};
                                         alert("User did not received the call.");
                                         // alert(data.message);
-                                        window.location.reload();
+                                        // window.location.reload();
+                                        window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
                                     }
                                 );
                             }
@@ -352,6 +366,8 @@
 
                     Video.on("user-added", (payload) => {
                         userList.userId = payload[0].userId;
+                        
+                        clearInterval(receiverInterval);
 
                         $("#countDownTime").show();
                         countDownInterval = setInterval(countDown, 1000);
@@ -384,12 +400,12 @@
                                         roomCreateData = {};
                                         alert("User did not received the call.");
                                         // alert(data.message);
-                                        window.location.reload();
+                                        // window.location.reload();
+                                        window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
                                     }
                                 );
                             }
 
-                            // window.location.reload();
                             document.getElementById("roomJoinBtn").style.display = "inline";
                             document.getElementById("roomLeftBtn").style.display = "none";
                             document.getElementById("my-self-view-video").style.display = "none";
@@ -397,6 +413,21 @@
                             // if (callReceived == true) {
                             //     alert("The mentee has ended the video call.");
                             // }
+                        }  else if(payload.state === 'Fail') {
+                            // session failed to reconnect after a few minutes
+                            // user flushed from Zoom Video SDK session
+                            Video.leave();
+                            $.post(
+                                mainUrl + "/api/webvideochat/disconnect_room", {
+                                    unique_name: roomCreateData.unique_name,
+                                },
+                                function(data, status) {
+                                    roomCreateData = {};
+                                    // alert(data.message);
+                                    // window.location.reload();
+                                    window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
+                                }
+                            );
                         }
                     });
 
@@ -418,7 +449,8 @@
                                     roomCreateData = {};
                                     alert("User did not received the call.");
                                     // alert(data.message);
-                                    window.location.reload();
+                                    // window.location.reload();
+                                    window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
                                 }
                             );
                         }
@@ -435,7 +467,6 @@
                                 // console.log("Video detached successfully for user:", userId);
                                 detachVideoElement(userId);
                                 Video.leave();
-                                // window.location.reload();
                             })
                             .catch((error) => {
                                 console.error(
@@ -458,6 +489,13 @@
                         document.getElementById("roomLeftBtn").style.display = "none";
                         document.getElementById("my-self-view-video").style.display = "none";
                     }
+
+                    // Event listener to find out about the status of the call
+                    Video.on('dialout-state-change', (payload) => {
+                        console.log(payload);
+                        zoomSession.hangup();
+                        endCallAndCleanup(payload[0].userId);
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -488,15 +526,22 @@
                 });
         }
 
-        // if (userType == "receiver") {
-        //     remainimgCallTime = roomCreateData.remaining_time;
-        //     $("#countDownTime").show();
+        if (userType == "receiver") {
+            clearInterval(receiverInterval);
+            remainimgCallTime = roomCreateData.remaining_time;
+            $("#countDownTime").show();
 
-        //     if (!timerActive) {
-        //         timerActive = true;
-        //         countDownInterval = setInterval(countDown, 1000);
-        //     }
-        // }
+            if (!timerActive) {
+                timerActive = true;
+                countDownInterval = setInterval(countDown, 1000);
+            }
+        }
+
+        // Event listener to find out about the status of the call
+        Video.on('dialout-state-change', (payload) => {
+            console.log(payload);
+            zoomSession.hangup();
+        });
 
         // socketConnect = io.connect(mainUrl + ":3000", {
         //     transports: ["websocket", "polling", "flashsocket"],
@@ -540,6 +585,9 @@
 
 
     function countDown() {
+        // console.log(remainimgCallTime);
+        // console.log(inititateData.remaining_time);
+
         if (remainimgCallTime < 2) {
             if (activeRoom) {
                 Video.leave();
@@ -558,8 +606,6 @@
             clearInterval(countDownInterval);
             $("#countDownTime").hide();
         }
-
-        // console.log(remainimgCallTime);
         
         if ( inititateData.remaining_time > remainimgCallTime + 50 && callReceived == false) {
             if (activeRoom) {
@@ -572,7 +618,8 @@
                         roomCreateData = {};
                         alert("User did not received the call.");
                         // alert(data.message);
-                        window.location.reload();
+                        // window.location.reload();
+                        window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
                     }
                 );
             }
@@ -619,8 +666,7 @@
     }
 
 
-    receiverInterval = setInterval(function () {
-        
+    receiverInterval = setInterval(function () { 
         $.post(
             mainUrl + "/api/webvideochat/check_room",
             roomCheckData,
@@ -697,12 +743,31 @@
                             );
                         }
                     }
-                // } else {
+                } else {
                     // document.getElementById("roomJoinBtn").style.display = "inline";
+                    // Event listener to find out about the status of the call
+                    Video.on('dialout-state-change', (payload) => {
+                        console.log("payload: "+payload);
+                        // zoomSession.hangup();
+                    });
                 }
             }
         );
     }, 2000); // Poll every 2 seconds
+
+
+    // setInterval(function () { 
+    //     console.log(remainimgCallTime);
+    //     console.log(inititateData.remaining_time);
+
+    //     // Event listener to find out about the status of the call
+    //     Video.on('dialout-state-change', (payload) => {
+    //         console.log("payload: "+payload);
+    //         zoomSession.hangup();
+    //     });
+    
+    // }, 1000); // Poll every 1 seconds
+
 
     // Activity log.
     function log(message) {
@@ -764,13 +829,9 @@
         log("Leaving room...");
         Video.leave();
 
-        if (selfType === 'mentor' || selfType.value === "mentor") {
-            document.getElementById("roomJoinBtn").style.display = "inline";
-            document.getElementById("roomLeftBtn").style.display = "none";
-            document.getElementById("my-self-view-video").style.display = "none";
-        // } else {
-        //     window.location.reload();
-        }
+        document.getElementById("roomJoinBtn").style.display = "inline";
+        document.getElementById("roomLeftBtn").style.display = "none";
+        document.getElementById("my-self-view-video").style.display = "none";
 
         if (countDownInterval) {
             clearInterval(countDownInterval);
@@ -784,11 +845,123 @@
             function(data, status) {
                 roomCreateData = {};
                 alert(data.message);
-                window.location.reload();
-                // window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
+                // window.location.reload();
+                window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
+                // window.location.href = "{{ route('mentor.chat.userlist') }}";
             }
         );
     };
+
+    // Bind button to Call Join.
+    // document.getElementById("callJoinBtn").onclick = function() {
+    //     $.post(
+    //         mainUrl + "/api/webvideochat/check_room",
+    //         roomCheckData,
+    //         function(roomData, status) {
+    //             if (roomData.status) {
+    //                 roomCreateData = roomData.data;
+    //                 roomName = roomCreateData.unique_name;
+
+    //                 userType = "receiver";
+
+    //                 connectOptions.name = roomName;
+    //                 if (roomCreateData.token) {
+    //                     tokenData = roomCreateData.token;
+    //                 }
+
+    //                 if (previewTracks) {
+    //                     connectOptions.tracks = previewTracks;
+    //                 }
+
+    //                 if (typeof navigator !== "undefined") {
+    //                     if (
+    //                         typeof navigator.getMedia === "undefined" &&
+    //                         typeof navigator.mediaDevices === "object" &&
+    //                         typeof navigator.mediaDevices.getUserMedia === "function"
+    //                     ) {
+    //                         navigator.mediaDevices
+    //                             .getUserMedia({
+    //                                 video: true,
+    //                                 audio: true
+    //                             })
+    //                             .then(function() {
+    //                                 Video.init("en-US", "Global", {
+    //                                     patchJsMedia: true
+    //                                 }).then(
+    //                                     () => {
+    //                                         Video.join(roomName, tokenData, identity).then(
+    //                                             roomJoined,
+    //                                             function(error) {
+    //                                                 console.log("Video.connect");
+    //                                                 console.log("error Here", error);
+    //                                             }
+    //                                         );
+    //                                     }
+    //                                 );
+    //                             })
+    //                             .catch(function(err) {
+    //                                 console.log("video, audio false");
+    //                                 alert("Please allow permission for camera and microphone");
+    //                             });
+    //                     } else {
+    //                         navigator.getMedia({
+    //                                 video: true,
+    //                                 audio: true
+    //                             },
+    //                             function() {
+    //                                 Video.init("en-US", "Global", {
+    //                                     patchJsMedia: true
+    //                                 }).then(
+    //                                     () => {
+    //                                         Video.join(roomName, tokenData, identity).then(
+    //                                             roomJoined,
+    //                                             function(error) {
+    //                                                 console.log("Video.connect");
+    //                                                 console.log(error);
+    //                                             }
+    //                                         );
+    //                                     }
+    //                                 );
+    //                             },
+    //                             function() {
+    //                                 console.log("video, audio false");
+    //                                 alert("Please allow permission for camera and microphone");
+    //                             }
+    //                         );
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     );
+    // };
+
+    // // Bind button to call Decline.
+    // document.getElementById("callDeclineBtn").onclick = function() {
+    //     log("Decline room...");
+    //     Video.leave();
+
+    //     document.getElementById("roomJoinBtn").style.display = "inline";
+    //     document.getElementById("roomLeftBtn").style.display = "none";
+    //     document.getElementById("my-self-view-video").style.display = "none";
+    //     document.getElementById("callJoinBtn").style.display = "none";
+    //     document.getElementById("callDeclineBtn").style.display = "none";
+
+    //     if (countDownInterval) {
+    //         clearInterval(countDownInterval);
+    //         $("#countDownTime").hide();
+    //     }
+
+    //     $.post(
+    //         mainUrl + "/api/webvideochat/disconnect_room", {
+    //             unique_name: roomCreateData.unique_name,
+    //         },
+    //         function(data, status) {
+    //             roomCreateData = {};
+    //             alert(data.message);
+    //             window.location.reload();
+    //         }
+    //     );
+    // };
 </script>
 
 @endsection

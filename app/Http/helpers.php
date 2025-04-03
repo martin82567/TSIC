@@ -8,6 +8,7 @@ use App\Services\SalesforceDBService;
 use Carbon\Carbon;
 use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use LaravelFCM\Facades\FCM;
 use LaravelFCM\Message\OptionsBuilder;
@@ -165,7 +166,8 @@ function getStudentMatchForMentor($token, $baseURL)
 
 function getProgramsAndServicesForAgency($agencyId, $token, $baseURL)
 {
-    $url = env('SF_MIDDLEWARE_BASE_URL') . "/getProgramAndServicesForAgency?agencyId=" . $agencyId;
+    // $url = env('SF_MIDDLEWARE_BASE_URL') . "/getProgramAndServicesForAgency?agencyId=" . $agencyId;
+    $url = "https://tsicmentorapp.org/api/middleware/getProgramAndServicesForAgency?agencyId=" . $agencyId;
 
     $httpClient = new GuzzleClient();
 
@@ -185,22 +187,30 @@ function getProgramsAndServicesForAgency($agencyId, $token, $baseURL)
 function createSession($session, $token, $baseURL)
 {
     sleep(2);
-    $url = env('SF_MIDDLEWARE_BASE_URL') . "/createSession";
+    
+    try {
+        // $url = env('SF_MIDDLEWARE_BASE_URL') . "/createSession";
+        $url = "https://tsicmentorapp.org/api/middleware/createSession";
 
-    $httpClient = new GuzzleClient();
+        $httpClient = new GuzzleClient();
 
-    $response = $httpClient->post($url, [
-        'headers' => [
-            'Accept' => 'application/json',
-            'token' => $token,
-            'baseURL' => $baseURL,
-        ],
-        'json' => $session
-    ]);
+        $response = $httpClient->post($url, [
+            'headers' => [
+                'Accept' => 'application/json',
+                'token' => $token,
+                'baseURL' => $baseURL,
+            ],
+            'json' => $session
+        ]);
 
-    $responseObject = json_decode($response->getBody());
+        $responseObject = json_decode($response->getBody());
+        // Log::debug("responseObject: ".print_r($responseObject, true));
 
-    return $responseObject->data;
+        return $responseObject->data;
+
+    } catch (\Exception $e) {
+        Log::debug("error message: ".print_r($e->getMessage(), true));
+    }
 }
 
 function getCountByStudentId($studentId)

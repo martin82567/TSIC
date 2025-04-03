@@ -329,3 +329,8 @@ Route::prefix('mentee')->group(function() {
     Route::get('upload_report', 'Mentee\UploadReportController@index')->name('mentee.report.index');
     Route::post('upload_report', 'Mentee\UploadReportController@save')->name('mentee.report.store');
 });
+
+Route::get('/test-sf', function() {
+	$loginResponse = loginToSalesforce();
+	return response()->json($loginResponse);
+});

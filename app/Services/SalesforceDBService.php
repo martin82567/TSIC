@@ -133,11 +133,16 @@ class SalesforceDBService implements ExternalDBService
     public function authenticate()
     {
         $httpClient = new GuzzleClient();
-        $clientID = env('SF_CLIENT_ID');
-        $clientSecret = env('SF_CLIENT_SECRET');
-        $loginURL = env('SF_LOGIN_URL');
-        $username = env('SF_USERNAME');
-        $password = env('SF_PASSWORD');
+        // $clientID = env('SF_CLIENT_ID');
+        // $clientSecret = env('SF_CLIENT_SECRET');
+        // $loginURL = env('SF_LOGIN_URL');
+        // $username = env('SF_USERNAME');
+        // $password = env('SF_PASSWORD');
+        $clientID = '3MVG9cHH2bfKACZaPayVHiH.uBdtQ13TDHvL_4LiEDVn0xy9AsJjbiXaOuOKCehoh7y2nmVPVFpfykZ26GVnv';
+        $clientSecret = 'F18ED4605422130C6EB8BFA43D2966EE9DF05E7865D5CAAF8FBAAC68884FD078';
+        $loginURL = 'https://login.salesforce.com/services';
+        $username = 'nick@crowdsourcedgeofencing.com';
+        $password = '5FfA2bE_dU$Na9G';
 
         try {
             $settings = DB::table('settings')->where('id', 1)->first();
@@ -223,9 +228,12 @@ class SalesforceDBService implements ExternalDBService
                 "sessionLocationID" => self::SESSION_LOCATION_MAPPING[$sessionObject['sessionLocationID']]
             ];
 
-            $sessionId = $this->createSessionInSalesforce($session);
+            $response = $this->createSessionInSalesforce($session);
+            Log::debug("SF response 2: ".print_r($response, true));
 
-            if ($sessionId) {
+            if ($response->success == true  ) {
+                $sessionId = $response->id;
+
                 return [
                     'success' => true,
                     'data' => [
@@ -234,13 +242,31 @@ class SalesforceDBService implements ExternalDBService
                     'code' => 200
                 ];
             } else {
-                return [
-                    'success' => false,
-                    'data' => [
-                        'id' => null
-                    ],
-                    'code' => 400
-                ];
+                // Duplicate Data
+                if ($response->errorCode == 'DUPLICATES_DETECTED') {
+                    $match_results = $response->duplicateResult->matchResults[0];
+                    Log::debug("SF match_results: ".print_r($match_results, true));
+                    $match_records = $match_results->matchRecords[0]->record;
+                    Log::debug("SF match_records: ".print_r($match_records, true));
+                    Log::debug("SF match_records id: ".print_r($match_records->Id, true));
+
+                    return [
+                        'success' => false,
+                        'data' => [
+                            'id' => $match_records ? $match_records->Id : null
+                        ],
+                        'code' => 400
+                    ];
+
+                } else {
+                    return [
+                        'success' => false,
+                        'data' => [
+                            'id' => null
+                        ],
+                        'code' => 400
+                    ];
+                }
             }
         } catch (\Exception $e) {
 
@@ -260,7 +286,8 @@ class SalesforceDBService implements ExternalDBService
     {
         $mentorsConverted = [];
 
-        $recordType = env('SF_MENTOR_RECORD_TYPE_ID');
+        // $recordType = env('SF_MENTOR_RECORD_TYPE_ID');
+        $recordType = "012Nt000000hJAvIAM";
         $mentors = $this->queryData('Contact', 'Id,AccountId,npe01__HomeEmail__c,MobilePhone,FirstName,MiddleName,LastName,Mentor__c,Take_Stock_in_Children_Student__c,Mentor_Status_1__c,Mentor_Status_2__c,Affiliate__c,Legacy_ID__c,Mentor_Status_Chevron__c,Inactive__c', "RecordTypeId='$recordType'  AND Affiliate__c='$office'");
 
         if ($mentors) {
@@ -300,7 +327,8 @@ class SalesforceDBService implements ExternalDBService
     {
         $converted = [];
 
-        $recordType = env('SF_MENTEE_RECORD_TYPE_ID');
+        // $recordType = env('SF_MENTEE_RECORD_TYPE_ID');
+        $recordType = '012Nt000000hJAxIAM';
         $students = $this->queryData('Contact', 'Id,AccountId,npe01__HomeEmail__c,MobilePhone,FirstName,MiddleName,LastName,Mentor__c,Take_Stock_in_Children_Student__c,Mentor_Status_1__c,Mentor_Status_2__c,Affiliate__c,Legacy_ID__c,Student_Status_1__c,Student_Status_2__c,Student_Status_3__c,Student_Status_4__c,npsp__Primary_Affiliation__c,Student_Status_Chevron__c,Children_Status__c,Closed_Reason__c,County__c', "RecordTypeId='$recordType' AND Affiliate__c='$office'");
 
         if ($students) {
@@ -347,7 +375,8 @@ class SalesforceDBService implements ExternalDBService
     {
         $converted = [];
 
-        $recordType = env('SF_SCHOLAR_RECORD_TYPE_ID');
+        // $recordType = env('SF_SCHOLAR_RECORD_TYPE_ID');
+        $recordType = '012Nt000001PL79IAG';
         $students = $this->queryData('Contact', 'Id,AccountId,npe01__HomeEmail__c,MobilePhone,FirstName,MiddleName,LastName,Mentor__c,Take_Stock_in_Children_Student__c,Mentor_Status_1__c,Mentor_Status_2__c,Affiliate__c,Legacy_ID__c,Student_Status_1__c,Student_Status_2__c,Student_Status_3__c,Student_Status_4__c,npsp__Primary_Affiliation__c,Student_Status_Chevron__c,Children_Status__c,Closed_Reason__c,County__c', "RecordTypeId='$recordType' AND Affiliate__c='$office'");
 
         if ($students) {
@@ -422,7 +451,8 @@ class SalesforceDBService implements ExternalDBService
 
         $converted = [];
 
-        $recordType = env('SF_SCHOOL_RECORD_TYPE_ID');
+        // $recordType = env('SF_SCHOOL_RECORD_TYPE_ID');
+        $recordType = '012Nt000000hJAkIAM';
         $matches = $this->queryData('Account', 'Id,Name,ParentId,ShippingCity,ShippingState,ShippingPostalCode,ShippingStreet,ShippingCountry,ShippingAddress,Affiliate__c'
             , "RecordTypeId = '$recordType' and Affiliate__c='$affiliateId'");
 
@@ -618,7 +648,10 @@ class SalesforceDBService implements ExternalDBService
 
             $url = "/services/data/v56.0/sobjects/pmdm__ServiceDelivery__c";
 
-//            Log::info('Sending request to Salesforce', ['url' => $this->baseURL . $url, 'session' => $session]);
+        //    Log::info('Sending request to Salesforce', ['url' => $this->baseURL . $url, 'session' => $session]);
+            // Log::debug("url SF: ".print_r($this->baseURL . $url, true));
+            // Log::debug("token SF: ".print_r($this->token, true));
+            // Log::debug("session SF: ".print_r($session, true));
 
             $response = $httpClient->post($this->baseURL . $url, [
                 'headers' => [
@@ -636,17 +669,23 @@ class SalesforceDBService implements ExternalDBService
                     "Session_Notes1__c" => $session['sessionNote'],
                     "Session_Source__c" => $session['sessionSourceID'],
                     "Session_Type__c" => $session['sessionTypeID'],
-                    "RecordTypeId" => env('SF_SERVICE_DELIVERY_RECORD_TYPE_ID')
+                    "RecordTypeId" => '012Nt000000hJB1IAM'
                 ]
             ]);
+            // Log::debug("response SF: ".print_r($response, true));
 
 //            Log::info($response->getStatusCode());
             $responseBody = json_decode($response->getBody());
+            // Log::debug("API response 2: ".print_r($responseBody, true));
 
-            return $responseBody->id;
+            return $responseBody;
+
         } catch (GuzzleException $e) {
-            Log::info($e);
-            return null;
+            // Log::info($e);
+            // return null;
+            Log::debug("SalesForce ERROR:: ".print_r($e->getMessage(), true));
+            $responseError = json_decode($e->getMessage());
+            return $responseError;
         }
     }
 }

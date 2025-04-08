@@ -133,16 +133,16 @@ class SalesforceDBService implements ExternalDBService
     public function authenticate()
     {
         $httpClient = new GuzzleClient();
-        // $clientID = env('SF_CLIENT_ID');
-        // $clientSecret = env('SF_CLIENT_SECRET');
-        // $loginURL = env('SF_LOGIN_URL');
-        // $username = env('SF_USERNAME');
-        // $password = env('SF_PASSWORD');
-        $clientID = '3MVG9cHH2bfKACZaPayVHiH.uBdtQ13TDHvL_4LiEDVn0xy9AsJjbiXaOuOKCehoh7y2nmVPVFpfykZ26GVnv';
-        $clientSecret = 'F18ED4605422130C6EB8BFA43D2966EE9DF05E7865D5CAAF8FBAAC68884FD078';
-        $loginURL = 'https://login.salesforce.com/services';
-        $username = 'nick@crowdsourcedgeofencing.com';
-        $password = '5FfA2bE_dU$Na9G';
+        $clientID = env('SF_CLIENT_ID');
+        $clientSecret = env('SF_CLIENT_SECRET');
+        $loginURL = env('SF_LOGIN_URL');
+        $username = env('SF_USERNAME');
+        $password = env('SF_PASSWORD');
+        // $clientID = '3MVG9cHH2bfKACZaPayVHiH.uBdtQ13TDHvL_4LiEDVn0xy9AsJjbiXaOuOKCehoh7y2nmVPVFpfykZ26GVnv';
+        // $clientSecret = 'F18ED4605422130C6EB8BFA43D2966EE9DF05E7865D5CAAF8FBAAC68884FD078';
+        // $loginURL = 'https://login.salesforce.com/services';
+        // $username = 'nick@crowdsourcedgeofencing.com';
+        // $password = '5FfA2bE_dU$Na9G';
 
         try {
             $settings = DB::table('settings')->where('id', 1)->first();
@@ -229,35 +229,47 @@ class SalesforceDBService implements ExternalDBService
             ];
 
             $response = $this->createSessionInSalesforce($session);
-            Log::debug("SF response 2: ".print_r($response, true));
+            // Log::debug("SF response 2: ".print_r($response, true));
 
-            if ($response->success == true  ) {
-                $sessionId = $response->id;
-
-                return [
-                    'success' => true,
-                    'data' => [
-                        'id' => $sessionId
-                    ],
-                    'code' => 200
-                ];
-            } else {
-                // Duplicate Data
-                if ($response->errorCode == 'DUPLICATES_DETECTED') {
-                    $match_results = $response->duplicateResult->matchResults[0];
-                    Log::debug("SF match_results: ".print_r($match_results, true));
-                    $match_records = $match_results->matchRecords[0]->record;
-                    Log::debug("SF match_records: ".print_r($match_records, true));
-                    Log::debug("SF match_records id: ".print_r($match_records->Id, true));
-
+            if (is_object($response)) {
+                if ($response->success == true) {
+                    $sessionId = $response->id;
+    
                     return [
-                        'success' => false,
+                        'success' => true,
                         'data' => [
-                            'id' => $match_records ? $match_records->Id : null
+                            'id' => $sessionId
                         ],
-                        'code' => 400
+                        'code' => 200
                     ];
+                }
 
+            } else {
+                // Duplicate Data                
+                if ($response[0]['errorCode'] == 'DUPLICATES_DETECTED') {
+
+                    $match_results = $response[0]['duplicateResult']['matchResults'][0];
+                    $match_records = $match_results['matchRecords'][0]['record'];
+                    Log::debug("SF match_records id: ".print_r($match_records['Id'], true));
+
+                    if (isset($match_records['Id'])) {
+                        return [
+                            'success' => true,
+                            'data' => [
+                                'id' => $match_records['Id']
+                            ],
+                            'code' => 200
+                        ];
+                    } else {
+                        return [
+                            'success' => false,
+                            'data' => [
+                                'id' => null
+                            ],
+                            'code' => 400
+                        ];
+                    }
+                    
                 } else {
                     return [
                         'success' => false,
@@ -286,8 +298,8 @@ class SalesforceDBService implements ExternalDBService
     {
         $mentorsConverted = [];
 
-        // $recordType = env('SF_MENTOR_RECORD_TYPE_ID');
-        $recordType = "012Nt000000hJAvIAM";
+        $recordType = env('SF_MENTOR_RECORD_TYPE_ID');
+        // $recordType = "012Nt000000hJAvIAM";
         $mentors = $this->queryData('Contact', 'Id,AccountId,npe01__HomeEmail__c,MobilePhone,FirstName,MiddleName,LastName,Mentor__c,Take_Stock_in_Children_Student__c,Mentor_Status_1__c,Mentor_Status_2__c,Affiliate__c,Legacy_ID__c,Mentor_Status_Chevron__c,Inactive__c', "RecordTypeId='$recordType'  AND Affiliate__c='$office'");
 
         if ($mentors) {
@@ -327,8 +339,8 @@ class SalesforceDBService implements ExternalDBService
     {
         $converted = [];
 
-        // $recordType = env('SF_MENTEE_RECORD_TYPE_ID');
-        $recordType = '012Nt000000hJAxIAM';
+        $recordType = env('SF_MENTEE_RECORD_TYPE_ID');
+        // $recordType = '012Nt000000hJAxIAM';
         $students = $this->queryData('Contact', 'Id,AccountId,npe01__HomeEmail__c,MobilePhone,FirstName,MiddleName,LastName,Mentor__c,Take_Stock_in_Children_Student__c,Mentor_Status_1__c,Mentor_Status_2__c,Affiliate__c,Legacy_ID__c,Student_Status_1__c,Student_Status_2__c,Student_Status_3__c,Student_Status_4__c,npsp__Primary_Affiliation__c,Student_Status_Chevron__c,Children_Status__c,Closed_Reason__c,County__c', "RecordTypeId='$recordType' AND Affiliate__c='$office'");
 
         if ($students) {
@@ -375,8 +387,8 @@ class SalesforceDBService implements ExternalDBService
     {
         $converted = [];
 
-        // $recordType = env('SF_SCHOLAR_RECORD_TYPE_ID');
-        $recordType = '012Nt000001PL79IAG';
+        $recordType = env('SF_SCHOLAR_RECORD_TYPE_ID');
+        // $recordType = '012Nt000001PL79IAG';
         $students = $this->queryData('Contact', 'Id,AccountId,npe01__HomeEmail__c,MobilePhone,FirstName,MiddleName,LastName,Mentor__c,Take_Stock_in_Children_Student__c,Mentor_Status_1__c,Mentor_Status_2__c,Affiliate__c,Legacy_ID__c,Student_Status_1__c,Student_Status_2__c,Student_Status_3__c,Student_Status_4__c,npsp__Primary_Affiliation__c,Student_Status_Chevron__c,Children_Status__c,Closed_Reason__c,County__c', "RecordTypeId='$recordType' AND Affiliate__c='$office'");
 
         if ($students) {
@@ -451,8 +463,8 @@ class SalesforceDBService implements ExternalDBService
 
         $converted = [];
 
-        // $recordType = env('SF_SCHOOL_RECORD_TYPE_ID');
-        $recordType = '012Nt000000hJAkIAM';
+        $recordType = env('SF_SCHOOL_RECORD_TYPE_ID');
+        // $recordType = '012Nt000000hJAkIAM';
         $matches = $this->queryData('Account', 'Id,Name,ParentId,ShippingCity,ShippingState,ShippingPostalCode,ShippingStreet,ShippingCountry,ShippingAddress,Affiliate__c'
             , "RecordTypeId = '$recordType' and Affiliate__c='$affiliateId'");
 
@@ -683,9 +695,17 @@ class SalesforceDBService implements ExternalDBService
         } catch (GuzzleException $e) {
             // Log::info($e);
             // return null;
-            Log::debug("SalesForce ERROR:: ".print_r($e->getMessage(), true));
-            $responseError = json_decode($e->getMessage());
-            return $responseError;
+            Log::debug("SalesForce API ERROR:: ".print_r($e->getMessage(), true));
+
+            if (method_exists($e, 'getResponse') && $e->getResponse()) {
+                $errorBody = $e->getResponse()->getBody()->getContents();
+                $responseError = json_decode($errorBody, true); // true = array format
+                
+                return $responseError;
+
+            } else {
+                return null;
+            }
         }
     }
 }

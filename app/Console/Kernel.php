@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('rerun:session')->everyMinute();
+        $schedule->command('rerun:session')->daily();
     }
 
     /**

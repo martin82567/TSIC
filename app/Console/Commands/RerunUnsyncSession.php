@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\SessionRerunLog;
 use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
@@ -43,7 +44,7 @@ class RerunUnsyncSession extends Command
     public function handle()
     {
         try {
-            $sessions = DB::table('session')->where('creationmethod', 'adminpanel')->where('mentee_id', '44754')->where('created_date', '>=', '2024-08-01')->get();
+            $sessions = DB::table('session')->where('creationmethod', 'adminpanel')->where('created_date', '>=', '2024-08-01')->get();
             
             foreach ($sessions as $session) {
                 Log::debug("Session ID: ".print_r($session->id, true));
@@ -92,7 +93,7 @@ class RerunUnsyncSession extends Command
                                 $baseURL = $loginResponse->baseURL;
 
                                 $response = createSession($data, $token, $baseURL);
-                                Log::debug("API response 1: ".print_r($response, true));
+                                // Log::debug("API response 1: ".print_r($response, true));
 
                                 DB::table('session')->where('id', $session->id)
                                     ->update([
@@ -101,7 +102,7 @@ class RerunUnsyncSession extends Command
                                         'error_count' => 0
                                     ]);
 
-                                DB::table('session_rerun_logs')->insert([
+                                SessionRerunLog::insert([
                                     'session_id' => $session->id,
                                     'externalId' => $response->id, 
                                     'status' => 1,
@@ -109,21 +110,33 @@ class RerunUnsyncSession extends Command
                                 ]);
                             
                             } else {
-                                DB::table('session_rerun_logs')->insert([
+                                if (SessionRerunLog::where('status', 0)->where('session_id', $session->id)->exists()) {
+                                    continue;
+                                }
+
+                                SessionRerunLog::insert([
                                     'session_id' => $session->id,
                                     'error_reason' => 'Custom Error: serviceRecord is empty.',
                                     'created_at' => Carbon::now()
                                 ]);
                             }
                         } else {
-                            DB::table('session_rerun_logs')->insert([
+                            if (SessionRerunLog::where('status', 0)->where('session_id', $session->id)->exists()) {
+                                continue;
+                            }
+
+                            SessionRerunLog::insert([
                                 'session_id' => $session->id,
                                 'error_reason' => 'Custom Error: Admin externalId is empty.',
                                 'created_at' => Carbon::now()
                             ]);
                         }
                     } else {
-                        DB::table('session_rerun_logs')->insert([
+                        if (SessionRerunLog::where('status', 0)->where('session_id', $session->id)->exists()) {
+                            continue;
+                        }
+                        
+                        SessionRerunLog::insert([
                             'session_id' => $session->id,
                             'error_reason' => 'Custom Error: Mentor data not present in Hopeforce.',
                             'created_at' => Carbon::now()
@@ -131,7 +144,11 @@ class RerunUnsyncSession extends Command
                     }
                 } catch (\Exception $e) {
                     Log::error("Failed to process session ID: {$session->id}. Error: " . $e->getMessage());
-                    DB::table('session_rerun_logs')->insert([
+                    
+                    if (SessionRerunLog::where('status', 0)->where('session_id', $session->id)->exists()) {
+                        continue;
+                    }
+                    SessionRerunLog::insert([
                         'session_id' => $session->id,
                         'error_reason' => $e->getMessage(),
                         'created_at' => Carbon::now()

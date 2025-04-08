@@ -166,8 +166,8 @@ function getStudentMatchForMentor($token, $baseURL)
 
 function getProgramsAndServicesForAgency($agencyId, $token, $baseURL)
 {
-    // $url = env('SF_MIDDLEWARE_BASE_URL') . "/getProgramAndServicesForAgency?agencyId=" . $agencyId;
-    $url = "https://tsicmentorapp.org/api/middleware/getProgramAndServicesForAgency?agencyId=" . $agencyId;
+    $url = env('SF_MIDDLEWARE_BASE_URL') . "/getProgramAndServicesForAgency?agencyId=" . $agencyId;
+    // $url = "https://tsicmentorapp.org/api/middleware/getProgramAndServicesForAgency?agencyId=" . $agencyId;
 
     $httpClient = new GuzzleClient();
 
@@ -189,8 +189,8 @@ function createSession($session, $token, $baseURL)
     sleep(2);
     
     try {
-        // $url = env('SF_MIDDLEWARE_BASE_URL') . "/createSession";
-        $url = "https://tsicmentorapp.org/api/middleware/createSession";
+        $url = env('SF_MIDDLEWARE_BASE_URL') . "/createSession";
+        // $url = "https://tsicmentorapp.org/api/middleware/createSession";
 
         $httpClient = new GuzzleClient();
 

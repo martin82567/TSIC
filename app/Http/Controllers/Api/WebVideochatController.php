@@ -491,5 +491,28 @@ class WebVideochatController extends Controller
         }
     }
 
+    /**
+     * Check call notification receiver side
+     */
+    public function checkCallNotification(Request $request)
+    {
+        $check_room = DB::table(VIDEO_CHAT_ROOMS)
+            ->where('receiver_id', $request->id)
+            ->where('receiver_type', $request->type)
+            ->where('duration', '=', '')
+            ->where('participant_count', '=', '1')
+            ->first();
+
+        if (!empty($check_room)) {
+
+            $video_chat_user = DB::table(VIDEO_CHAT_USER)->where('chat_code', $check_room->chat_code)->first();
+            $remaining_time = $video_chat_user->remaining_time;
+
+            return Response::json(['status' => true, 'message' => "Call notification", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'unique_name' => $check_room->unique_name, 'remaining_time' => $remaining_time, 'receiver_id' => $check_room->receiver_id)]);
+        
+        } else {
+            return Response::json(['status' => false, 'message' => "No ongoing room found", 'data' => array()]);
+        }
+    }
 
 }

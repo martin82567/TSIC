@@ -122,11 +122,9 @@
 
 </style>
 
-{{-- <script type="text/javascript" src="{{ env('APP_URL') }}:3000/quickstart/index.js"></script> --}}
 
 
 <script src="https://source.zoom.us/videosdk/zoom-video-2.1.10.min.js"></script>
-
 <script>
     var ZoomVideo = window.WebVideoSDK.default;
     var Video = ZoomVideo.createClient();
@@ -138,6 +136,7 @@
     var roomCreateData = {};
     var sendRequest = false;
     var callReceived = false;
+
     var roomCheckData = {};
     var inititateData = {};
 
@@ -188,6 +187,7 @@
         receiver_voip_token: otherVoipToken,
     };
 
+
     function initiateCall() {
         $.post(
             mainUrl + "/api/webvideochat/initiate_chat",
@@ -196,7 +196,7 @@
                 if (roomData.status === false) {
                     alert(roomData.message);
                     document.getElementById("roomConnectingBtn").style.display = "none";
-                    document.getElementById("roomJoinBtn").style.display = "inline";
+                    document.getElementById("roomJoinBtn").style.display = "inline";                    
                     // leaveRoomIfJoined();
                     return;
                 }
@@ -228,8 +228,6 @@
                 sendRequest = true;
                 remainimgCallTime = roomCreateData.remaining_time;
 
-                // $("#countDownTime").show();
-                // countDownInterval = setInterval(countDown, 1000);
 
                 Video.init("en-US", "Global", {
                     patchJsMedia: true
@@ -284,10 +282,15 @@
         let userList = {};
         callReceived = true;
 
-        // clearInterval(receiverInterval);
-
         zoomSession = Video.getMediaStream();
         zoomSession.startAudio();
+        
+        // Event listener to find out about the status of the call
+        // Video.on('dialout-state-change', (payload) => {
+        //     console.log("payload: "+payload);
+        //     zoomSession.hangup();
+        //     endCallAndCleanup(payload[0].userId);
+        // });
 
         if (zoomSession.isRenderSelfViewWithVideoElement()) {
             zoomSession
@@ -316,9 +319,13 @@
                             clearInterval(countDownInterval);
                             $("#countDownTime").hide();
 
+                            console.log(countDownInterval);
+                            
+
                             if (callReceived == false) {
                                 // socketConnect.emit("endBeforeReceived", inititateData);
                                 Video.leave();
+                                ZoomVideo.destroyClient();
                                 $.post(
                                     mainUrl + "/api/webvideochat/disconnect_room", {
                                         unique_name: roomCreateData.unique_name,
@@ -333,9 +340,7 @@
                                 );
                             }
 
-                            // if (selfType.value === "mentor") {
-                                document.getElementById("roomJoinBtn").style.display = "inline";
-                            // }
+                            document.getElementById("roomJoinBtn").style.display = "inline";
                             document.getElementById("roomLeftBtn").style.display = "none";
                         }
                     });
@@ -353,7 +358,7 @@
 
                     Video.on("user-added", (payload) => {
                         userList.userId = payload[0].userId;
-
+                        
                         clearInterval(receiverInterval);
 
                         $("#countDownTime").show();
@@ -362,15 +367,19 @@
 
                     // session ended by host
                     Video.on("connection-change", (payload) => {
-                        console.log("payload: "+payload);
-                        
                         if (payload.state === "Closed") {
                             clearInterval(countDownInterval);
                             $("#countDownTime").hide();
 
                             detachVideoElement(userList.userId);
                             Video.leave();
+                            
                             zoomSession.muteAudio();
+
+                            // if (selfType.value === "mentor") {
+                            //     document.getElementById("roomJoinBtn").style.display = "inline";
+                            // }
+                            // document.getElementById("roomLeftBtn").style.display = "none";
 
                             if (callReceived == false) {
                                 // socketConnect.emit("endBeforeReceived", inititateData);
@@ -394,9 +403,8 @@
                             document.getElementById("my-self-view-video").style.display = "none";
 
                             // if (callReceived == true) {
-                            //     alert("The mentor has ended the video call.");
+                            //     alert("The mentee has ended the video call.");
                             // }
-
                         }  else if(payload.state === 'Fail') {
                             // session failed to reconnect after a few minutes
                             // user flushed from Zoom Video SDK session
@@ -463,10 +471,17 @@
                         clearInterval(countDownInterval);
                         $("#countDownTime").hide();
 
-                        document.getElementById("roomLeftBtn").style.display = "none";
                         document.getElementById("roomJoinBtn").style.display = "inline";
+                        document.getElementById("roomLeftBtn").style.display = "none";
                         document.getElementById("my-self-view-video").style.display = "none";
                     }
+
+                    // Event listener to find out about the status of the call
+                    Video.on('dialout-state-change', (payload) => {
+                        console.log(payload);
+                        zoomSession.hangup();
+                        endCallAndCleanup(payload[0].userId);
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -497,10 +512,9 @@
                 });
         }
 
-        
         if (userType == "receiver") {
-            remainimgCallTime = roomCreateData.remaining_time;
             clearInterval(receiverInterval);
+            remainimgCallTime = roomCreateData.remaining_time;
             $("#countDownTime").show();
 
             if (!timerActive) {
@@ -508,6 +522,12 @@
                 countDownInterval = setInterval(countDown, 1000);
             }
         }
+
+        // Event listener to find out about the status of the call
+        // Video.on('dialout-state-change', (payload) => {
+        //     console.log(payload);
+        //     zoomSession.hangup();
+        // });
 
         // socketConnect = io.connect(mainUrl + ":3000", {
         //     transports: ["websocket", "polling", "flashsocket"],
@@ -551,9 +571,13 @@
 
 
     function countDown() {
+        // console.log(remainimgCallTime);
+        // console.log(inititateData.remaining_time);
+
         if (remainimgCallTime < 2) {
             if (activeRoom) {
                 Video.leave();
+                
                 $.post(
                     mainUrl + "/api/webvideochat/disconnect_room", {
                         room_sid: roomCreateData.unique_name,
@@ -568,11 +592,8 @@
             clearInterval(countDownInterval);
             $("#countDownTime").hide();
         }
-
-        if (
-            inititateData.remaining_time > remainimgCallTime + 50 &&
-            callReceived == false
-        ) {
+        
+        if ( inititateData.remaining_time > remainimgCallTime + 50 && callReceived == false) {
             if (activeRoom) {
                 Video.leave();
                 $.post(
@@ -630,7 +651,8 @@
         return displayTime;
     }
 
-    receiverInterval = setInterval(function () {
+
+    receiverInterval = setInterval(function () { 
         $.post(
             mainUrl + "/api/webvideochat/check_room",
             roomCheckData,
@@ -707,15 +729,31 @@
                             );
                         }
                     }
-                } else {
-                    Video.on('dialout-state-change', (payload) => {
-                        console.log("payload: "+payload);
-                        // zoomSession.hangup();
-                    });
+                // } else {
+                //     // document.getElementById("roomJoinBtn").style.display = "inline";
+                //     // Event listener to find out about the status of the call
+                //     Video.on('dialout-state-change', (payload) => {
+                //         console.log("payload: "+payload);
+                //         // zoomSession.hangup();
+                //     });
                 }
             }
         );
-    }, 2000); // Poll every 5 seconds
+    }, 2000); // Poll every 2 seconds
+
+
+    // setInterval(function () { 
+    //     console.log(remainimgCallTime);
+    //     console.log(inititateData.remaining_time);
+
+    //     // Event listener to find out about the status of the call
+    //     Video.on('dialout-state-change', (payload) => {
+    //         console.log("payload: "+payload);
+    //         zoomSession.hangup();
+    //     });
+    
+    // }, 1000); // Poll every 1 seconds
+
 
     // Activity log.
     function log(message) {
@@ -795,6 +833,7 @@
                 alert(data.message);
                 // window.location.reload();
                 window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
+                // window.location.href = "{{ route('mentor.chat.userlist') }}";
             }
         );
     };

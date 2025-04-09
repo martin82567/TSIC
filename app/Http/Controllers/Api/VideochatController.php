@@ -15,6 +15,7 @@ use Hash;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class VideochatController extends Controller
 {
@@ -419,6 +420,7 @@ class VideochatController extends Controller
 
     public function denied_call(Request $request)
     {
+        Log::debug("video request all: ".print_r($request->all(), true));
         $room_sid = '';
         $unique_name = !empty($request->unique_name) ? $request->unique_name : '';
         $denied_by = !empty($request->denied_by) ? $request->denied_by : '';
@@ -441,17 +443,10 @@ class VideochatController extends Controller
             }
         }
 
-//        twilio_disconnect_room($room_sid);
-
         $video_chat_rooms = DB::table(VIDEO_CHAT_ROOMS)->where('unique_name', $unique_name)->first();
         $chat_code = !empty($video_chat_rooms) ? $video_chat_rooms->chat_code : '';
         $unique_name = !empty($video_chat_rooms) ? $video_chat_rooms->unique_name : '';
 
-        // $explode_unique_name = explode("-",$unique_name);
-        // $sender_type = $explode_unique_name[0];
-        // $sender_id = $explode_unique_name[1];
-        // $receiver_type = $explode_unique_name[2];
-        // $receiver_id = $explode_unique_name[3];
         $sender_type = $video_chat_rooms->sender_type;
         $sender_id = $video_chat_rooms->sender_id;
         $receiver_type = $video_chat_rooms->receiver_type;
@@ -460,11 +455,13 @@ class VideochatController extends Controller
         if ($sender_id == $denied_by && $sender_type == $denied_by_type) {
 
             if ($receiver_type == 'mentee') {
+                Log::info("LOG 1");
                 $receiver_data = DB::table(MENTEE)->where('id', $receiver_id)->first();
                 $receiver_device_type = !empty($receiver_data->device_type) ? $receiver_data->device_type : '';
                 $receiver_firebase_id = !empty($receiver_data->firebase_id) ? $receiver_data->firebase_id : '';
                 $receiver_voip_device_token = !empty($receiver_data->voip_device_token) ? $receiver_data->voip_device_token : '';
             } else if ($receiver_type == 'mentor') {
+                Log::info("LOG 2");
                 $receiver_data = DB::table(MENTOR)->where('id', $receiver_id)->first();
                 $receiver_device_type = !empty($receiver_data->device_type) ? $receiver_data->device_type : '';
                 $receiver_firebase_id = !empty($receiver_data->firebase_id) ? $receiver_data->firebase_id : '';
@@ -472,20 +469,24 @@ class VideochatController extends Controller
             }
 
             if ($sender_type == 'mentee') {
+                Log::info("LOG 3");
                 $sender_data = DB::table(MENTEE)->select('firstname', 'lastname')->where('id', $sender_id)->first();
                 $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
 
             } else if ($sender_type == 'mentor') {
+                Log::info("LOG 4");
                 $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();
                 $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
             }
         } elseif ($receiver_id == $denied_by && $receiver_type == $denied_by_type) {
             if ($sender_type == 'mentee') {
+                Log::info("LOG 5");
                 $receiver_data = DB::table(MENTEE)->where('id', $sender_id)->first();
                 $receiver_device_type = !empty($receiver_data->device_type) ? $receiver_data->device_type : '';
                 $receiver_firebase_id = !empty($receiver_data->firebase_id) ? $receiver_data->firebase_id : '';
                 $receiver_voip_device_token = !empty($receiver_data->voip_device_token) ? $receiver_data->voip_device_token : '';
             } else if ($sender_type == 'mentor') {
+                Log::info("LOG 6");
                 $receiver_data = DB::table(MENTOR)->where('id', $sender_id)->first();
                 $receiver_device_type = !empty($receiver_data->device_type) ? $receiver_data->device_type : '';
                 $receiver_firebase_id = !empty($receiver_data->firebase_id) ? $receiver_data->firebase_id : '';
@@ -493,10 +494,12 @@ class VideochatController extends Controller
             }
 
             if ($receiver_type == 'mentee') {
+                Log::info("LOG 7");
                 $sender_data = DB::table(MENTEE)->select('firstname', 'lastname')->where('id', $receiver_id)->first();
                 $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
 
             } else if ($receiver_type == 'mentor') {
+                Log::info("LOG 8");
                 $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $receiver_id)->first();
                 $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
             }
@@ -506,6 +509,7 @@ class VideochatController extends Controller
         if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
 
             if ($receiver_device_type == 'android') {
+                Log::info("LOG 9");
                 $message = "Video call has been denied";
 
                 $time = time();
@@ -513,13 +517,14 @@ class VideochatController extends Controller
                 $data_arr = array('meeting_data' => $send_data);
 
                 if ($receiver_device_type == "iOS") {
+                    Log::info("LOG 10");
                     $msg = array('message' => $message, 'title' => "Denied video call", 'sound' => "default");
                     $fields = array('to' => $receiver_firebase_id, 'notification' => $msg, 'data' => $data_arr, 'priority' => "high");
 
-                } else
-                    if ($receiver_device_type == "android") {
-                        $fields = array('to' => $receiver_firebase_id, 'data' => $send_data, 'priority' => "high"); // For Android
-                    }
+                } else if ($receiver_device_type == "android") {
+                    Log::info("LOG 11");
+                    $fields = array('to' => $receiver_firebase_id, 'data' => $send_data, 'priority' => "high"); // For Android
+                }
 
                 $result = sendPushNotificationWithV1($fields);
 
@@ -530,7 +535,7 @@ class VideochatController extends Controller
                 }
 
             } else if ($receiver_device_type == 'iOS') {
-
+                Log::info("LOG 12");
 //                    if (!empty($receiver_voip_device_token)) {
 //                        $this->ios_voip_push_denied($receiver_voip_device_token, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid);
 //                    }
@@ -542,10 +547,12 @@ class VideochatController extends Controller
                 $data_arr = array('meeting_data' => $send_data);
 
                 if ($receiver_device_type == "iOS") {
+                    Log::info("LOG 13");
                     $msg = array('message' => $message, 'title' => "Denied video call", 'sound' => "default");
                     $fields = array('to' => $receiver_firebase_id, 'notification' => $msg, 'data' => $data_arr, 'priority' => "high");
 
                 } else if ($receiver_device_type == "android") {
+                    Log::info("LOG 14");
                     $fields = array('to' => $receiver_firebase_id, 'data' => $send_data, 'priority' => "high"); // For Android
                 }
 

@@ -113,9 +113,9 @@ class UserController extends Controller
         $user_id = $this->user_id;
         $user = DB::table('mentee')->where('id', '=', $user_id)->first();
 
-        if (empty($user->is_logged_out)) {
-            return response()->json(['status' => false, 'message' => "Logged Out"]);
-        }
+        // if (empty($user->is_logged_out)) {
+        //     return response()->json(['status' => false, 'message' => "Logged Out"]);
+        // }
 
         $image = '';
         if (!empty($request->userimage)) {

@@ -78,7 +78,7 @@ class SessionController extends Controller
     public function add(Request $request)
     {
 
-        $creationmethod = $this->creationmethod;
+        $creationmethod = $this->creationmethod; /// Mentor creation method =>salesforceapi 003Nt00000J2NU9IAN  003Nt00000FjDH6IAN
 
         $name = !empty($request->name) ? $request->name : '';
         $schedule_date = !empty($request->schedule_date) ? $request->schedule_date : '';
@@ -140,7 +140,7 @@ class SessionController extends Controller
             return response()->json(['status' => false, 'message' => "Time duration maxlength is 10", 'data' => array()]);
 
 
-        $affiliate_data = DB::table('admins')->select('id', 'timezone', 'externalId')->where('id', $this->assigned_by)->first();
+        $affiliate_data = DB::table('admins')->select('id', 'timezone', 'externalId')->where('id', $this->assigned_by)->first(); ///128 
 
         $timezone = !empty($affiliate_data->timezone) ? $affiliate_data->timezone : 'America/New_York';
 
@@ -181,7 +181,7 @@ class SessionController extends Controller
             /*===========Star DB Insertion============*/
             if ($creationmethod == 'salesforceapi' && !empty($this->externalId) && !empty($mentee_data->externalId)) {
                 //Get Service ID for Salesforce Sessions
-                if ($affiliate_data->externalId) {
+                if ($affiliate_data->externalId) { //// 001Nt00000E2MMeIAN
                     $fiscalYear = getFiscalYear($schedule_date);
                     $serviceRecord = DB::table('agency_programs')->select('service_id')->where('agency_id', $affiliate_data->id)->where('year', $fiscalYear)->where('active', 1)->first();
 

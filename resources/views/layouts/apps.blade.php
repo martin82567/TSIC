@@ -453,10 +453,10 @@
     <!-- SOCKET CONNECTION -->
     <script type="application/javascript">
         var userType = "<?php echo $logged_in; ?>".toLowerCase();
-        // var urlRedirect = "";
-        // var recivedData = {};
+        var urlRedirect = "";
+        var recivedData = {};
 
-        // var callingAudio = document.getElementById("videoCallingAudio");
+        var callingAudio = document.getElementById("videoCallingAudio");
 
         // const socketMain = io.connect("{{ env('APP_URL') }}:3000", {
         //     transports: ['websocket', 'polling', 'flashsocket']
@@ -468,15 +468,15 @@
         //         type: userType,
         //         device: "web"
         //     };
-        //     // console.log(det);
+        //     console.log(det);
 
         //     socketMain.emit('connected', det);
         // });
 
         // socketMain.on('reqReceived', function(data) {
-        //     // console.log("reqReceived");
-        //     // console.log(data);
-        //     // alert("success");
+        //     console.log("reqReceived");
+        //     console.log(data);
+        //     alert("success");
         //     recivedData = data;
 
         //     $("#videoCallPop").modal({backdrop: "static"});
@@ -498,92 +498,193 @@
         //     };
         // });
 
-        // $("#videoCallAccept").click(function() {
-        //     $("#videoCallPop").modal("hide");
 
-        //     if(userType == 'mentor') {
-        //         urlRedirect = "{{ env('APP_URL') }}/mentor/videochat/initiate?mentee_id=" + recivedData.sender_id;
-        //     };
 
-        //     if(userType == 'mentee') {
-        //         urlRedirect = "{{ env('APP_URL') }}/mentee/videochat/initiate?mentor_id=" + recivedData.sender_id;
-        //     };
+        $("#videoCallAccept").click(function() {
+            $("#videoCallPop").modal("hide");
 
-        //     window.location.href = urlRedirect;
-        // });
+            if(userType == 'mentor') {
+                urlRedirect = "{{ env('APP_URL') }}/mentor/videochat/initiate?mentee_id=" + recivedData.sender_id;
+            };
 
-        // $("#videoCallDeny").click(function() {
-        //     socketMain.emit('callDenied', recivedData);
-        //     $("#videoCallPop").modal("hide");
-        // });
+            if(userType == 'mentee') {
+                urlRedirect = "{{ env('APP_URL') }}/mentee/videochat/initiate?mentor_id=" + recivedData.sender_id;
+            };
 
-        // // $("#videoCallPop").on('show.bs.modal', function(){
-        // //     // alert('The modal is about to be shown.');
-        // //     callingAudio.load();
-        // //     callingAudio.play();
-        // // });
+            window.location.href = urlRedirect;
+        });
 
-        // // $("#videoCallPop").on('hide.bs.modal', function(){
-        // //     // alert('The modal is about to be hide.');
-        // //     callingAudio.pause();
-        // // });
+        $("#videoCallDeny").click(function() {
+            // socketMain.emit('callDenied', recivedData);
+            $("#videoCallPop").modal("hide");
+        });
 
-        // function closeModalAndRefresh() {
-        //     $('#logSessionModal').modal('hide');
-        //     window.location.reload()
+        $("#videoCallPop").on('show.bs.modal', function(){
+            // alert('The modal is about to be shown.');
+            callingAudio.load();
+            callingAudio.play();
+        });
+
+        $("#videoCallPop").on('hide.bs.modal', function(){
+            // alert('The modal is about to be hide.');
+            callingAudio.pause();
+        });
+
+        function closeModalAndRefresh() {
+            $('#logSessionModal').modal('hide');
+            window.location.reload()
+        }
+
+        // var mainUrl = "{{ env('APP_URL') }}";
+        var mainUrl = "https://test.tsicmentorapp.org";
+        room_data = {
+            id: {{ Auth::user()->id }},
+            type: userType,
+            device: "web"
+        };
+
+        // function checkIncomingCall() {
+        //     $.post(
+        //         mainUrl + "/api/webvideochat/check-call-notification",
+        //         room_data,
+        //         function(response, status) {
+        //             console.log(response);
+                    
+        //             if (response.status == true) {
+        //                 recivedData = response.data;
+
+        //                 if (recivedData.receiver_id == {{ Auth::user()->id }}) {
+        //                     $("#videoCallPop").modal({backdrop: "static"});
+        //                 } 
+        //             }
+                    
+
+        //             // if (response.incoming_call) {
+        //             //     let audio = new Audio('/ringtone.mp3');
+        //             //     audio.loop = true;
+        //             //     audio.play();
+
+        //             //     let modalHtml = `
+        //             //         <div id="callModal" class="modal">
+        //             //             <div class="modal-content">
+        //             //                 <h3>Incoming Zoom Call</h3>
+        //             //                 <p>${response.caller_name} is calling...</p>
+        //             //                 <button onclick="acceptCall('${response.session_id}')">Accept</button>
+        //             //                 <button onclick="declineCall()">Decline</button>
+        //             //             </div>
+        //             //         </div>
+        //             //     `;
+
+        //             //     let modalHtml = `
+        //             //         <div id="callModal" class="modal">
+        //             //             <div class="modal-content">
+        //             //                 <h3>Incoming Zoom Call</h3>
+        //             //                 <p>Mentor is calling...</p>
+        //             //                 <button onclick="acceptCall()">Accept</button>
+        //             //                 <button onclick="declineCall()">Decline</button>
+        //             //             </div>
+        //             //         </div>
+        //             //     `;
+
+        //             //     document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+        //             //     window.acceptCall = function (sessionId) {
+        //             //         audio.pause();
+        //             //         document.getElementById("callModal").remove();
+        //             //         window.location.href = `/zoom-call?sessionId=${sessionId}`;
+        //             //     };
+
+        //             //     window.declineCall = function () {
+        //             //         audio.pause();
+        //             //         document.getElementById("callModal").remove();
+        //             //     };
+        //             // }
+        //     });
         // }
 
-
-
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     var callingAudio = document.getElementById("videoCallingAudio");
-        //     var checkCallInterval;
-
-        //     function checkIncomingCall() {
-        //         fetch(`${env('APP_URL')}/api/webvideochat/check-video-call`, { method: "GET" })
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 if (data.data.has_call) {
-        //                     recivedData = data;
-        //                     $("#videoCallPop").modal({ backdrop: "static" });
-        //                 }
-        //             })
-        //             .catch(error => console.error("Error checking call:", error));
-        //     }
-
-        //     checkCallInterval = setInterval(checkIncomingCall, 5000); // Poll every 5 seconds
-
-        //     document.getElementById("videoCallAccept").addEventListener("click", function () {
-        //         $("#videoCallPop").modal("hide");
-
-        //         let urlRedirect = "";
-        //         if (userType === "mentor") {
-        //             urlRedirect = `${env('APP_URL')}/mentor/videochat/initiate?mentee_id=${recivedData.sender_id}`;
-        //         } else if (userType === "mentee") {
-        //             urlRedirect = `${env('APP_URL')}/mentee/videochat/initiate?mentor_id=${recivedData.sender_id}`;
-        //         }
-
-        //         window.location.href = urlRedirect;
-        //     });
-
-        //     document.getElementById("videoCallDeny").addEventListener("click", function () {
-        //         // fetch(`${env('APP_URL')}/deny-video-call`, {
-        //         //     method: "POST",
-        //         //     headers: { "Content-Type": "application/json" },
-        //         //     body: JSON.stringify({ call_id: recivedData.call_id }),
-        //         // })
-        //         //     .then(() => {
-        //                 $("#videoCallPop").modal("hide");
-        //             // })
-        //             // .catch(error => console.error("Error denying call:", error));
-        //     });
-
-        //     function closeModalAndRefresh() {
-        //         $("#logSessionModal").modal("hide");
-        //         window.location.reload();
-        //     }
-        // });
+        // // Poll every 5 seconds for new calls
+        // setInterval(checkIncomingCall, 5000);
 
     </script>
+
+    {{-- <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js"></script>
+    <script>
+        firebase.initializeApp({
+            apiKey: 'AIzaSyAccQ1C2DN-l1Ihyj7yftxbPAu0IRfBI2Y',
+            authDomain: 'takestockinchildren-427bb.firebaseapp.com',
+            databaseURL: 'https://takestockinchildren-427bb.firebaseio.com',
+            projectId: 'takestockinchildren-427bb',
+            storageBucket: 'takestockinchildren-427bb.appspot.com',
+            messagingSenderId: '393481861829',
+            appId: '1:393481861829:web:38a4e2b511fcc73f',
+        });
+
+        // Retrieve an instance of Firebase Messaging so that it can handle background messages.
+        const messaging = firebase.messaging();
+
+        // Request permission to receive notifications
+        messaging.getToken({ vapidKey: '<YOUR_PUBLIC_VAPID_KEY_HERE>' })
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log('FCM Token:', currentToken);
+                    // Send the token to your server and update the UI if necessary
+                    fetch('/update-web-fcm-token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ fcm_token: currentToken })
+                    });
+                } else {
+                    // Show permission request UI
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+                // ...
+        });
+
+        // Handle incoming messages.
+        messaging.onMessage((payload) => {
+            console.log('FCM Message received. ', payload);
+            
+        //     // Show notification
+        //     new Notification(payload.notification.title, {
+        //         body: payload.notification.body,
+        //         icon: payload.notification.icon,
+        //     });
+
+            $("#videoCallPop").modal({backdrop: "static"});
+        });
+
+    </script> --}}
+
+    {{-- <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyD6-e8bFCCy1exg_xpsQAx1g6KFSPRjfNk",
+          authDomain: "test-37b77.firebaseapp.com",
+          projectId: "test-37b77",
+          storageBucket: "test-37b77.firebasestorage.app",
+          messagingSenderId: "1088105111361",
+          appId: "1:1088105111361:web:5e76e2b51ad2ad8656cbc0",
+          measurementId: "G-WYDFZ6CEXP"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script> --}}
+
 </body>
 </html>

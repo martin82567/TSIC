@@ -229,8 +229,6 @@
                 sendRequest = true;
                 remainimgCallTime = roomCreateData.remaining_time;
 
-                // $("#countDownTime").show();
-                // countDownInterval = setInterval(countDown, 1000);
 
                 Video.init("en-US", "Global", {
                     patchJsMedia: true
@@ -285,18 +283,15 @@
         let userList = {};
         callReceived = true;
 
-        // clearInterval(receiverInterval);
-
         zoomSession = Video.getMediaStream();
-        // setMediaStream(zoomSession);
         zoomSession.startAudio();
         
         // Event listener to find out about the status of the call
-        Video.on('dialout-state-change', (payload) => {
-            console.log("payload: "+payload);
-            zoomSession.hangup();
-            endCallAndCleanup(payload[0].userId);
-        });
+        // Video.on('dialout-state-change', (payload) => {
+        //     console.log("payload: "+payload);
+        //     zoomSession.hangup();
+        //     endCallAndCleanup(payload[0].userId);
+        // });
 
         if (zoomSession.isRenderSelfViewWithVideoElement()) {
             zoomSession
@@ -346,9 +341,7 @@
                                 );
                             }
 
-                            if (selfType.value === "mentor") {
-                                document.getElementById("roomJoinBtn").style.display = "inline";
-                            }
+                            document.getElementById("roomJoinBtn").style.display = "inline";
                             document.getElementById("roomLeftBtn").style.display = "none";
                         }
                     });
@@ -479,12 +472,6 @@
                         clearInterval(countDownInterval);
                         $("#countDownTime").hide();
 
-                        console.log("selfType", selfType.value);
-
-                        if (selfType.value === "mentor") {
-                            document.getElementById("roomJoinBtn").style.display = "inline";
-                        }
-                        
                         document.getElementById("roomJoinBtn").style.display = "inline";
                         document.getElementById("roomLeftBtn").style.display = "none";
                         document.getElementById("my-self-view-video").style.display = "none";
@@ -538,10 +525,10 @@
         }
 
         // Event listener to find out about the status of the call
-        Video.on('dialout-state-change', (payload) => {
-            console.log(payload);
-            zoomSession.hangup();
-        });
+        // Video.on('dialout-state-change', (payload) => {
+        //     console.log(payload);
+        //     zoomSession.hangup();
+        // });
 
         // socketConnect = io.connect(mainUrl + ":3000", {
         //     transports: ["websocket", "polling", "flashsocket"],
@@ -743,13 +730,13 @@
                             );
                         }
                     }
-                } else {
-                    // document.getElementById("roomJoinBtn").style.display = "inline";
-                    // Event listener to find out about the status of the call
-                    Video.on('dialout-state-change', (payload) => {
-                        console.log("payload: "+payload);
-                        // zoomSession.hangup();
-                    });
+                // } else {
+                //     // document.getElementById("roomJoinBtn").style.display = "inline";
+                //     // Event listener to find out about the status of the call
+                //     Video.on('dialout-state-change', (payload) => {
+                //         console.log("payload: "+payload);
+                //         // zoomSession.hangup();
+                //     });
                 }
             }
         );

@@ -455,55 +455,58 @@
         var userType = "<?php echo $logged_in; ?>".toLowerCase();
         var urlRedirect = "";
         var recivedData = {};
-        var room_data = {};
 
         var callingAudio = document.getElementById("videoCallingAudio");
 
         // var mainUrl = "{{ env('APP_URL') }}";
         var mainUrl = "https://test.tsicmentorapp.org";
 
+        // const socketMain = io.connect("{{ env('APP_URL') }}:3000", {
+        //     transports: ['websocket', 'polling', 'flashsocket']
+        // });
+
+        // socketMain.on('connect', function() {
+        //     var det = {
+        //         id: {{ Auth::user()->id }},
+        //         type: userType,
+        //         device: "web"
+        //     };
+        //     console.log(det);
+
+        //     socketMain.emit('connected', det);
+        // });
+
+        // socketMain.on('reqReceived', function(data) {
+        //     console.log("reqReceived");
+        //     console.log(data);
+        //     alert("success");
+        //     recivedData = data;
+
+        //     $("#videoCallPop").modal({backdrop: "static"});
+        // });
+
+        // socketMain.on('endVideo', function(data) {
+        //     console.log("endVideo");
+        //     console.log(data);
+
+        //     if(data.endBefore) {
+        //         $("#videoCallPop").modal("hide");
+        //         if(userType === 'mentor') {
+        //             $('#logSessionModal').modal('show');
+        //         }
+        //     } else {
+        //         $("#roomLeftBtn").trigger("click");
+        //         alert("Call denied by receiver.");
+		// window.location.reload()
+        //     };
+        // });
+
         var callInterval;
         var stopIncoming = false;
 
         $(document).ready(function() {
-            callInterval = setInterval(checkIncomingCall, 3000); // store interval
+            callInterval = setInterval(checkIncomingCall, 2000); // <-- store interval
         });
-
-        room_data = {
-            id: {{ Auth::user()->id }},
-            type: userType,
-            device: "web"
-        };
-
-        function checkIncomingCall() {
-            if (stopIncoming) return;
-
-            $.post(
-                mainUrl + "/api/webvideochat/check-call-notification",
-                room_data,
-                function(response, status) {
-                    console.log(response);
-                    
-                    if (response.status == true) {
-                        recivedData = response.data;
-
-                        if (recivedData.receiver_id == {{ Auth::user()->id }}) {
-                            console.log("call_status: "+ recivedData.call_status);
-                            
-                            if (recivedData.call_status == 'accept') {
-                                stopIncoming = true; // Tell the code to STOP triggering modal
-                                clearInterval(callInterval); // Stop polling when accepting
-                                callingAudio.pause();
-                            } else {
-                                $("#videoCallPop").modal({backdrop: "static"});
-                                callingAudio.load();
-                                callingAudio.play();
-                            }
-                        } 
-                    }
-                
-            });
-        }
 
 
         $("#videoCallAccept").click(function() {
@@ -532,6 +535,8 @@
         });
 
         $("#videoCallDeny").click(function() {
+            // socketMain.emit('callDenied', recivedData);
+
             $.post(mainUrl + "/api/webvideochat/accept-decline-call", {
                 id: {{ Auth::user()->id }},
                 type: userType,
@@ -541,25 +546,6 @@
                 stopIncoming = true; // Also stop if user denies
                 $("#videoCallPop").modal("hide");
                 callingAudio.pause(); // optional: stop the ringtone
-
-                recivedData = response.data;
-                if (recivedData.call_status == 'decline') {
-                    $.post(
-                        mainUrl + "/api/webvideochat/disconnect_room", {
-                            unique_name: recivedData.unique_name,
-                        },
-                        function(data, status) {
-                            alert("User did not received the call.");
-                            // alert(data.message);
-                            window.location.reload();
-                        }
-                    );
-                } else {
-                    setInterval(function () { 
-                        window.location.reload();
-                    }, 11000); // page refresh after 11 second
-                }
-
             });
         });
 
@@ -578,7 +564,124 @@
             $('#logSessionModal').modal('hide');
             window.location.reload()
         }
+
+        room_data = {
+            id: {{ Auth::user()->id }},
+            type: userType,
+            device: "web"
+        };
+
+        function checkIncomingCall() {
+            if (stopIncoming) return;
+
+            $.post(
+                mainUrl + "/api/webvideochat/check-call-notification",
+                room_data,
+                function(response, status) {
+                    console.log(response);
+                    
+                    if (response.status == true) {
+                        recivedData = response.data;
+
+                        if (recivedData.receiver_id == {{ Auth::user()->id }}) {
+                            $("#videoCallPop").modal({backdrop: "static"});
+                            callingAudio.load();
+                            callingAudio.play();
+                        } 
+
+                        if (recivedData.call_status == 'accept') {
+                            stopIncoming = true; // Tell the code to STOP triggering modal
+                            clearInterval(callInterval); // Stop polling when accepting
+                            callingAudio.pause();
+                        }
+                    }
+                
+            });
+        }
+
+        // Poll every 5 seconds for new calls
+        // setInterval(checkIncomingCall, 5000);
+
     </script>
+
+    {{-- <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js"></script>
+    <script>
+        firebase.initializeApp({
+            apiKey: 'AIzaSyAccQ1C2DN-l1Ihyj7yftxbPAu0IRfBI2Y',
+            authDomain: 'takestockinchildren-427bb.firebaseapp.com',
+            databaseURL: 'https://takestockinchildren-427bb.firebaseio.com',
+            projectId: 'takestockinchildren-427bb',
+            storageBucket: 'takestockinchildren-427bb.appspot.com',
+            messagingSenderId: '393481861829',
+            appId: '1:393481861829:web:38a4e2b511fcc73f',
+        });
+
+        // Retrieve an instance of Firebase Messaging so that it can handle background messages.
+        const messaging = firebase.messaging();
+
+        // Request permission to receive notifications
+        messaging.getToken({ vapidKey: '<YOUR_PUBLIC_VAPID_KEY_HERE>' })
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log('FCM Token:', currentToken);
+                    // Send the token to your server and update the UI if necessary
+                    fetch('/update-web-fcm-token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ fcm_token: currentToken })
+                    });
+                } else {
+                    // Show permission request UI
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+                // ...
+        });
+
+        // Handle incoming messages.
+        messaging.onMessage((payload) => {
+            console.log('FCM Message received. ', payload);
+            
+        //     // Show notification
+        //     new Notification(payload.notification.title, {
+        //         body: payload.notification.body,
+        //         icon: payload.notification.icon,
+        //     });
+
+            $("#videoCallPop").modal({backdrop: "static"});
+        });
+
+    </script> --}}
+
+    {{-- <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyD6-e8bFCCy1exg_xpsQAx1g6KFSPRjfNk",
+          authDomain: "test-37b77.firebaseapp.com",
+          projectId: "test-37b77",
+          storageBucket: "test-37b77.firebasestorage.app",
+          messagingSenderId: "1088105111361",
+          appId: "1:1088105111361:web:5e76e2b51ad2ad8656cbc0",
+          measurementId: "G-WYDFZ6CEXP"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script> --}}
 
 </body>
 </html>

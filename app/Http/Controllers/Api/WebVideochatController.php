@@ -296,7 +296,7 @@ class WebVideochatController extends Controller
             }
         }
 
-//        twilio_disconnect_room($room_sid);
+        // twilio_disconnect_room($room_sid);
 
         $video_chat_rooms = DB::table(VIDEO_CHAT_ROOMS)->where('unique_name', $unique_name)->first();
         $chat_code = !empty($video_chat_rooms) ? $video_chat_rooms->chat_code : '';
@@ -384,7 +384,7 @@ class WebVideochatController extends Controller
             $remaining_time = $video_chat_user->remaining_time;
 
             $token = $this->generateMenteeZoomToken($check_room->unique_name);
-            return Response::json(['status' => true, 'message' => "Chat room created successfully", 'data' => array('room_sid' => $check_room->room_sid, 'unique_name' => $check_room->unique_name, 'remaining_time' => $remaining_time, 'token' => $token)]);
+            return Response::json(['status' => true, 'message' => "Chat room created successfully", 'data' => array('room_sid' => $check_room->room_sid, 'receiver_id' => $receiver_id, 'unique_name' => $check_room->unique_name, 'remaining_time' => $remaining_time, 'token' => $token)]);
         } else {
             return Response::json(['status' => false, 'message' => "No ongoing room found", 'data' => array()]);
         }
@@ -501,6 +501,7 @@ class WebVideochatController extends Controller
             ->where('receiver_type', $request->type)
             ->where('duration', '=', '')
             ->where('participant_count', '=', '1')
+            ->whereNull('receiver_call_status')
             ->first();
 
         if (!empty($check_room)) {
@@ -508,10 +509,44 @@ class WebVideochatController extends Controller
             $video_chat_user = DB::table(VIDEO_CHAT_USER)->where('chat_code', $check_room->chat_code)->first();
             $remaining_time = $video_chat_user->remaining_time;
 
-            return Response::json(['status' => true, 'message' => "Call notification", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'unique_name' => $check_room->unique_name, 'remaining_time' => $remaining_time, 'receiver_id' => $check_room->receiver_id)]);
+            return Response::json(['status' => true, 'message' => "Call notification", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'call_status' => $check_room->receiver_call_status, 'unique_name' => $check_room->unique_name, 'remaining_time' => $remaining_time, 'receiver_id' => $check_room->receiver_id)]);
         
         } else {
             return Response::json(['status' => false, 'message' => "No ongoing room found", 'data' => array()]);
+        }
+    }
+
+    /**
+     * Accept or Decline Call
+     */
+    public function acceptDeclineCall(Request $request)
+    {
+        $check_room = DB::table(VIDEO_CHAT_ROOMS)
+            ->where('receiver_id', $request->id)
+            ->where('receiver_type', $request->type)
+            ->where('duration', '=', '')
+            ->where('participant_count', '=', '1')
+            ->orderBy('id', 'DESC')
+            ->first();
+
+        if ($check_room) {
+            if ($request->action_type == 'accept') {
+                DB::table(VIDEO_CHAT_ROOMS)->where('id', $check_room->id)
+                    ->update([
+                        'receiver_call_status' => 'accept'
+                    ]);
+                    
+                return Response::json(['status' => true, 'message' => "Call accepted", 'data' => array('call_status' => 'accept', 'unique_name' => $check_room->unique_name)]);
+            } else {
+                DB::table(VIDEO_CHAT_ROOMS)->where('id', $check_room->id)
+                    ->update([
+                        'receiver_call_status' => 'decline'
+                    ]);
+
+                return Response::json(['status' => true, 'message' => "Call declined", 'data' => array('call_status' => 'decline', 'unique_name' => $check_room->unique_name)]);
+            }
+        } else {
+            return Response::json(['status' => false, 'message' => "No ongoing call found", 'data' => array()]);
         }
     }
 

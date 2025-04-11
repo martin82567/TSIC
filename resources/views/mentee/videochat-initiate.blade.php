@@ -25,7 +25,7 @@
         <?php } ?>
 
         <div class="box-inner">
-            <button class="btn btn-success" id="roomJoinBtn">Start Call</button>
+            {{-- <button class="btn btn-success" id="roomJoinBtn">Start Call</button> --}}
             <button class="btn btn-danger" id="roomLeftBtn" style="display: none">End Call</button>
             <button class="btn btn-secondary" id="roomConnectingBtn" disable style="display: none">Connecting <i class="fa fa-spinner fa-pulse"></i></button>
 
@@ -187,6 +187,7 @@
         receiver_voip_token: otherVoipToken,
     };
 
+    checkRoom();
 
     function initiateCall() {
         $.post(
@@ -196,7 +197,7 @@
                 if (roomData.status === false) {
                     alert(roomData.message);
                     document.getElementById("roomConnectingBtn").style.display = "none";
-                    document.getElementById("roomJoinBtn").style.display = "inline";                    
+                    // document.getElementById("roomJoinBtn").style.display = "inline";                    
                     // leaveRoomIfJoined();
                     return;
                 }
@@ -222,7 +223,7 @@
                 if (roomCreateData.remaining_time < 10) {
                     alert("You dont have enought time to call this user.");
                     document.getElementById("roomConnectingBtn").style.display = "none";
-                    document.getElementById("roomJoinBtn").style.display = "inline";
+                    // document.getElementById("roomJoinBtn").style.display = "inline";
                     return;
                 }
                 sendRequest = true;
@@ -251,7 +252,8 @@
                                     roomCreateData = {};
                                     alert(data.message);
                                     document.getElementById("roomConnectingBtn").style.display = "none";
-                                    document.getElementById("roomJoinBtn").style.display = "inline";
+                                    // document.getElementById("roomJoinBtn").style.display = "inline";
+                                    window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
                                 }
                             );
 
@@ -298,7 +300,7 @@
                     videoElement: document.querySelector("#my-self-view-video"),
                 })
                 .then(() => {
-                    document.getElementById("roomJoinBtn").style.display = "none";
+                    // document.getElementById("roomJoinBtn").style.display = "none";
                     document.getElementById("roomConnectingBtn").style.display = "none";
                     document.getElementById("roomLeftBtn").style.display = "inline";
 
@@ -319,9 +321,6 @@
                             clearInterval(countDownInterval);
                             $("#countDownTime").hide();
 
-                            console.log(countDownInterval);
-                            
-
                             if (callReceived == false) {
                                 // socketConnect.emit("endBeforeReceived", inititateData);
                                 Video.leave();
@@ -340,8 +339,9 @@
                                 );
                             }
 
-                            document.getElementById("roomJoinBtn").style.display = "inline";
+                            // document.getElementById("roomJoinBtn").style.display = "inline";
                             document.getElementById("roomLeftBtn").style.display = "none";
+                            window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
                         }
                     });
 
@@ -376,11 +376,6 @@
                             
                             zoomSession.muteAudio();
 
-                            // if (selfType.value === "mentor") {
-                            //     document.getElementById("roomJoinBtn").style.display = "inline";
-                            // }
-                            // document.getElementById("roomLeftBtn").style.display = "none";
-
                             if (callReceived == false) {
                                 // socketConnect.emit("endBeforeReceived", inititateData);
                                 Video.leave();
@@ -398,9 +393,10 @@
                                 );
                             }
 
-                            document.getElementById("roomJoinBtn").style.display = "inline";
+                            // document.getElementById("roomJoinBtn").style.display = "inline";
                             document.getElementById("roomLeftBtn").style.display = "none";
                             document.getElementById("my-self-view-video").style.display = "none";
+                            window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
 
                             // if (callReceived == true) {
                             //     alert("The mentee has ended the video call.");
@@ -471,9 +467,10 @@
                         clearInterval(countDownInterval);
                         $("#countDownTime").hide();
 
-                        document.getElementById("roomJoinBtn").style.display = "inline";
+                        // document.getElementById("roomJoinBtn").style.display = "inline";
                         document.getElementById("roomLeftBtn").style.display = "none";
                         document.getElementById("my-self-view-video").style.display = "none";
+                        window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
                     }
 
                     // Event listener to find out about the status of the call
@@ -585,6 +582,7 @@
                     function(data, status) {
                         roomCreateData = {};
                         alert(data.message);
+                        window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
                     }
                 );
             }
@@ -652,11 +650,14 @@
     }
 
 
-    receiverInterval = setInterval(function () { 
+    // receiverInterval = setInterval(function () { 
+    function checkRoom() {
         $.post(
             mainUrl + "/api/webvideochat/check_room",
             roomCheckData,
             function(roomData, status) {
+                console.log(roomData);
+                
                 if (roomData.status) {
                     roomCreateData = roomData.data;
                     roomName = roomCreateData.unique_name;
@@ -729,7 +730,8 @@
                             );
                         }
                     }
-                // } else {
+                } else {
+                    startCall();
                 //     // document.getElementById("roomJoinBtn").style.display = "inline";
                 //     // Event listener to find out about the status of the call
                 //     Video.on('dialout-state-change', (payload) => {
@@ -739,7 +741,9 @@
                 }
             }
         );
-    }, 2000); // Poll every 2 seconds
+    }
+        
+    // }, 2000); // Poll every 2 seconds
 
 
     // setInterval(function () { 
@@ -767,10 +771,9 @@
         }
     }
 
-    // Bind button to join Room.
-    document.getElementById("roomJoinBtn").onclick = function() {
+    function startCall() {
         userType = "sender";
-        document.getElementById("roomJoinBtn").style.display = "none";
+        // document.getElementById("roomJoinBtn").style.display = "none";
         document.getElementById("roomConnectingBtn").style.display = "inline";
 
         if (typeof navigator !== "undefined") {
@@ -790,7 +793,7 @@
                     .catch((err) => {
                         alert("Please allow permission for camera and microphone");
                         document.getElementById("roomConnectingBtn").style.display = "none";
-                        document.getElementById("roomJoinBtn").style.display = "inline";
+                        // document.getElementById("roomJoinBtn").style.display = "inline";
                     });
             } else {
                 navigator.getMedia({
@@ -803,19 +806,62 @@
                     function() {
                         alert("Please allow permission for camera and microphone");
                         document.getElementById("roomConnectingBtn").style.display = "none";
-                        document.getElementById("roomJoinBtn").style.display = "inline";
+                        // document.getElementById("roomJoinBtn").style.display = "inline";
                     }
                 );
             }
         }
-    };
+    }
+
+    // Bind button to join Room.
+    // document.getElementById("roomJoinBtn").onclick = function() {
+    //     userType = "sender";
+    //     document.getElementById("roomJoinBtn").style.display = "none";
+    //     document.getElementById("roomConnectingBtn").style.display = "inline";
+
+    //     if (typeof navigator !== "undefined") {
+    //         if (
+    //             typeof navigator.getMedia === "undefined" &&
+    //             typeof navigator.mediaDevices === "object" &&
+    //             typeof navigator.mediaDevices.getUserMedia === "function"
+    //         ) {
+    //             navigator.mediaDevices
+    //                 .getUserMedia({
+    //                     video: true,
+    //                     audio: true
+    //                 })
+    //                 .then(() => {
+    //                     initiateCall();
+    //                 })
+    //                 .catch((err) => {
+    //                     alert("Please allow permission for camera and microphone");
+    //                     document.getElementById("roomConnectingBtn").style.display = "none";
+    //                     document.getElementById("roomJoinBtn").style.display = "inline";
+    //                 });
+    //         } else {
+    //             navigator.getMedia({
+    //                     video: true,
+    //                     audio: true
+    //                 },
+    //                 function() {
+    //                     initiateCall();
+    //                 },
+    //                 function() {
+    //                     alert("Please allow permission for camera and microphone");
+    //                     document.getElementById("roomConnectingBtn").style.display = "none";
+    //                     document.getElementById("roomJoinBtn").style.display = "inline";
+    //                 }
+    //             );
+    //         }
+    //     }
+    // };
 
     // Bind button to leave Room.
     document.getElementById("roomLeftBtn").onclick = function() {
         log("Leaving room...");
         Video.leave();
 
-        document.getElementById("roomJoinBtn").style.display = "inline";
+        // document.getElementById("roomJoinBtn").style.display = "inline";
         document.getElementById("roomLeftBtn").style.display = "none";
         document.getElementById("my-self-view-video").style.display = "none";
 

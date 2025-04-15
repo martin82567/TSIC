@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAKE STOCK IN CHILDREN</title>
+    <link rel="icon" href="https://www.takestockinchildren.org/wp-content/uploads/2021/04/TSICfavicon.png" sizes="32x32" />
     <!--Css-->
     <link rel="stylesheet" type="text/css" href="<?php echo url('assets/'); ?>/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo url('assets/'); ?>/css/font-awesome.min.css">
@@ -18,7 +19,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" /> -->
     <!--jQuery-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    <script type="text/javascript" src="<?php echo url('assets/'); ?>/js/jquery-input-file-text.js"></script>    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+    <script type="text/javascript" src="<?php echo url('assets/'); ?>/js/jquery-input-file-text.js"></script>    
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<?php echo url('assets/'); ?>/js/moment.js"></script>
     <script type="text/javascript" src="<?php echo url('assets/'); ?>/js/bootstrap.min.js"></script>
@@ -148,7 +151,8 @@
                                             <div class="fl-module-content fl-node-content">
                                                 <div class="fl-photo fl-photo-align-left" itemscope="" itemtype="https://schema.org/ImageObject">
                                                     <div class="fl-photo-content fl-photo-img-png">
-                                                        <a href="https://www.takestockinchildren.org/" target="_self" itemprop="url">
+                                                        <a href="{{ url('/') . $home_url }}" target="_self" itemprop="url">
+                                                        {{-- <a href="https://www.takestockinchildren.org/" target="_self" itemprop="url"> --}}
                                                         <img loading="lazy" class="fl-photo-img wp-image-47" src="https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x.png" alt="take-stock-in-children-logo@2x" itemprop="image" title="take-stock-in-children-logo@2x" srcset="https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x.png 398w, https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x-300x184.png 300w" sizes="(max-width: 398px) 100vw, 398px" width="398" height="244">
                                                         </a>
                                                     </div>
@@ -172,12 +176,12 @@
                                                     <div class="fl-clear"></div>
                                                     <nav aria-label="Menu" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement">
                                                         <ul id="menu-main-menu" class="menu fl-menu-horizontal fl-toggle-none">
-                                                            <li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item"><a href="https://www.takestockinchildren.org/who-we-are/">Who We Are</a></li>
-                                                            <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.takestockinchildren.org/programs/">Programs</a></li>
-                                                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/students/">Students</a></li>
-                                                            <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/mentors/">Mentors</a></li>
-                                                            <li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/news-events/">News &amp; Events</a></li>
-                                                            <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/contact/">Contact</a></li>
+                                                            <li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item"><a href="https://www.takestockinchildren.org/who-we-are/" target="_blank">Who We Are</a></li>
+                                                            <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.takestockinchildren.org/programs/" target="_blank">Programs</a></li>
+                                                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/students/" target="_blank">Students</a></li>
+                                                            <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/mentors/" target="_blank">Mentors</a></li>
+                                                            <li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/news-events/" target="_blank">News &amp; Events</a></li>
+                                                            <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/contact/" target="_blank">Contact</a></li>
                                                         </ul>
                                                     </nav>
                                                 </div>
@@ -459,8 +463,8 @@
 
         var callingAudio = document.getElementById("videoCallingAudio");
 
-        // var mainUrl = "{{ env('APP_URL') }}";
-        var mainUrl = "https://test.tsicmentorapp.org";
+        var mainUrl = "{{ env('APP_URL') }}";
+        // var mainUrl = "https://test.tsicmentorapp.org";
 
         var callInterval;
         var stopIncoming = false;

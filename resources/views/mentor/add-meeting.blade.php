@@ -49,7 +49,13 @@
         display: none;
     }
 
+    .text-danger {
+        display: block;
+        font-size: 0.875em;
+    }
+
 </style>
+
 <div class="db-inner-content">
     <form role="form" action="{{ url('/mentor/meeting/save')}}" method="post" enctype="multipart/form-data" id="submit_form">
         {{ csrf_field() }}
@@ -64,7 +70,7 @@
                         <h3>Session</h3>
                     </div>
                     <div class="col-lg-6">
-                        <a href="{{ url('/mentor/meeting/list?type=requested') }}" class="back-btn"><i class="fa fa-arrow-left"></i></a>
+                        <a href="{{ url('/mentor/meeting/list?type=requested&view=calendar') }}" class="back-btn"><i class="fa fa-arrow-left"></i></a>
                     </div>
                 </div>
             </div>
@@ -127,8 +133,8 @@
                     <div class="row">                                                
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Agenda Name </label>
-                                <input type="text" value="<?php echo !empty($meeting_data->title)?$meeting_data->title:'Mentor Session';?>" placeholder="Mentor Session" class="form-control" name="title" id="title" <?php if(!empty($meeting_requests)){?> readonly <?php }?>>
+                                <label>Agenda Name <sup style="color: #ff6c6c;">*</sup></label>
+                                <input type="text" value="<?php echo !empty($meeting_data->title)?$meeting_data->title:'Mentor Session';?>" placeholder="Mentor Session" class="form-control" name="title" id="title"  required <?php if(!empty($meeting_requests)){?> readonly <?php }?>>
                             </div>
                         </div>
                     </div>
@@ -145,7 +151,7 @@
                             <div class="form-group">
                                 <label>Choose a Mentee <sup style="color: #ff6c6c;">*</sup></label>
                                 <div class="select">
-	                                <select name="mentee_ids" id="mentee_ids" <?php if(!empty($meeting_requests)){?> disabled <?php }?>>
+	                                <select name="mentee_ids" id="mentee_ids" required <?php if(!empty($meeting_requests)){?> disabled <?php }?>>
                                         <option value="">Select a mentee</option>
 	                                    <?php if(!empty($mentee_list)){ 
                                             foreach($mentee_list as $m){?>
@@ -162,7 +168,7 @@
                             <div class="form-group">
                                 <label>Session Location <sup style="color: #ff6c6c;">*</sup></label>
                                 <div class="select">
-                                    <select class="" id="school_id" name="school_id" <?php if(!empty($meeting_requests)){?> disabled <?php }?>>
+                                    <select class="" id="school_id" name="school_id" required <?php if(!empty($meeting_requests)){?> disabled <?php }?>>
                                         
                                     </select>
                                 </div>
@@ -176,7 +182,7 @@
                             <div class="form-group">
                                 <label>Session Method Location <sup style="color: #ff6c6c;">*</sup></label>
                                 <div class="select">
-                                    <select class="" id="session_method_location_id" name="session_method_location_id" <?php if(!empty($meeting_requests)){?> disabled <?php }?>>
+                                    <select class="" id="session_method_location_id" name="session_method_location_id"  required <?php if(!empty($meeting_requests)){?> disabled <?php }?>>
                                         <option value="">Select an option</option>
                                         <?php if(!empty($session_method_location)){ foreach($session_method_location as $ml){?>
                                         <option value="<?php echo $ml->id; ?>" <?php if(!empty($meeting_data->session_method_location_id) && ($meeting_data->session_method_location_id == $ml->id) ){?> selected <?php }?>>
@@ -203,7 +209,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Schedule Date &amp; Time<sup style="color: #ff6c6c;">*</sup></label>
-                                <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"  name="schedule_time" <?php if(!$is_datetime_valid){?> readonly <?php }?>>
+                                <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker"  required data-target="#datetimepicker5"  name="schedule_time" <?php if(!$is_datetime_valid){?> readonly <?php }?>>
 
                             </div>
                         </div>
@@ -225,6 +231,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <!-- <script type="text/javascript" src="https://momentjs.com/downloads/moment-timezone.min.js"></script> -->
 <!-- <script type="text/javascript" src="https://momentjs.com/downloads/moment-timezone.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js   "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -373,40 +385,77 @@
         var school_id = $('#school_id').val();
         var session_method_location_id = $('#session_method_location_id').val();
         var school_location = $('#school_location').val();
-        
         var datetimepicker5 = $('#datetimepicker5').val();
 
-        console.log(title);
-        
-        console.log(mentee_ids);
+        // console.log(title);
+        // console.log(mentee_ids);
 
-        if(title == ''){
-            swal('Agenda is required');
-            return false;
-        }
-        // else if (description == '') {
-        //     swal('Description is required');
+        $('#submit_form').validate({
+            rules: {
+                title: "required",
+                mentee_ids: "required",
+                school_id: "required",
+                session_method_location_id: "required",
+                schedule_time: "required"
+            },
+            messages: {
+                title: {
+                    required: "Please add agenda name"
+                },
+                mentee_ids: {
+                    required: "Please add mentee"
+                },
+                school_id: {
+                    required: "Please add session location"
+                },
+                session_method_location_id: {
+                    required: "Please add session method location"
+                },
+                schedule_time: {
+                    required: "Please add schedule date & time"
+                }
+            },
+            errorElement: 'span',
+            errorClass: 'text-danger',
+            // errorPlacement: function(error, element) {
+            //     error.insertAfter(element); // ensures it's after input
+            // },
+            // highlight: function (element) {
+            //     $(element).addClass('is-invalid');
+            // },
+            // unhighlight: function (element) {
+            //     $(element).removeClass('is-invalid');
+            // }
+        });
+
+
+        // if(title == ''){
+        //     swal('Agenda is required');
         //     return false;
         // }
-        else if (mentee_ids == '') {
-            swal('Please add mentee');
-            return false;
-        }
-        else if(session_method_location_id == ''){
-            swal('Please add method location');
-            return false;
-        }
-        else if (datetimepicker5 == '') {
-            swal('Please add Schedule');
-            return false;
-        }
+        // // else if (description == '') {
+        // //     swal('Description is required');
+        // //     return false;
+        // // }
+        // else if (mentee_ids == '') {
+        //     swal('Please add mentee');
+        //     return false;
+        // }
+        // else if(session_method_location_id == ''){
+        //     swal('Please add method location');
+        //     return false;
+        // }
+        // else if (datetimepicker5 == '') {
+        //     swal('Please add Schedule');
+        //     return false;
+        // }
         // else if(school_location == ''){
         //     swal('Please add school location');
         //     return false;
         // }
         // return true;
 
-        $('#submit_btn').prop('disabled', true);
+        // $('#submit_btn').prop('disabled', true);
         $('#submit_form').submit();   
     }
 

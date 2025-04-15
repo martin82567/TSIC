@@ -154,8 +154,8 @@
     //     connectOptions.bandwidthProfile.video.maxSubscriptionBitrate = 2500000;
     // }
 
-    // var mainUrl = "{{ env('APP_URL') }}";
-    var mainUrl = "https://test.tsicmentorapp.org";
+    var mainUrl = "{{ env('APP_URL') }}";
+    // var mainUrl = "https://test.tsicmentorapp.org";
 
     // var identity = '{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}';
     var identity = document.getElementById("selfName").value;

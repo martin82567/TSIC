@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAKE STOCK IN CHILDREN</title>
+    <link rel="icon" href="https://www.takestockinchildren.org/wp-content/uploads/2021/04/TSICfavicon.png" sizes="32x32" />
     <!--Css-->
     <link rel="stylesheet" type="text/css" href="<?php echo url('assets/'); ?>/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo url('assets/'); ?>/css/font-awesome.min.css">
@@ -135,9 +136,9 @@
                     <?php if(!empty($keyword_notification_access)){?>
                     <div class="h-notification">
                         <a href="javascript:void(0);">
-                            <i class="fa fa-bell"></i>
+                            <i class="fa fa-bell" id="notification-icon"></i>
                             <?php if(!empty($chat_unread_notification)){?>
-                            <span class="notification-badge">{{$chat_unread_notification}}</span>
+                            <span class="notification-badge" id="notification-badge">{{$chat_unread_notification}}</span>
                             <?php }?>
                         </a>
                         <div class="db-user-menu">
@@ -612,6 +613,17 @@
             jQuery("#chat_div").toggle();
 
         }
+
+        document.getElementById('notification-icon').addEventListener('click', function () {
+            fetch('/admin/chat/notification-mark-all-read')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('notification-badge').style.display = 'none';
+                    }
+                });
+        });
+
     </script>
     <div class="autopilot">
         <a class="autopilot-btn" onclick="showchat();" ><i class="fa fas fa-comments" aria-hidden="true"></i></a>

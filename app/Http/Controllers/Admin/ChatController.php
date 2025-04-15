@@ -604,6 +604,27 @@ class ChatController extends Controller
 
         return view('admin.chat_notification.list',['data' => $data,  'sort' => $sort, 'column' => $column ,'sort_needed' => $sort_needed,  'type' => 'unreviewed' ]);
     }
+
+    /**
+     * Notification mark all read
+     */
+    public function notificationMarkAllRead()
+    {
+        if(Auth::user()->type == 1){
+            DB::table('keyword_chat_notification')->update(['is_admin_read'=>1]);
+        }else if(Auth::user()->type == 2){
+            DB::table('keyword_chat_notification')->update(['is_affiliate_read'=>1]);
+        } else {
+            if(Auth::user()->parent_id != 1){
+                DB::table('keyword_chat_notification')->update(['is_staff_read'=>1]);
+            }else{
+                DB::table('keyword_chat_notification')->update(['is_super_staff_read'=>1]);
+            }
+        }
+        
+        return response()->json(['status' => 'success']);
+    }
+
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     public function make_reviewed_notification(Request $request)
     {

@@ -199,6 +199,7 @@ Route::prefix('admin')->group(function() {
 	Route::post('/chat/get_data_from_affiliate', 'Admin\ChatController@get_data_from_affiliate')->name('admin.chat.get_data_from_affiliate');
 	Route::get('/chat/keyword-notification-reviewed', 'Admin\ChatController@keyword_notification_reviewed')->name('admin.chat.keyword-notification-reviewed');
 	Route::get('/chat/keyword-notification-unreviewed', 'Admin\ChatController@keyword_notification_unreviewed')->name('admin.chat.keyword-notification-unreviewed');
+	Route::get('/chat/notification-mark-all-read', 'Admin\ChatController@notificationMarkAllRead')->name('admin.chat.notification-mark-all-read');
 	Route::post('/chat/make-reviewed-notification', 'Admin\ChatController@make_reviewed_notification')->name('admin.chat.make-reviewed-notification');
 	Route::post('/chat/make-flagged-notification', 'Admin\ChatController@make_flagged_notification')->name('admin.chat.make-flagged-notification');
 

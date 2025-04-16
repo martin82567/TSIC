@@ -20,7 +20,8 @@ class ErrorController extends Controller
 
 	public function four_not_four()
 	{
-		return view('errors.401');
+		// return view('errors.401');
+		return redirect('/login');
 	}
 
 }

@@ -94,7 +94,8 @@
                                             <div class="fl-module-content fl-node-content">
                                                 <div class="fl-photo fl-photo-align-left" itemscope="" itemtype="https://schema.org/ImageObject">
                                                     <div class="fl-photo-content fl-photo-img-png">
-                                                        <a href="https://www.takestockinchildren.org/" target="_self" itemprop="url">
+                                                        {{-- <a href="https://www.takestockinchildren.org/" target="_self" itemprop="url"> --}}
+                                                        <a href="{{ env('APP_URL') }}" target="_self" itemprop="url">
                                                         <img loading="lazy" class="fl-photo-img wp-image-47" src="https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x.png" alt="take-stock-in-children-logo@2x" itemprop="image" title="take-stock-in-children-logo@2x" srcset="https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x.png 398w, https://www.takestockinchildren.org/wp-content/uploads/2020/12/take-stock-in-children-logo@2x-300x184.png 300w" sizes="(max-width: 398px) 100vw, 398px" width="398" height="244">
                                                         </a>
                                                     </div>
@@ -118,12 +119,12 @@
                                                     <div class="fl-clear"></div>
                                                     <nav aria-label="Menu" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement">
                                                         <ul id="menu-main-menu" class="menu fl-menu-horizontal fl-toggle-none">
-                                                            <li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item"><a href="https://www.takestockinchildren.org/who-we-are/">Who We Are</a></li>
-                                                            <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.takestockinchildren.org/programs/">Programs</a></li>
-                                                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/students/">Students</a></li>
-                                                            <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/mentors/">Mentors</a></li>
-                                                            <li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/news-events/">News &amp; Events</a></li>
-                                                            <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/contact/">Contact</a></li>
+                                                            <li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item"><a href="https://www.takestockinchildren.org/who-we-are/" target="_blank">Who We Are</a></li>
+                                                            <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.takestockinchildren.org/programs/" target="_blank">Programs</a></li>
+                                                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/students/" target="_blank">Students</a></li>
+                                                            <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/mentors/" target="_blank">Mentors</a></li>
+                                                            <li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/news-events/" target="_blank">News &amp; Events</a></li>
+                                                            <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.takestockinchildren.org/contact/" target="_blank">Contact</a></li>
                                                         </ul>
                                                     </nav>
                                                 </div>

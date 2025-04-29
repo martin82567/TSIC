@@ -454,6 +454,126 @@
         Your browser does not support the audio element.
     </audio>
 
+    <!-- Include Firebase SDK -->
+    {{-- <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js"></script>
+    <script>
+        firebase.initializeApp({
+            // apiKey: 'AIzaSyBIZpp-4HVARIfwOhE9fI7KU1tes-cnVtw',
+            // authDomain: 'takestockinchildren-427bb.firebaseapp.com',
+            // databaseURL: 'https://takestockinchildren-427bb.firebaseio.com',
+            // projectId: 'takestockinchildren-427bb',
+            // storageBucket: 'takestockinchildren-427bb.appspot.com',
+            // messagingSenderId: '393481861829',
+            // appId: '1:393481861829:web:38a4e2b511fcc73f',
+            apiKey: "AIzaSyD1RlN2N0LtoDnwzb_q89FlJSydfBi4Z40",
+            authDomain: "takestockinchildren-427bb.firebaseapp.com",
+            databaseURL: "https://takestockinchildren-427bb.firebaseio.com",
+            projectId: "takestockinchildren-427bb",
+            storageBucket: "takestockinchildren-427bb.firebasestorage.app",
+            messagingSenderId: "393481861829",
+            appId: "1:393481861829:web:7a5197e105a5bdc6a18eac",
+            measurementId: "G-M2KVNV8MRZ"
+        });
+
+        // Retrieve an instance of Firebase Messaging so that it can handle background messages.
+        const messaging = firebase.messaging();
+
+        // Request permission to receive notifications
+        messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' })
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log('FCM Token:', currentToken);
+                    // Send the token to your server and update the UI if necessary
+                    // fetch('/update-web-fcm-token', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    //     },
+                    //     body: JSON.stringify({ fcm_token: currentToken })
+                    // });
+                } else {
+                    // Show permission request UI
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+                // ...
+        });
+
+        // Handle incoming messages.
+        messaging.onMessage((payload) => {
+            console.log('FCM Message received. ', payload);
+            
+        //     // Show notification
+        //     new Notification(payload.notification.title, {
+        //         body: payload.notification.body,
+        //         icon: payload.notification.icon,
+        //     });
+
+            // $("#videoCallPop").modal({backdrop: "static"});
+        });
+    </script> --}}
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyD1RlN2N0LtoDnwzb_q89FlJSydfBi4Z40",
+          authDomain: "takestockinchildren-427bb.firebaseapp.com",
+          databaseURL: "https://takestockinchildren-427bb.firebaseio.com",
+          projectId: "takestockinchildren-427bb",
+          storageBucket: "takestockinchildren-427bb.firebasestorage.app",
+          messagingSenderId: "393481861829",
+          appId: "1:393481861829:web:7a5197e105a5bdc6a18eac",
+          measurementId: "G-M2KVNV8MRZ"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+
+        const messaging = firebase.messaging();
+        // Request permission to receive notifications
+        messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' })
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log('FCM Token:', currentToken);
+                    // Send the token to your server and update the UI if necessary
+                    // fetch('/update-web-fcm-token', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    //     },
+                    //     body: JSON.stringify({ fcm_token: currentToken })
+                    // });
+                } else {
+                    // Show permission request UI
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+                // ...
+        });
+
+        // Handle incoming messages.
+        messaging.onMessage((payload) => {
+            console.log('FCM Message received. ', payload);
+        });
+    </script>
+
+
     <!-- SOCKET CONNECTION -->
     <script type="application/javascript">
         var userType = "<?php echo $logged_in; ?>".toLowerCase();

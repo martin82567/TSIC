@@ -219,6 +219,19 @@ class WebVideochatController extends Controller
                     $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();;
                     $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
                 }
+
+                // Push Notification to Web
+                if ($receiver_data->web_fcm_token) {
+                    $message = "Request for video chat";
+                    $time = time();
+                    $web_send_data = array('title' => "Incoming Video call", 'type' => 'video_chat', 'sender_id' => $sender_id, 'message' => $message, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'room_sid' => $room_sid, 'remaining_time' => "$remaining_time", 'timestamp' => "$time", 'created_at' => $created_at);
+                    
+                    $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data);
+
+                    sendPushNotificationWithV1($web_fields);
+                }
+
+
                 $fields = array();
 
                 if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
@@ -329,6 +342,17 @@ class WebVideochatController extends Controller
             $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();
             $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
         }
+
+        // Push Notification to Web
+        if ($receiver_data->web_fcm_token) {
+            $message = "Video call has been cancelled";
+            $time = time();
+            $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
+                
+            $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
+            sendPushNotificationWithV1($web_fields);
+        }
+
         $fields = array();
 
 

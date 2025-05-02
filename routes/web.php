@@ -267,6 +267,7 @@ Route::prefix('mentor')->group(function() {
 	Route::post('/submit_forget_password', 'Auth\Mentor\MentorLoginController@submit_forget_password')->name('mentor.forget-password.submit');
 	Route::post('/submit_reset_password', 'Auth\Mentor\MentorLoginController@submit_reset_password')->name('mentor.reset-password.submit');
 	Route::get('/', 'Mentor\HomeController@index')->name('mentor.dashboard');
+	Route::post('/save-fcm-token', 'Mentor\HomeController@saveFcmToken')->name('mentor.save-fcm-token');
 	Route::post('logout/', 'Auth\Mentor\MentorLoginController@logout')->name('mentor.logout');
 	Route::post('/check_waiver', 'Auth\Mentor\MentorLoginController@check_waiver')->name('mentor.check_waiver');
 	Route::get('meeting/list', 'Mentor\MeetingController@index')->name('mentor.meeting.index');
@@ -299,6 +300,7 @@ Route::prefix('mentee')->group(function() {
 	Route::post('/submit_forget_password', 'Auth\Mentee\MenteeLoginController@submit_forget_password')->name('mentee.forget-password.submit');
 	Route::post('/submit_reset_password', 'Auth\Mentee\MenteeLoginController@submit_reset_password')->name('mentee.reset-password.submit');
 	Route::get('/', 'Mentee\HomeController@index')->name('mentee.dashboard');
+	Route::post('/save-fcm-token', 'Mentee\HomeController@saveFcmToken')->name('mentee.save-fcm-token');
 	Route::post('logout/', 'Auth\Mentee\MenteeLoginController@logout')->name('mentee.logout');
 	Route::post('/check_waiver', 'Auth\Mentee\MenteeLoginController@check_waiver')->name('mentee.check_waiver');
 	Route::get('meeting/list', 'Mentee\MeetingController@index')->name('mentee.meeting.index');

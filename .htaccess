@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # Handle Service Worker
+    # RewriteCond %{REQUEST_URI} ^/firebase-messaging-sw\.js [NC]
+    # RewriteRule ^ - [L]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]

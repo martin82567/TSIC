@@ -454,26 +454,76 @@
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Firebase CDN -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+    <!-- Include Firebase SDK -->
+    {{-- <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js"></script>
+    <script>
+        firebase.initializeApp({
+            // apiKey: 'AIzaSyBIZpp-4HVARIfwOhE9fI7KU1tes-cnVtw',
+            // authDomain: 'takestockinchildren-427bb.firebaseapp.com',
+            // databaseURL: 'https://takestockinchildren-427bb.firebaseio.com',
+            // projectId: 'takestockinchildren-427bb',
+            // storageBucket: 'takestockinchildren-427bb.appspot.com',
+            // messagingSenderId: '393481861829',
+            // appId: '1:393481861829:web:38a4e2b511fcc73f',
+            apiKey: "AIzaSyD1RlN2N0LtoDnwzb_q89FlJSydfBi4Z40",
+            authDomain: "takestockinchildren-427bb.firebaseapp.com",
+            databaseURL: "https://takestockinchildren-427bb.firebaseio.com",
+            projectId: "takestockinchildren-427bb",
+            storageBucket: "takestockinchildren-427bb.firebasestorage.app",
+            messagingSenderId: "393481861829",
+            appId: "1:393481861829:web:7a5197e105a5bdc6a18eac",
+            measurementId: "G-M2KVNV8MRZ"
+        });
+
+        // Retrieve an instance of Firebase Messaging so that it can handle background messages.
+        const messaging = firebase.messaging();
+
+        // Request permission to receive notifications
+        messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' })
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log('FCM Token:', currentToken);
+                    // Send the token to your server and update the UI if necessary
+                    // fetch('/update-web-fcm-token', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    //     },
+                    //     body: JSON.stringify({ fcm_token: currentToken })
+                    // });
+                } else {
+                    // Show permission request UI
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+                // ...
+        });
+
+        // Handle incoming messages.
+        messaging.onMessage((payload) => {
+            console.log('FCM Message received. ', payload);
+            
+        //     // Show notification
+        //     new Notification(payload.notification.title, {
+        //         body: payload.notification.body,
+        //         icon: payload.notification.icon,
+        //     });
+
+            // $("#videoCallPop").modal({backdrop: "static"});
+        });
+    </script> --}}
+
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-check-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-messaging-compat.js"></script>
 
     <script>
-         var userType = "<?php echo $logged_in; ?>".toLowerCase();
-        var urlRedirect = "";
-        var recivedData = {};
-        var room_data = {
-            id: {{ Auth::user()->id }},
-            type: userType,
-            device: "web"
-        };
-
-        var callingAudio = document.getElementById("videoCallingAudio");
-
-        var mainUrl = "{{ env('APP_URL') }}";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
+        var firebaseConfig = {
             apiKey: "AIzaSyD1RlN2N0LtoDnwzb_q89FlJSydfBi4Z40",
             authDomain: "takestockinchildren-427bb.firebaseapp.com",
             databaseURL: "https://takestockinchildren-427bb.firebaseio.com",
@@ -488,191 +538,108 @@
         firebase.initializeApp(firebaseConfig);
         const messaging = firebase.messaging();
 
-        // Get FCM token
-        messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' }).then((currentToken) => {
+        messaging.getToken({ vapidKey: '<YOUR_PUBLIC_VAPID_KEY_HERE>' }).then((currentToken) => {
             if (currentToken) {
+                // Send the token to your server and update the UI if necessary
                 console.log('FCM Token:', currentToken);
-                // document.getElementById('fcm_token').textContent = 'FCM Token: ' + currentToken;
-                
-                // Send token to your Laravel backend for storage
-                saveToken(currentToken);
             } else {
+                // Show permission request UI
                 console.log('No registration token available. Request permission to generate one.');
+                // ...
             }
-        }).catch((err) => {
-            console.log('An error occurred while retrieving token. ', err);
-        });
-
-        // Send token to Laravel backend
-        function saveToken(token) {
-            fetch('{{ $home_url }}/save-fcm-token', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({token: token})
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
-
-
-        // Handle incoming messages
-        messaging.onMessage((payload) => {
-            console.log('Message received. ', payload);
-
-            const notificationTitle = payload.data.title;
-            var notificationType = payload.data.type;
-            var senderId = payload.data.sender_id;
-            var receiverUniqueName = payload.data.unique_name;
-
-            console.log('notificationType: ', notificationType);
-
-
-            // checkIncomingCall();
-            if (notificationType == 'video_chat' && senderId != {{ Auth::user()->id }}) {
-                $("#videoCallPop").modal({backdrop: "static"});
-                callingAudio.load();
-                callingAudio.play();
-
-            } else if  (notificationType == 'denied_call') {
-                $("#videoCallPop").modal("hide");
-                callingAudio.pause(); 
-
-                $.post(
-                    mainUrl + "/api/webvideochat/disconnect_room", {
-                        unique_name: receiverUniqueName,
-                    },
-                    function(data, status) {
-                        roomCreateData = {};
-                        alert(data.message);
-                        window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
-                    }
-                );
-            }
-
-            const notificationOptions = {
-                body: payload.data.message,
-                icon: '/icon.png'
-            };
-
-            new Notification(notificationTitle, notificationOptions);
-        });
-
-        // Handle token refresh
-        messaging.onTokenRefresh(() => {
-            messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' }).then((refreshedToken) => {
-                console.log('Token refreshed.');
-                saveToken(refreshedToken);
             }).catch((err) => {
-                console.log('Unable to retrieve refreshed token ', err);
-            });
+                console.log('An error occurred while retrieving token. ', err);
+        
         });
-
-
-        // function checkIncomingCall() {
-        //     $.post(
-        //         mainUrl + "/api/webvideochat/check-call-notification",
-        //         room_data,
-        //         function(response, status) {
-        //             console.log(response);
-                    
-        //             if (response.status == true) {
-        //                 recivedData = response.data;
-
-        //                 if (recivedData.receiver_id == {{ Auth::user()->id }}) {
-        //                     console.log("call_status: "+ recivedData.call_status);
-                            
-        //                     if (recivedData.call_status == 'accept') {
-        //                         callingAudio.pause();
-        //                     } else {
-        //                         $("#videoCallPop").modal({backdrop: "static"});
-        //                         callingAudio.load();
-        //                         callingAudio.play();
-        //                     }
-        //                 } 
-        //             }
-                
-        //     });
-        // }
-
-
-        $("#videoCallAccept").click(function() {
-            $("#videoCallPop").modal("hide");
-            
-            callingAudio.pause(); // optional: stop the ringtone
-
-            $.post(mainUrl + "/api/webvideochat/accept-decline-call", {
-                id: {{ Auth::user()->id }},
-                type: userType,
-                device: "web",
-                action_type: "accept"
-            }, function(response) {
-                if(userType == 'mentor') {
-                    urlRedirect = "{{ env('APP_URL') }}/mentor/videochat/initiate?mentee_id=" + recivedData.sender_id;
-                };
-
-                if(userType == 'mentee') {
-                    urlRedirect = "{{ env('APP_URL') }}/mentee/videochat/initiate?mentor_id=" + recivedData.sender_id;
-                };
-
-                window.location.href = urlRedirect;
-            });
-        });
-
-        $("#videoCallDeny").click(function() {
-            $.post(mainUrl + "/api/webvideochat/accept-decline-call", {
-                id: {{ Auth::user()->id }},
-                type: userType,
-                device: "web",
-                action_type: "decline"
-            }, function(response) {
-                $("#videoCallPop").modal("hide");
-                callingAudio.pause(); // optional: stop the ringtone
-
-                recivedData = response.data;
-                if (recivedData.call_status == 'decline') {
-                    $.post(
-                        mainUrl + "/api/webvideochat/disconnect_room", {
-                            unique_name: recivedData.unique_name,
-                        },
-                        function(data, status) {
-                            alert("User did not received the call.");
-                            // alert(data.message);
-                            window.location.reload();
-                        }
-                    );
-                } else {
-                    setInterval(function () { 
-                        window.location.reload();
-                    }, 11000); // page refresh after 11 second
-                }
-
-            });
-        });
-
-        $("#videoCallPop").on('show.bs.modal', function(){
-            // alert('The modal is about to be shown.');
-            callingAudio.load();
-            callingAudio.play();
-        });
-
-        $("#videoCallPop").on('hide.bs.modal', function(){
-            // alert('The modal is about to be hide.');
-            callingAudio.pause();
-        });
-
-        function closeModalAndRefresh() {
-            $('#logSessionModal').modal('hide');
-            window.location.reload()
-        }
+        
     </script>
+
+    {{-- <script type="module">
+        // Import the functions you need from the SDKs you need
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        // import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+        // import { getMessaging, getToken  } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-messaging.js";
+    
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyD1RlN2N0LtoDnwzb_q89FlJSydfBi4Z40",
+          authDomain: "takestockinchildren-427bb.firebaseapp.com",
+          databaseURL: "https://takestockinchildren-427bb.firebaseio.com",
+          projectId: "takestockinchildren-427bb",
+          storageBucket: "takestockinchildren-427bb.firebasestorage.app",
+          messagingSenderId: "393481861829",
+          appId: "1:393481861829:web:7a5197e105a5bdc6a18eac",
+          measurementId: "G-M2KVNV8MRZ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Initialize Firebase Cloud Messaging and get a reference to the service
+        const messaging = firebase.messaging();
+
+        // Initialize Firebase
+        // const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
+
+        // Initialize Firebase Cloud Messaging and get a reference to the service
+        // const messaging = getMessaging(app);
+        // const messaging = firebase.messaging();
+
+        // Add the public key generated from the console here.
+        // getToken(messaging, {vapidKey: "BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c"})
+        //     .then((currentToken) => {
+        //         if (currentToken) {
+        //             // Send the token to your server and update the UI if necessary
+        //             console.log('FCM Token:', currentToken);
+        //         } else {
+        //             // Show permission request UI
+        //             console.log('No registration token available. Request permission to generate one.');
+        //             // ...
+        //         }
+        //     }).catch((err) => {
+        //         console.log('An error occurred while retrieving token. ', err);
+        //         // ...
+        //     });
+
+        // Request permission to receive notifications
+        messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' })
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log('FCM Token:', currentToken);
+                    // Send the token to your server and update the UI if necessary
+                    // fetch('/update-web-fcm-token', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    //     },
+                    //     body: JSON.stringify({ fcm_token: currentToken })
+                    // });
+                } else {
+                    // Show permission request UI
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+                // ...
+        });
+
+        // Handle incoming messages.
+        // messaging.onMessage((payload) => {
+        //     console.log('FCM Message received. ', payload);
+        // });
+    </script> --}}
 
 
     <!-- SOCKET CONNECTION -->
-    {{-- <script type="application/javascript">
+    <script type="application/javascript">
         var userType = "<?php echo $logged_in; ?>".toLowerCase();
         var urlRedirect = "";
         var recivedData = {};
@@ -683,12 +650,12 @@
         var mainUrl = "{{ env('APP_URL') }}";
         // var mainUrl = "https://test.tsicmentorapp.org";
 
-        // var callInterval;
+        var callInterval;
         var stopIncoming = false;
 
-        // $(document).ready(function() {
-        //     callInterval = setInterval(checkIncomingCall, 3000); // store interval
-        // });
+        $(document).ready(function() {
+            callInterval = setInterval(checkIncomingCall, 3000); // store interval
+        });
 
         room_data = {
             id: {{ Auth::user()->id }},
@@ -713,7 +680,7 @@
                             
                             if (recivedData.call_status == 'accept') {
                                 stopIncoming = true; // Tell the code to STOP triggering modal
-                                // clearInterval(callInterval); // Stop polling when accepting
+                                clearInterval(callInterval); // Stop polling when accepting
                                 callingAudio.pause();
                             } else {
                                 $("#videoCallPop").modal({backdrop: "static"});
@@ -731,7 +698,7 @@
             $("#videoCallPop").modal("hide");
 
             stopIncoming = true; // Tell the code to STOP triggering modal
-            // clearInterval(callInterval); // Stop polling when accepting
+            clearInterval(callInterval); // Stop polling when accepting
             callingAudio.pause(); // optional: stop the ringtone
 
             $.post(mainUrl + "/api/webvideochat/accept-decline-call", {
@@ -799,7 +766,7 @@
             $('#logSessionModal').modal('hide');
             window.location.reload()
         }
-    </script> --}}
+    </script>
 
 </body>
 </html>

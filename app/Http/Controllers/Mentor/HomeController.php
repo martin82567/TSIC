@@ -33,11 +33,11 @@ class HomeController extends Controller
     {
         $externalId = Auth::user()->externalId;
         $user_id = Auth::user()->id;
-//    	if(!empty($externalId)){
-//    		$sessionLogCount = getMentorStudentsCount($externalId);
-//    	}else{
-//    		$sessionLogCount = 0;
-//    	}
+        // if(!empty($externalId)){
+        //     $sessionLogCount = getMentorStudentsCount($externalId);
+        // }else{
+        //     $sessionLogCount = 0;
+        // }
 
         $sessionLogCount = 0;
         // $data = DB::table('mentor_session_log_count')->where('mentor_id', $user_id)->first();
@@ -137,5 +137,16 @@ class HomeController extends Controller
         return view('mentor.home', compact('upcoming_meeting', 'past_meeting', 'chats', 'chat_time', 'recently_logged_sessions', 'sessionLogCount'));
     }
 
+    /**
+     * Save FCM Token
+     */
+    public function saveFcmToken(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        DB::table('mentor')->where('id', $user_id)->update(['web_fcm_token' => $request->token]);
+    
+        return response()->json(['success' => true, 'message' => 'Token saved successfully']);
+    }
 
 }

@@ -31,11 +31,11 @@ class HomeController extends Controller
     {
         $externalId = Auth::user()->externalId;
         $user_id = Auth::user()->id;
-//        if(!empty($externalId)){
-//            $sessionLogCount = getCountByStudentId($externalId);
-//        }else{
-//            $sessionLogCount = 0;
-//        }
+        // if(!empty($externalId)){
+        //     $sessionLogCount = getCountByStudentId($externalId);
+        // }else{
+        //     $sessionLogCount = 0;
+        // }
         $get_mentors = DB::table('assign_mentee')->select('assign_mentee.*', 'mentor.is_active', 'mentor.platform_status', 'mentor_status.view_in_application')->leftJoin('mentor', 'mentor.id', 'assign_mentee.assigned_by')->leftJoin('mentor_status', 'mentor_status.id', 'mentor.is_active')->where('mentor_status.view_in_application', 1)->where('mentor.platform_status', 1)->where('assign_mentee.mentee_id', $user_id)->get()->toarray();
 
         $mentor_ids = array();
@@ -138,6 +138,18 @@ class HomeController extends Controller
 
 
         return view('mentee.home', compact('upcoming_meeting', 'past_meeting', 'chats', 'chat_time', 'sessionLogCount'));
+    }
+
+    /**
+     * Save FCM Token
+     */
+    public function saveFcmToken(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        DB::table('mentee')->where('id', $user_id)->update(['web_fcm_token' => $request->token]);
+    
+        return response()->json(['success' => true, 'message' => 'Token saved successfully']);
     }
 
 }

@@ -180,7 +180,8 @@ class ChatController extends Controller
 
         }
 
-        $mentee_name = Auth::user()->firstname.' '.Auth::user()->lastname;
+        // $mentee_name = Auth::user()->firstname.' '.Auth::user()->lastname;
+        $mentee_name = Auth::user()->firstname;
 
         return view('mentee.chat-message')->with('type',$type)->with('code',$code)->with('chat_details_arr',$chat_details_arr)->with('sender_id',$sender_id)->with('sender_name',$sender_name)->with('timezone',$timezone)->with('mentee_id', Auth::user()->id)->with('mentee_name',$mentee_name)->with('from_where',$from_where)->with('socket_chat_type',$socket_chat_type)->with('channel_sid',$channel_sid)->with('chat_type',$chat_type)->with('receiver_type',$receiver_type);
 

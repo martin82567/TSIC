@@ -220,17 +220,6 @@ class WebVideochatController extends Controller
                     $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
                 }
 
-                // Push Notification to Web
-                if ($receiver_data->web_fcm_token) {
-                    $message = "Request for video chat";
-                    $time = time();
-                    $web_send_data = array('title' => "Incoming Video call", 'type' => 'video_chat', 'sender_id' => $sender_id, 'message' => $message, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'room_sid' => $room_sid, 'remaining_time' => "$remaining_time", 'timestamp' => "$time", 'created_at' => $created_at);
-                    
-                    $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data);
-
-                    sendPushNotificationWithV1($web_fields);
-                }
-
 
                 $fields = array();
 
@@ -267,6 +256,29 @@ class WebVideochatController extends Controller
 
                     }
 
+                }
+                
+                // Push Notification to Web
+                if ($receiver_data->web_fcm_token) {
+                    $message = $sender_name." is requested for video chat";
+                    $time = time();
+                    $web_send_data = [
+                        'title' => "Incoming Video call", 
+                        'type' => 'video_chat', 
+                        'message' => $message, 
+                        'sender_id' => $sender_id, 
+                        'encrypt_sender_id' => \Crypt::encrypt($sender_id),
+                        'unique_name' => $unique_name, 
+                        'sender_name' => $sender_name, 
+                        'room_sid' => $room_sid, 
+                        'remaining_time' => "$remaining_time", 
+                        'timestamp' => "$time", 
+                        'created_at' => $created_at
+                    ];
+                    
+                    $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data);
+
+                    sendPushNotificationWithV1($web_fields);
                 }
 
 
@@ -335,26 +347,15 @@ class WebVideochatController extends Controller
         }
 
         if ($sender_type == 'mentee') {
-            $sender_data = DB::table(MENTEE)->select('firstname', 'lastname')->where('id', $sender_id)->first();
+            $sender_data = DB::table(MENTEE)->select('firstname', 'lastname', 'web_fcm_token')->where('id', $sender_id)->first();
             $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
 
         } else if ($sender_type == 'mentor') {
-            $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $sender_id)->first();
+            $sender_data = DB::table(MENTOR)->select('firstname', 'lastname', 'web_fcm_token')->where('id', $sender_id)->first();
             $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
         }
 
-        // Push Notification to Web
-        if ($receiver_data->web_fcm_token) {
-            $message = "Video call has been cancelled";
-            $time = time();
-            $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
-                
-            $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
-            sendPushNotificationWithV1($web_fields);
-        }
-
         $fields = array();
-
 
         if (!empty($receiver_device_type) && !empty($receiver_firebase_id) && ($disconnect_type == 'miss_call')) {
 
@@ -388,6 +389,25 @@ class WebVideochatController extends Controller
             }
 
         }
+
+
+        // Web Push Notification to Sender
+        if ($sender_data->web_fcm_token) {
+            $message = "Video call has been cancelled";
+            $time = time();
+            $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
+                
+            $web_fields = array('to' => $sender_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
+            sendPushNotificationWithV1($web_fields);
+        }
+        // if ($receiver_data->web_fcm_token) {
+        //     $message = "Video call has been cancelled";
+        //     $time = time();
+        //     $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
+                
+        //     $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
+        //     sendPushNotificationWithV1($web_fields);
+        // }
 
         return Response::json(['status' => true, 'message' => "Video call has been ended", 'data' => array('room_sid' => '', 'unique_name' => $unique_name)]);
     }
@@ -560,17 +580,17 @@ class WebVideochatController extends Controller
                         'receiver_call_status' => 'accept'
                     ]);
                     
-                return Response::json(['status' => true, 'message' => "Call accepted", 'data' => array('call_status' => 'accept', 'unique_name' => $check_room->unique_name)]);
+                return Response::json(['status' => true, 'message' => "Call accepted", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'call_status' => 'accept', 'unique_name' => $check_room->unique_name)]);
             } else {
                 DB::table(VIDEO_CHAT_ROOMS)->where('id', $check_room->id)
                     ->update([
                         'receiver_call_status' => 'decline'
                     ]);
 
-                return Response::json(['status' => true, 'message' => "Call declined", 'data' => array('call_status' => 'decline', 'unique_name' => $check_room->unique_name)]);
+                return Response::json(['status' => true, 'message' => "Call declined", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'call_status' => 'decline', 'unique_name' => $check_room->unique_name)]);
             }
         } else {
-            return Response::json(['status' => false, 'message' => "No ongoing call found", 'data' => array()]);
+            return Response::json(['status' => false, 'message' => "No ongoing call found", 'data' => array('sender_id' => \Crypt::encrypt($request->id))]);
         }
     }
 

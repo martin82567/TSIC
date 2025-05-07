@@ -1,6 +1,10 @@
 // Give the service worker access to Firebase Messaging.
-importScripts('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/11.6.1/firebase-messaging.js');
+// importScripts('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
+// importScripts('https://www.gstatic.com/firebasejs/11.6.1/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js');
+// importScripts('/firebase-app.js');
+// importScripts('/firebase-messaging.js');
 
 // Initialize the Firebase app in the service worker
 firebase.initializeApp({
@@ -18,10 +22,37 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
     
-    const notificationTitle = payload.notification.title;
+    const notificationTitle = payload.data.title;
+    var notificationType = payload.data.type;
+    var senderId = payload.data.sender_id;
+    var receiverUniqueName = payload.data.unique_name;
+    var encryptSenderId = payload.data.encrypt_sender_id;
+    var roomCreateData = {};
+
+    if (notificationType == 'video_chat') {
+        $("#videoCallPop").modal({backdrop: "static"});
+        callingAudio.load();
+        callingAudio.play();
+
+    } else if  (notificationType == 'denied_call') {
+        $("#videoCallPop").modal("hide");
+        callingAudio.pause(); 
+
+        $.post(
+            mainUrl + "/api/webvideochat/disconnect_room", {
+                unique_name: receiverUniqueName,
+            },
+            function(data, status) {
+                roomCreateData = {};
+                alert(data.message);
+                window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
+            }
+        );
+    }
+
     const notificationOptions = {
-        body: payload.notification.body,
-        icon: payload.notification.icon || '/icon.png'
+        body: payload.data.body,
+        icon: '/icon.png'
     };
 
     return self.registration.showNotification(notificationTitle, notificationOptions);

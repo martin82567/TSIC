@@ -488,25 +488,14 @@ class VideochatController extends Controller
             }
 
             if ($receiver_type == 'mentee') {
-                $sender_data = DB::table(MENTEE)->select('firstname', 'lastname')->where('id', $receiver_id)->first();
+                $sender_data = DB::table(MENTEE)->select('firstname', 'lastname', 'web_fcm_token')->where('id', $receiver_id)->first();
                 $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
 
             } else if ($receiver_type == 'mentor') {
-                $sender_data = DB::table(MENTOR)->select('firstname', 'lastname')->where('id', $receiver_id)->first();
+                $sender_data = DB::table(MENTOR)->select('firstname', 'lastname', 'web_fcm_token')->where('id', $receiver_id)->first();
                 $sender_name = $sender_data->firstname . ' ' . $sender_data->lastname;
             }
         }
-
-        // Push Notification to Web
-        if ($receiver_data->web_fcm_token) {
-            $message = "Video call has been denied";
-            $time = time();
-            $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
-                
-            $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
-            sendPushNotificationWithV1($web_fields);
-        }
-
 
         if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
 
@@ -534,9 +523,9 @@ class VideochatController extends Controller
                 }
 
             } else if ($receiver_device_type == 'iOS') {
-//                    if (!empty($receiver_voip_device_token)) {
-//                        $this->ios_voip_push_denied($receiver_voip_device_token, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid);
-//                    }
+                //    if (!empty($receiver_voip_device_token)) {
+                //        $this->ios_voip_push_denied($receiver_voip_device_token, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid);
+                //    }
 
                 $message = "Video call has been denied";
 
@@ -564,6 +553,19 @@ class VideochatController extends Controller
             }
 
         }
+
+        
+        // Push Notification to Web
+        if ($sender_data->web_fcm_token) {
+            $message = "Video call has been cancelled";
+            $time = time();
+            $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
+                
+            $web_fields = array('to' => $sender_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
+            sendPushNotificationWithV1($web_fields);
+        }
+
+
         return Response::json(['status' => true, 'message' => "Video call has been ended", 'data' => array('room_sid' => $room_sid, 'unique_name' => $unique_name)]);
     }
 

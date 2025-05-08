@@ -144,7 +144,6 @@
 
     var remainimgCallTime = 0;
     var countDownInterval;
-    var receiverInterval;
     var timerActive = false;
 
     var userType = "sender";
@@ -202,8 +201,10 @@
                     document.getElementById("roomConnectingBtn").style.display = "none";
                     // document.getElementById("roomJoinBtn").style.display = "inline";                    
                     // leaveRoomIfJoined();
+                    window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
                     return;
                 }
+
                 roomCreateData = roomData.data;
                 roomName = roomCreateData.unique_name;
 
@@ -361,8 +362,6 @@
 
                     Video.on("user-added", (payload) => {
                         userList.userId = payload[0].userId;
-                        
-                        clearInterval(receiverInterval);
 
                         $("#countDownTime").show();
                         countDownInterval = setInterval(countDown, 1000);
@@ -513,7 +512,6 @@
         }
 
         if (userType == "receiver") {
-            clearInterval(receiverInterval);
             remainimgCallTime = roomCreateData.remaining_time;
             $("#countDownTime").show();
 
@@ -653,7 +651,6 @@
     }
 
 
-    // receiverInterval = setInterval(function () { 
     function checkRoom() {
         $.post(
             mainUrl + "/api/webvideochat/check_room",

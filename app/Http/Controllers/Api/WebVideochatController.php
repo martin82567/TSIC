@@ -15,6 +15,7 @@ use Hash;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class WebVideochatController extends Controller
 {
@@ -27,6 +28,8 @@ class WebVideochatController extends Controller
 
     public function initiate_chat(Request $request)
     {
+        // Log::debug("initiate_chat request: ". print_r($request->all(), true));
+
         $user_type = !empty($request->user_type) ? $request->user_type : 'mentor-mentee';
         $sender_id = !empty($request->sender_id) ? $request->sender_id : 15;
         $sender_type = !empty($request->sender_type) ? $request->sender_type : 'mentor';
@@ -97,14 +100,22 @@ class WebVideochatController extends Controller
 
         }
 
-        DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->update(['duration' => 0]);
+        // DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->update(['duration' => 0]);
+        $check_ongoing_room = DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->first();
 
-//		$check_previous_room_completed = DB::table(VIDEO_CHAT_ROOMS)->where('chat_code',$chat_code)->where('duration', '=', '')->first();
-//
-//		if(!empty($check_previous_room_completed)) {
-//		    $check_previous_room_completed->update(['duration' => 0]);
-//            // return Response::json(['status'=>false,'message'=>"You cannot initiate new chat until your previous call has been completed",'data'=> (object) array()  ]);
-//        }
+        if($check_ongoing_room) {
+            DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->update(['duration' => 0]);
+
+            return Response::json(['status' => false, 'message' => "Video call session ended. Please initiate call again.", 'data' => (object)array()]);
+        }
+
+
+		// $check_previous_room_completed = DB::table(VIDEO_CHAT_ROOMS)->where('chat_code',$chat_code)->where('duration', '=', '')->first();
+
+		// if(!empty($check_previous_room_completed)) {
+		//     $check_previous_room_completed->update(['duration' => 0]);
+        //    // return Response::json(['status'=>false,'message'=>"You cannot initiate new chat until your previous call has been completed",'data'=> (object) array()  ]);
+        // }
 
         /*++++++Check another user trying to call with them+++++++*/
 
@@ -126,7 +137,6 @@ class WebVideochatController extends Controller
             }
         }
 
-
         $unique_name = $sender_type . '-' . $sender_id . '-' . $receiver_type . '-' . $receiver_id . '-' . time();
 
 
@@ -139,12 +149,11 @@ class WebVideochatController extends Controller
                 return Response::json(['status' => false, 'message' => "Video call Session expired", 'data' => (object)array()]);
             }
 
-//			$room_sid = twilio_create_video_room($unique_name);
+			// $room_sid = twilio_create_video_room($unique_name);
 
             // Generate Zoom JWT Access Token
             $sender_jwt = $this->generateMentorZoomToken($unique_name);
             $receiver_jwt = $this->generateMenteeZoomToken($unique_name);
-            $room_sid = '';
 
             // echo $room_sid; die;
 
@@ -157,6 +166,7 @@ class WebVideochatController extends Controller
                 $receiver_type = $explode_unique_name[2];
                 $receiver_id = $explode_unique_name[3];
                 $sender_name = '';
+                $room_sid = '';
 
 
                 DB::table(VIDEO_CHAT_ROOMS)->insert([
@@ -392,21 +402,21 @@ class WebVideochatController extends Controller
 
 
         // Web Push Notification to Sender
-        if ($sender_data->web_fcm_token) {
-            $message = "Video call has been cancelled";
-            $time = time();
-            $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
-                
-            $web_fields = array('to' => $sender_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
-            sendPushNotificationWithV1($web_fields);
-        }
-        // if ($receiver_data->web_fcm_token) {
+        // if ($sender_data->web_fcm_token) {
         //     $message = "Video call has been cancelled";
         //     $time = time();
-        //     $web_send_data = array('title' => "Denied video call", 'message' => $message, 'type' => 'denied_call', 'sender_id' => $sender_id, 'firebase_token' => $receiver_firebase_id, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'timestamp' => "$time");
-                
-        //     $web_fields = array('to' => $receiver_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
-        //     sendPushNotificationWithV1($web_fields);
+        //     $web_send_data = [
+        //         'title' => "Denied video call", 
+        //         'message' => $message, 
+        //         'type' => 'denied_call', 
+        //         'unique_name' => $unique_name, 
+        //         'sender_name' => $sender_name, 
+        //         'timestamp' => "$time"
+        //     ];
+
+        //     $web_fields = array('to' => $sender_data->web_fcm_token, 'data' => $web_send_data, 'priority' => "high");
+        //     $result = sendPushNotificationWithV1($web_fields);
+        //     Log::debug("disconnect push: ". print_r($result, true));
         // }
 
         return Response::json(['status' => true, 'message' => "Video call has been ended", 'data' => array('room_sid' => '', 'unique_name' => $unique_name)]);
@@ -420,7 +430,14 @@ class WebVideochatController extends Controller
         $receiver_id = !empty($request->receiver_id) ? $request->receiver_id : 11;
         $receiver_type = !empty($request->receiver_type) ? $request->receiver_type : 'mentee';
         $created_from = 'web';
-        $check_room = DB::table(VIDEO_CHAT_ROOMS)->where('sender_id', $sender_id)->where('sender_type', $sender_type)->where('receiver_id', $receiver_id)->where('receiver_type', $receiver_type)->where('duration', '=', '')->first();
+
+        $check_room = DB::table(VIDEO_CHAT_ROOMS)
+            ->where('sender_id', $sender_id)
+            ->where('sender_type', $sender_type)
+            ->where('receiver_id', $receiver_id)
+            ->where('receiver_type', $receiver_type)
+            ->where('duration', '=', '')
+            ->first();
 
         if (!empty($check_room)) {
 
@@ -532,65 +549,6 @@ class WebVideochatController extends Controller
             }
             // Close the connection to the server
             fclose($fp);
-        }
-    }
-
-    /**
-     * Check call notification receiver side
-     */
-    public function checkCallNotification(Request $request)
-    {
-        $check_room = DB::table(VIDEO_CHAT_ROOMS)
-            ->where('receiver_id', $request->id)
-            ->where('receiver_type', $request->type)
-            ->where('duration', '=', '')
-            ->where('participant_count', '=', '1')
-            ->whereNull('receiver_call_status')
-            ->first();
-
-        if (!empty($check_room)) {
-
-            $video_chat_user = DB::table(VIDEO_CHAT_USER)->where('chat_code', $check_room->chat_code)->first();
-            $remaining_time = $video_chat_user->remaining_time;
-
-            return Response::json(['status' => true, 'message' => "Call notification", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'call_status' => $check_room->receiver_call_status, 'unique_name' => $check_room->unique_name, 'remaining_time' => $remaining_time, 'receiver_id' => $check_room->receiver_id)]);
-        
-        } else {
-            return Response::json(['status' => false, 'message' => "No ongoing room found", 'data' => array()]);
-        }
-    }
-
-    /**
-     * Accept or Decline Call
-     */
-    public function acceptDeclineCall(Request $request)
-    {
-        $check_room = DB::table(VIDEO_CHAT_ROOMS)
-            ->where('receiver_id', $request->id)
-            ->where('receiver_type', $request->type)
-            ->where('duration', '=', '')
-            ->where('participant_count', '=', '1')
-            ->orderBy('id', 'DESC')
-            ->first();
-
-        if ($check_room) {
-            if ($request->action_type == 'accept') {
-                DB::table(VIDEO_CHAT_ROOMS)->where('id', $check_room->id)
-                    ->update([
-                        'receiver_call_status' => 'accept'
-                    ]);
-                    
-                return Response::json(['status' => true, 'message' => "Call accepted", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'call_status' => 'accept', 'unique_name' => $check_room->unique_name)]);
-            } else {
-                DB::table(VIDEO_CHAT_ROOMS)->where('id', $check_room->id)
-                    ->update([
-                        'receiver_call_status' => 'decline'
-                    ]);
-
-                return Response::json(['status' => true, 'message' => "Call declined", 'data' => array('sender_id' => \Crypt::encrypt($check_room->sender_id), 'call_status' => 'decline', 'unique_name' => $check_room->unique_name)]);
-            }
-        } else {
-            return Response::json(['status' => false, 'message' => "No ongoing call found", 'data' => array('sender_id' => \Crypt::encrypt($request->id))]);
         }
     }
 

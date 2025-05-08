@@ -199,6 +199,7 @@
                     document.getElementById("roomConnectingBtn").style.display = "none";
                     // document.getElementById("roomJoinBtn").style.display = "inline";                    
                     // leaveRoomIfJoined();
+                    window.location.href = mainUrl + "/mentee/chat/userlist?type=mm";
                     return;
                 }
                 roomCreateData = roomData.data;

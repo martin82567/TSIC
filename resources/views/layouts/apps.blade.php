@@ -521,10 +521,15 @@
             .catch(error => console.error('Error:', error));
         }
 
+        let onMessageInitialized = false;
 
         // Handle incoming messages
         messaging.onMessage((payload) => {
+
             console.log('Message received. ', payload);
+
+            if (onMessageInitialized) return;
+            onMessageInitialized = true;
 
             const notificationTitle = payload.data.title;
             var notificationType = payload.data.type;
@@ -535,25 +540,17 @@
             console.log('notificationType: ', notificationType);
 
 
-            // checkIncomingCall();
             if (notificationType == 'video_chat' && senderId != {{ Auth::user()->id }}) {
                 $("#videoCallPop").modal({backdrop: "static"});
                 callingAudio.load();
                 callingAudio.play();
-
-                const notificationOptions = {
-                    body: payload.data.message,
-                    icon: '/icon.png'
-                };
-
-                new Notification(notificationTitle, notificationOptions);
 
             } else if  (notificationType == 'denied_call') {
                 $("#videoCallPop").modal("hide");
                 callingAudio.pause(); 
 
                 $.post(
-                    mainUrl + "/api/webvideochat/disconnect_room", {
+                    mainUrl + "/api/videochat/denied_call", {
                         unique_name: receiverUniqueName,
                     },
                     function(data, status) {
@@ -563,6 +560,9 @@
                     }
                 );
 
+            }
+
+            if ((notificationType == 'video_chat' && senderId != {{ Auth::user()->id }}) || notificationType == 'denied_call') {
                 const notificationOptions = {
                     body: payload.data.message,
                     icon: '/icon.png'
@@ -570,6 +570,7 @@
 
                 new Notification(notificationTitle, notificationOptions);
             }
+
         });
 
         // Handle token refresh
@@ -581,33 +582,6 @@
                 console.log('Unable to retrieve refreshed token ', err);
             });
         });
-
-
-        // function checkIncomingCall() {
-        //     $.post(
-        //         mainUrl + "/api/webvideochat/check-call-notification",
-        //         room_data,
-        //         function(response, status) {
-        //             console.log(response);
-                    
-        //             if (response.status == true) {
-        //                 recivedData = response.data;
-
-        //                 if (recivedData.receiver_id == {{ Auth::user()->id }}) {
-        //                     console.log("call_status: "+ recivedData.call_status);
-                            
-        //                     if (recivedData.call_status == 'accept') {
-        //                         callingAudio.pause();
-        //                     } else {
-        //                         $("#videoCallPop").modal({backdrop: "static"});
-        //                         callingAudio.load();
-        //                         callingAudio.play();
-        //                     }
-        //                 } 
-        //             }
-                
-        //     });
-        // }
 
         $("#videoCallAccept").click(function() {
             $("#videoCallPop").modal("hide");
@@ -623,27 +597,6 @@
             };
             
             window.location.href = urlRedirect;
-
-            // $.post(mainUrl + "/api/webvideochat/accept-decline-call", {
-            //     id: {{ Auth::user()->id }},
-            //     type: userType,
-            //     device: "web",
-            //     action_type: "accept"
-            // }, function(response) {
-            //     console.log(response)
-            //     console.log(response.data.sender_id);
-            //     alert(response.data.sender_id);
-            //     if(userType == 'mentor') {
-            //         urlRedirect = "{{ env('APP_URL') }}/mentor/videochat/initiate?mentee_id=" + response.data.sender_id;
-            //     };
-
-            //     if(userType == 'mentee') {
-            //         urlRedirect = "{{ env('APP_URL') }}/mentee/videochat/initiate?mentor_id=" + response.data.sender_id;
-            //     };
-            //     console.log(urlRedirect);
-
-            //     // window.location.href = urlRedirect;
-            // });
         });
 
         $("#videoCallDeny").click(function() {
@@ -652,7 +605,7 @@
             callingAudio.pause(); // optional: stop the ringtone
 
             $.post(
-                mainUrl + "/api/webvideochat/disconnect_room", {
+                mainUrl + "/api/videochat/denied_call", {
                     unique_name: receiverUniqueName,
                 },
                 function(data, status) {
@@ -663,39 +616,6 @@
                 }
             );
         });
-
-        // $("#videoCallDeny").click(function() {
-        //     $.post(mainUrl + "/api/webvideochat/accept-decline-call", {
-        //         id: {{ Auth::user()->id }},
-        //         type: userType,
-        //         device: "web",
-        //         action_type: "decline"
-        //     }, function(response) {
-        //         console.log(response)
-
-        //         $("#videoCallPop").modal("hide");
-        //         callingAudio.pause(); // optional: stop the ringtone
-
-        //         recivedData = response.data;
-        //         if (recivedData.call_status == 'decline') {
-        //             $.post(
-        //                 mainUrl + "/api/webvideochat/disconnect_room", {
-        //                     unique_name: recivedData.unique_name,
-        //                 },
-        //                 function(data, status) {
-        //                     alert("User did not received the call.");
-        //                     // alert(data.message);
-        //                     window.location.reload();
-        //                 }
-        //             );
-        //         } else {
-        //             setInterval(function () { 
-        //                 window.location.reload();
-        //             }, 11000); // page refresh after 11 second
-        //         }
-
-        //     });
-        // });
 
         $("#videoCallPop").on('show.bs.modal', function(){
             // alert('The modal is about to be shown.');

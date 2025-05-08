@@ -162,8 +162,6 @@ Route::match(array('GET', 'POST'), '/v1/mentor/faq/index', 'Api\V1\mentor\FaqCon
 Route::match(array('GET', 'POST'), '/webvideochat/initiate_chat', 'Api\WebVideochatController@initiate_chat');
 Route::match(array('GET', 'POST'), '/webvideochat/disconnect_room', 'Api\WebVideochatController@disconnect_room');
 Route::match(array('GET', 'POST'), '/webvideochat/check_room', 'Api\WebVideochatController@check_room');
-Route::match(array('GET', 'POST'), '/webvideochat/check-call-notification', 'Api\WebVideochatController@checkCallNotification');
-Route::match(array('GET', 'POST'), '/webvideochat/accept-decline-call', 'Api\WebVideochatController@acceptDeclineCall');
 
 /*+++++++Twilio Chat API+++++++*/
 

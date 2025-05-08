@@ -29,27 +29,6 @@ messaging.onBackgroundMessage((payload) => {
     var encryptSenderId = payload.data.encrypt_sender_id;
     var roomCreateData = {};
 
-    if (notificationType == 'video_chat') {
-        $("#videoCallPop").modal({backdrop: "static"});
-        callingAudio.load();
-        callingAudio.play();
-
-    } else if  (notificationType == 'denied_call') {
-        $("#videoCallPop").modal("hide");
-        callingAudio.pause(); 
-
-        $.post(
-            mainUrl + "/api/webvideochat/disconnect_room", {
-                unique_name: receiverUniqueName,
-            },
-            function(data, status) {
-                roomCreateData = {};
-                alert(data.message);
-                window.location.href = mainUrl + "/mentor/chat/userlist?type=mm";
-            }
-        );
-    }
-
     const notificationOptions = {
         body: payload.data.body,
         icon: '/icon.png'

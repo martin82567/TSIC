@@ -11,6 +11,10 @@
 |
 */
 
+
+Route::get('/ios-voip-test', 'Api\VideochatController@iosVoipTest');
+
+
 Route::get('/', function () {
     return view('welcome');
 });

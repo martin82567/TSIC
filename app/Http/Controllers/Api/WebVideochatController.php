@@ -100,14 +100,14 @@ class WebVideochatController extends Controller
 
         }
 
-        // DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->update(['duration' => 0]);
-        $check_ongoing_room = DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->first();
+        DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->update(['duration' => 0]);
 
-        if($check_ongoing_room) {
-            DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->update(['duration' => 0]);
-
-            return Response::json(['status' => false, 'message' => "Video call session ended. Please initiate call again.", 'data' => (object)array()]);
-        }
+        // $check_ongoing_room = DB::table(VIDEO_CHAT_ROOMS)->where('chat_code', $chat_code)->where('duration', '=', '')->first();
+        // if($check_ongoing_room) {
+        //     $duration_update = DB::table(VIDEO_CHAT_ROOMS)->where('id', $check_ongoing_room->id)->update(['duration' => 0]);
+        //     // Log::debug("duration_update: ". print_r($duration_update, true));
+        //     return Response::json(['status' => false, 'message' => "Video call session ended. Please initiate call again.", 'data' => (object)array()]);
+        // }
 
 
 		// $check_previous_room_completed = DB::table(VIDEO_CHAT_ROOMS)->where('chat_code',$chat_code)->where('duration', '=', '')->first();

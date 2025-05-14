@@ -280,7 +280,8 @@ class VideochatController extends Controller
 
                 } else if ($receiver_device_type == 'iOS') {
                     if (!empty($receiver_voip_device_token)) {
-                        $this->ios_voip_push_connect($receiver_voip_device_token, $receiver_accesstoken, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid, $remaining_time);
+                        $result_ios = $this->ios_voip_push_connect($receiver_voip_device_token, $receiver_accesstoken, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid, $remaining_time);
+                        Log::debug("voip message: ". print_r($result_ios, true));
                     }
 
                 }
@@ -640,10 +641,11 @@ class VideochatController extends Controller
             ////////////////////////////////////////////////////////////////////////////////
             $ctx = stream_context_create();
             stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
+            stream_context_set_option($ctx, 'ssl', 'passphrase', '123456');
 
             $fp = stream_socket_client(
-                'ssl://gateway.push.apple.com:2195', $err,
-//                'ssl://gateway.sandbox.push.apple.com:2195', $err,
+                // 'ssl://gateway.push.apple.com:2195', $err,
+               'ssl://gateway.sandbox.push.apple.com:2195', $err,
                 $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
             if (!$fp)
@@ -656,27 +658,114 @@ class VideochatController extends Controller
                 'content-available' => 1,
                 'data' => $data_arr
             );
+            Log::debug("voip body: ". print_r($body, true));
+
             // Encode the payload as JSON
             $payload = json_encode($body);
 
+            Log::debug("voip payload: ". print_r($payload, true));
+
             // Build the binary notification
             $msg = chr(0) . pack('n', 32) . pack('H*', $voip_device_token) . pack('n', strlen($payload)) . $payload;
+            // Log::debug("voip msg: ". print_r($msg, true));
 
             // Send it to the server
             $result = fwrite($fp, $msg, strlen($msg));
 
             if ($result) {
                 // echo 'Message not delivered' . PHP_EOL;
+                Log::info("APNs: Message delivered.");
                 DB::table(VIDEO_CHAT_PUSH_NOTIFICATION)->insert(['room_sid' => $room_sid, 'receiver_id' => $receiver_id, 'receiver_type' => $receiver_type, 'receiver_device_type' => 'iOS', 'receiver_firebase_id' => '', 'receiver_voip_device_token' => $voip_device_token]);
 
+            } else {
+                Log::error("APNs: Message not delivered.");
             }
+            
             // Close the connection to the server
             fclose($fp);
         }
     }
 
-    private
-    function ios_voip_push_disconnect($voip_device_token, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid)
+    public function iosVoipTest(Request $request)
+    {
+        $voip_device_token = $request->voip_device_token;
+
+        $certificatePath = public_path('/videochat_new' . '/pushcerttwo.pem');
+        $privateKeyPath = public_path('/videochat_new' . '/AuthKey_BV6289K67H.p8');
+
+        // $deviceToken = 'YOUR_DEVICE_TOKEN';
+        // $certificatePath = storage_path('certs/certificate.pem'); // Adjust the path
+        // $privateKeyPath = storage_path('certs/private.key');       // Adjust the path
+        $apnsTopic = 'com.app.TakeStockInChildren';
+
+        $payload = json_encode([
+            'aps' => [
+                'content-available' => 1
+            ]
+        ]);
+        
+        // $timezone = 'America/New_York';
+        // date_default_timezone_set($timezone);
+        // $created_at = date('Y-m-d H:i:s');
+
+        // $send_data = array(
+        //     'title' => "Incoming Video call", 
+        //     'type' => 'video_chat', 
+        //     'receiver_accesstoken' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBfa2V5IjoiN2lacHRSNnBTNUdLbzZpTjk5eWNNZyIsInJvbGVfdHlwZSI6MCwidHBjIjoibWVudG9yLTQ3MjYwLW1lbnRlZS00ODY2MS0xNzQ3MjA5NDY2IiwidmVyc2lvbiI6MSwiaWF0IjoxNzQ3MjA5NDY2LCJleHAiOjE3NDczODIyNjZ9._EW4JvMO1qKhwqLnAo8eK1UNVBg5rmtjwgUhxzMQtBE', 
+        //     'message' => 'Incoming Video call', 
+        //     'voip_device_token' => $voip_device_token, 
+        //     'unique_name' => 'mentor-47260-mentee-48661-1747209466', 
+        //     'sender_name' => 'David Test', 
+        //     'room_sid' => '', 
+        //     'remaining_time' => '1542', 
+        //     'created_at' => $created_at
+        // );
+
+        // $data_arr = array('meeting_data' => $send_data);
+        // $message = 'message';
+
+        // // Create the payload body
+        // $body['aps'] = array(
+        //     'alert' => $message,
+        //     'sound' => 'default',
+        //     'content-available' => 1,
+        //     'data' => $data_arr
+        // );
+
+        // // Encode the payload as JSON
+        // $payload = json_encode($body);
+
+        $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSLCERT, $certificatePath);
+        curl_setopt($ch, CURLOPT_SSLKEY, $privateKeyPath);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "apns-topic: $apnsTopic.voip",
+            "apns-push-type: voip",
+            "Content-Type: application/json",
+            "Content-Length: " . strlen($payload),
+        ]);
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            // echo 'Error: ' . curl_error($ch);
+            return Response::json(['status' => false, 'message' => "Notification not delivered.", 'error' => curl_error($ch)]);
+        } else {
+            // echo 'Response: ' . $response;
+            return Response::json(['status' => true, 'message' => "Notification delivered.", 'response' => $response, 'payload' => json_decode($payload)]);
+        }
+
+        curl_close($ch);
+
+    }
+
+    private function ios_voip_push_disconnect($voip_device_token, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid)
     {
         $send_data = array('title' => "Missed video call", 'message' => "Video call has been cancelled", 'voip_device_token' => $voip_device_token, 'type' => 'miss_call', 'unique_name' => $unique_name, 'sender_name' => $sender_name);
 
@@ -691,8 +780,8 @@ class VideochatController extends Controller
             stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
 
             $fp = stream_socket_client(
-                'ssl://gateway.push.apple.com:2195', $err,
-//                'ssl://gateway.sandbox.push.apple.com:2195', $err,
+                // 'ssl://gateway.push.apple.com:2195', $err,
+               'ssl://gateway.sandbox.push.apple.com:2195', $err,
                 $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
             if (!$fp)

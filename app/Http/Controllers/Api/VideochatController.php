@@ -623,7 +623,7 @@ class VideochatController extends Controller
         return Response::json(['status' => true, 'message' => "Video call has been ended", 'data' => array('room_sid' => $room_sid, 'unique_name' => $unique_name)]);
     }
 
-    private function ios_voip_push_connect($voip_device_token, $receiver_accesstoken, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid, $remaining_time)
+    private function ios_voip_push_connect__OLD($voip_device_token, $receiver_accesstoken, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid, $remaining_time)
     {
 
         $timezone = 'America/New_York';
@@ -686,54 +686,116 @@ class VideochatController extends Controller
         }
     }
 
+    private function ios_voip_push_connect($voip_device_token, $receiver_accesstoken, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid, $remaining_time)
+    {
+        $timezone = 'America/New_York';
+        date_default_timezone_set($timezone);
+        $created_at = date('Y-m-d H:i:s');
+
+        $send_data = array('title' => "Incoming Video call", 'type' => 'video_chat', 'receiver_accesstoken' => $receiver_accesstoken, 'message' => 'Incoming Video call', 'voip_device_token' => $voip_device_token, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'room_sid' => $room_sid, 'remaining_time' => $remaining_time, 'created_at' => $created_at);
+
+        $data_arr = array('meeting_data' => $send_data);
+
+        if (!empty($voip_device_token)) {
+
+            $message = 'message';
+
+            // Create the payload body
+            $body['aps'] = array(
+                'alert' => $message,
+                'sound' => 'default',
+                'content-available' => 1,
+                'data' => $data_arr
+            );
+
+            // Encode the payload as JSON
+            $payload = json_encode($body);
+
+            // Log::debug("voip payload: ". print_r($payload, true));
+
+            $certificatePath = public_path('/videochat_new' . '/pushcert.pem');
+            $apnsTopic = 'com.app.TakeStockInChildren';
+
+            $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
+
+            $ch = curl_init($url);
+
+            curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSLCERT, $certificatePath);
+            curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
+            curl_setopt($ch, CURLOPT_SSLCERTPASSWD, '123456');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                "apns-topic: $apnsTopic.voip",
+                "apns-push-type: voip",
+                "Content-Type: application/json",
+                "Content-Length: " . strlen($payload),
+            ]);
+
+            $response = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                // echo 'Error: ' . curl_error($ch);
+                Log::error("APNs: Message not delivered. Error: ".curl_error($ch));
+            } else {
+                // Log::info("APNs: Message delivered.");
+                DB::table(VIDEO_CHAT_PUSH_NOTIFICATION)->insert(['room_sid' => $room_sid, 'receiver_id' => $receiver_id, 'receiver_type' => $receiver_type, 'receiver_device_type' => 'iOS', 'receiver_firebase_id' => '', 'receiver_voip_device_token' => $voip_device_token]);
+            }
+
+            curl_close($ch);
+
+        }
+    }
+
     public function iosVoipTest(Request $request)
     {
         $voip_device_token = $request->voip_device_token;
 
-        $certificatePath = public_path('/videochat_new' . '/pushcerttwo.pem');
-        $privateKeyPath = public_path('/videochat_new' . '/AuthKey_BV6289K67H.p8');
+        $certificatePath = public_path('/videochat_new' . '/pushcert.pem');
+        $privateKeyPath = public_path('/videochat_new' . '/private_key.pem');
 
         // $deviceToken = 'YOUR_DEVICE_TOKEN';
         // $certificatePath = storage_path('certs/certificate.pem'); // Adjust the path
         // $privateKeyPath = storage_path('certs/private.key');       // Adjust the path
         $apnsTopic = 'com.app.TakeStockInChildren';
 
-        $payload = json_encode([
-            'aps' => [
-                'content-available' => 1
-            ]
-        ]);
+        // $payload = json_encode([
+        //     'aps' => [
+        //         'content-available' => 1
+        //     ]
+        // ]);
         
-        // $timezone = 'America/New_York';
-        // date_default_timezone_set($timezone);
-        // $created_at = date('Y-m-d H:i:s');
+        $timezone = 'America/New_York';
+        date_default_timezone_set($timezone);
+        $created_at = date('Y-m-d H:i:s');
 
-        // $send_data = array(
-        //     'title' => "Incoming Video call", 
-        //     'type' => 'video_chat', 
-        //     'receiver_accesstoken' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBfa2V5IjoiN2lacHRSNnBTNUdLbzZpTjk5eWNNZyIsInJvbGVfdHlwZSI6MCwidHBjIjoibWVudG9yLTQ3MjYwLW1lbnRlZS00ODY2MS0xNzQ3MjA5NDY2IiwidmVyc2lvbiI6MSwiaWF0IjoxNzQ3MjA5NDY2LCJleHAiOjE3NDczODIyNjZ9._EW4JvMO1qKhwqLnAo8eK1UNVBg5rmtjwgUhxzMQtBE', 
-        //     'message' => 'Incoming Video call', 
-        //     'voip_device_token' => $voip_device_token, 
-        //     'unique_name' => 'mentor-47260-mentee-48661-1747209466', 
-        //     'sender_name' => 'David Test', 
-        //     'room_sid' => '', 
-        //     'remaining_time' => '1542', 
-        //     'created_at' => $created_at
-        // );
+        $send_data = array(
+            'title' => "Incoming Video call", 
+            'type' => 'video_chat', 
+            'receiver_accesstoken' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBfa2V5IjoiN2lacHRSNnBTNUdLbzZpTjk5eWNNZyIsInJvbGVfdHlwZSI6MCwidHBjIjoibWVudG9yLTQ3MjYwLW1lbnRlZS00ODY2MS0xNzQ3MjA5NDY2IiwidmVyc2lvbiI6MSwiaWF0IjoxNzQ3MjA5NDY2LCJleHAiOjE3NDczODIyNjZ9._EW4JvMO1qKhwqLnAo8eK1UNVBg5rmtjwgUhxzMQtBE', 
+            'message' => 'Incoming Video call', 
+            'voip_device_token' => $voip_device_token, 
+            'unique_name' => 'mentor-47260-mentee-48661-1747209466', 
+            'sender_name' => 'David Test', 
+            'room_sid' => '', 
+            'remaining_time' => '1542', 
+            'created_at' => $created_at
+        );
 
-        // $data_arr = array('meeting_data' => $send_data);
-        // $message = 'message';
+        $data_arr = array('meeting_data' => $send_data);
+        $message = 'message';
 
-        // // Create the payload body
-        // $body['aps'] = array(
-        //     'alert' => $message,
-        //     'sound' => 'default',
-        //     'content-available' => 1,
-        //     'data' => $data_arr
-        // );
+        // Create the payload body
+        $body['aps'] = array(
+            'alert' => $message,
+            'sound' => 'default',
+            'content-available' => 1,
+            'data' => $data_arr
+        );
 
-        // // Encode the payload as JSON
-        // $payload = json_encode($body);
+        // Encode the payload as JSON
+        $payload = json_encode($body);
 
         $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
 
@@ -743,7 +805,9 @@ class VideochatController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSLCERT, $certificatePath);
-        curl_setopt($ch, CURLOPT_SSLKEY, $privateKeyPath);
+        curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
+        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, '123456');
+        // curl_setopt($ch, CURLOPT_SSLKEY, $privateKeyPath);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "apns-topic: $apnsTopic.voip",
             "apns-push-type: voip",

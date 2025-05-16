@@ -571,6 +571,12 @@
                 new Notification(notificationTitle, notificationOptions);
             }
 
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    console.log('Persistent notification permission granted');
+                }
+            });
+
         });
 
         // Handle token refresh

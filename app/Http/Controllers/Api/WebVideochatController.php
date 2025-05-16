@@ -400,7 +400,6 @@ class WebVideochatController extends Controller
 
         }
 
-
         // Web Push Notification to Sender
         // if ($sender_data->web_fcm_token) {
         //     $message = "Video call has been cancelled";
@@ -451,32 +450,19 @@ class WebVideochatController extends Controller
         }
     }
 
-    private function ios_voip_push_connect($voip_device_token, $receiver_accesstoken, $receiver_id, $receiver_type, $unique_name, $sender_name, $sender_id, $sender_type, $room_sid, $remaining_time)
+    private function ios_voip_push_connect($voip_device_token, $receiver_accesstoken, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid, $remaining_time)
     {
-
         $timezone = 'America/New_York';
         date_default_timezone_set($timezone);
         $created_at = date('Y-m-d H:i:s');
 
-        $send_data = array('title' => "Incoming Video call", 'type' => 'video_chat', 'receiver_accesstoken' => $receiver_accesstoken, 'receiver_id' => $receiver_id, 'receiver_type' => $receiver_type, 'message' => 'Incoming Video call', 'voip_device_token' => $voip_device_token, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'sender_id' => $sender_id, 'sender_type' => $sender_type, 'room_sid' => $room_sid, 'remaining_time' => $remaining_time, 'created_at' => $created_at, 'created_from' => 'web');
+        $send_data = array('title' => "Incoming Video call", 'type' => 'video_chat', 'receiver_accesstoken' => $receiver_accesstoken, 'message' => 'Incoming Video call', 'voip_device_token' => $voip_device_token, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'room_sid' => $room_sid, 'remaining_time' => $remaining_time, 'created_at' => $created_at);
 
         $data_arr = array('meeting_data' => $send_data);
 
         if (!empty($voip_device_token)) {
-            // $pemfilename = public_path('/videochat_new'.'/pushcert.pem');
-            $pemfilename = public_path('/videochat_new' . '/pushcerttwo.pem');
+
             $message = 'message';
-            ////////////////////////////////////////////////////////////////////////////////
-            $ctx = stream_context_create();
-            stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
-
-            $fp = stream_socket_client(
-                // 'ssl://gateway.push.apple.com:2195', $err,
-               'ssl://gateway.sandbox.push.apple.com:2195', $err,
-                $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
-
-            if (!$fp)
-                exit("Failed to connect: $err $errstr" . PHP_EOL);
 
             // Create the payload body
             $body['aps'] = array(
@@ -485,22 +471,44 @@ class WebVideochatController extends Controller
                 'content-available' => 1,
                 'data' => $data_arr
             );
+
             // Encode the payload as JSON
             $payload = json_encode($body);
 
-            // Build the binary notification
-            $msg = chr(0) . pack('n', 32) . pack('H*', $voip_device_token) . pack('n', strlen($payload)) . $payload;
+            // Log::debug("voip payload: ". print_r($payload, true));
 
-            // Send it to the server
-            $result = fwrite($fp, $msg, strlen($msg));
+            $certificatePath = public_path('/videochat_new' . '/pushcert.pem');
+            $apnsTopic = 'com.app.TakeStockInChildren';
 
-            if ($result) {
-                // echo 'Message not delivered' . PHP_EOL;
+            $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
+
+            $ch = curl_init($url);
+
+            curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSLCERT, $certificatePath);
+            curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
+            curl_setopt($ch, CURLOPT_SSLCERTPASSWD, '123456');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                "apns-topic: $apnsTopic.voip",
+                "apns-push-type: voip",
+                "Content-Type: application/json",
+                "Content-Length: " . strlen($payload),
+            ]);
+
+            $response = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                // echo 'Error: ' . curl_error($ch);
+                Log::error("APNs: Message not delivered. Error: ".curl_error($ch));
+            } else {
+                // Log::info("APNs: Message delivered.");
                 DB::table(VIDEO_CHAT_PUSH_NOTIFICATION)->insert(['room_sid' => $room_sid, 'receiver_id' => $receiver_id, 'receiver_type' => $receiver_type, 'receiver_device_type' => 'iOS', 'receiver_firebase_id' => '', 'receiver_voip_device_token' => $voip_device_token]);
-
             }
-            // Close the connection to the server
-            fclose($fp);
+
+            curl_close($ch);
+
         }
     }
 
@@ -511,20 +519,7 @@ class WebVideochatController extends Controller
         $data_arr = array('meeting_data' => $send_data);
 
         if (!empty($voip_device_token)) {
-            // $pemfilename = public_path('/videochat_new'.'/pushcert.pem');
-            $pemfilename = public_path('/videochat_new' . '/pushcerttwo.pem');
             $message = 'message';
-            ////////////////////////////////////////////////////////////////////////////////
-            $ctx = stream_context_create();
-            stream_context_set_option($ctx, 'ssl', 'local_cert', $pemfilename);
-
-            $fp = stream_socket_client(
-                // 'ssl://gateway.push.apple.com:2195', $err,
-               'ssl://gateway.sandbox.push.apple.com:2195', $err,
-                $errstr, 60, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
-
-            if (!$fp)
-                exit("Failed to connect: $err $errstr" . PHP_EOL);
 
             // Create the payload body
             $body['aps'] = array(
@@ -536,19 +531,37 @@ class WebVideochatController extends Controller
             // Encode the payload as JSON
             $payload = json_encode($body);
 
-            // Build the binary notification
-            $msg = chr(0) . pack('n', 32) . pack('H*', $voip_device_token) . pack('n', strlen($payload)) . $payload;
+            $certificatePath = public_path('/videochat_new' . '/pushcert.pem');
+            $apnsTopic = 'com.app.TakeStockInChildren';
 
-            // Send it to the server
-            $result = fwrite($fp, $msg, strlen($msg));
+            $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
 
-            if ($result) {
-                // echo 'Message not delivered' . PHP_EOL;
+            $ch = curl_init($url);
+
+            curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSLCERT, $certificatePath);
+            curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
+            curl_setopt($ch, CURLOPT_SSLCERTPASSWD, '123456');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                "apns-topic: $apnsTopic.voip",
+                "apns-push-type: voip",
+                "Content-Type: application/json",
+                "Content-Length: " . strlen($payload),
+            ]);
+
+            $response = curl_exec($ch);
+
+            if (curl_errno($ch)) {
+                // echo 'Error: ' . curl_error($ch);
+                Log::error("APNs: Message not delivered. Error: ".curl_error($ch));
+            } else {
+                // Log::info("APNs: Message delivered.");
                 DB::table(VIDEO_CHAT_PUSH_NOTIFICATION)->insert(['notification_for' => 'disconnect_chat', 'room_sid' => $room_sid, 'receiver_id' => $receiver_id, 'receiver_type' => $receiver_type, 'receiver_device_type' => 'iOS', 'receiver_firebase_id' => '', 'receiver_voip_device_token' => $voip_device_token]);
-
             }
-            // Close the connection to the server
-            fclose($fp);
+
+            curl_close($ch);
         }
     }
 

@@ -19,20 +19,72 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    const urlToOpen = event.notification.data.url || '/';
+    
+    // Check which action was clicked
+    if (event.action === 'join') {
+        event.waitUntil(
+            clients.matchAll({type: 'window'})
+                .then((windowClients) => {
+                    // Focus on existing tab if already open
+                    for (const client of windowClients) {
+                        if (client.url === urlToOpen && 'focus' in client) {
+                            return client.focus();
+                        }
+                    }
+                    
+                    // Open new tab if not already open
+                    if (clients.openWindow) {
+                        return clients.openWindow(urlToOpen);
+                    }
+                })
+        );
+    } else if (event.action === 'dismiss') {
+        // Handle Dismiss button click
+        console.log('Notification dismissed');
+    } else {
+        // Default click behavior (notification body clicked)
+        event.waitUntil(
+            clients.openWindow(urlToOpen)
+        );
+    }
+});
+
 messaging.onBackgroundMessage((payload) => {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
     
     const notificationTitle = payload.data.title;
-    var notificationType = payload.data.type;
-    var senderId = payload.data.sender_id;
-    var receiverUniqueName = payload.data.unique_name;
+    // var notificationType = payload.data.type;
+    // var senderId = payload.data.sender_id;
+    // var receiverUniqueName = payload.data.unique_name;
     var encryptSenderId = payload.data.encrypt_sender_id;
-    var roomCreateData = {};
+    // var roomCreateData = {};
 
     const notificationOptions = {
         body: payload.data.body,
-        icon: '/icon.png'
+        icon: '/icon.png',
+        requireInteraction: true,  // Keeps notification visible until dismissed
+        data: { // Include click action data
+            url: 'https://test.tsicmentorapp.org/mentee/videochat/initiate?mentor_id='+encryptSenderId
+        },
+        actions: [
+            {
+                action: 'join',
+                title: 'Join Now'
+            },
+            {
+                action: 'dismiss',
+                title: 'Dismiss'
+            }
+        ],
     };
 
+    // Show notification
+    // self.registration.showNotification(notificationTitle, notificationOptions)
+    //     .catch(err => console.error('Notification failed:', err));
     return self.registration.showNotification(notificationTitle, notificationOptions);
+
+
 });

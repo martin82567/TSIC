@@ -154,6 +154,7 @@ class UniversalLoginController extends Controller
         $firebase_id = !empty($input['firebase_id'])?$input['firebase_id']:'';
         $device_type = !empty($input['device_type'])?$input['device_type']:'';
         $voip_device_token = !empty($input['voip_device_token'])?$input['voip_device_token']:'';
+        $uuid = !empty($input['uuid'])?$input['uuid']:'';
         $waiver_statement_id = !empty($input['waiver_statement_id'])?$input['waiver_statement_id']:0;
 
         $user_obj =DB::table('mentee')->select('mentee.*','student_status.view_in_application')->leftJoin('student_status','student_status.id','mentee.status')->where('mentee.email', '=', $email)->where('student_status.view_in_application', '=', 1)->where('mentee.platform_status',1)->first();
@@ -186,6 +187,7 @@ class UniversalLoginController extends Controller
                     'longitude' => $longitude,
                     'firebase_id' => $firebase_id,
                     'voip_device_token' => $voip_device_token,
+                    'uuid' => $uuid,
                     'device_type' => $device_type,
                     'is_logged_out' => 0
                 ]);
@@ -280,6 +282,7 @@ class UniversalLoginController extends Controller
         $longitude = !empty($input['longitude'])?$input['longitude']:'';
         $firebase_id = !empty($input['firebase_id'])?$input['firebase_id']:'';
         $voip_device_token = !empty($input['voip_device_token'])?$input['voip_device_token']:'';
+        $uuid = !empty($input['uuid'])?$input['uuid']:'';
         $device_type = !empty($input['device_type'])?$input['device_type']:'';
         $waiver_statement_id = !empty($input['waiver_statement_id'])?$input['waiver_statement_id']:0;
 
@@ -310,7 +313,8 @@ class UniversalLoginController extends Controller
 
                 DB::table('mentor')->where('id', $user_obj->id)->update([
                     'firebase_id' => $firebase_id,
-                    'voip_device_token' => $voip_device_token ,
+                    'voip_device_token' => $voip_device_token,
+                    'uuid' => $uuid,
                     'device_type' => $device_type,
                     'is_logged_out' => 0
                 ]);

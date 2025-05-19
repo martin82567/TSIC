@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UniversalLoginController extends Controller
 {
@@ -182,6 +183,14 @@ class UniversalLoginController extends Controller
                     return response()->json(['status'=>false, 'message' => 'Your affiliate is inactive now.Please talk to admin to login.', 'data' => $data]);
                 }
 
+                Log::debug("voip_device_token: ".print_r($voip_device_token, true));
+
+                if ($device_type == 'iOS') {
+                    if (empty($voip_device_token)) {
+                        return response()->json(['status'=>false, 'message' => 'Voip device token is required.', 'data' => []]);
+                    }
+                }
+
                 DB::table('mentee')->where('id', $user_obj->id)->update([
                     'latitude' => $latitude,
                     'longitude' => $longitude,
@@ -310,6 +319,13 @@ class UniversalLoginController extends Controller
                     return response()->json(['status'=>false, 'message' => 'Your affiliate is inactive now.Please talk to admin to login.', 'data' => $data]);
                 }
 
+                Log::debug("voip_device_token: ".print_r($voip_device_token, true));
+
+                if ($device_type == 'iOS') {
+                    if (empty($voip_device_token)) {
+                        return response()->json(['status'=>false, 'message' => 'Voip device token is required.', 'data' => []]);
+                    }
+                }
 
                 DB::table('mentor')->where('id', $user_obj->id)->update([
                     'firebase_id' => $firebase_id,

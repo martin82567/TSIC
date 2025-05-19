@@ -56,11 +56,30 @@ messaging.onBackgroundMessage((payload) => {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
     
     const notificationTitle = payload.data.title;
-    // var notificationType = payload.data.type;
+    var notificationType = payload.data.type;
     // var senderId = payload.data.sender_id;
     // var receiverUniqueName = payload.data.unique_name;
     var encryptSenderId = payload.data.encrypt_sender_id;
     // var roomCreateData = {};
+
+    // const notificationOptions = {
+    //     body: payload.data.body,
+    //     icon: '/icon.png',
+    //     requireInteraction: true,  // Keeps notification visible until dismissed
+    //     data: { // Include click action data
+    //         url: 'https://test.tsicmentorapp.org/mentee/videochat/initiate?mentor_id='+encryptSenderId
+    //     },
+    //     actions: [
+    //         {
+    //             action: 'join',
+    //             title: 'Join Now'
+    //         },
+    //         {
+    //             action: 'dismiss',
+    //             title: 'Dismiss'
+    //         }
+    //     ],
+    // };
 
     const notificationOptions = {
         body: payload.data.body,
@@ -68,8 +87,12 @@ messaging.onBackgroundMessage((payload) => {
         requireInteraction: true,  // Keeps notification visible until dismissed
         data: { // Include click action data
             url: 'https://test.tsicmentorapp.org/mentee/videochat/initiate?mentor_id='+encryptSenderId
-        },
-        actions: [
+        }
+    };
+
+    // Only add actions if notificationType is "video_chat"
+    if (notificationType === "video_chat") {
+        notificationOptions.actions = [
             {
                 action: 'join',
                 title: 'Join Now'
@@ -78,8 +101,8 @@ messaging.onBackgroundMessage((payload) => {
                 action: 'dismiss',
                 title: 'Dismiss'
             }
-        ],
-    };
+        ];
+    }
 
     // Show notification
     // self.registration.showNotification(notificationTitle, notificationOptions)

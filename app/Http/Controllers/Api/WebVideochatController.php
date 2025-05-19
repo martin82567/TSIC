@@ -460,55 +460,56 @@ class WebVideochatController extends Controller
         date_default_timezone_set($timezone);
         $created_at = date('Y-m-d H:i:s');
 
-        // $send_data = array('title' => "Incoming Video call", 'type' => 'video_chat', 'receiver_accesstoken' => $receiver_accesstoken, 'message' => 'Incoming Video call', 'voip_device_token' => $voip_device_token, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'room_sid' => $room_sid, 'remaining_time' => $remaining_time, 'created_at' => $created_at);
+        $send_data = array('title' => "Incoming Video call", 'type' => 'video_chat', 'receiver_accesstoken' => $receiver_accesstoken, 'message' => 'Incoming Video call', 'voip_device_token' => $voip_device_token, 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'room_sid' => $room_sid, 'remaining_time' => $remaining_time, 'created_at' => $created_at);
 
-        // $data_arr = array('meeting_data' => $send_data);
+        $data_arr = array('meeting_data' => $send_data);
 
         if (!empty($voip_device_token)) {
 
-            // $message = 'message';
+            $message = 'message';
 
-            // // Create the payload body
-            // $body['aps'] = array(
-            //     'alert' => $message,
-            //     'sound' => 'default',
-            //     'content-available' => 1,
-            //     'data' => $data_arr
-            // );
-
-            // // Encode the payload as JSON
-            // $payload = json_encode($body);
-
-            $send_data = array(
-                'title' => "Incoming Video call", 
-                'type' => 'video_chat', 
-                'message' => 'Incoming Video call', 
-                'voip_device_token' => $voip_device_token, 
-                'unique_name' => $unique_name, 
-                'sender_name' => $sender_name, 
-                'room_sid' => $room_sid, 
-                'remaining_time' => $remaining_time, 
-                'created_at' => $created_at
+            // Create the payload body
+            $body['aps'] = array(
+                'alert' => $message,
+                'sound' => 'default',
+                'content-available' => 1,
+                'data' => $data_arr
             );
 
+            // Encode the payload as JSON
+            $payload = json_encode($body);
 
-            $data_arr = array('meeting_data' => $send_data);
+            // $send_data = array(
+            //     'title' => "Incoming Video call", 
+            //     'type' => 'video_chat', 
+            //     'message' => 'Incoming Video call', 
+            //     'voip_device_token' => $voip_device_token, 
+            //     'unique_name' => $unique_name, 
+            //     'sender_name' => $sender_name, 
+            //     'room_sid' => $room_sid, 
+            //     'remaining_time' => $remaining_time, 
+            //     'created_at' => $created_at
+            // );
 
-            $payload = json_encode([
-                'aps' => [
-                    'content-available' => 1
-                ],
-                'uuid' => $uuid,
-                'caller_name' => $sender_name,
-                'data' => $data_arr
-            ]);
+
+            // $data_arr = array('meeting_data' => $send_data);
+
+            // $payload = json_encode([
+            //     'aps' => [
+            //         'content-available' => 1
+            //     ],
+            //     'uuid' => $uuid,
+            //     'caller_name' => $sender_name,
+            //     'data' => $data_arr
+            // ]);
 
             // Log::debug("voip payload: ". print_r($payload, true));
 
             $certificatePath = public_path('/videochat_new' . '/pushcert.pem');
             $apnsTopic = 'com.app.TakeStockInChildren';
 
-            $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
+            // $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
+            $url = "https://api.push.apple.com/3/device/{$voip_device_token}";
 
             $ch = curl_init($url);
 
@@ -542,47 +543,48 @@ class WebVideochatController extends Controller
 
     private function ios_voip_push_disconnect($voip_device_token, $uuid, $receiver_id, $receiver_type, $unique_name, $sender_name, $room_sid)
     {
-        // $send_data = array('title' => "Missed video call", 'message' => "Video call has been cancelled", 'voip_device_token' => $voip_device_token, 'type' => 'miss_call', 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'created_from' => 'web');
+        $send_data = array('title' => "Missed video call", 'message' => "Video call has been cancelled", 'voip_device_token' => $voip_device_token, 'type' => 'miss_call', 'unique_name' => $unique_name, 'sender_name' => $sender_name, 'created_from' => 'web');
 
-        // $data_arr = array('meeting_data' => $send_data);
+        $data_arr = array('meeting_data' => $send_data);
 
         if (!empty($voip_device_token)) {
-            // $message = 'message';
+            $message = 'message';
 
-            // // Create the payload body
-            // $body['aps'] = array(
-            //     'alert' => $message,
-            //     'sound' => 'default',
-            //     'content-available' => 1,
-            //     'data' => $data_arr
-            // );
-            // // Encode the payload as JSON
-            // $payload = json_encode($body);
-
-            $send_data = array(
-                'title' => "Missed video call", 
-                'message' => "Video call has been cancelled", 
-                'voip_device_token' => $voip_device_token, 
-                'type' => 'miss_call', 
-                'unique_name' => $unique_name, 
-                'sender_name' => $sender_name
-            );
-
-            $data_arr = array('meeting_data' => $send_data);
-
-            $payload = json_encode([
-                'aps' => [
-                    'content-available' => 1
-                ],
-                'uuid' => $uuid,
-                'caller_name' => $sender_name,
+            // Create the payload body
+            $body['aps'] = array(
+                'alert' => $message,
+                'sound' => 'default',
+                'content-available' => 1,
                 'data' => $data_arr
-            ]);
+            );
+            // Encode the payload as JSON
+            $payload = json_encode($body);
+
+            // $send_data = array(
+            //     'title' => "Missed video call", 
+            //     'message' => "Video call has been cancelled", 
+            //     'voip_device_token' => $voip_device_token, 
+            //     'type' => 'miss_call', 
+            //     'unique_name' => $unique_name, 
+            //     'sender_name' => $sender_name
+            // );
+
+            // $data_arr = array('meeting_data' => $send_data);
+
+            // $payload = json_encode([
+            //     'aps' => [
+            //         'content-available' => 1
+            //     ],
+            //     'uuid' => $uuid,
+            //     'caller_name' => $sender_name,
+            //     'data' => $data_arr
+            // ]);
 
             $certificatePath = public_path('/videochat_new' . '/pushcert.pem');
             $apnsTopic = 'com.app.TakeStockInChildren';
 
-            $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
+            // $url = "https://api.sandbox.push.apple.com/3/device/{$voip_device_token}";
+            $url = "https://api.push.apple.com/3/device/{$voip_device_token}";
 
             $ch = curl_init($url);
 

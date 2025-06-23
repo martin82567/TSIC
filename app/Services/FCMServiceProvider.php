@@ -13,7 +13,8 @@ class FCMServiceProvider
     private $clientEmail;
     private $privateKey;
     private $tokenUri = 'https://oauth2.googleapis.com/token';
-    private $fcmApiUri = 'https://fcm.googleapis.com/v1/projects/takestockinchildren-427bb/messages:send';
+    // private $fcmApiUri = 'https://fcm.googleapis.com/v1/projects/takestockinchildren-427bb/messages:send';
+    private $fcmApiUri = 'https://fcm.googleapis.com/v1/projects/takestockinchildren-7f3b9/messages:send';
 
     public function __construct($serviceAccountFilePath)
     {

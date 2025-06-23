@@ -282,7 +282,7 @@ class WebhookController extends Controller
 
             $video_chat_rooms = DB::table('video_chat_rooms')->where('unique_name', $unique_name)->first();
 
-            if ($video_chat_rooms->participant_count >= 2) {
+            if ($video_chat_rooms && $video_chat_rooms->participant_count >= 2) {
                 // Time Differece from participant join & leave
                 $user_join_time = Carbon::parse($video_chat_rooms->receiver_join_time);
                 // $user_leave_time = Carbon::parse($video_chat_rooms->user_leave_time);

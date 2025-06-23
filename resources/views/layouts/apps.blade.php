@@ -459,6 +459,29 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
 
     <script>
+        // if (!('PushManager' in window) || !('ServiceWorker' in navigator)) {
+        //     alert("❌ Your browser doesn't support video call notifications. Please use Chrome, Firefox, or Edge.");
+        // }
+
+        // In your main page script
+        navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data.type === 'SW_NAVIGATE') {
+                // Verify URL is safe before redirecting
+                if (isValidUrl(event.data.url)) {
+                    window.location.href = event.data.url;
+                }
+            }
+        });
+
+        function isValidUrl(url) {
+            try {
+                new URL(url);
+                return url.startsWith("{{ env('APP_URL') }}"); // Security check
+            } catch {
+                return false;
+            }
+        }
+
         var userType = "<?php echo $logged_in; ?>".toLowerCase();
         var urlRedirect = "";
         var recivedData = {};
@@ -476,35 +499,106 @@
         var mainUrl = "{{ env('APP_URL') }}";
 
         // Your web app's Firebase configuration
+        // const firebaseConfig = {
+        //     apiKey: "AIzaSyD1RlN2N0LtoDnwzb_q89FlJSydfBi4Z40",
+        //     authDomain: "takestockinchildren-427bb.firebaseapp.com",
+        //     databaseURL: "https://takestockinchildren-427bb.firebaseio.com",
+        //     projectId: "takestockinchildren-427bb",
+        //     storageBucket: "takestockinchildren-427bb.firebasestorage.app",
+        //     messagingSenderId: "393481861829",
+        //     appId: "1:393481861829:web:7a5197e105a5bdc6a18eac",
+        //     measurementId: "G-M2KVNV8MRZ"
+        // };
         const firebaseConfig = {
-            apiKey: "AIzaSyD1RlN2N0LtoDnwzb_q89FlJSydfBi4Z40",
-            authDomain: "takestockinchildren-427bb.firebaseapp.com",
-            databaseURL: "https://takestockinchildren-427bb.firebaseio.com",
-            projectId: "takestockinchildren-427bb",
-            storageBucket: "takestockinchildren-427bb.firebasestorage.app",
-            messagingSenderId: "393481861829",
-            appId: "1:393481861829:web:7a5197e105a5bdc6a18eac",
-            measurementId: "G-M2KVNV8MRZ"
+            apiKey: "AIzaSyAuBsRj5ql7x4cxaypXbbc0y-MX1rCLAIw",
+            authDomain: "takestockinchildren-7f3b9.firebaseapp.com",
+            projectId: "takestockinchildren-7f3b9",
+            storageBucket: "takestockinchildren-7f3b9.firebasestorage.app",
+            messagingSenderId: "471404106462",
+            appId: "1:471404106462:web:82bc907f064c06f715684f",
+            measurementId: "G-18VCTYLMLT"
         };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const messaging = firebase.messaging();
 
-        // Get FCM token
-        messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' }).then((currentToken) => {
-            if (currentToken) {
-                console.log('FCM Token:', currentToken);
-                // document.getElementById('fcm_token').textContent = 'FCM Token: ' + currentToken;
-                
-                // Send token to your Laravel backend for storage
-                saveToken(currentToken);
-            } else {
-                console.log('No registration token available. Request permission to generate one.');
+        // Function to request notification permission
+        async function requestNotificationPermission() {
+            try {
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    console.log('Notification permission granted.');
+                    return true;
+                } else {
+                    console.log('Notification permission denied.');
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error requesting permission:', error);
+                return false;
             }
-        }).catch((err) => {
-            console.log('An error occurred while retrieving token. ', err);
-        });
+        }
+
+        // Main function to get FCM token
+        async function getFCMToken() {
+            try {
+                // Check current permission state
+                if (Notification.permission === 'granted') {
+                    // Permission already granted, proceed to get token
+                    // return await messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' });
+                    return await messaging.getToken({ vapidKey: 'BOk-IZZDuf3wuaBzgw7Mrkgf0xdxDGpGKBQLzOV8N0f0kLkiZ17Dwa5egovFNZzY6M226CMoMUTVeTgY2j6uEiU' });
+                } else if (Notification.permission === 'denied') {
+                    console.log('Notifications are blocked by user.');
+                    // Show instructions to manually enable notifications
+                    alert('Please enable notifications in your browser settings to receive updates.');
+                    return null;
+                } else {
+                    // Permission not requested yet - request it
+                    const permissionGranted = await requestNotificationPermission();
+                    if (permissionGranted) {
+                        // return await messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' });
+                        return await messaging.getToken({ vapidKey: 'BOk-IZZDuf3wuaBzgw7Mrkgf0xdxDGpGKBQLzOV8N0f0kLkiZ17Dwa5egovFNZzY6M226CMoMUTVeTgY2j6uEiU' });
+                    }
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error getting FCM token:', error);
+                throw error;
+            }
+        }
+
+        // Execute the flow
+        getFCMToken()
+            .then((currentToken) => {
+                if (currentToken) {
+                    console.log('FCM Token:', currentToken);
+                    saveToken(currentToken);
+                } else {
+                    console.log('No token available');
+                }
+            })
+            .catch((err) => {
+                console.log('Error in FCM flow:', err);
+            });
+
+
+        // Get FCM token
+        // messaging.getToken({ vapidKey: 'BOk-IZZDuf3wuaBzgw7Mrkgf0xdxDGpGKBQLzOV8N0f0kLkiZ17Dwa5egovFNZzY6M226CMoMUTVeTgY2j6uEiU' }).then((currentToken) => {
+        //     if (currentToken) {
+        //         // console.log('FCM Token:', currentToken);
+                
+        //         // Send token to your Laravel backend for storage
+        //         saveToken(currentToken);
+
+        //     } else {
+        //         console.log('No registration token available. Request permission to generate one.');
+        //         // alert('Notifications are currently blocked. To continue, please enable them in your browser settings and refresh the page.');
+        //     }
+        // }).catch((err) => {
+        //     console.log('An error occurred while retrieving token. ', err);
+        //     // alert("❌ Your browser doesn't support video call notifications. Please use Chrome, Firefox, or Edge.");
+        // });
 
         // Send token to Laravel backend
         function saveToken(token) {
@@ -581,7 +675,7 @@
 
         // Handle token refresh
         messaging.onTokenRefresh(() => {
-            messaging.getToken({ vapidKey: 'BDNrsWHvBj6pRrj294GEUaxIb6tZoSkeD-v1zZnj3EH_cnSLwYOPDi_AmtJdU3woCGU13SqGMuLloRcKcpJAo8c' }).then((refreshedToken) => {
+            messaging.getToken({ vapidKey: 'BOk-IZZDuf3wuaBzgw7Mrkgf0xdxDGpGKBQLzOV8N0f0kLkiZ17Dwa5egovFNZzY6M226CMoMUTVeTgY2j6uEiU' }).then((refreshedToken) => {
                 console.log('Token refreshed.');
                 saveToken(refreshedToken);
             }).catch((err) => {

@@ -35,6 +35,12 @@ class UniversalLoginController extends Controller
 
     public function login(Request $request)
     {
+        // Session END handle
+        // session(['message' => 'TSIC app will not be available until the next session.', 'msg_class' => 'danger']);
+        // return redirect()->back();
+        // Session END handle 
+
+
         $mentee =DB::table('mentee')->select('mentee.email')->where('mentee.email', '=', $request->email)->first();
         $mentor =DB::table('mentor')->select('mentor.email')->where('mentor.email', '=', $request->email)->first();
 

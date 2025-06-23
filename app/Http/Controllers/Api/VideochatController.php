@@ -259,6 +259,8 @@ class VideochatController extends Controller
             }
             $fields = array();
 
+            Log::debug("receiver_device_type: ".print_r($receiver_device_type, true));
+            Log::debug("receiver_firebase_id: ".print_r($receiver_firebase_id, true));
             if (!empty($receiver_device_type) && !empty($receiver_firebase_id)) {
 
                 if ($receiver_device_type == 'android') {
@@ -270,14 +272,18 @@ class VideochatController extends Controller
                     $data_arr = array('meeting_data' => json_encode($send_data));
 
                     if ($receiver_device_type == "iOS") {
+                        Log::info("Log 1");
                         $msg = array('message' => $message, 'title' => "Incoming Video call", 'sound' => "default");
                         $fields = array('to' => $receiver_firebase_id, 'notification' => $msg, 'data' => $data_arr);
 
                     } else if ($receiver_device_type == "android") {
+                        Log::info("Log 2");
                         $fields = array('to' => $receiver_firebase_id, 'data' => $send_data); // For Android
                     }
 
                     $result = sendPushNotificationWithV1($fields);
+                    
+                    Log::debug("result: ".print_r($result, true));
 
                     if ($result) {
                         if (!empty($result['name'])) {
@@ -580,6 +586,7 @@ class VideochatController extends Controller
                 }
 
                 $result = sendPushNotificationWithV1($fields);
+                Log::debug("result 1: ".print_r($result, true));
 
                 if ($result) {
                     if (!empty($result['name'])) {
@@ -610,6 +617,7 @@ class VideochatController extends Controller
                 }
 
                 $result = sendPushNotificationWithV1($fields);
+                Log::debug("result 2: ".print_r($result, true));
 
                 if ($result) {
                     if (!empty($result['name'])) {

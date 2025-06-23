@@ -23,9 +23,13 @@ class VersionController extends Controller
         if ($platform == 'ios') {
             $data = DB::table(APP_VERSION)->where('platform', '=', 'ios')->first();
             return Response::json(['status' => true, 'message' => "Here is your app version", 'data' => array('app_version' => $data)]);
+        
         } else {
-            $data = DB::table(APP_VERSION)->where('platform', '=', 'android')->first();
-            return Response::json(['status' => true, 'message' => "Here is your app version", 'data' => array('app_version' => $data)]);
+            // $data = DB::table(APP_VERSION)->where('platform', '=', 'android')->first();
+            // return Response::json(['status' => true, 'message' => "Here is your app version", 'data' => array('app_version' => $data)]);
+            
+            // For temporary site OFF
+            return Response::json(['status' => false, 'message' => "TSIC app will not be available until the next session.", 'data' => (object)array()]);
         }
 
     }

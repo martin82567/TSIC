@@ -155,7 +155,7 @@
     // }
 
     var mainUrl = "{{ env('APP_URL') }}";
-    // var mainUrl = "https://test.tsicmentorapp.org";
+    // var mainUrl = "https://tsicmentorapp.org";
 
     // var identity = '{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}';
     var identity = document.getElementById("selfName").value;

@@ -19,7 +19,6 @@ import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-
 class TwilioChatActivity : AppCompatActivity() {
 
     val binding by lazy {
@@ -51,7 +50,7 @@ class TwilioChatActivity : AppCompatActivity() {
         }
 
         binding?.viewModel = viewModel
-        viewModel.fetch()
+
         viewModel?.apply {
             chatterId.set(intent?.getStringExtra(INTENT_KEY_CHATTER_ID) ?: "")
             chatterName.set(intent?.getStringExtra(INTENT_KEY_CHATTER_NAME) ?: "")
@@ -60,11 +59,13 @@ class TwilioChatActivity : AppCompatActivity() {
             chatCode = intent?.getStringExtra(INTENT_KEY_CHAT_CODE) ?: ""
             chatSid = intent?.getStringExtra(INTENT_KEY_CHAT_SID) ?: ""
             // firebaseToken.set(intent?.getStringExtra(INTENT_KEY_FIREBASE_TOKEN) ?: "")
-            if (chatterType.get() == TYPE_MENTOR_STAFF || chatterType.get() == TYPE_MENTEE_STAFF)
+            if (chatterType.get() == TYPE_MENTOR_STAFF || chatterType.get() == TYPE_MENTEE_STAFF || chatterType.get() == TYPE_MENTOR)
                 videoButtonEnable.set(false)
         }
+        viewModel.fetch()
+        viewModel.fetchOldChat()
         Log.d("TAG", "onCreate: ${viewModel.chatSid} ${viewModel.chatCode}")
-        adapter = TwilioChatDetailsAdapter(viewModel.chatMsgList, viewModel.identity)
+        adapter = TwilioChatDetailsAdapter(viewModel.chatMsgList, viewModel)
 
         binding?.contentChatMessage?.apply {
             back.setOnClickListener {

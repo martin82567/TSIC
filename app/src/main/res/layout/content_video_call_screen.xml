@@ -25,18 +25,6 @@
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:elevation="0dp"
-			android:visibility="invisible"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent" />
-
-		<us.zoom.sdk.ZoomVideoSDKVideoView
-			android:id="@+id/primaryVideoView2"
-			android:layout_width="0dp"
-			android:layout_height="0dp"
-			android:elevation="0dp"
-			android:visibility="visible"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +37,6 @@
 			android:layout_marginStart="16dp"
 			android:layout_marginBottom="24dp"
 			android:elevation="2dp"
-			android:visibility="invisible"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.0"

@@ -1,7 +1,17 @@
 package com.tsic.ui.screen.videocallscreen
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
+import com.google.android.material.snackbar.Snackbar
 import us.zoom.sdk.UVCCameraStatus
 import us.zoom.sdk.ZoomVideoSDK
 import us.zoom.sdk.ZoomVideoSDKAnnotationHelper
@@ -53,6 +63,8 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
 
     val roomListener = object : ZoomVideoSDKDelegate {
 
+
+        @Deprecated("Deprecated in Java")
         override fun onSessionLeave() {
             Log.d(TAG, "onSessionLeave: ")
             roomCallback.onDisconnected()
@@ -113,6 +125,7 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
             videoHelper: ZoomVideoSDKVideoHelper?,
             userList: MutableList<ZoomVideoSDKUser>?
         ) {
+
             Log.d(TAG, "onUserVideoStatusChanged: ${userList?.map { it.userName }}")
             /*userList?.forEach {
                 // Check if the current user's video is on
@@ -138,6 +151,7 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
             userInfo: ZoomVideoSDKUser?,
             status: ZoomVideoSDKShareStatus?
         ) {
+
             Log.d(TAG, "onUserShareStatusChanged: ${userInfo?.userName} -  ${status?.name}")
         }
 
@@ -223,7 +237,6 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
 
         override fun onCommandReceived(sender: ZoomVideoSDKUser?, strCmd: String?) {
             Log.d(TAG, "onCommandReceived: $strCmd")
-
         }
 
         override fun onCommandChannelConnectResult(isSuccess: Boolean) {
@@ -253,6 +266,7 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
             user: ZoomVideoSDKUser?,
             videoPipe: ZoomVideoSDKRawDataPipe?
         ) {
+
             Log.d(TAG, "onMultiCameraStreamStatusChanged: ")
         }
 
@@ -265,7 +279,7 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
         }
 
         override fun onLiveTranscriptionStatus(status: ZoomVideoSDKLiveTranscriptionHelper.ZoomVideoSDKLiveTranscriptionStatus?) {
-            Log.d(TAG, "onLiveTranscriptionStatus: ")
+            Log.d(TAG,"onLiveTranscriptionStatus: ")
         }
 
         override fun onOriginalLanguageMsgReceived(messageInfo: ZoomVideoSDKLiveTranscriptionHelper.ILiveTranscriptionMessageInfo?) {
@@ -305,6 +319,10 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
             status: ZoomVideoSDKNetworkStatus?,
             user: ZoomVideoSDKUser?
         ) {
+            if (status == ZoomVideoSDKNetworkStatus.ZoomVideoSDKNetwork_None || status == ZoomVideoSDKNetworkStatus.ZoomVideoSDKNetwork_Bad) {
+                showLowBandwidthAlert(context)
+            }
+
             Log.d(TAG, "onUserVideoNetworkStatusChanged: ")
         }
 
@@ -365,6 +383,8 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
             userList: MutableList<ZoomVideoSDKUser>?
         ) {}
 
+
+
     }
 
     init {
@@ -389,4 +409,14 @@ class InitVideoCallRoom(val context: Context, val roomCallback: RoomCallback) {
     }
 
 
+}
+fun showLowBandwidthAlert(context: Context) {
+
+    val alert = Toast.makeText(context, "Low bandwidth detected", Toast.LENGTH_LONG)
+    alert.show()
+
+    // Auto-hide after 5 seconds
+    Handler(Looper.getMainLooper()).postDelayed({
+        alert.cancel()
+    }, 5000)
 }

@@ -84,7 +84,8 @@ class MentorMyMenteeListAdapter(
                     INTENT_KEY_CHATTER_TYPE to TYPE_MENTEE,
                     INTENT_KEY_CHAT_SID to item?.channelSid,
                     INTENT_KEY_CHAT_CODE to item?.code,
-                )/*activity.startActivity<ChatDetailsActivity>(
+                )
+                /*activity.startActivity<ChatDetailsActivity>(
                     INTENT_KEY_CHATTER_ID to item?.id?.toString(),
                     INTENT_KEY_CHATTER_NAME to "${item?.firstname} ${item?.middlename} ${item?.lastname}",
                     INTENT_KEY_CHATTER_PIC to url,

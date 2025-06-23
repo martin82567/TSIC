@@ -27,7 +27,7 @@ class PdfViewerActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding?.rootLayout?.setBackgroundResource(
+        binding?.rootContentLayout?.setBackgroundResource(
             when (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
                 Configuration.UI_MODE_NIGHT_NO ->
                     R.drawable.bg_all_white

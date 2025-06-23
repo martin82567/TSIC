@@ -67,15 +67,15 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
 
     fun fetchMsgList(showProgress: Boolean = true) {
         when (myLoginMode) {
-            TYPE_MENTEE -> if (chatterType.get()
-                    ?.toString() ?: "" == TYPE_MENTOR
+            TYPE_MENTEE -> if ((chatterType.get()
+                    ?.toString() ?: "") == TYPE_MENTOR
             ) getMenteeMyMentorChatMsgList(
                 showProgress
             )
             else getMenteeMyStaffChatMsgList(showProgress)
 
-            else -> if (chatterType.get()
-                    ?.toString() ?: "" == TYPE_MENTEE
+            else -> if ((chatterType.get()
+                    ?.toString() ?: "") == TYPE_MENTEE
             ) getMentorMyMenteeChatMsgList(
                 showProgress
             ) else getMentorMyStaffChatMsgList(showProgress)
@@ -121,10 +121,10 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                         result.data.let {
                             val t = it?.count_message
                             chatCount =
-                                if (t?.rem(15) == 0) t?.div(15) else t?.div(15)?.plus(1) ?: 0
+                                if (t?.rem(15) == 0) t.div(15) else t?.div(15)?.plus(1) ?: 0
                             chatCount
                             if (page == 0)
-                                chatTempMsgList?.clear()
+                                chatTempMsgList.clear()
                             if (result.data?.chatList?.size == 0)
                                 page--
                             else {
@@ -133,12 +133,12 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                                         it.chatterServerPic = chatterPic.get()?.toString() ?: ""
                                     }
                                 }
-                                v?.forEach { it ->
-                                    chatTempMsgList?.add(it)
+                                v?.forEach { it1 ->
+                                    chatTempMsgList.add(it1)
                                 }
                                 /* chatMsgList=chatTempMsgList
                                  rvAdapter?.notifyDataSetChanged()*/
-                                activity?.binding?.contentChatMessage?.rvChatMessageList?.apply {
+                                activity.binding?.contentChatMessage?.rvChatMessageList?.apply {
                                     scrollToPosition(if (page * 15 == 0) 0 else page * 15 - 1)
                                     adapter = ChatDetailsAdapter(chatTempMsgList, activity)
                                 }
@@ -199,10 +199,10 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                                 })*/
                                 val t = it?.count_message
                                 chatCount =
-                                    if (t?.rem(15) == 0) t?.div(15) else t?.div(15)?.plus(1) ?: 0
+                                    if (t?.rem(15) == 0) t.div(15) else t?.div(15)?.plus(1) ?: 0
                                 chatCount
                                 if (page == 0)
-                                    chatTempMsgList?.clear()
+                                    chatTempMsgList.clear()
                                 if (result.data?.chatList?.size == 0)
                                     moreData = false
                                 else {
@@ -212,14 +212,14 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                                             it.chatterServerPic = chatterPic.get()?.toString() ?: ""
                                         }
                                     }
-                                    v?.forEach { it ->
-                                        chatTempMsgList?.add(it)
+                                    v?.forEach { it1 ->
+                                        chatTempMsgList.add(it1)
                                     }
                                     /*chatMsgList=chatTempMsgList
 //                                    activity?.binding?.contentChatMessage?.rvChatMessageList?.invalidate()
                                     rvAdapter?.notifyDataSetChanged()
 */
-                                    activity?.binding?.contentChatMessage?.rvChatMessageList?.apply {
+                                    activity.binding?.contentChatMessage?.rvChatMessageList?.apply {
                                         scrollToPosition(if (page * 15 == 0) 0 else page * 15 - 1)
                                         adapter = ChatDetailsAdapter(chatTempMsgList, activity)
                                     }
@@ -277,10 +277,10 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                             result.data.let {
                                 val t = it?.count_message
                                 chatCount =
-                                    if (t?.rem(15) == 0) t?.div(15) else t?.div(15)?.plus(1) ?: 0
+                                    if (t?.rem(15) == 0) t.div(15) else t?.div(15)?.plus(1) ?: 0
                                 chatCount
                                 if (page == 0)
-                                    chatTempMsgList?.clear()
+                                    chatTempMsgList.clear()
                                 if (result.data?.chatList?.size == 0)
                                     page--
                                 else {
@@ -289,13 +289,13 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                                             it.chatterServerPic = chatterPic.get()?.toString() ?: ""
                                         }
                                     }
-                                    v?.forEach { it ->
-                                        chatTempMsgList?.add(it)
+                                    v?.forEach { it1 ->
+                                        chatTempMsgList.add(it1)
                                     }
                                     /*chatMsgList=chatTempMsgList
 //                                    activity?.binding?.contentChatMessage?.rvChatMessageList?.invalidate()
                                     rvAdapter?.notifyDataSetChanged()*/
-                                    activity?.binding?.contentChatMessage?.rvChatMessageList?.apply {
+                                    activity.binding?.contentChatMessage?.rvChatMessageList?.apply {
                                         scrollToPosition(if (page * 15 == 0) 0 else page * 15 - 1)
                                         adapter = ChatDetailsAdapter(chatTempMsgList, activity)
                                     }
@@ -360,7 +360,7 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                                 })*/
 
                                 if (page == 0)
-                                    chatTempMsgList?.clear()
+                                    chatTempMsgList.clear()
                                 if (result.data?.chatList?.size == 0)
                                     moreData = false
                                 else {
@@ -370,13 +370,13 @@ class ChatDetailsViewModel(private val activity: ChatDetailsActivity) {
                                             it.chatterServerPic = chatterPic.get()?.toString() ?: ""
                                         }
                                     }
-                                    v?.forEach { it ->
-                                        chatTempMsgList?.add(it)
+                                    v?.forEach { it1 ->
+                                        chatTempMsgList.add(it1)
                                     }
                                     /*chatMsgList=chatTempMsgList
                                     //activity?.binding?.contentChatMessage?.rvChatMessageList?.invalidate()
                                     rvAdapter?.notifyDataSetChanged()*/
-                                    activity?.binding?.contentChatMessage?.rvChatMessageList?.apply {
+                                    activity.binding?.contentChatMessage?.rvChatMessageList?.apply {
                                         scrollToPosition(if (page * 15 == 0) 0 else page * 15 - 1)
                                         adapter = ChatDetailsAdapter(chatTempMsgList, activity)
                                     }

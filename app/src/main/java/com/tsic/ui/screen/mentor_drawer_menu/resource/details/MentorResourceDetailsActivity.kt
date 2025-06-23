@@ -21,6 +21,7 @@ import org.jetbrains.anko.browse
 import org.jetbrains.anko.configuration
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.util.Locale
 
 class MentorResourceDetailsActivity : AppCompatActivity() {
 
@@ -78,7 +79,7 @@ class MentorResourceDetailsActivity : AppCompatActivity() {
     }
 
     private fun checkLearningType() {
-        when (e_learning_model?.type?.toLowerCase()) {
+        when (e_learning_model?.type?.lowercase(Locale.getDefault())) {
             "url" -> {
 
                 binding.contentLayout.tVLearningModuleUrl.setOnClickListener {

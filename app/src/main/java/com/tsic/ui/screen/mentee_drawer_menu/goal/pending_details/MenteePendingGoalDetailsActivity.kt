@@ -5,30 +5,33 @@ package com.tsic.ui.screen.mentee_drawer_menu.goal.pending_details
  */
 
 //import com.github.tcking.giraffecompressor.GiraffeCompressor
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.downloader.PRDownloader
 import com.downloader.PRDownloaderConfig
-import com.jaiselrahman.filepicker.activity.FilePickerActivity
-import com.jaiselrahman.filepicker.config.Configurations
-import com.jaiselrahman.filepicker.model.MediaFile
+import com.esafirm.imagepicker.features.ImagePickerConfig
+import com.esafirm.imagepicker.features.ImagePickerMode
+import com.esafirm.imagepicker.features.registerImagePicker
 import com.tsic.R
 import com.tsic.databinding.ActivityMenteePendingGoalDetailsBinding
 import com.tsic.ui.screen.mentee_drawer_menu.goal.pending_details.add_note.MenteePendingGoalsAddNoteActivity
 import com.tsic.util.INTENT_KEY_GOAL_ID
 import com.tsic.util.extension.setStatusBarColor
-import org.jetbrains.anko.startActivityForResult
+import com.tsic.util.getFilePathFromUri
+import gun0912.tedimagepicker.builder.TedImagePicker
 import org.jetbrains.anko.toast
 
 class MenteePendingGoalDetailsActivity : AppCompatActivity() {
 
     //declarations
-    private val FILE_REQUEST_CODE: Int = 100
-    private val REQUEST_SAVE_NOTES = 101
     internal val binding by lazy {
         DataBindingUtil.setContentView<ActivityMenteePendingGoalDetailsBinding>(
             this,
@@ -36,6 +39,19 @@ class MenteePendingGoalDetailsActivity : AppCompatActivity() {
         )
     }
     val goalId by lazy { intent.getStringExtra(INTENT_KEY_GOAL_ID) ?: "" }
+
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { _ ->
+        selectImages()
+    }
+
+    private val startActivityForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result -> if (result.resultCode == RESULT_OK) {
+        binding?.vm?.getGoalDetails(goalId)
+    }
+    }
 
     //methods
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -117,65 +133,47 @@ class MenteePendingGoalDetailsActivity : AppCompatActivity() {
     }
 
     fun selectImages() {
-        val intent = Intent(this, FilePickerActivity::class.java).apply {
-            putExtra(
-                FilePickerActivity.CONFIGS, Configurations.Builder()
-                    .setCheckPermission(true)
-                    .setShowImages(true)
-                    .setShowAudios(false)
-                    .setShowVideos(false)
-                    .enableImageCapture(true)
-                    .enableVideoCapture(false)
-                    .setMaxSelection(5)
-                    //.setSingleChoiceMode(true)
-                    .setSkipZeroSizeFiles(true)
-                    .build()
-            )
+        val permissionsToRequest = mutableListOf<String>()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.CAMERA)
+//            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                permissionsToRequest.add(Manifest.permission.READ_MEDIA_IMAGES)
+//            }
         }
-        startActivityForResult(intent, FILE_REQUEST_CODE)
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        // Request permissions if not granted
+        if (permissionsToRequest.isNotEmpty()) {
+            cameraPermissionLauncher.launch(permissionsToRequest.toTypedArray())
+            return
+        }
 
-        if (requestCode == FILE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                binding.vm?.apply {
-                    val mPaths =
-                        data?.getParcelableArrayListExtra<MediaFile>(FilePickerActivity.MEDIA_FILES)
-                    if (mPaths != null && mPaths.isNotEmpty())
-                        binding?.vm?.apply {
-                            uploadFile(mPaths)
-                        }
+        TedImagePicker.with(this)
+            .image()
+            .max(5, "You can only select five image")
+            .dropDownAlbum()
+            .startMultiImage { uriList ->
+                val filePathList = uriList.map { getFilePathFromUri(it, this) }
 
+                if (filePathList.isNotEmpty() && filePathList.any { it.isNotEmpty() }) {
+                    binding?.vm?.apply {
+                        uploadFile(filePathList)
+                    }
+
+                } else {
+                    toast("Something went wrong")
                 }
-
             }
-        }
-        if (requestCode == REQUEST_SAVE_NOTES) {
-            if (resultCode == RESULT_OK) {
-                binding?.vm?.getGoalDetails(goalId)
-            }
-        }
-    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            selectImages()
-        } else {
-            showToast("Please approve permissions to open ImagePicker")
-        }
     }
 
     fun gotoAddNoteScreen(view: View) {
-        startActivityForResult<MenteePendingGoalsAddNoteActivity>(
-            REQUEST_SAVE_NOTES,
-            INTENT_KEY_GOAL_ID to binding?.vm?.details?.get()?.id?.toString()
-        )
+        val intent = Intent(this, MenteePendingGoalsAddNoteActivity::class.java).apply {
+            putExtra(INTENT_KEY_GOAL_ID, binding?.vm?.details?.get()?.id?.toString())
+        }
+
+        startActivityForResult.launch(intent)
+
     }
 }

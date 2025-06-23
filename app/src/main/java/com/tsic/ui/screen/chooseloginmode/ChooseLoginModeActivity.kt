@@ -17,8 +17,6 @@ import com.tsic.data.local.prefs.USER_PREF
 import com.tsic.databinding.ActivityChooseLoginModeBinding
 import com.tsic.ui.screen.mentor_bottom_menu.mysessions.calendarView.makeInVisible
 import com.tsic.ui.screen.mentor_bottom_menu.mysessions.calendarView.makeVisible
-import kotlinx.android.synthetic.main.activity_choose_login_mode.*
-import kotlinx.android.synthetic.main.content_choose_login_mode.view.*
 import org.jetbrains.anko.configuration
 import org.jetbrains.anko.toast
 

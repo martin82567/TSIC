@@ -17,16 +17,18 @@ import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
 import java.io.File
 import java.net.URLConnection
+import java.util.Locale
 
 
 var globalEmail: String? = null
@@ -88,7 +90,7 @@ fun Activity?.dismissKeyboard() {
 
 private fun isValidUrl(url: String): Boolean {
     val p = Patterns.WEB_URL
-    val m = p.matcher(url.toLowerCase())
+    val m = p.matcher(url.lowercase(Locale.getDefault()))
     return m.matches()
 }
 
@@ -132,9 +134,17 @@ fun Activity?.playVideo(playerView: PlayerView, url: String) {
 }
 
 private fun buildMediaSource(uri: Uri): MediaSource {
-    return ExtractorMediaSource.Factory(
-        DefaultHttpDataSourceFactory("exoplayer-codelab")
-    ).createMediaSource(uri)
+    // Use DefaultHttpDataSource directly instead of DefaultHttpDataSourceFactory
+    val dataSourceFactory = DefaultHttpDataSource.Factory()
+        .setUserAgent("exoplayer-codelab") // Set the user agent
+
+    // Create a media source factory using the new DefaultHttpDataSource
+    val mediaSourceFactory =
+        com.google.android.exoplayer2.source.DefaultMediaSourceFactory(dataSourceFactory)
+
+    // Create and return the media source for the given URI
+    return mediaSourceFactory.createMediaSource(MediaItem.fromUri(uri))
+
 }
 
 fun String.isImageFile(): Boolean {

@@ -2,11 +2,14 @@ package com.tsic.util
 
 import android.annotation.TargetApi
 import android.content.Context
+import android.database.Cursor
 import android.graphics.ImageFormat
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
+import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import com.zipow.nydus.VideoCapturer
 import us.zoom.sdk.ZoomVideoSDK
 import java.util.*
@@ -165,4 +168,17 @@ class CameraCapturerCompat()  {
                 camera2Capturer = null
             }*/
     }
+}
+
+fun getFilePathFromUri(uri: Uri, context: Context): String {
+    val projection = arrayOf(MediaStore.Images.Media.DATA)
+    val cursor: Cursor? = context.contentResolver.query(uri, projection, null, null, null)
+
+    cursor?.use {
+        if (it.moveToFirst()) {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            return it.getString(columnIndex)
+        }
+    }
+    return ""
 }

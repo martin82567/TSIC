@@ -30,7 +30,6 @@ import com.tsic.util.INTENT_KEY_LOGIN_MODE
 import com.tsic.util.TYPE_MENTEE
 import com.tsic.util.extension.ForgetPasswordDialog
 import com.tsic.util.extension.openBrowser
-import kotlinx.android.synthetic.main.content_login.*
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.configuration
 import org.jetbrains.anko.toast
@@ -159,7 +158,7 @@ class LoginActivity : AppCompatActivity() {
     fun showMessageWaiver(show: Boolean) {
         if (show) {
             binding?.contentLayout?.apply {
-                cb_t_n_c.visibility = View.VISIBLE
+                cbTNC.visibility = View.VISIBLE
                 msgDisplay=true
                 txtWaiverTxt()
 
@@ -167,7 +166,7 @@ class LoginActivity : AppCompatActivity() {
             }
         } else {
             binding?.contentLayout?.apply {
-                cb_t_n_c.visibility = View.GONE
+                cbTNC.visibility = View.GONE
                 msgDisplay=false
                 txtWaiverTxt()
 
@@ -235,7 +234,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.contentLayout.tvTNC.setText(spannable, TextView.BufferType.SPANNABLE)
         binding.contentLayout.tvTNC.visibility=View.VISIBLE
-        cb_t_n_c.visibility = View.VISIBLE
+        binding.contentLayout.cbTNC.visibility = View.VISIBLE
 
 
     }

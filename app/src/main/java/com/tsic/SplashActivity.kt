@@ -12,7 +12,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.google.firebase.iid.FirebaseInstanceId
+import androidx.databinding.DataBindingUtil
+import com.google.firebase.messaging.FirebaseMessaging
 import com.tsic.data.local.prefs.KEY_AUTH_TOKEN
 import com.tsic.data.local.prefs.KEY_DARK_MODE
 import com.tsic.data.local.prefs.KEY_FIREBASE_TOKEN
@@ -23,12 +24,14 @@ import com.tsic.data.local.prefs.PreferenceHelper.setData
 import com.tsic.data.local.prefs.USER_PREF
 import com.tsic.data.remote.api.DEBUG
 import com.tsic.data.remote.api.MentorApiService
+import com.tsic.databinding.ActivityMentorMyProfileBinding
+import com.tsic.databinding.ActivitySplashBinding
+import com.tsic.databinding.ActivityTwilioChatBinding
 import com.tsic.ui.screen.chooseloginmode.ChooseLoginModeActivity
 import com.tsic.ui.screen.mentee_bottom_menu.myprofile.MenteeMyProfileActivity
 import com.tsic.ui.screen.mentor_bottom_menu.myprofile.MentorMyProfileActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_splash.root_layout
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.configuration
 import org.jetbrains.anko.startActivity
@@ -38,6 +41,13 @@ import org.jetbrains.anko.toast
 class SplashActivity : AppCompatActivity() {
 
     val SPLASH_TIMEOUT = 2000L
+    val binding by lazy {
+        DataBindingUtil.setContentView<ActivitySplashBinding>(
+            this,
+            R.layout.activity_splash
+        )
+    }
+
     private val userPrefs: SharedPreferences? by lazy {
         PreferenceHelper.customPrefs(this, USER_PREF)
     }
@@ -62,7 +72,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
         when (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
@@ -70,14 +79,14 @@ class SplashActivity : AppCompatActivity() {
                 if (userPrefs?.getString(KEY_DARK_MODE, "") == "0" ||
                     userPrefs?.getString(KEY_DARK_MODE, "") == ""
                 ) {
-                    root_layout?.setBackgroundResource(R.drawable.bg_all_white)
+                    binding.rootLayout.setBackgroundResource(R.drawable.bg_all_white)
                 } else {
-                    root_layout?.setBackgroundResource(R.drawable.bg3)
+                    binding.rootLayout.setBackgroundResource(R.drawable.bg3)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
             } // Night mode is not active, we're using the light theme
             Configuration.UI_MODE_NIGHT_YES -> {
-                root_layout?.setBackgroundResource(R.drawable.bg3)
+                binding.rootLayout.setBackgroundResource(R.drawable.bg3)
             } // Night mode is active, we're using dark theme
         }
 
@@ -100,12 +109,13 @@ class SplashActivity : AppCompatActivity() {
         remoteConfig.setConfigSettingsAsync(configSettings)
     }*/
     private fun fetchFirebaseToken() {
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
-            instanceIdResult?.token?.let {
+        FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
+            token?.let {
                 userPrefs?.apply {
                     setData(KEY_FIREBASE_TOKEN, it)
                     Log.d("FIREBASE_TOKEN-->", it)
-                    //sendTokenToServer(it)
+                    // Optionally, send token to your server
+                    // sendTokenToServer(it)
                     handler.postDelayed(runnable, SPLASH_TIMEOUT)
                 }
             }

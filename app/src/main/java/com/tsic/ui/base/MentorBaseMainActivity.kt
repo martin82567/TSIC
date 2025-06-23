@@ -133,7 +133,7 @@ abstract class MentorBaseMainActivity : AppCompatActivity(),
 
     private fun setSeesionLogBroadcastReceiver() {
         val filter = IntentFilter(BROADCAST_SHOW_LOG_SESSION_POPUP)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(sessionLogBroadcastReceiver, filter, RECEIVER_NOT_EXPORTED)
         } else {
             registerReceiver(sessionLogBroadcastReceiver, filter)

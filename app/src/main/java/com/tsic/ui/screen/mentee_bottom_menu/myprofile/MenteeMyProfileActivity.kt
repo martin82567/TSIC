@@ -5,7 +5,7 @@ package com.tsic.ui.screen.mentee_bottom_menu.myprofile
  */
 
 import android.Manifest
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -17,15 +17,15 @@ import android.os.Build
 import android.os.CountDownTimer
 import android.provider.Settings
 import android.view.View
-import android.view.WindowManager
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import com.jaiselrahman.filepicker.activity.FilePickerActivity
-import com.jaiselrahman.filepicker.config.Configurations
-import com.jaiselrahman.filepicker.model.MediaFile
+import com.esafirm.imagepicker.features.registerImagePicker
 import com.tsic.R
 import com.tsic.databinding.ActivityMenteeMyProfileBinding
 import com.tsic.ui.base.MenteeBaseMainActivity
@@ -39,6 +39,8 @@ import com.tsic.ui.screen.util_screens.FullscreenImageActivity
 import com.tsic.util.INTENT_KEY_TITLE
 import com.tsic.util.INTENT_KEY_URL
 import com.tsic.util.extension.dismissKeyboard
+import com.tsic.util.getFilePathFromUri
+import gun0912.tedimagepicker.builder.TedImagePicker
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.textInputEditText
 import org.jetbrains.anko.design.textInputLayout
@@ -47,14 +49,22 @@ import java.util.*
 
 class MenteeMyProfileActivity : MenteeBaseMainActivity() {
 
-    private val ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 107
-
-    private val FILE_REQUEST_CODE: Int = 101
     private var disposable: CountDownTimer? = null
     var adapter: MenteeBannerListAdapter? = null
 
     //declarations
     var binding: ActivityMenteeMyProfileBinding? = null
+
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { _ ->
+        updateImage()
+    }
+
+    private val popupPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { _ -> showPermissionDialog()
+    }
 
     override fun getContentView() {
         val stub = bindingBase.appBarMain.viewstub.viewStub
@@ -72,32 +82,31 @@ class MenteeMyProfileActivity : MenteeBaseMainActivity() {
 
 
     private fun initUiAndListeners() {
-        bindingBase?.appBarMain?.toolbar?.title == "My Profile"
-        checkPermission()
+        showPermissionDialog()
         binding?.apply {
             vm = MenteeMyProfileViewModel(this@MenteeMyProfileActivity)
             activity = this@MenteeMyProfileActivity
             initBannerAdapter()
-            contentLayout?.swipeRefreshLayout?.setOnRefreshListener {
+            contentLayout.swipeRefreshLayout.setOnRefreshListener {
                 vm?.getUserData(true)
                 //vm?.getSystemMessage()
             }
-            contentLayout?.chatMentor?.setOnClickListener {
+            contentLayout.chatMentor.setOnClickListener {
                 gotoMentorChatScreen(it)
             }
-            contentLayout?.goalMenteeScreen?.setOnClickListener {
+            contentLayout.goalMenteeScreen.setOnClickListener {
                 gotoGoalScreen(it)
             }
-            contentLayout?.meetingMentor?.setOnClickListener {
+            contentLayout.meetingMentor.setOnClickListener {
                 gotoMeetingScreen(it)
             }
             val currentNightMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
             when (currentNightMode) {
                 Configuration.UI_MODE_NIGHT_NO -> {
-                    contentLayout?.rootContentLayout?.setBackgroundResource(R.drawable.bg_profile_top)
-                } // Night mode is not active, we're using the light theme
+                    contentLayout.rootContentLayout.setBackgroundResource(R.drawable.bg_profile_top)
+                }
                 Configuration.UI_MODE_NIGHT_YES -> {
-                    contentLayout?.rootContentLayout?.setBackgroundResource(R.drawable.bg1)
+                    contentLayout.rootContentLayout.setBackgroundResource(R.drawable.bg1)
                 } // Night mode is active, we're using dark theme
             }
             /*contentLayout?.gotToResource?.setOnClickListener {
@@ -115,7 +124,7 @@ class MenteeMyProfileActivity : MenteeBaseMainActivity() {
                     110
                 )
             }
-        } catch (e: java.lang.Exception) {
+        } catch (_: java.lang.Exception) {
         }
     }
 
@@ -137,23 +146,41 @@ class MenteeMyProfileActivity : MenteeBaseMainActivity() {
     }
 
     fun updateImage() {
-        val intent = Intent(this, FilePickerActivity::class.java).apply {
-            putExtra(
-                FilePickerActivity.CONFIGS, Configurations.Builder()
-                    .setCheckPermission(true)
-                    .setShowImages(true)
-                    .setShowAudios(false)
-                    .setShowVideos(false)
-                    .enableImageCapture(true)
-                    .enableVideoCapture(false)
-                    .setMaxSelection(1)
-                    //.setSingleChoiceMode(true)
-                    .setSkipZeroSizeFiles(true)
-                    .build()
-            )
+
+        val permissionsToRequest = mutableListOf<String>()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.CAMERA)
+//            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                permissionsToRequest.add(Manifest.permission.READ_MEDIA_IMAGES)
+//            }
         }
-        startActivityForResult(intent, FILE_REQUEST_CODE)
+
+        // Request permissions if not granted
+        if (permissionsToRequest.isNotEmpty()) {
+            cameraPermissionLauncher.launch(permissionsToRequest.toTypedArray())
+            return
+        }
+
+        TedImagePicker.with(this)
+            .image()
+            .max(1, "You can only select one image")
+            .dropDownAlbum()
+            .start { uri ->
+                val filePath = getFilePathFromUri(uri, this)
+            if (filePath.isNotEmpty()) {
+                binding?.vm?.apply {
+                    profilePic.set(filePath)
+                    updateProfile()
+                }
+            } else {
+                toast("Something went wrong")
+            }
+        }
+
     }
+
 
     fun updateUsername() {
         binding?.vm?.apply {
@@ -184,93 +211,63 @@ class MenteeMyProfileActivity : MenteeBaseMainActivity() {
                         updateProfile()
                 }
                 cancelButton { dismissKeyboard() }
-                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+              //  window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             }.show()
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 110) {
-            return
-        }
-        if (requestCode == FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val mPaths =
-                data?.getParcelableArrayListExtra<MediaFile>(FilePickerActivity.MEDIA_FILES)
-            if (mPaths != null && mPaths.isNotEmpty())
-                binding?.vm?.apply {
-                    profilePic.set(mPaths.get(0)?.path)
-                    updateProfile() //for image
+    private fun showPermissionDialog() {
+        if (!Settings.canDrawOverlays(this)) {
+            AlertDialog.Builder(this)
+                .setTitle("Overlay Permission Needed")
+                .setMessage("This app needs the 'Display over other apps' permission to show important alerts while you're using other apps.")
+                .setCancelable(false)
+                .setPositiveButton(
+                    android.R.string.ok
+                ) { dialog, which ->
+                    checkPermission()
                 }
-
-
-        }
-        if (requestCode == ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE) {
-            if (!Settings.canDrawOverlays(this)) {
-                // You don't have permission
-                checkPermission();
-            } else {
-                getNotificationPermission()
-            }
+                .setIconAttribute(android.R.attr.alertDialogIcon)
+                .show()
+        } else {
+            getNotificationPermission()
         }
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(this)) {
-                if ("xiaomi" == Build.MANUFACTURER.toLowerCase(Locale.ROOT)) {
-                    try {
-                        val intent = Intent("miui.intent.action.APP_PERM_EDITOR")
-                        intent.setClassName(
-                            "com.miui.securitycenter",
-                            "com.miui.permcenter.permissions.PermissionsEditorActivity"
-                        )
-                        intent.putExtra("extra_pkgname", getPackageName())
-                        startActivity(intent)
-                    } catch (e: Exception) {
-                        val intent = Intent(
-                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            Uri.parse("package:$packageName")
-                        )
-                        startActivityForResult(
-                            intent,
-                            ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE
-                        )
-                    }
-                } else {
+        if (!Settings.canDrawOverlays(this)) {
+            if ("xiaomi" == Build.MANUFACTURER.lowercase(Locale.ROOT)) {
+                try {
+                    val intent = Intent("miui.intent.action.APP_PERM_EDITOR")
+                    intent.setClassName(
+                        "com.miui.securitycenter",
+                        "com.miui.permcenter.permissions.PermissionsEditorActivity"
+                    )
+                    intent.putExtra("extra_pkgname", packageName)
+                    startActivity(intent)
+                } catch (e: Exception) {
                     val intent = Intent(
                         Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:$packageName")
                     )
-                    startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE)
+                    popupPermissionLauncher.launch(intent)
                 }
+            } else {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                popupPermissionLauncher.launch(intent)
             }
-
         }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            updateImage()
-        } else {
-            showToast("Please approve permissions to open ImagePicker")
         }
-        /*ActivityCompat.requestPermissions(
-            this,
-            arrayOf(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION
-            ),
-            ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE
-        )*/
     }
 
     fun clearBadge() {
         val n = NotificationCompat.Builder(applicationContext, getString(R.string.app_name))
+
             .setSmallIcon(R.drawable.tsic)
             .setContentTitle("")
             .setContentText("")
@@ -308,7 +305,9 @@ class MenteeMyProfileActivity : MenteeBaseMainActivity() {
         binding?.vm?.getSystemMessage()
         disposable = object : CountDownTimer(360000, 5500) {
             override fun onTick(millisUntilFinished: Long) {
-                binding?.vm?.getUserData()
+
+                    binding?.vm?.getUserData()
+
                 binding?.vm?.getSystemMessage()
             }
 
@@ -424,3 +423,4 @@ class MenteeMyProfileActivity : MenteeBaseMainActivity() {
 
 
 }
+

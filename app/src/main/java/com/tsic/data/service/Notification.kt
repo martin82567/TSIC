@@ -1,5 +1,6 @@
 package com.tsic.data.service
 
+import android.app.ActivityManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,7 +9,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.media.RingtoneManager
+import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.tsic.R
 import com.tsic.SplashActivity
 import com.tsic.data.local.prefs.KEY_LOGIN_MENTOR
@@ -17,6 +20,7 @@ import com.tsic.data.local.prefs.PreferenceHelper
 import com.tsic.data.local.prefs.USER_PREF
 import com.tsic.data.remote.api.finishUI
 import com.tsic.data.remote.api.isShowCallUIOneTime
+import com.tsic.ui.base.AppVisibilityTracker
 import com.tsic.ui.common.ForegroundCheckTask
 import com.tsic.ui.screen.mentee_bottom_menu.mychats.my_mentor_list.MenteeMyMentorListActivity
 import com.tsic.ui.screen.mentee_bottom_menu.mychats.my_staff_list.MenteeMyStaffListActivity
@@ -26,6 +30,9 @@ import com.tsic.ui.screen.message_center.MessageCenterActivity
 import com.tsic.ui.screen.receivevideocall.ReceiveVideoCallActivity
 import com.tsic.util.TYPE_MENTEE
 import com.tsic.util.TYPE_MENTOR
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.util.Locale
 
 class Notification(val context: Context) {
 
@@ -90,7 +97,7 @@ class Notification(val context: Context) {
                 "Chat",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            channel.description = body.toUpperCase()
+            channel.description = body.uppercase(Locale.getDefault())
             channel.setShowBadge(true)
             notificationManager.createNotificationChannel(channel)
         }
@@ -144,7 +151,7 @@ class Notification(val context: Context) {
                 "MissCall",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            channel.description = body.toUpperCase()
+            channel.description = body.uppercase(Locale.getDefault())
             channel.setShowBadge(true)
             notificationManager.createNotificationChannel(channel)
         }
@@ -195,7 +202,7 @@ class Notification(val context: Context) {
                 "TipStatus",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            channel.description = body.toUpperCase()
+            channel.description = body.uppercase(Locale.getDefault())
             channel.setShowBadge(true)
             notificationManager.createNotificationChannel(channel)
         }
@@ -244,7 +251,7 @@ fun showMessageNotification(
                 "TipStatus",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            channel.description = body.toUpperCase()
+            channel.description = body.uppercase(Locale.getDefault())
             channel.setShowBadge(true)
             notificationManager.createNotificationChannel(channel)
         }
@@ -296,7 +303,7 @@ fun showMessageNotification(
                 "Meeting",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            channel.description = body.toUpperCase()
+            channel.description = body.uppercase(Locale.getDefault())
             channel.setShowBadge(true)
             notificationManager.createNotificationChannel(channel)
         }
@@ -313,38 +320,80 @@ fun showMessageNotification(
         roomSid: String,
         remainingTime: String,
         createdAt: String,
-        callFrom: String
+        callFrom: String,
+        notificationId: Int,
+        channelId: String
     ) {
-        val foregroud = ForegroundCheckTask().execute(context).get()
         finishUI = false
         isShowCallUIOneTime = 0
-        if (foregroud) {
-            val intentNotif = Intent(context, ReceiveVideoCallActivity::class.java)
-            intentNotif.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intentNotif.putExtra("token", token)
-            intentNotif.putExtra("roomName", roomName)
-            intentNotif.putExtra("roomSid", roomSid)
-            intentNotif.putExtra("name", name)
-            intentNotif.putExtra("remainingTime", remainingTime)
-            intentNotif.putExtra("created_at", createdAt)
-            intentNotif.putExtra("call_from", callFrom)
-            context.startActivity(intentNotif)
 
-        } else {
-            val intentNotif = Intent(context, ReceiveVideoCallActivity::class.java)
-            intentNotif.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intentNotif.putExtra("token", token)
-            intentNotif.putExtra("roomName", roomName)
-            intentNotif.putExtra("roomSid", roomSid)
-            intentNotif.putExtra("name", name)
-            intentNotif.putExtra("remainingTime", remainingTime)
-            intentNotif.putExtra("created_at", createdAt)
-            intentNotif.putExtra("call_from", callFrom)
+        val intentNotif = Intent(context, ReceiveVideoCallActivity::class.java)
+        intentNotif.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intentNotif.putExtra("token", token)
+        intentNotif.putExtra("roomName", roomName)
+        intentNotif.putExtra("roomSid", roomSid)
+        intentNotif.putExtra("name", name)
+        intentNotif.putExtra("remainingTime", remainingTime)
+        intentNotif.putExtra("created_at", createdAt)
+        intentNotif.putExtra("call_from", callFrom)
+
+        val canStartDirectly = Build.VERSION.SDK_INT > Build.VERSION_CODES.S || AppVisibilityTracker.isAppInForeground
+
+        if (canStartDirectly) {
             context.startActivity(intentNotif)
+        } else {
+            val notifyImage = BitmapFactory.decodeResource(context.resources, R.drawable.app_logo)
+            val uriDefaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+
+            val pendingIntentFlags =
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                intentNotif,
+                pendingIntentFlags
+            )
+
+
+            val builder = NotificationCompat.Builder(context, channelId)
+                .setSmallIcon(R.drawable.tsic)
+                .setLargeIcon(notifyImage)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setContentInfo("")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setTicker(context.getString(R.string.app_name))
+                .setSound(uriDefaultSound)
+                .setContentIntent(pendingIntent)
+                .setStyle(
+                    NotificationCompat.BigTextStyle()
+                        .bigText(body)
+                )
+
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+
+
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    channelId,
+                    "VideoCall",
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+                channel.description = body.uppercase(Locale.getDefault())
+                channel.setShowBadge(true)
+                notificationManager.createNotificationChannel(channel)
+            }
+            notificationManager.notify(notificationId, builder.build())
 
         }
     }
-
-
 
 }

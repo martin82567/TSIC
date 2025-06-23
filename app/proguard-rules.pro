@@ -23,3 +23,7 @@
 -keep class com.twilio.video.** { *; }
 -keep class com.twilio.common.** { *; }
 -keepattributes InnerClasses
+
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*

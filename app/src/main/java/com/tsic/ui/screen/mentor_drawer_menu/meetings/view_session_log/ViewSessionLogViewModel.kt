@@ -25,6 +25,7 @@ class ViewSessionLogViewModel(private val activity: ViewSessionLogActivity) {
     var currentPage = 0
     var isCalling = false
     var tempList = mutableListOf<MentorPastMeeting?>()
+    var lastPage = false;
 
     private val userPrefs by lazy {
         activity?.let { PreferenceHelper.customPrefs(it, USER_PREF) }
@@ -56,6 +57,7 @@ class ViewSessionLogViewModel(private val activity: ViewSessionLogActivity) {
                                 tempList.clear()
                             result.data?.let { tempList.addAll(it) }
                             activity?.adapter?.notifyDataSetChanged()
+                            lastPage = tempList.size < 10
                             /*binding?.rvSession?.apply {
                                 layoutManager = LinearLayoutManager(this.context)
                                 setHasFixedSize(true)

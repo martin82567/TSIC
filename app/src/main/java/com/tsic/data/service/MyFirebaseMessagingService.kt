@@ -38,7 +38,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             PreferenceHelper.customPrefs(this, USER_PREF)
         }
         userPrefs?.apply { PreferenceHelper.setData(KEY_FIREBASE_TOKEN, token) }
-
     }
 
     @ExperimentalStdlibApi
@@ -121,7 +120,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                             receiverAccessToken,
                             roomName,
                             roomSid, remainingTime,
-                            createdAt, callFrom
+                            createdAt, callFrom, 198,
+                            remoteMessage.notification?.channelId ?: getString(R.string.app_name)
                         )
                     }
                 }

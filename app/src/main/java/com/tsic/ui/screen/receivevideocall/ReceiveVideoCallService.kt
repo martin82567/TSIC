@@ -11,8 +11,6 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.tsic.R
-import com.tsic.data.model.mentee_api.ZowodMsg
-import com.tsic.ui.screen.videocallscreen.InitVideoCallRoom
 import us.zoom.sdk.ZoomVideoSDK
 
 class ReceiveVideoCallService : Service() {

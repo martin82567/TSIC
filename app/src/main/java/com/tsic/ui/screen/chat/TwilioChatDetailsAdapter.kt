@@ -14,7 +14,7 @@ import com.tsic.ui.base.BaseRecyclerAdapter
 
 class TwilioChatDetailsAdapter(
     list: List<ChatMessage?>,
-    val identity:List<String>
+    val viewModel: TwilioChatViewModel
 ) :
     BaseRecyclerAdapter<ChatMessage?>(list) {
 
@@ -60,6 +60,7 @@ class TwilioChatDetailsAdapter(
     inner class ChatterMsgViewHolder(val binding: InflaterTwilioChatChatterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
+            binding.viewModel = viewModel
             binding.model = list[position]
             binding.executePendingBindings()
         }
@@ -70,6 +71,6 @@ class TwilioChatDetailsAdapter(
     {
         val item = list[position] ?: return super.getItemViewType(position)
 
-        return if (item.author==identity[0]) 0 else 1
+        return if (item.author== viewModel.identity[0]) 0 else 1
     }
 }

@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.tsic.data.model.common.PastMeetings
 import com.tsic.data.model.common.UpcominMeetings
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 
 data class MentorLoginResponseDetails(

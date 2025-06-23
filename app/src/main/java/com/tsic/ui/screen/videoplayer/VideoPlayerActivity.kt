@@ -2,30 +2,38 @@ package com.tsic.ui.screen.videoplayer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.tsic.R
+import com.tsic.databinding.ActivitySplashBinding
+import com.tsic.databinding.ActivityVideoPlayerBinding
 import com.tsic.util.extension.playVideo
-import kotlinx.android.synthetic.main.activity_video_player.*
 
 class VideoPlayerActivity : AppCompatActivity() {
 
+    val binding by lazy {
+        DataBindingUtil.setContentView<ActivityVideoPlayerBinding>(
+            this,
+            R.layout.activity_video_player
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_video_player)
     }
 
     override fun onResume() {
         super.onResume()
         val file = intent.getStringExtra("file")
         playVideo(
-            video_player,
+            binding.videoPlayer,
             file ?: ""
         )
     }
 
     override fun onPause() {
         super.onPause()
-        video_player?.player?.stop()
-        video_player?.player?.release()
+        binding.videoPlayer.player?.stop()
+        binding.videoPlayer.player?.release()
     }
 
 }

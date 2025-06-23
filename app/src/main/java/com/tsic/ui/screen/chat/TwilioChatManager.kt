@@ -263,7 +263,6 @@ class TwilioChatManager(val listener: ChatListener) {
                 }
             }
         )
-
     }
 
     fun sendChatMessage(messageBody: String?) {

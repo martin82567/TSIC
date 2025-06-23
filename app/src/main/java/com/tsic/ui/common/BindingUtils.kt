@@ -10,9 +10,10 @@ import android.text.method.ScrollingMovementMethod
 import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.tsic.R
-import com.tsic.util.GlideApp
 
 object BindingUtils {
     /*  @JvmStatic
@@ -56,7 +57,7 @@ object BindingUtils {
     fun ImageView.setImage(imageUrl: String?) {
         if (imageUrl == null) return
 
-        GlideApp.with(this.context).load(imageUrl)
+        Glide.with(this.context).load(imageUrl)
             .placeholder(if (imageUrl == "camera") R.drawable.ic_camera else R.drawable.loader)
             .into(this)
     }
@@ -65,7 +66,7 @@ object BindingUtils {
     @BindingAdapter(value = ["image_url_circular"], requireAll = false)
     fun ImageView.setImageCircular(imageUrlCircular: String?) {
         if (imageUrlCircular?.endsWith("/") == true) return
-        GlideApp.with(this.context).load(imageUrlCircular)
+        Glide.with(this.context).load(imageUrlCircular)
             .placeholder(if (imageUrlCircular == "avatar") R.drawable.ic_camera else R.drawable.loader)
             .circleCrop()
             .into(this)
@@ -75,8 +76,8 @@ object BindingUtils {
     @BindingAdapter(value = ["image_url_circular_profile"], requireAll = false)
     fun ImageView.setImageCircularProfile(imageUrlCircular: String?) {
         if (imageUrlCircular?.endsWith("/") == true) return
-        GlideApp.with(this.context).load(imageUrlCircular)
-            .placeholder(R.drawable.ic_avatar_all)
+        Glide.with(this.context).load(imageUrlCircular)
+            .placeholder(this.drawable ?: ContextCompat.getDrawable(this.context, R.drawable.ic_avatar_all))
             .circleCrop()
             .into(this)
     }

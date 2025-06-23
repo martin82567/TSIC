@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.tsic">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!--
          Some Chromebooks don't support touch. Although not essential,
@@ -10,7 +9,9 @@
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -30,11 +31,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_PHONE_CALL" />
     <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
+        tools:node="remove" />
     <!--
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -54,11 +57,16 @@
         android:roundIcon="@drawable/app_logo"
         android:showOnLockScreen="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:targetApi="n">
+        tools:replace="android:allowBackup"
+        tools:targetApi="n"
+        >
         <!--		<uses-library android:name="org.apache.http.legacy" android:required="false"/>-->
-        <activity android:name=".ui.screen.pdf_viewer.PdfViewerActivity"></activity>
+        <activity android:name=".ui.screen.pdf_viewer.PdfViewerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".ui.screen.mentee_bottom_menu.mymeeting.detaillist.MenteeMyAllMeetingActivity"
             android:screenOrientation="portrait"
@@ -83,7 +91,8 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".ui.screen.initvideocallscreen.InitVideoCallActivity" />
+        <activity android:name=".ui.screen.initvideocallscreen.InitVideoCallActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.screen.videoplayer.VideoPlayerActivity"
             android:screenOrientation="portrait"
@@ -324,6 +333,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
+
+        <activity
+            android:name="gun0912.tedimagepicker.TedImagePickerActivity"
+            android:theme="@style/TedImagePickerTheme.NoOverlap"
+            tools:replace="android:theme"/>
+
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
 
 </manifest>

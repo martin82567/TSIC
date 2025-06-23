@@ -291,7 +291,7 @@ class MenteeMyMeetingActivity : MenteeBaseMainActivity() {
                     container.legendLayout.tag = month.yearMonth
                     container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
                         tv.text = daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
-                            .toUpperCase(Locale.ENGLISH)
+                            .uppercase(Locale.ENGLISH)
                         tv.setTextColorRes(R.color.black)
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
                     }

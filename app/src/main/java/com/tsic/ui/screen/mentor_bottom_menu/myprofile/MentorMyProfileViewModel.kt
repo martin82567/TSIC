@@ -1,6 +1,7 @@
 package com.tsic.ui.screen.mentor_bottom_menu.myprofile
 
 
+import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import androidx.databinding.ObservableField
@@ -12,6 +13,7 @@ import com.tsic.data.model.Status
 import com.tsic.data.model.common.SystemMessage
 import com.tsic.data.model.mentor_api.AffiliateSystemMessaging
 import com.tsic.data.model.mentor_api.TodaysMeetingModel
+import com.tsic.data.remote.api.MENTEE_IMAGE_URL
 import com.tsic.data.remote.api.MENTOR_IMAGE_URL
 import com.tsic.data.remote.api.MentorApiService
 import com.tsic.ui.base.BaseApplication
@@ -19,6 +21,7 @@ import com.tsic.ui.screen.chatdetails.ChatDetailsBinding
 import com.tsic.ui.screen.chatdetails.ChatDetailsBinding.setData
 import com.tsic.ui.screen.mentor_bottom_menu.myprofile.dialog.DialogSessionReminder
 import com.tsic.ui.screen.mentor_bottom_menu.mysessions.MentorMySessionsActivity
+import com.tsic.ui.screen.mentor_bottom_menu.mysessions.autofilladdsession.MentorAutoFillAddSessionActivity
 import com.tsic.util.Utils
 import com.tsic.util.extension.dismissKeyboard
 import com.tsic.util.extension.isDeviceOnline
@@ -29,6 +32,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.io.File
 import java.text.SimpleDateFormat
@@ -89,10 +93,10 @@ class MentorMyProfileViewModel(private val activity: MentorMyProfileActivity) {
                                 setData(KEY_LAST_NAME, lastname)
                                 setData(KEY_EMAIL, email)
                                 setData(KEY_PHONE, phone)
-                                setData(
-                                    KEY_PROFILE_PIC,
-                                    "$MENTOR_IMAGE_URL$image"
-                                )
+//                                setData(
+//                                    KEY_PROFILE_PIC,
+//                                    "$MENTOR_IMAGE_URL$image"
+//                                )
                                 setData(KEY_ADDRESS, address)
 
 
@@ -107,7 +111,12 @@ class MentorMyProfileViewModel(private val activity: MentorMyProfileActivity) {
                             name.set("${firstname?.trim()} ${middlename?.trim()} ${lastname?.trim()}")
                             personalEmail.set(email)
                             phoneNumber.set(phone)
-                            profilePic.set("$MENTOR_IMAGE_URL$image")
+                            val picUrl = "${userPrefs?.getString(KEY_PROFILE_PIC, "")}"
+                            if ((picUrl != "$MENTOR_IMAGE_URL$image" || profilePic.get() == "")) {
+                                profilePic.set("$MENTOR_IMAGE_URL$image")
+                                setData(KEY_PROFILE_PIC, "$MENTOR_IMAGE_URL$image")
+                                activity.initUserDataOnNavHeader()
+                            }
                             personaladdress.set(address)
                             affiliateName.set(linkedAgencyName)
                             mentorMenteeChatCount.set(mentor_mentee_chat_count)
@@ -175,7 +184,18 @@ class MentorMyProfileViewModel(private val activity: MentorMyProfileActivity) {
 
                             if (past_meeting != null && BaseApplication.passedMeetingId != past_meeting?.id) {
                                 val dialogPassed = DialogSessionReminder(activity,activity.getString(R.string.header_reminder_log_session),activity.getString(R.string.scheduled_session, Utils.getSimplifiedDate(past_meeting?.schedule_time))+ " " +past_meeting?.firstname + " " + past_meeting?.lastname){
-                                    activity.startActivity(Intent(activity,MentorMySessionsActivity::class.java))
+                                 //   activity.startActivity(Intent(activity,MentorMySessionsActivity::class.java))
+
+                                    activity.startActivity<MentorAutoFillAddSessionActivity>(
+                                        "agenda_name" to past_meeting?.title,
+                                        "description" to past_meeting?.description,
+                                        "mentee_name" to "${past_meeting?.firstname} ${past_meeting?.lastname}",
+                                        "mentee_id" to past_meeting?.mentee_id.toString(),
+                                        "meeting_id" to past_meeting?.id?.toString(),
+                                        "date" to Utils.formatDate(past_meeting?.schedule_time.toString()),
+                                        "session_method_location" to past_meeting?.method_value,
+                                        "session_method_location_id" to past_meeting?.session_method_location_id.toString(),
+                                    )
                                 }
                                 BaseApplication.passedMeetingId = past_meeting?.id
                                 dialogPassed.show()
@@ -339,10 +359,10 @@ fun updateProfile() {
                                 setData(KEY_ADDRESS, result.data?.address)
                                 setData(KEY_PHONE, result.data?.phone)
                                 setData(KEY_EMAIL, result.data?.email)
-                                setData(
-                                    KEY_PROFILE_PIC,
-                                    "$MENTOR_IMAGE_URL${result.data?.image}"
-                                )
+//                                setData(
+//                                    KEY_PROFILE_PIC,
+//                                    "$MENTOR_IMAGE_URL${result.data?.image}"
+//                                )
                             }
                             activity.initUserDataOnNavHeader()
                         }

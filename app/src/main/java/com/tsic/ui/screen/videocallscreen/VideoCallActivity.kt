@@ -17,9 +17,11 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.snackbar.Snackbar
 import com.tsic.R
 import com.tsic.data.local.prefs.KEY_FIRST_NAME
 import com.tsic.data.local.prefs.KEY_LOGIN_MENTOR
@@ -30,7 +32,6 @@ import com.tsic.data.remote.api.busy
 import com.tsic.databinding.ActivityVideoCallScreenBinding
 import com.tsic.util.BROADCAST_END_CALL
 import com.tsic.util.BROADCAST_SHOW_LOG_SESSION_POPUP
-import kotlinx.android.synthetic.main.content_video_call_screen.primaryVideoView
 import org.jetbrains.anko.toast
 import us.zoom.sdk.ZoomVideoSDK
 import us.zoom.sdk.ZoomVideoSDKSessionContext
@@ -53,6 +54,7 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
     val RECEIVER_TYPE = 2
     val RECEIVER_ID = 3
     val zoomSdk = ZoomVideoSDK.getInstance()
+    var lastToast = ""
 
 
     /* private var localAudioTrack: LocalAudioTrack? = null
@@ -102,14 +104,17 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
         } "*/
     private val deniedCallBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            showToast("Call Disconnected")
-            finish()
+            if (lastToast != "Call Disconnected") {
+                showToast("Call Disconnected")
+                finish()
+            }
         }
     }
 
+
     private fun setSeesionDeniedBroadcastReceiver() {
         val filter = IntentFilter(BROADCAST_END_CALL)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(deniedCallBroadcastReceiver, filter, RECEIVER_EXPORTED)
         } else {
             registerReceiver(deniedCallBroadcastReceiver, filter)
@@ -122,6 +127,7 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
         super.onStart()
         setSeesionDeniedBroadcastReceiver()
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -295,7 +301,9 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
 
     private fun createAudioAndVideoTracks() {
         zoomSdk.videoHelper.startVideo()
+
         Log.d(TAG, "createAudioAndVideoTracks: ")
+        zoomSdk.videoHelper.rotateMyVideo(0)
         zoomSdk.session.mySelf.videoCanvas.subscribe(
             binding?.contentLayout?.thumbnailVideoView,
             ZoomVideoSDKVideoAspect.ZoomVideoSDKVideoAspect_PanAndScan,
@@ -379,11 +387,7 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
             binding?.contentLayout?.viewModel?.callStatus?.set("")
             isCallDisconnect = false
             showTime = true
-            binding?.contentLayout?.primaryVideoView2?.visibility = View.INVISIBLE
-            binding?.contentLayout?.primaryVideoView?.visibility = View.VISIBLE
-            binding?.contentLayout?.thumbnailVideoView?.visibility = View.VISIBLE
         } else {
-            // binding?.contentLayout?.viewModel?.type = "miss_call"
             binding?.contentLayout?.viewModel?.callStatus?.set("Calling...")
             timer.setDisconnectClock()
             showTime = false
@@ -408,10 +412,12 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
     override fun onDisconnected() {
         if (binding?.contentLayout?.viewModel?.isReceiver == false)
             binding?.contentLayout?.viewModel?.callDisconnect()
-
-        showToast("Call End")
-        busy = false
-        sendBroadcast(Intent(BROADCAST_SHOW_LOG_SESSION_POPUP))
+        if (lastToast != "Call End") {
+            showToast("Call End")
+            sendBroadcast(Intent(BROADCAST_SHOW_LOG_SESSION_POPUP))
+            busy = false
+            lastToast = "Call End"
+        }
     }
 
     override fun onParticipantConnected() {
@@ -420,9 +426,6 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
         binding?.contentLayout?.viewModel?.type = "end_call"
         isCallDisconnect = false
         showTime = true
-        binding?.contentLayout?.primaryVideoView2?.visibility = View.INVISIBLE
-        binding?.contentLayout?.primaryVideoView?.visibility = View.VISIBLE
-        binding?.contentLayout?.thumbnailVideoView?.visibility = View.VISIBLE
     }
 
     override fun onParticipantDisconnected() {
@@ -432,7 +435,7 @@ class VideoCallActivity : AppCompatActivity(), RoomCallback {
 
     override fun onVideoTrackSubscribed(userId: String) {
         zoomSdk.session.remoteUsers.firstOrNull { userId == it.userID }?.videoCanvas?.subscribe(
-            primaryVideoView,
+            binding.contentLayout.primaryVideoView,
             ZoomVideoSDKVideoAspect.ZoomVideoSDKVideoAspect_PanAndScan,
             ZoomVideoSDKVideoResolution.ZoomVideoSDKResolution_Auto
         )

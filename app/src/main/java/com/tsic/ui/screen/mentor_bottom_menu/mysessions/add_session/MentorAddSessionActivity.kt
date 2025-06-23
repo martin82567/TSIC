@@ -12,7 +12,6 @@ import com.tsic.data.local.prefs.PreferenceHelper
 import com.tsic.data.local.prefs.USER_PREF
 import com.tsic.databinding.ActivityMentorAddSessionBinding
 import com.tsic.util.extension.setStatusBarColor
-import kotlinx.android.synthetic.main.activity_mentor_add_session.*
 import org.jetbrains.anko.selector
 import org.jetbrains.anko.toast
 import java.util.*
@@ -36,7 +35,7 @@ class MentorAddSessionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.tsic.R.layout.activity_mentor_add_session)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         initUiAndListeners()
     }
 

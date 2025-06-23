@@ -1,25 +1,35 @@
 package com.tsic.ui.screen.mentee_bottom_menu.myuploads.upload_report
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.jaiselrahman.filepicker.activity.FilePickerActivity
-import com.jaiselrahman.filepicker.config.Configurations
-import com.jaiselrahman.filepicker.model.MediaFile
+import com.esafirm.imagepicker.features.ImagePickerConfig
+import com.esafirm.imagepicker.features.ImagePickerMode
+import com.esafirm.imagepicker.features.registerImagePicker
 import com.tsic.R
 import com.tsic.databinding.ActivityMenteeUploadReportBinding
 import com.tsic.util.extension.setStatusBarColor
+import com.tsic.util.getFilePathFromUri
+import gun0912.tedimagepicker.builder.TedImagePicker
 import org.jetbrains.anko.configuration
 import org.jetbrains.anko.toast
 
 class MenteeUploadReportActivity : AppCompatActivity() {
 
-    private val FILE_REQUEST_CODE: Int = 101
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { _ ->
+        selectImage()
+    }
 
 
     private val binding by lazy {
@@ -68,37 +78,38 @@ class MenteeUploadReportActivity : AppCompatActivity() {
     }
 
 
-    fun selectImage() {
-        val intent = Intent(this, FilePickerActivity::class.java).apply {
-            putExtra(
-                FilePickerActivity.CONFIGS, Configurations.Builder()
-                    .setCheckPermission(true)
-                    .setShowImages(true)
-                    .setShowAudios(false)
-                    .setShowVideos(false)
-                    .enableImageCapture(true)
-                    .enableVideoCapture(false)
-                    .setMaxSelection(1)
-                    //.setSingleChoiceMode(true)
-                    .setSkipZeroSizeFiles(true)
-                    .build()
-            )
-        }
-        startActivityForResult(intent, FILE_REQUEST_CODE)
-    }
+    private fun selectImage() {
+        val permissionsToRequest = mutableListOf<String>()
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val mPaths =
-                data?.getParcelableArrayListExtra<MediaFile>(FilePickerActivity.MEDIA_FILES)
-            if (mPaths != null && mPaths.isNotEmpty()) {
-                binding?.vm?.apply {
-                    imageUpload.set(mPaths.get(0)?.path)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.CAMERA)
+//            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                permissionsToRequest.add(Manifest.permission.READ_MEDIA_IMAGES)
+//            }
+        }
+
+        // Request permissions if not granted
+        if (permissionsToRequest.isNotEmpty()) {
+            cameraPermissionLauncher.launch(permissionsToRequest.toTypedArray())
+            return
+        }
+
+        TedImagePicker.with(this)
+            .image()
+            .max(1, "You can only select one image")
+            .dropDownAlbum()
+            .start { uri ->
+                val filePath = getFilePathFromUri(uri, this)
+                if (filePath.isNotEmpty()) {
+                    binding?.vm?.apply {
+                        imageUpload.set(filePath)
+                    }
+                } else {
+                    toast("Something went wrong")
                 }
-
             }
-        }
+
     }
 
 

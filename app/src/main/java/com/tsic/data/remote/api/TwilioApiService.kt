@@ -8,6 +8,7 @@ import android.util.Log
 import com.tsic.BuildConfig
 import com.tsic.data.model.BaseResponse
 import com.tsic.data.model.common.TwilioAccessTokenModel
+import com.tsic.ui.screen.chat.ChatModel
 import io.reactivex.Observable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -47,6 +48,13 @@ interface TwilioApiService {
         @Field("user_id") userId: String? = "",
         @Field("message") message: String? = "",
     ): Observable<BaseResponse<Any>>
+
+    @POST("api/chat/history")
+    @FormUrlEncoded
+    fun getOldChatMessage(
+        @Field("chat_code") userType: String? = "",
+        @Field("chat_type") userId: String? = "",
+    ): Observable<ChatModel>
 
     companion object {
 

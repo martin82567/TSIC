@@ -34,7 +34,6 @@ import com.tsic.ui.screen.mentor_drawer_menu.meetings.alllist.MentorAllDetailsLi
 import com.tsic.ui.screen.mentor_drawer_menu.meetings.requested.addMeeting.MentorAddMeetingActivity
 import com.tsic.ui.screen.mentor_drawer_menu.meetings.view_session_log.ViewSessionLogActivity
 import com.tsic.util.extension.setStatusBarColor
-import kotlinx.android.synthetic.main.content_mentor_my_meeting.*
 import org.jetbrains.anko.configuration
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -305,7 +304,7 @@ class MentorMyMeetingActivity : MentorBaseMainActivity() {
                     container.legendLayout.tag = month.yearMonth
                     container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
                         tv.text = daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
-                            .toUpperCase(Locale.ENGLISH)
+                            .uppercase(Locale.ENGLISH)
                         tv.setTextColorRes(R.color.black)
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
                     }

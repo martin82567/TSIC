@@ -5,7 +5,6 @@ package com.tsic.ui.screen.mentor_bottom_menu.myprofile
  */
 
 import android.Manifest
-import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -20,6 +19,7 @@ import android.text.InputType
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -27,9 +27,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
-import com.jaiselrahman.filepicker.activity.FilePickerActivity
-import com.jaiselrahman.filepicker.config.Configurations
-import com.jaiselrahman.filepicker.model.MediaFile
+import com.esafirm.imagepicker.features.ImagePickerConfig
+import com.esafirm.imagepicker.features.ImagePickerMode
+import com.esafirm.imagepicker.features.ReturnMode
+import com.esafirm.imagepicker.features.registerImagePicker
 import com.tsic.R
 import com.tsic.databinding.ActivityMentorMyProfileBinding
 import com.tsic.ui.base.MentorBaseMainActivity
@@ -41,16 +42,24 @@ import com.tsic.ui.screen.util_screens.FullscreenImageActivity
 import com.tsic.util.INTENT_KEY_TITLE
 import com.tsic.util.INTENT_KEY_URL
 import com.tsic.util.extension.dismissKeyboard
-import org.jetbrains.anko.*
+import com.tsic.util.getFilePathFromUri
+import gun0912.tedimagepicker.builder.TedImagePicker
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.cancelButton
+import org.jetbrains.anko.configuration
+import org.jetbrains.anko.customView
 import org.jetbrains.anko.design.textInputEditText
 import org.jetbrains.anko.design.textInputLayout
-import java.util.*
+import org.jetbrains.anko.dip
+import org.jetbrains.anko.padding
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.verticalLayout
+import java.util.Locale
 
 
 class MentorMyProfileActivity : MentorBaseMainActivity() {
-    val ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 107
 
-    private val FILE_REQUEST_CODE: Int = 101
     private var disposable: CountDownTimer? = null
 
     var name = ObservableField<String>("")
@@ -60,6 +69,19 @@ class MentorMyProfileActivity : MentorBaseMainActivity() {
     //declarations
     var binding: ActivityMentorMyProfileBinding? = null
     var adapter: MentorBannerListAdapter? = null
+
+    private val popupPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { _ ->
+        showPermissionDialog()
+    }
+
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { _ ->
+        updateImage()
+    }
+
     override fun getContentView() {
         val stub = bindingBase.appBarMain.viewstub.viewStub
         stub?.layoutResource = R.layout.activity_mentor_my_profile
@@ -78,7 +100,7 @@ class MentorMyProfileActivity : MentorBaseMainActivity() {
     private fun initUiAndListeners() {
 
         supportActionBar?.title = "MyProfileMentor"
-        checkPermission()
+        showPermissionDialog()
 //        checkLocationPermission()
 //        val gpsTracker = GpsTracker(this@MentorMyProfileActivity)
 //        if (!gpsTracker.canGetLocation())
@@ -191,22 +213,37 @@ class MentorMyProfileActivity : MentorBaseMainActivity() {
     }
 
     fun updateImage() {
-        val intent = Intent(this, FilePickerActivity::class.java).apply {
-            putExtra(
-                FilePickerActivity.CONFIGS, Configurations.Builder()
-                    .setCheckPermission(true)
-                    .setShowImages(true)
-                    .setShowAudios(false)
-                    .setShowVideos(false)
-                    .enableImageCapture(true)
-                    .enableVideoCapture(false)
-                    .setMaxSelection(1)
-                    //.setSingleChoiceMode(true)
-                    .setSkipZeroSizeFiles(true)
-                    .build()
-            )
+
+        val permissionsToRequest = mutableListOf<String>()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(Manifest.permission.CAMERA)
+//            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                permissionsToRequest.add(Manifest.permission.READ_MEDIA_IMAGES)
+//            }
         }
-        startActivityForResult(intent, FILE_REQUEST_CODE)
+
+        // Request permissions if not granted
+        if (permissionsToRequest.isNotEmpty()) {
+            cameraPermissionLauncher.launch(permissionsToRequest.toTypedArray())
+            return
+        }
+        TedImagePicker.with(this)
+            .image()
+            .max(1, "You can only select one image")
+            .dropDownAlbum()
+            .start { uri ->
+                val filePath = getFilePathFromUri(uri, this)
+                if (filePath.isNotEmpty()) {
+                    binding?.vm?.apply {
+                        profilePic.set(filePath)
+                        updateProfile()
+                    }
+                } else {
+                    toast("Something went wrong")
+                }
+            }
     }
 
     fun updateUsername() {
@@ -310,35 +347,28 @@ class MentorMyProfileActivity : MentorBaseMainActivity() {
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 111) {
-            return
-        }
-        if (requestCode == FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val mPaths =
-                data?.getParcelableArrayListExtra<MediaFile>(FilePickerActivity.MEDIA_FILES)
-            if (mPaths != null && mPaths.isNotEmpty())
-                binding?.vm?.apply {
-                    profilePic.set(mPaths.get(0)?.path)
-                    updateProfile() //for image
+    private fun showPermissionDialog() {
+        if (!Settings.canDrawOverlays(this)) {
+            AlertDialog.Builder(this)
+                .setTitle("Overlay Permission Needed")
+                .setMessage("This app needs the 'Display over other apps' permission to show important alerts while you're using other apps.")
+                .setCancelable(false)
+                .setPositiveButton(
+                    android.R.string.ok
+                ) { dialog, which ->
+                    checkPermission()
                 }
-        }
-        if (requestCode == ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE) {
-            if (!Settings.canDrawOverlays(this)) {
-                // You don't have permission
-                checkPermission();
-            } else {
-                getNotificationPermission()
-            }
-        }
+                .setIconAttribute(android.R.attr.alertDialogIcon)
+                .show()
+        } else {
+        getNotificationPermission()
+    }
     }
 
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
-                if ("xiaomi" == Build.MANUFACTURER.toLowerCase(Locale.ROOT)) {
+                if ("xiaomi" == Build.MANUFACTURER.lowercase(Locale.ROOT)) {
                     try {
                         val intent = Intent("miui.intent.action.APP_PERM_EDITOR")
                         intent.setClassName(
@@ -352,17 +382,14 @@ class MentorMyProfileActivity : MentorBaseMainActivity() {
                             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                             Uri.parse("package:$packageName")
                         )
-                        startActivityForResult(
-                            intent,
-                            ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE
-                        )
+                        popupPermissionLauncher.launch(intent)
                     }
                 } else {
                     val intent = Intent(
                         Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:$packageName")
                     )
-                    startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE)
+                    popupPermissionLauncher.launch(intent)
                 }
             }
 
@@ -380,31 +407,6 @@ class MentorMyProfileActivity : MentorBaseMainActivity() {
                 )
             }
         } catch (e: java.lang.Exception) {
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 110) {
-            return
-        }
-        /* if (requestCode == 109) {
-             if (grantResults.isNotEmpty()
-                 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-             ) {
-                 startLocationService(this@MentorMyProfileActivity)
-             } else {
-                 stopLocationService(this@MentorMyProfileActivity)
-             }
-         } else */
-        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            updateImage()
-        } else {
-            showToast("Please approve permissions to open ImagePicker")
         }
     }
 

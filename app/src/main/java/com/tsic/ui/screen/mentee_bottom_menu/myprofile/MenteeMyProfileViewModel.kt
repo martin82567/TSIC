@@ -33,7 +33,7 @@ class MenteeMyProfileViewModel(private val activity: MenteeMyProfileActivity) {
 
 
     var name = ObservableField<String>("")
-    var profilePic = ObservableField<String>("avatar")
+    var profilePic = ObservableField<String>("")
     var personEmail = ObservableField<String>("")
     var schoolAddress = ObservableField<String>("")
     var linkedAgency = ObservableField<String>("")
@@ -77,12 +77,17 @@ class MenteeMyProfileViewModel(private val activity: MenteeMyProfileActivity) {
                                     setData(KEY_MIDDLE_NAME, middlename)
                                     setData(KEY_LAST_NAME, lastname)
                                     setData(KEY_EMAIL, email)
-                                    setData(KEY_PROFILE_PIC, "$MENTEE_IMAGE_URL$image")
+
                                 }
 
                                 name.set("${firstname?.trim()} ${middlename?.trim()} ${lastname?.trim()}")
                                 personEmail.set(email)
-                                profilePic.set("$MENTEE_IMAGE_URL$image")
+                                val picUrl = "${userPrefs?.getString(KEY_PROFILE_PIC, "")}"
+                                if ((picUrl != "$MENTEE_IMAGE_URL$image" || profilePic.get() == "") || isShow) {
+                                    profilePic.set("$MENTEE_IMAGE_URL$image")
+                                    setData(KEY_PROFILE_PIC, "$MENTEE_IMAGE_URL$image")
+                                    activity.initUserDataOnNavHeader()
+                                }
                                 schoolAddress.set("${currentLivingDetails?.trim()} ${country?.trim()}")
                                 linkedAgency.set("${linkedAgencyName?.trim()}")
                                 sumSessionLogged.set(sum_mentor_session_log_count)
@@ -128,8 +133,6 @@ class MenteeMyProfileViewModel(private val activity: MenteeMyProfileActivity) {
                                     }
                                 }
                                 activity.adapter?.notifyDataSetChanged()
-
-
 
                                 if (upcoming_meeting != null && BaseApplication.upComingMeetingId != upcoming_meeting?.id) {
                                     val dialogUpcoming = DialogSessionReminder(activity,activity.getString(R.string.header_reminder_upcoming_session),activity.getString(R.string.reminder_session,Utils.getSimplifiedDate(upcoming_meeting?.schedule_time)) + " " +  upcoming_meeting?.firstname + " " + upcoming_meeting?.lastname){}
@@ -246,12 +249,10 @@ class MenteeMyProfileViewModel(private val activity: MenteeMyProfileActivity) {
                                     setData(KEY_FIRST_NAME, result.data?.firstname)
                                     setData(KEY_MIDDLE_NAME, result.data?.middlename)
                                     setData(KEY_LAST_NAME, result.data?.lastname)
-                                    setData(
-                                        KEY_PROFILE_PIC,
-                                        "$MENTEE_IMAGE_URL${result.data?.image}"
-
-
-                                    )
+//                                    setData(
+//                                        KEY_PROFILE_PIC,
+//                                        "$MENTEE_IMAGE_URL${result.data?.image}"
+//                                    )
                                 }
                                 activity.initUserDataOnNavHeader()
                             }

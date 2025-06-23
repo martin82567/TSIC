@@ -3,7 +3,7 @@ package com.tsic.data.model.mentor_api
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 
 data class MentorGoalListResponseModel(

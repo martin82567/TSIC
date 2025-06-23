@@ -12,6 +12,11 @@
 		<import type="android.view.Gravity" />
 
 		<variable
+			name="viewModel"
+			type="com.tsic.ui.screen.chat.TwilioChatViewModel"
+			/>
+
+		<variable
 				name="model"
 				type="com.tsic.ui.screen.chat.ChatMessage"
 				/>
@@ -68,7 +73,7 @@
 				android:layout_alignParentStart="true"
 				android:layout_alignParentTop="true"
 				android:elevation="10dp"
-
+			image_url_circular_profile="@{viewModel.chatterPic}"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
 				app:srcCompat="@drawable/ic_avatar_all"

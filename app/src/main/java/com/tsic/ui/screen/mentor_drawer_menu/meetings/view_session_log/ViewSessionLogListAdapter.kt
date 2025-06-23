@@ -56,15 +56,15 @@ class ViewSessionLogListAdapter(
             binding.tvMentorPastMeeting.text =
                 if (item?.schoolName == "") item?.school_type else item?.schoolName
 
-            if (position == list.size - 1) {
-                activity.binding?.vm?.apply {
-                    if (!isCalling) {
-                        isCalling = true
-                        currentPage++
-                        fetchViewSessionLogList()
-                    }
-                }
-            }
+//            if (position == list.size - 1) {
+//                activity.binding?.vm?.apply {
+//                    if (!isCalling) {
+//                        isCalling = true
+//                        currentPage++
+//                        fetchViewSessionLogList()
+//                    }
+//                }
+//            }
         }
     }
 

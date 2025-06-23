@@ -13,11 +13,11 @@
 				/>
 	</data>
 
-	<FrameLayout
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			tools:context=".ui.screen.util_screens.FullscreenImageActivity"
-			>
+			android:layout_height="wrap_content"
+			android:fitsSystemWindows="true"
+			tools:context=".ui.screen.util_screens.FullscreenImageActivity" >
 
 		<com.google.android.material.appbar.AppBarLayout
 				android:layout_width="match_parent"
@@ -38,12 +38,14 @@
 		</com.google.android.material.appbar.AppBarLayout>
 
 		<ImageView
+
 				android:id="@+id/imageview_full"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:background="@color/colorBackGround"
-				app:image_url="@{url}"
+            app:image_url="@{url}"
+			android:fillViewport="true"
 				tools:src="@drawable/ic_camera"
-				/>
-	</FrameLayout>
+			app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -16,7 +16,6 @@ import com.tsic.ui.base.BaseTabViewPagerAdapter
 import com.tsic.ui.screen.mentee_drawer_menu.task.completed.MenteeCompletedTasksFrag
 import com.tsic.ui.screen.mentee_drawer_menu.task.pending.MenteePendingTasksFrag
 import com.tsic.util.extension.setStatusBarColor
-import kotlinx.android.synthetic.main.content_mentee_task.*
 import org.jetbrains.anko.configuration
 import org.jetbrains.anko.toast
 
@@ -68,8 +67,8 @@ class MenteeTaskActivity : AppCompatActivity() {
             addFragment(completedTaskFrag, "Completed")
         }
         binding?.contentLayout?.apply {
-            viewPager_task.adapter = adapter
-            tabs_task.setupWithViewPager(viewPager_task)
+            binding.contentLayout.viewPagerTask.adapter = adapter
+            binding.contentLayout.tabsTask.setupWithViewPager(binding.contentLayout.viewPagerTask)
         }
     }
 

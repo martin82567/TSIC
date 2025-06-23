@@ -3,11 +3,13 @@ package com.tsic.ui.screen.chat
 import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import com.bumptech.glide.util.Util
 import com.tsic.data.local.prefs.*
 import com.tsic.data.remote.api.TwilioApiService
 import com.tsic.util.TYPE_MENTEE
 import com.tsic.util.TYPE_MENTEE_STAFF
 import com.tsic.util.TYPE_MENTOR_STAFF
+import com.tsic.util.Utils
 import com.tsic.util.extension.dismissKeyboard
 import com.tsic.util.extension.isDeviceOnline
 import com.twilio.chat.Message
@@ -50,6 +52,53 @@ class TwilioChatViewModel(val activity: TwilioChatActivity) : ChatListener {
         TwilioChatManager(this)
     }
 
+    fun fetchOldChat() {
+        activity.dismissKeyboard()
+
+        if (!activity.isDeviceOnline()) {
+            activity.showToast("Error: \n You must be connected to WiFi or Cellular service to use the Take Stock App. Please check your internet connection and try again.")
+            return
+        }
+        var type = userPrefs?.getString(KEY_LOGIN_MODE, "")
+        var id = userPrefs?.getInt(KEY_USER_ID, 0)
+        var name = userPrefs?.getString(KEY_FIRST_NAME, "")
+        Log.d("TAG", "fetch: ${type}_${id}_${name}")
+        disposable = apiService.getOldChatMessage(chatCode, type)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                if (chatMsgList?.size == 0)
+                    activity?.progressDialog?.show()
+            }
+            .doAfterTerminate {
+            }
+            .subscribe(
+                { result ->
+                    if (result.status == true) {
+                        val model: List<ChatMessage> = result.data?.chats?.map { chat -> chat.copy(date = Utils.convertToIso8601(chat.date ?: "")) } ?: emptyList()
+                        chatMsgList.clear()
+                            chatMsgList.addAll(model)
+                        activity.binding?.contentChatMessage?.rvChatMessageList?.scrollToPosition(chatMsgList.size - 1)
+                        activity.adapter?.notifyDataSetChanged()
+                        activity.clearNotification()
+
+                    } else {
+                        activity.showToast("Some Error Occurred")
+                        activity?.progressDialog?.dismiss()
+                    }
+                },
+                { error ->
+
+                    activity.showToast(
+                        error.message
+                            ?: "Error: \n The Take Stock App is experiencing technical difficulties due to issues with our server provider. Please try again later."
+                    )
+                    activity?.progressDialog?.dismiss()
+
+                }
+            )
+    }
+
     fun fetch() {
 
         activity.dismissKeyboard()
@@ -76,6 +125,7 @@ class TwilioChatViewModel(val activity: TwilioChatActivity) : ChatListener {
                     if (result.token != "") {
                         twilioChatManager.build(activity.applicationContext, result.token)
                         identity.add(result.identity.toString())
+
                     } else {
                         activity.showToast("Some Error Occurred")
                         activity?.progressDialog?.dismiss()
@@ -186,11 +236,11 @@ class TwilioChatViewModel(val activity: TwilioChatActivity) : ChatListener {
     }
 
     override fun onLoadMessage(list: List<ChatMessage>) {
-        chatMsgList.addAll(list)
-        activity.binding?.contentChatMessage?.rvChatMessageList?.scrollToPosition(chatMsgList.size - 1)
-        activity.adapter?.notifyDataSetChanged()
-        activity.progressDialog?.dismiss()
-        activity.clearNotification()
+//        chatMsgList.addAll(list)
+//        activity.binding?.contentChatMessage?.rvChatMessageList?.scrollToPosition(chatMsgList.size - 1)
+//        activity.adapter?.notifyDataSetChanged()
+//        activity.progressDialog?.dismiss()
+//        activity.clearNotification()
     }
 
     override fun onError(error: String) {

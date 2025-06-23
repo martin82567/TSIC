@@ -18,18 +18,21 @@
 				/>
 	</data>
 
-	<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical"
-			>
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
+		android:id="@+id/root_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fitsSystemWindows="true"
+		tools:context=".ui.screen.mentee_bottom_menu.mychats.my_mentor_list.MenteeMyMentorListActivity"
+		>
 
 		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/ab"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="@null"
 				android:theme="@style/AppTheme.AppBarOverlay.Local"
-				>
+			>
 
 			<androidx.appcompat.widget.Toolbar
 					android:id="@+id/toolbar"
@@ -45,10 +48,11 @@
 		<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 				android:id="@+id/swipeRefreshLayout"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
+				android:layout_height="match_parent"
+			android:fillViewport="true"
 				android:background="@drawable/bg_all_white"
 				tools:context=".ui.screen.mentee_bottom_menu.mychats.my_mentor_list.MenteeMyMentorListActivity"
-				>
+			app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 			<LinearLayout
 					android:layout_width="match_parent"
@@ -99,5 +103,5 @@
 
 			</LinearLayout>
 		</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-	</LinearLayout>
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

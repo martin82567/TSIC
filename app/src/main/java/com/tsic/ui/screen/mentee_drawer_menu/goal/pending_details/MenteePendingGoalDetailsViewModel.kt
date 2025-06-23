@@ -2,7 +2,7 @@ package com.tsic.ui.screen.mentee_drawer_menu.goal.pending_details
 
 
 import androidx.databinding.ObservableField
-import com.jaiselrahman.filepicker.model.MediaFile
+import com.esafirm.imagepicker.model.Image
 import com.tsic.data.local.prefs.KEY_AUTH_TOKEN
 import com.tsic.data.local.prefs.PreferenceHelper
 import com.tsic.data.local.prefs.USER_PREF
@@ -117,7 +117,7 @@ class MenteePendingGoalDetailsViewModel(private val activity: MenteePendingGoalD
 
     }
 
-    fun uploadFile(listPics: ArrayList<MediaFile>?) {
+    fun uploadFile(listPics: List<String>?) {
         if (!activity.isDeviceOnline()) {
             activity.toast("Error: \n You must be connected to WiFi or Cellular service to use the Take Stock App. Please check your internet connection and try again.")
             return
@@ -130,7 +130,7 @@ class MenteePendingGoalDetailsViewModel(private val activity: MenteePendingGoalD
         builder.addFormDataPart("id", details.get()?.id.toString())
 
         listPics?.forEach {
-            var file = File(it.path)
+            val file = File(it)
             builder.addFormDataPart(
                 "files[]",
                 file.name,

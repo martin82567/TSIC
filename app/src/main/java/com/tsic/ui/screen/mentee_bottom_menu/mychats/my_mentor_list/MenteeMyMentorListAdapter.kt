@@ -24,7 +24,6 @@ class MenteeMyMentorListAdapter(
         parent: ViewGroup?,
         viewType: Int
     ): RecyclerView.ViewHolder {
-
         return MyMentorListItemHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent?.context),

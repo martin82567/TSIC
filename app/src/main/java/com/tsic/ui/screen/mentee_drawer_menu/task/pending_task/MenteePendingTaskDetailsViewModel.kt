@@ -2,7 +2,7 @@ package com.tsic.ui.screen.mentee_drawer_menu.task.pending_task
 
 
 import androidx.databinding.ObservableField
-import com.jaiselrahman.filepicker.model.MediaFile
+import com.esafirm.imagepicker.model.Image
 import com.tsic.data.local.prefs.KEY_AUTH_TOKEN
 import com.tsic.data.local.prefs.PreferenceHelper
 import com.tsic.data.local.prefs.USER_PREF
@@ -115,7 +115,7 @@ class MenteePendingTaskDetailsViewModel(private val activity: MenteePendingTaskD
 
     }
 
-    fun uploadFile(listPics: ArrayList<MediaFile>?) {
+    fun uploadFile(listPics: List<String>?) {
         if (!activity.isDeviceOnline()) {
             activity.toast("No internet connection.")
             return
@@ -128,7 +128,7 @@ class MenteePendingTaskDetailsViewModel(private val activity: MenteePendingTaskD
         builder.addFormDataPart("id", details.get()?.id.toString())
 
         listPics?.forEach {
-            var file = File(it.path)
+            val file = File(it)
             builder.addFormDataPart(
                 "files[]",
                 file.name,

@@ -2,25 +2,25 @@ package com.tsic.data.remote.api
 
 import com.tsic.BuildConfig
 
-//val DEBUG = false       //false//for live false  and  for debug true
-val DEBUG = BuildConfig.DEBUG       //false//for live false  and  for debug true
+val DEBUG = false       //false//for live false  and  for debug true
 var busy = false
+
 var timestamp: Long = 0
 var isShowCallUIOneTime = 0
 var finishUI = true
 var isCallDisconnect = true
 val BASE_URL: String =
-    if (DEBUG) "https://test.tsicmentorapp.org/" else "https://tsicmentorapp.org"
+    if (DEBUG) "https://test.tsicmentorapp.org/" else "https://live.tsicmentorapp.org/" // "https://tsicmentorapp.org"
 /*val BASE_URL: String =
     if (DEBUG) "https://mentorappdev.tsic.org/" else "https://tsicmentorapp.org/"*/
 val CHAT_URL: String =
-    if (DEBUG) "https://test.tsicmentorapp.org:3700/" else "https://tsicmentorapp.org:3700/"
+    if (DEBUG) "https://test.tsicmentorapp.org:3700/" else "https://live.tsicmentorapp.org:3700/" // "https://tsicmentorapp.org:3700/"
 
 //val TWILIO_CHAT_URL: String =
 //    if (DEBUG) "https://mentorappdev.tsic.org:3700/" else "https://mentorappdev.tsic.org:3700/"
 
 val VIDEO_URL: String =
-    if (DEBUG) "https://test.tsicmentorapp.org:3000/" else "https://tsicmentorapp.org:3000/"
+    if (DEBUG) "https://test.tsicmentorapp.org:3000/" else "https://live.tsicmentorapp.org:3000/" // "https://tsicmentorapp.org:3000/"
 
 //Mentor URL
 
@@ -37,7 +37,7 @@ var MENTEE_REPORT_IMAGE_BASE_URL =
 //    "http://tsicmobileapp-faq.s3-website-us-east-1.amazonaws.com/mentor.html"
 
 val MENTOR_MENTEE_TOOLKIT_URL =
-    "https://drive.google.com/file/d/14ZEN4PAIwPTlhdUv5j9XnXsbv6oZO8AY/view"      //--->NEW LINK
+    "https://drive.google.com/file/d/14ZEN4PAIwPTlhdUv5j9XnXsbv6oZO8AY/view"      //---> NEW LINK
 //    "https://drive.google.com/file/d/1f45-CkpruU34gMB1t1qyGxApZSrdZo2D/view?usp=sharing"   //--->OLD LINK
 
 

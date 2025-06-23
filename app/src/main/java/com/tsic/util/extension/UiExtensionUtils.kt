@@ -14,7 +14,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import com.tsic.R
-import com.tsic.util.GlideApp
+import com.bumptech.glide.Glide
 
 /*fun AppCompatActivity?.setToolbar(
     title: String?,
@@ -81,7 +81,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 fun ImageView.loadUrl(imageUrl: String?, placeHolderDrawable: Drawable? = null) {
     if (imageUrl == null) return
 
-    GlideApp.with(this.context).load(imageUrl).apply {
+    Glide.with(this.context).load(imageUrl).apply {
         if (placeHolderDrawable == null)
             placeholder(R.drawable.partial_logo_without_text)
         else

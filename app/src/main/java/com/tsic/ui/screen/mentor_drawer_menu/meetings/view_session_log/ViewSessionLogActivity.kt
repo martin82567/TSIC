@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tsic.R
 import com.tsic.databinding.ActivityViewSessionLogBinding
 import com.tsic.util.extension.setStatusBarColor
@@ -46,7 +47,7 @@ class ViewSessionLogActivity : AppCompatActivity() {
             }
         )
         binding.vm = ViewSessionLogViewModel(this)
-        binding?.vm?.fetchViewSessionLogList()
+        binding.vm?.fetchViewSessionLogList()
         setStatusBarColor(R.color.colorStatusTranslucentGreen)
 
         setSupportActionBar(binding.toolbar)
@@ -69,8 +70,23 @@ class ViewSessionLogActivity : AppCompatActivity() {
         }
         binding?.rvSession?.apply {
             adapter = this@ViewSessionLogActivity.adapter
-//            setHasFixedSize(true)
+           // setHasFixedSize(true)
             setItemViewCacheSize(100)
+            val linearLayoutManager = LinearLayoutManager(this@ViewSessionLogActivity)
+            layoutManager = linearLayoutManager;
+            addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+                override fun loadMoreItems() {
+                    binding.vm?.isCalling = true
+                    binding.vm?.currentPage = (binding.vm?.currentPage ?: 0) +1
+                    binding?.vm?.fetchViewSessionLogList()
+                }
+
+                override val isLastPage: Boolean
+                    get() = (binding.vm?.lastPage ?: false)
+                override val isLoading: Boolean
+                    get() = (binding.vm?.isCalling ?: false)
+
+            })
         }
 
     }

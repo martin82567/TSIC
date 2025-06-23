@@ -38,10 +38,10 @@ class MentorMyMenteeChatListActivity : AppCompatActivity() {
     private fun initUiAndListner() {
         when (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_NO -> {
-                binding?.swipeRefreshLayout?.setBackgroundResource(R.drawable.bg_all_white)
+                binding?.rootLayout?.setBackgroundResource(R.drawable.bg_all_white)
             } // Night mode is not active, we're using the light theme
             Configuration.UI_MODE_NIGHT_YES -> {
-                binding?.swipeRefreshLayout?.setBackgroundResource(R.drawable.bg3)
+                binding?.rootLayout?.setBackgroundResource(R.drawable.bg3)
             } // Night mode is active, we're using dark theme
         }
         binding?.vm = MentorMyMenteeListViewModel(this)

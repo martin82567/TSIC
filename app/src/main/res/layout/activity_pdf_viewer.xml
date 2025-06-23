@@ -9,34 +9,38 @@
 
 	</data>
 
-	<androidx.constraintlayout.widget.ConstraintLayout
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
 			android:id="@+id/root_layout"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:fitsSystemWindows="true"
 			tools:context=".ui.screen.pdf_viewer.PdfViewerActivity"
 			>
-		<LinearLayout
+
+		<com.google.android.material.appbar.AppBarLayout
+			android:id="@+id/ab"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/colorToolbarTranslucentGreen"
+			android:theme="@style/AppTheme.AppBarOverlay.Local"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+
+			>
+
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:orientation="vertical"
-				>
+				android:layout_height="?android:attr/actionBarSize"
+				android:background="@color/colorToolbarGreen"
+				app:popupTheme="@style/AppTheme.PopupOverlay"
+				/>
 
-			<com.google.android.material.appbar.AppBarLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:background="@color/colorToolbarTranslucentGreen"
-					android:theme="@style/AppTheme.AppBarOverlay.Local"
-					>
+		</com.google.android.material.appbar.AppBarLayout>
 
-				<androidx.appcompat.widget.Toolbar
-						android:id="@+id/toolbar"
-						android:layout_width="match_parent"
-						android:layout_height="?android:attr/actionBarSize"
-						android:background="@color/colorToolbarGreen"
-						app:popupTheme="@style/AppTheme.PopupOverlay"
-						/>
 
-			</com.google.android.material.appbar.AppBarLayout>
+
 
 
 			<androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +51,7 @@
 					app:layout_behavior="@string/appbar_scrolling_view_behavior"
 					tools:context=".ui.screen.mentor_bottom_menu.myprofile.MentorMyProfileActivity"
 					tools:showIn="@layout/activity_mentor_my_profile"
+
 					>
 
 				<WebView
@@ -61,8 +66,6 @@
 
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
-		</LinearLayout>
 
-
-	</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

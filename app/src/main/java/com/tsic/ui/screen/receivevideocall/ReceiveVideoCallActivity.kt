@@ -5,6 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.media.Ringtone
 import android.media.RingtoneManager
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +16,7 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.tsic.R
 import com.tsic.SplashActivity
@@ -27,9 +32,11 @@ import com.tsic.data.remote.api.isShowCallUIOneTime
 import com.tsic.databinding.ActivityReceiveVideoCallBinding
 import com.tsic.ui.screen.mentee_bottom_menu.mymeeting.MenteeModalBottomSheet.Companion.TAG
 import com.tsic.ui.screen.videocallscreen.InitVideoCallRoom
+import com.tsic.ui.screen.videocallscreen.InitVideoCallRoom.Companion
 import com.tsic.ui.screen.videocallscreen.InitVideoCallSocket
 import com.tsic.ui.screen.videocallscreen.RoomCallback
 import com.tsic.ui.screen.videocallscreen.VideoCallActivity
+import com.tsic.ui.screen.videocallscreen.showLowBandwidthAlert
 import com.tsic.util.BROADCAST_SHOW_LOG_SESSION_POPUP
 import com.tsic.util.extension.dismissKeyboard
 import com.tsic.util.extension.isDeviceOnline
@@ -39,7 +46,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.toast
 import us.zoom.sdk.ZoomVideoSDK
-import us.zoom.sdk.ZoomVideoSDKSessionContext
 
 
 class ReceiveVideoCallActivity : AppCompatActivity() {
@@ -56,11 +62,12 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
     }
 
     private var ringtone: Ringtone? = null
-
+    var lastToast = ""
     val SENDER_TYPE = 0
     val SENDER_ID = 1
     val RECEIVER_TYPE = 2
     val RECEIVER_ID = 3
+
     private val roomCallback = object : RoomCallback {
         override fun onConnected(isRemoteParticipantPresent: Boolean) {}
 
@@ -73,16 +80,21 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
         override fun onDisconnected() {
             if (binding?.viewModel?.isReceiver == false)
                 binding?.viewModel?.callDisconnect()
-            showToast("End call")
-            busy = false
-            finish()
-            sendBroadcast(Intent(BROADCAST_SHOW_LOG_SESSION_POPUP))
+            if (lastToast != "End Call") {
+                showToast("End Call")
+                sendBroadcast(Intent(BROADCAST_SHOW_LOG_SESSION_POPUP))
+                finish()
+                busy = false
+                lastToast = "End Call"
+            }
         }
 
-        override fun onParticipantConnected() {}
+        override fun onParticipantConnected() {
+            Log.e("ZOOM", "onParticipantConnected")
+        }
 
         override fun onParticipantDisconnected() {
-
+            Log.e("ZOOM", "onParticipantDisconnected")
         }
 
         override fun onVideoTrackSubscribed(userId: String) {
@@ -153,6 +165,33 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         createRingtone()
+
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkRequest = NetworkRequest.Builder().build()
+
+        connectivityManager.registerNetworkCallback(networkRequest, object : ConnectivityManager.NetworkCallback() {
+
+            override fun onLost(network: Network) {
+                super.onLost(network)
+                showLowBandwidthAlert(this@ReceiveVideoCallActivity)
+            }
+
+            override fun onLosing(network: Network, maxMsToLive: Int) {
+                super.onLosing(network, maxMsToLive)
+                showLowBandwidthAlert(this@ReceiveVideoCallActivity)
+            }
+
+            override fun onCapabilitiesChanged(
+                network: Network,
+                capabilities: NetworkCapabilities
+            ) {
+                super.onCapabilitiesChanged(network, capabilities)
+                val linkDownstreamBandwidthKbps = capabilities.linkDownstreamBandwidthKbps
+                if (linkDownstreamBandwidthKbps < 1000) {
+                 //   showLowBandwidthAlert(this@ReceiveVideoCallActivity)
+                }
+            }
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -205,6 +244,7 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
     }
 
     private fun callDisconnect(sendDeniedWebhook: Boolean = false) {
+
         dismissKeyboard()
         if (!isDeviceOnline()) {
             toast("No internet connection.")
@@ -224,13 +264,12 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
                         it[SENDER_TYPE],
                         it[SENDER_ID],
                         true
-
                     )
                 }
 
             }
         }
-        val disposable = apiService.callDenied(roomName ?: "", userId ?: 0, loginType ?: "mentor")
+        val disposable = apiService.callDenied(roomName ?: "", userId ?: 0,  loginType ?: "mentor")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -251,7 +290,6 @@ class ReceiveVideoCallActivity : AppCompatActivity() {
                             toast(result.message.toString())
                         }
                         finish()
-
                     }
                 },
                 { error ->

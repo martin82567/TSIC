@@ -1,0 +1,1161 @@
+2019-08-19 12:56:16 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fc6727528a0; archive(resolved)='<IDEArchive: 0x7fc67244cfd0>', distributionTask(resolved)='2', distributionDestination(resolved)='1', distributionMethod(resolved)='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team(resolved)='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	Chain (12, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fc6727528a0; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionProcessingPipelineContext: 0x7fc69134b0b0; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc691351490; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc69109fce0; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc6913c7cc0; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc6913cb750; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc6889c10b0; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc691393510; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc68882b160; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='<IDEProvisioningDisambiguatableBasicTeam: 0x7fc6ac2b8df0; teamID='X2WK6QAS2Y', teamName='TSIC, INC', teamType='Company', username='angell_kevin@yahoo.com', isFreeProvisioningTeam='0'>'>
+	<IDEDistributionContext: 0x7fc68fafae50; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='(null)'>
+	<IDEDistributionContext: 0x7fc67256fc60; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='<IDEDistributionMethodDevelopmentSigned: 0x7fc6724ae7b0>', team='(null)'>
+	<IDEDistributionContext: 0x7fc690026c00; archive = '<IDEArchive: 0x7fc67244cfd0>', distributionMethod='(null)', team='(null)'>
+</IDEDistributionProcessingPipelineContext: 0x7fc6727528a0>
+2019-08-19 12:56:16 +0000  Processing step: IDEDistributionCreateDestRootStep
+2019-08-19 12:56:16 +0000  Processing step: IDEDistributionCopyItemStep
+2019-08-19 12:56:16 +0000  Running /usr/bin/ditto '-V' '/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app'
+2019-08-19 12:56:16 +0000  >>> Copying /Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app 
+2019-08-19 12:56:16 +0000  copying file ./Raleway-Bold_0.ttf ... 
+2019-08-19 12:56:16 +0000  179244 bytes for ./Raleway-Bold_0.ttf
+2019-08-19 12:56:16 +0000  copying file ./_CodeSignature/CodeResources ... 
+2019-08-19 12:56:16 +0000  48243 bytes for ./_CodeSignature/CodeResources
+2019-08-19 12:56:16 +0000  copying file ./Profile.storyboardc/ProfileViewController.nib ... 
+2019-08-19 12:56:16 +0000  1014 bytes for ./Profile.storyboardc/ProfileViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Profile.storyboardc/08l-qF-fhO-view-3ww-Ze-QGi.nib ... 
+2019-08-19 12:56:16 +0000  19274 bytes for ./Profile.storyboardc/08l-qF-fhO-view-3ww-Ze-QGi.nib
+2019-08-19 12:56:16 +0000  copying file ./Profile.storyboardc/Info.plist ... 
+2019-08-19 12:56:16 +0000  167 bytes for ./Profile.storyboardc/Info.plist
+copying file ./Raleway-Light_0.ttf ... 
+2019-08-19 12:56:16 +0000  182376 bytes for ./Raleway-Light_0.ttf
+copying file ./AppIcon60x60@2x.png ... 
+2019-08-19 12:56:16 +0000  10523 bytes for ./AppIcon60x60@2x.png
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/EditMentorProfileViewController.nib ... 
+2019-08-19 12:56:16 +0000  1152 bytes for ./Mentor.storyboardc/EditMentorProfileViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/SelectTypeViewController.nib ... 
+2019-08-19 12:56:16 +0000  1138 bytes for ./Mentor.storyboardc/SelectTypeViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/qjt-xT-peo-view-mOY-Fa-pe8.nib ... 
+2019-08-19 12:56:16 +0000  3165 bytes for ./Mentor.storyboardc/qjt-xT-peo-view-mOY-Fa-pe8.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/MyMenteeListViewController.nib ... 
+2019-08-19 12:56:16 +0000  1142 bytes for ./Mentor.storyboardc/MyMenteeListViewController.nib
+copying file ./Mentor.storyboardc/MyMenteeDetailsViewController.nib ... 
+2019-08-19 12:56:16 +0000  1148 bytes for ./Mentor.storyboardc/MyMenteeDetailsViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/rdy-Pd-Wj7-view-cFh-i3-lYL.nib ... 
+2019-08-19 12:56:16 +0000  12729 bytes for ./Mentor.storyboardc/rdy-Pd-Wj7-view-cFh-i3-lYL.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/gaS-fv-AAc-view-mxl-5w-Xqk.nib ... 
+2019-08-19 12:56:16 +0000  10986 bytes for ./Mentor.storyboardc/gaS-fv-AAc-view-mxl-5w-Xqk.nib
+copying file ./Mentor.storyboardc/MentorForgotPasswordViewController.nib ... 
+2019-08-19 12:56:16 +0000  1158 bytes for ./Mentor.storyboardc/MentorForgotPasswordViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/9la-3U-DOm-view-5rJ-C8-S3u.nib ... 
+2019-08-19 12:56:16 +0000  16789 bytes for ./Mentor.storyboardc/9la-3U-DOm-view-5rJ-C8-S3u.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/MentorProfileViewController.nib ... 
+2019-08-19 12:56:16 +0000  1144 bytes for ./Mentor.storyboardc/MentorProfileViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/MentorTabBarViewController.nib ... 
+2019-08-19 12:56:16 +0000  4835 bytes for ./Mentor.storyboardc/MentorTabBarViewController.nib
+copying file ./Mentor.storyboardc/jiZ-1f-Vzg-view-8cv-PS-Omm.nib ... 
+2019-08-19 12:56:16 +0000  13452 bytes for ./Mentor.storyboardc/jiZ-1f-Vzg-view-8cv-PS-Omm.nib
+copying file ./Mentor.storyboardc/SessionViewController.nib ... 
+2019-08-19 12:56:16 +0000  1084 bytes for ./Mentor.storyboardc/SessionViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/h1b-9o-Cf8-view-PyA-tj-cRD.nib ... 
+2019-08-19 12:56:16 +0000  11121 bytes for ./Mentor.storyboardc/h1b-9o-Cf8-view-PyA-tj-cRD.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/1BC-QK-SGL-view-75G-u4-tBl.nib ... 
+2019-08-19 12:56:16 +0000  6473 bytes for ./Mentor.storyboardc/1BC-QK-SGL-view-75G-u4-tBl.nib
+2019-08-19 12:56:16 +0000  copying file ./Mentor.storyboardc/Info.plist ... 
+2019-08-19 12:56:16 +0000  652 bytes for ./Mentor.storyboardc/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./TakeStockInChildren ... 
+2019-08-19 12:56:16 +0000  17928784 bytes for ./TakeStockInChildren
+2019-08-19 12:56:16 +0000  copying file ./GoogleService-Info.plist ... 
+2019-08-19 12:56:16 +0000  760 bytes for ./GoogleService-Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/qlF-MV-brN-view-8d6-1X-ydN.nib ... 
+2019-08-19 12:56:16 +0000  18365 bytes for ./Base.lproj/Main.storyboardc/qlF-MV-brN-view-8d6-1X-ydN.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/HelpTabViewController.nib ... 
+1084 bytes for ./Base.lproj/Main.storyboardc/HelpTabViewController.nib
+copying file ./Base.lproj/Main.storyboardc/JobViewController.nib ... 
+2019-08-19 12:56:16 +0000  1046 bytes for ./Base.lproj/Main.storyboardc/JobViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/pTb-gW-MU0-view-c6F-ac-axS.nib ... 
+2019-08-19 12:56:16 +0000  4389 bytes for ./Base.lproj/Main.storyboardc/pTb-gW-MU0-view-c6F-ac-axS.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/Pcs-tK-iwR-view-llc-yx-SXB.nib ... 
+2019-08-19 12:56:16 +0000  4398 bytes for ./Base.lproj/Main.storyboardc/Pcs-tK-iwR-view-llc-yx-SXB.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/crQ-QG-V8T-view-sQw-8u-ZC9.nib ... 
+2019-08-19 12:56:16 +0000  12000 bytes for ./Base.lproj/Main.storyboardc/crQ-QG-V8T-view-sQw-8u-ZC9.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ResetPasswordViewController.nib ... 
+2019-08-19 12:56:16 +0000  1144 bytes for ./Base.lproj/Main.storyboardc/ResetPasswordViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/gZU-kU-juL-view-DS4-Cl-OxQ.nib ... 
+2019-08-19 12:56:16 +0000  22390 bytes for ./Base.lproj/Main.storyboardc/gZU-kU-juL-view-DS4-Cl-OxQ.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/EfU-pQ-smn-view-YeP-O8-Vmf.nib ... 
+2019-08-19 12:56:16 +0000  23219 bytes for ./Base.lproj/Main.storyboardc/EfU-pQ-smn-view-YeP-O8-Vmf.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/YR8-PM-uDU-view-eTc-LX-inZ.nib ... 
+2019-08-19 12:56:16 +0000  19453 bytes for ./Base.lproj/Main.storyboardc/YR8-PM-uDU-view-eTc-LX-inZ.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/5Mx-iz-i9B-view-6Bm-R8-iGP.nib ... 
+2019-08-19 12:56:16 +0000  13240 bytes for ./Base.lproj/Main.storyboardc/5Mx-iz-i9B-view-6Bm-R8-iGP.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/1pr-lH-dQf-view-vfQ-7h-zDs.nib ... 
+2019-08-19 12:56:16 +0000  30845 bytes for ./Base.lproj/Main.storyboardc/1pr-lH-dQf-view-vfQ-7h-zDs.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ResourceViewController.nib ... 
+2019-08-19 12:56:16 +0000  1134 bytes for ./Base.lproj/Main.storyboardc/ResourceViewController.nib
+copying file ./Base.lproj/Main.storyboardc/PendingAddFilesViewController.nib ... 
+2019-08-19 12:56:16 +0000  1070 bytes for ./Base.lproj/Main.storyboardc/PendingAddFilesViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/2JN-WU-jBt-view-hXJ-ER-EBI.nib ... 
+2019-08-19 12:56:16 +0000  10200 bytes for ./Base.lproj/Main.storyboardc/2JN-WU-jBt-view-hXJ-ER-EBI.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/Aea-Dr-u88-view-C6X-nZ-Al0.nib ... 
+2019-08-19 12:56:16 +0000  12312 bytes for ./Base.lproj/Main.storyboardc/Aea-Dr-u88-view-C6X-nZ-Al0.nib
+copying file ./Base.lproj/Main.storyboardc/BaseLoginViewController.nib ... 
+2019-08-19 12:56:16 +0000  1136 bytes for ./Base.lproj/Main.storyboardc/BaseLoginViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/CompletedDetailsViewController.nib ... 
+2019-08-19 12:56:16 +0000  1072 bytes for ./Base.lproj/Main.storyboardc/CompletedDetailsViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/2dq-zX-ybL-view-jqc-4l-c55.nib ... 
+2019-08-19 12:56:16 +0000  13203 bytes for ./Base.lproj/Main.storyboardc/2dq-zX-ybL-view-jqc-4l-c55.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/p58-4N-SdT-view-ILe-FM-53Z.nib ... 
+2019-08-19 12:56:16 +0000  4266 bytes for ./Base.lproj/Main.storyboardc/p58-4N-SdT-view-ILe-FM-53Z.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/Yso-OM-Skv-view-yFl-Vu-l0A.nib ... 
+2019-08-19 12:56:16 +0000  4395 bytes for ./Base.lproj/Main.storyboardc/Yso-OM-Skv-view-yFl-Vu-l0A.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/UploadViewController.nib ... 
+2019-08-19 12:56:16 +0000  1130 bytes for ./Base.lproj/Main.storyboardc/UploadViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ProfileViewController.nib ... 
+2019-08-19 12:56:16 +0000  1132 bytes for ./Base.lproj/Main.storyboardc/ProfileViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/GoalViewController.nib ... 
+2019-08-19 12:56:16 +0000  1126 bytes for ./Base.lproj/Main.storyboardc/GoalViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/c8x-AH-nNk-view-CwB-Id-vsU.nib ... 
+2019-08-19 12:56:16 +0000  8143 bytes for ./Base.lproj/Main.storyboardc/c8x-AH-nNk-view-CwB-Id-vsU.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ElearningDetailsVideoViewController.nib ... 
+2019-08-19 12:56:16 +0000  1160 bytes for ./Base.lproj/Main.storyboardc/ElearningDetailsVideoViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ihM-Nl-hPp-view-Dmt-2j-VfV.nib ... 
+2019-08-19 12:56:16 +0000  14995 bytes for ./Base.lproj/Main.storyboardc/ihM-Nl-hPp-view-Dmt-2j-VfV.nib
+copying file ./Base.lproj/Main.storyboardc/aH1-x2-Uhu-view-lWE-wb-yZV.nib ... 
+2019-08-19 12:56:16 +0000  4712 bytes for ./Base.lproj/Main.storyboardc/aH1-x2-Uhu-view-lWE-wb-yZV.nib
+copying file ./Base.lproj/Main.storyboardc/NoteListViewController.nib ... 
+2019-08-19 12:56:16 +0000  1056 bytes for ./Base.lproj/Main.storyboardc/NoteListViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/JournalsListingViewController.nib ... 
+2019-08-19 12:56:16 +0000  1148 bytes for ./Base.lproj/Main.storyboardc/JournalsListingViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ChatViewController.nib ... 
+2019-08-19 12:56:16 +0000  1283 bytes for ./Base.lproj/Main.storyboardc/ChatViewController.nib
+copying file ./Base.lproj/Main.storyboardc/UINavigationController-BLk-nm-evG.nib ... 
+2019-08-19 12:56:16 +0000  1805 bytes for ./Base.lproj/Main.storyboardc/UINavigationController-BLk-nm-evG.nib
+copying file ./Base.lproj/Main.storyboardc/AUp-Sg-dLA-view-RvA-Ue-6Ny.nib ... 
+2019-08-19 12:56:16 +0000  13864 bytes for ./Base.lproj/Main.storyboardc/AUp-Sg-dLA-view-RvA-Ue-6Ny.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/JournalsViewController.nib ... 
+2019-08-19 12:56:16 +0000  1056 bytes for ./Base.lproj/Main.storyboardc/JournalsViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ImageElearningViewController.nib ... 
+2019-08-19 12:56:16 +0000  1146 bytes for ./Base.lproj/Main.storyboardc/ImageElearningViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/LogInViewController.nib ... 
+2019-08-19 12:56:16 +0000  1128 bytes for ./Base.lproj/Main.storyboardc/LogInViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/cZh-Q5-KzC-view-mfX-HJ-BMo.nib ... 
+2019-08-19 12:56:16 +0000  36660 bytes for ./Base.lproj/Main.storyboardc/cZh-Q5-KzC-view-mfX-HJ-BMo.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/Tcu-ZT-7Iv-view-8Bi-oM-pFb.nib ... 
+2019-08-19 12:56:16 +0000  10772 bytes for ./Base.lproj/Main.storyboardc/Tcu-ZT-7Iv-view-8Bi-oM-pFb.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/DetaliViewController.nib ... 
+2019-08-19 12:56:16 +0000  1052 bytes for ./Base.lproj/Main.storyboardc/DetaliViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/MenuViewController.nib ... 
+2019-08-19 12:56:16 +0000  1126 bytes for ./Base.lproj/Main.storyboardc/MenuViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/AttachFileListViewController.nib ... 
+2019-08-19 12:56:16 +0000  1068 bytes for ./Base.lproj/Main.storyboardc/AttachFileListViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ElearningViewController.nib ... 
+2019-08-19 12:56:16 +0000  1136 bytes for ./Base.lproj/Main.storyboardc/ElearningViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/PendingDetailsViewController.nib ... 
+2019-08-19 12:56:16 +0000  1068 bytes for ./Base.lproj/Main.storyboardc/PendingDetailsViewController.nib
+copying file ./Base.lproj/Main.storyboardc/dhz-JP-wx1-view-jCy-f1-PMe.nib ... 
+2019-08-19 12:56:16 +0000  16587 bytes for ./Base.lproj/Main.storyboardc/dhz-JP-wx1-view-jCy-f1-PMe.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/nbC-LS-Soy-view-Yca-2P-IsZ.nib ... 
+2019-08-19 12:56:16 +0000  4388 bytes for ./Base.lproj/Main.storyboardc/nbC-LS-Soy-view-Yca-2P-IsZ.nib
+copying file ./Base.lproj/Main.storyboardc/JOU-DS-aAU-view-tT8-2x-FGp.nib ... 
+2019-08-19 12:56:16 +0000  10958 bytes for ./Base.lproj/Main.storyboardc/JOU-DS-aAU-view-tT8-2x-FGp.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/V58-4V-vas-view-X3C-Ns-Bwi.nib ... 
+9568 bytes for ./Base.lproj/Main.storyboardc/V58-4V-vas-view-X3C-Ns-Bwi.nib
+copying file ./Base.lproj/Main.storyboardc/MentorViewController.nib ... 
+2019-08-19 12:56:16 +0000  1130 bytes for ./Base.lproj/Main.storyboardc/MentorViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/ResourceDetailsViewController.nib ... 
+2019-08-19 12:56:16 +0000  1070 bytes for ./Base.lproj/Main.storyboardc/ResourceDetailsViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Base.lproj/Main.storyboardc/QpN-cp-le1-view-s0Q-3A-Of6.nib ... 
+14699 bytes for ./Base.lproj/Main.storyboardc/QpN-cp-le1-view-s0Q-3A-Of6.nib
+copying file ./Base.lproj/Main.storyboardc/bd3-r5-a5Z-view-3JG-UU-kMh.nib ... 
+11470 bytes for ./Base.lproj/Main.storyboardc/bd3-r5-a5Z-view-3JG-UU-kMh.nib
+copying file ./Base.lproj/Main.storyboardc/Info.plist ... 
+1889 bytes for ./Base.lproj/Main.storyboardc/Info.plist
+copying file ./Base.lproj/Main.storyboardc/MeetingViewController.nib ... 
+2019-08-19 12:56:16 +0000  1132 bytes for ./Base.lproj/Main.storyboardc/MeetingViewController.nib
+copying file ./Base.lproj/Main.storyboardc/TabBarViewController.nib ... 
+5842 bytes for ./Base.lproj/Main.storyboardc/TabBarViewController.nib
+copying file ./Base.lproj/Main.storyboardc/MenteeEditProfileViewController.nib ... 
+2019-08-19 12:56:16 +0000  1152 bytes for ./Base.lproj/Main.storyboardc/MenteeEditProfileViewController.nib
+copying file ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2019-08-19 12:56:16 +0000  2812 bytes for ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+copying file ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+832 bytes for ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2019-08-19 12:56:16 +0000  258 bytes for ./Base.lproj/LaunchScreen.storyboardc/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Assets.car ... 
+2019-08-19 12:56:16 +0000  8799080 bytes for ./Assets.car
+2019-08-19 12:56:16 +0000  copying file ./TakeStockInChildren.momd/TakeStockInChildren.omo ... 
+696 bytes for ./TakeStockInChildren.momd/TakeStockInChildren.omo
+copying file ./TakeStockInChildren.momd/VersionInfo.plist ... 
+2019-08-19 12:56:16 +0000  179 bytes for ./TakeStockInChildren.momd/VersionInfo.plist
+copying file ./TakeStockInChildren.momd/TakeStockInChildren.mom ... 
+2019-08-19 12:56:16 +0000  513 bytes for ./TakeStockInChildren.momd/TakeStockInChildren.mom
+2019-08-19 12:56:16 +0000  copying file ./Challenge.png ... 
+2019-08-19 12:56:16 +0000  8140 bytes for ./Challenge.png
+2019-08-19 12:56:16 +0000  copying file ./Task.storyboardc/ChallengeViewController.nib ... 
+2019-08-19 12:56:16 +0000  1136 bytes for ./Task.storyboardc/ChallengeViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Task.storyboardc/KDV-3p-cDh-view-gHA-qM-86x.nib ... 
+2019-08-19 12:56:16 +0000  18665 bytes for ./Task.storyboardc/KDV-3p-cDh-view-gHA-qM-86x.nib
+2019-08-19 12:56:16 +0000  copying file ./Task.storyboardc/ErU-io-4w2-view-NWt-zM-S0C.nib ... 
+2019-08-19 12:56:16 +0000  18704 bytes for ./Task.storyboardc/ErU-io-4w2-view-NWt-zM-S0C.nib
+2019-08-19 12:56:16 +0000  copying file ./Task.storyboardc/TaskViewController.nib ... 
+2019-08-19 12:56:16 +0000  1126 bytes for ./Task.storyboardc/TaskViewController.nib
+2019-08-19 12:56:16 +0000  copying file ./Task.storyboardc/Info.plist ... 
+2019-08-19 12:56:16 +0000  265 bytes for ./Task.storyboardc/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ActionKit.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:16 +0000  1798 bytes for ./Frameworks/ActionKit.framework/_CodeSignature/CodeResources
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ActionKit.framework/ActionKit ... 
+2019-08-19 12:56:16 +0000  389888 bytes for ./Frameworks/ActionKit.framework/ActionKit
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ActionKit.framework/Info.plist ... 
+2019-08-19 12:56:16 +0000  742 bytes for ./Frameworks/ActionKit.framework/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftPhotos.dylib ... 
+2019-08-19 12:56:16 +0000  468032 bytes for ./Frameworks/libswiftPhotos.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftCoreImage.dylib ... 
+2019-08-19 12:56:16 +0000  466560 bytes for ./Frameworks/libswiftCoreImage.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftObjectiveC.dylib ... 
+2019-08-19 12:56:16 +0000  679680 bytes for ./Frameworks/libswiftObjectiveC.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:16 +0000  4398 bytes for ./Frameworks/ImagePicker.framework/_CodeSignature/CodeResources
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/ImagePicker ... 
+2019-08-19 12:56:16 +0000  2523088 bytes for ./Frameworks/ImagePicker.framework/ImagePicker
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/selectedImageGallery@3x.png ... 
+2231 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/selectedImageGallery@3x.png
+copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/focusIcon@3x.png ... 
+2019-08-19 12:56:16 +0000  1261 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/focusIcon@3x.png
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/ON@3x.png ... 
+2019-08-19 12:56:16 +0000  839 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/ON@3x.png
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/OFF@3x.png ... 
+2019-08-19 12:56:16 +0000  760 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/OFF@3x.png
+copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/AUTO@3x.png ... 
+2019-08-19 12:56:16 +0000  760 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/AUTO@3x.png
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/video@3x.png ... 
+2019-08-19 12:56:16 +0000  795 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/video@3x.png
+copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/cameraIcon@3x.png ... 
+2019-08-19 12:56:16 +0000  1722 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/cameraIcon@3x.png
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/ImagePicker.bundle/Info.plist ... 
+2019-08-19 12:56:16 +0000  721 bytes for ./Frameworks/ImagePicker.framework/ImagePicker.bundle/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/ImagePicker.framework/Info.plist ... 
+2019-08-19 12:56:16 +0000  746 bytes for ./Frameworks/ImagePicker.framework/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftCore.dylib ... 
+2019-08-19 12:56:16 +0000  95497584 bytes for ./Frameworks/libswiftCore.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftCoreGraphics.dylib ... 
+2019-08-19 12:56:16 +0000  2041040 bytes for ./Frameworks/libswiftCoreGraphics.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftUIKit.dylib ... 
+2019-08-19 12:56:16 +0000  1608800 bytes for ./Frameworks/libswiftUIKit.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftMetal.dylib ... 
+2019-08-19 12:56:16 +0000  724416 bytes for ./Frameworks/libswiftMetal.dylib
+copying file ./Frameworks/libswiftCoreData.dylib ... 
+2019-08-19 12:56:16 +0000  994896 bytes for ./Frameworks/libswiftCoreData.dylib
+copying file ./Frameworks/libswiftDispatch.dylib ... 
+2019-08-19 12:56:16 +0000  4056896 bytes for ./Frameworks/libswiftDispatch.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftos.dylib ... 
+857184 bytes for ./Frameworks/libswiftos.dylib
+copying file ./Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:16 +0000  1798 bytes for ./Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/GoogleUtilities.framework/GoogleUtilities ... 
+810992 bytes for ./Frameworks/GoogleUtilities.framework/GoogleUtilities
+copying file ./Frameworks/GoogleUtilities.framework/Info.plist ... 
+756 bytes for ./Frameworks/GoogleUtilities.framework/Info.plist
+copying file ./Frameworks/libswiftMediaPlayer.dylib ... 
+2019-08-19 12:56:16 +0000  777856 bytes for ./Frameworks/libswiftMediaPlayer.dylib
+copying file ./Frameworks/libswiftCoreFoundation.dylib ... 
+450384 bytes for ./Frameworks/libswiftCoreFoundation.dylib
+copying file ./Frameworks/libswiftDarwin.dylib ... 
+2019-08-19 12:56:16 +0000  1091440 bytes for ./Frameworks/libswiftDarwin.dylib
+copying file ./Frameworks/nanopb.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Frameworks/nanopb.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/nanopb.framework/nanopb ... 
+260336 bytes for ./Frameworks/nanopb.framework/nanopb
+copying file ./Frameworks/nanopb.framework/Info.plist ... 
+738 bytes for ./Frameworks/nanopb.framework/Info.plist
+copying file ./Frameworks/libswiftQuartzCore.dylib ... 
+2019-08-19 12:56:16 +0000  486336 bytes for ./Frameworks/libswiftQuartzCore.dylib
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/_CodeSignature/CodeResources ... 
+4698 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@2x.png ... 
+1786 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@2x.png
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@3x.png ... 
+2164 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@3x.png
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@2x.png ... 
+1769 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@2x.png
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@3x.png ... 
+2019-08-19 12:56:16 +0000  1844 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@3x.png
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@3x.png ... 
+1815 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@3x.png
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@3x.png ... 
+2177 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@3x.png
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@2x.png ... 
+1764 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@2x.png
+copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@2x.png ... 
+2019-08-19 12:56:16 +0000  1793 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@2x.png
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManagerSwift ... 
+2019-08-19 12:56:16 +0000  2394048 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManagerSwift
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/IQKeyboardManagerSwift.framework/Info.plist ... 
+770 bytes for ./Frameworks/IQKeyboardManagerSwift.framework/Info.plist
+copying file ./Frameworks/libswiftAssetsLibrary.dylib ... 
+2019-08-19 12:56:16 +0000  467232 bytes for ./Frameworks/libswiftAssetsLibrary.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftCoreAudio.dylib ... 
+2019-08-19 12:56:16 +0000  836048 bytes for ./Frameworks/libswiftCoreAudio.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftAVFoundation.dylib ... 
+2019-08-19 12:56:16 +0000  1652096 bytes for ./Frameworks/libswiftAVFoundation.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/Alamofire.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:16 +0000  1798 bytes for ./Frameworks/Alamofire.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/Alamofire.framework/Alamofire ... 
+2019-08-19 12:56:16 +0000  3955456 bytes for ./Frameworks/Alamofire.framework/Alamofire
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/Alamofire.framework/Info.plist ... 
+742 bytes for ./Frameworks/Alamofire.framework/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/SDWebImage.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:16 +0000  1798 bytes for ./Frameworks/SDWebImage.framework/_CodeSignature/CodeResources
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/SDWebImage.framework/SDWebImage ... 
+2019-08-19 12:56:16 +0000  1111248 bytes for ./Frameworks/SDWebImage.framework/SDWebImage
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/SDWebImage.framework/Info.plist ... 
+2019-08-19 12:56:16 +0000  744 bytes for ./Frameworks/SDWebImage.framework/Info.plist
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftFoundation.dylib ... 
+2019-08-19 12:56:16 +0000  43094320 bytes for ./Frameworks/libswiftFoundation.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftCoreMedia.dylib ... 
+2019-08-19 12:56:16 +0000  794576 bytes for ./Frameworks/libswiftCoreMedia.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftCoreLocation.dylib ... 
+2019-08-19 12:56:16 +0000  730224 bytes for ./Frameworks/libswiftCoreLocation.dylib
+2019-08-19 12:56:16 +0000  copying file ./Frameworks/libswiftsimd.dylib ... 
+2019-08-19 12:56:16 +0000  4134160 bytes for ./Frameworks/libswiftsimd.dylib
+2019-08-19 12:56:16 +0000  copying file ./embedded.mobileprovision ... 
+7529 bytes for ./embedded.mobileprovision
+copying file ./SVProgressHUD.bundle/info.png ... 
+2019-08-19 12:56:16 +0000  3527 bytes for ./SVProgressHUD.bundle/info.png
+2019-08-19 12:56:16 +0000  copying file ./SVProgressHUD.bundle/error@3x.png ... 
+2315 bytes for ./SVProgressHUD.bundle/error@3x.png
+copying file ./SVProgressHUD.bundle/angle-mask@3x.png ... 
+9389 bytes for ./SVProgressHUD.bundle/angle-mask@3x.png
+copying file ./SVProgressHUD.bundle/angle-mask@2x.png ... 
+2019-08-19 12:56:17 +0000  5614 bytes for ./SVProgressHUD.bundle/angle-mask@2x.png
+2019-08-19 12:56:17 +0000  copying file ./SVProgressHUD.bundle/error@2x.png ... 
+2019-08-19 12:56:17 +0000  1137 bytes for ./SVProgressHUD.bundle/error@2x.png
+2019-08-19 12:56:17 +0000  copying file ./SVProgressHUD.bundle/info@3x.png ... 
+2019-08-19 12:56:17 +0000  6585 bytes for ./SVProgressHUD.bundle/info@3x.png
+2019-08-19 12:56:17 +0000  copying file ./SVProgressHUD.bundle/success@2x.png ... 
+2019-08-19 12:56:17 +0000  811 bytes for ./SVProgressHUD.bundle/success@2x.png
+2019-08-19 12:56:17 +0000  copying file ./SVProgressHUD.bundle/success@3x.png ... 
+2019-08-19 12:56:17 +0000  1576 bytes for ./SVProgressHUD.bundle/success@3x.png
+2019-08-19 12:56:17 +0000  copying file ./SVProgressHUD.bundle/info@2x.png ... 
+2019-08-19 12:56:17 +0000  4852 bytes for ./SVProgressHUD.bundle/info@2x.png
+2019-08-19 12:56:17 +0000  copying file ./SVProgressHUD.bundle/error.png ... 
+2019-08-19 12:56:17 +0000  455 bytes for ./SVProgressHUD.bundle/error.png
+copying file ./SVProgressHUD.bundle/success.png ... 
+2019-08-19 12:56:17 +0000  349 bytes for ./SVProgressHUD.bundle/success.png
+2019-08-19 12:56:17 +0000  copying file ./SVProgressHUD.bundle/angle-mask.png ... 
+2019-08-19 12:56:17 +0000  3482 bytes for ./SVProgressHUD.bundle/angle-mask.png
+copying file ./Info.plist ... 
+2019-08-19 12:56:17 +0000  1734 bytes for ./Info.plist
+2019-08-19 12:56:17 +0000  copying file ./PkgInfo ... 
+2019-08-19 12:56:17 +0000  8 bytes for ./PkgInfo
+2019-08-19 12:56:17 +0000  /usr/bin/ditto exited with 0
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionEmbedProfileStep
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc684553820 'org.cocoapods.ActionKit' '<DVTFilePath:0x7fc693266360:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ActionKit.framework'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc69099bcc0 'org.cocoapods.Alamofire' '<DVTFilePath:0x7fc6983110b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/Alamofire.framework'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc68682fa50 'org.cocoapods.GoogleUtilities' '<DVTFilePath:0x7fc68fdec670:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6913a6550 'org.cocoapods.IQKeyboardManagerSwift' '<DVTFilePath:0x7fc69fa0cb80:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc689307550 'org.cocoapods.ImagePicker' '<DVTFilePath:0x7fc688cde470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ImagePicker.framework'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6869650a0 'org.cocoapods.SDWebImage' '<DVTFilePath:0x7fc684f39470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/SDWebImage.framework'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc69ec2bf60 'com.apple.dt.runtime.swiftAVFoundation' '<DVTFilePath:0x7fc69fdb8720:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc69138b9a0 'com.apple.dt.runtime.swiftAssetsLibrary' '<DVTFilePath:0x7fc69fbac710:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc672570bd0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7fc68989ce60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCore.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6913883d0 'com.apple.dt.runtime.swiftCoreAudio' '<DVTFilePath:0x7fc69841aec0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6913b1f40 'com.apple.dt.runtime.swiftCoreData' '<DVTFilePath:0x7fc6870d1070:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6724dd060 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7fc688bd8970:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc684513b70 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7fc68d66c6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc69c04d450 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7fc69f528b70:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc688c86e00 'com.apple.dt.runtime.swiftCoreLocation' '<DVTFilePath:0x7fc69808fdf0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc68fd20460 'com.apple.dt.runtime.swiftCoreMedia' '<DVTFilePath:0x7fc6883dcdd0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc68f58e260 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7fc6b1a31190:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc68721e270 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7fc6910ac6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc69099c260 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7fc69c8bc100:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6913a82d0 'com.apple.dt.runtime.swiftMediaPlayer' '<DVTFilePath:0x7fc68c6c40b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc685729c50 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7fc68bb76c40:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6913856e0 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7fc6905dd0f0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6889c1240 'com.apple.dt.runtime.swiftPhotos' '<DVTFilePath:0x7fc6985778a0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6869bcb20 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7fc68fb25c60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc68869ed00 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7fc68b467b00:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6a63f5440 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7fc69860b7e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftos.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc6913c6570 'com.apple.dt.runtime.swiftsimd' '<DVTFilePath:0x7fc697eee0d0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib'>'>
+2019-08-19 12:56:17 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fc690910480 'org.cocoapods.nanopb' '<DVTFilePath:0x7fc6abf84690:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/nanopb.framework'>'>
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionSymbolsStep
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionAppThinningStep
+2019-08-19 12:56:17 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2019-08-19 12:56:17 +0000  Processing step: IDEDistributionArchThinningStep
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework/ActionKit' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:17 +0000  Skipping architecture thinning for item "ActionKit" because arch "arm64e" wasn't found
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework/Alamofire' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:17 +0000  Skipping architecture thinning for item "Alamofire" because arch "arm64e" wasn't found
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework/GoogleUtilities' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:17 +0000  Skipping architecture thinning for item "GoogleUtilities" because arch "arm64e" wasn't found
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManagerSwift' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:17 +0000  Skipping architecture thinning for item "IQKeyboardManagerSwift" because arch "arm64e" wasn't found
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:17 +0000  Skipping architecture thinning for item "ImagePicker" because arch "arm64e" wasn't found
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework/SDWebImage' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:17 +0000  Skipping architecture thinning for item "SDWebImage" because arch "arm64e" wasn't found
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftAVFoundation.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftAssetsLibrary.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCore.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCore.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCore.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCore.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCoreAudio.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCoreData.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCoreFoundation.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCoreGraphics.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCoreImage.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCoreLocation.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftCoreMedia.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftDarwin.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftDispatch.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftFoundation.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftMediaPlayer.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftMetal.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftObjectiveC.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftPhotos.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib'
+2019-08-19 12:56:17 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:17 +0000  Successfully thinned item "libswiftQuartzCore.dylib", arch "arm64e"
+2019-08-19 12:56:17 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:18 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:18 +0000  Successfully thinned item "libswiftUIKit.dylib", arch "arm64e"
+2019-08-19 12:56:18 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftos.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:18 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftos.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftos.dylib'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:18 +0000  Successfully thinned item "libswiftos.dylib", arch "arm64e"
+2019-08-19 12:56:18 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib' '-verify_arch' 'arm64e'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:18 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib' '-remove' 'arm64e' '-output' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 0
+2019-08-19 12:56:18 +0000  Successfully thinned item "libswiftsimd.dylib", arch "arm64e"
+2019-08-19 12:56:18 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/nanopb.framework/nanopb' '-verify_arch' 'arm64e'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:18 +0000  Skipping architecture thinning for item "nanopb" because arch "arm64e" wasn't found
+2019-08-19 12:56:18 +0000  Running /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/TakeStockInChildren' '-verify_arch' 'arm64e'
+2019-08-19 12:56:18 +0000  /Users/administrator/Documents/PAYEL/PayelOthers/Softwares/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2019-08-19 12:56:18 +0000  Skipping architecture thinning for item "TakeStockInChildren" because arch "arm64e" wasn't found
+2019-08-19 12:56:18 +0000  Processing step: IDEDistributionODRStep
+2019-08-19 12:56:18 +0000  Processing step: IDEDistributionStripXattrsStep
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc684553820 'org.cocoapods.ActionKit' '<DVTFilePath:0x7fc693266360:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ActionKit.framework'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc69099bcc0 'org.cocoapods.Alamofire' '<DVTFilePath:0x7fc6983110b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/Alamofire.framework'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc68682fa50 'org.cocoapods.GoogleUtilities' '<DVTFilePath:0x7fc68fdec670:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6913a6550 'org.cocoapods.IQKeyboardManagerSwift' '<DVTFilePath:0x7fc69fa0cb80:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc689307550 'org.cocoapods.ImagePicker' '<DVTFilePath:0x7fc688cde470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ImagePicker.framework'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6869650a0 'org.cocoapods.SDWebImage' '<DVTFilePath:0x7fc684f39470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/SDWebImage.framework'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc69ec2bf60 'com.apple.dt.runtime.swiftAVFoundation' '<DVTFilePath:0x7fc69fdb8720:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc69138b9a0 'com.apple.dt.runtime.swiftAssetsLibrary' '<DVTFilePath:0x7fc69fbac710:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc672570bd0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7fc68989ce60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCore.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6913883d0 'com.apple.dt.runtime.swiftCoreAudio' '<DVTFilePath:0x7fc69841aec0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6913b1f40 'com.apple.dt.runtime.swiftCoreData' '<DVTFilePath:0x7fc6870d1070:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6724dd060 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7fc688bd8970:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc684513b70 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7fc68d66c6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc69c04d450 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7fc69f528b70:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc688c86e00 'com.apple.dt.runtime.swiftCoreLocation' '<DVTFilePath:0x7fc69808fdf0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc68fd20460 'com.apple.dt.runtime.swiftCoreMedia' '<DVTFilePath:0x7fc6883dcdd0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc68f58e260 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7fc6b1a31190:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc68721e270 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7fc6910ac6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc69099c260 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7fc69c8bc100:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6913a82d0 'com.apple.dt.runtime.swiftMediaPlayer' '<DVTFilePath:0x7fc68c6c40b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc685729c50 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7fc68bb76c40:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6913856e0 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7fc6905dd0f0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6889c1240 'com.apple.dt.runtime.swiftPhotos' '<DVTFilePath:0x7fc6985778a0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6869bcb20 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7fc68fb25c60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc68869ed00 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7fc68b467b00:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6a63f5440 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7fc69860b7e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftos.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc6913c6570 'com.apple.dt.runtime.swiftsimd' '<DVTFilePath:0x7fc697eee0d0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib'>'>
+2019-08-19 12:56:18 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fc690910480 'org.cocoapods.nanopb' '<DVTFilePath:0x7fc6abf84690:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/nanopb.framework'>'>
+2019-08-19 12:56:18 +0000  Running /usr/bin/xattr '-crs' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app'
+2019-08-19 12:56:18 +0000  /usr/bin/xattr exited with 0
+2019-08-19 12:56:18 +0000  Processing step: IDEDistributionCodesignStep
+2019-08-19 12:56:18 +0000  Entitlements for <IDEDistributionItem: 0x7fc684553820 'org.cocoapods.ActionKit' '<DVTFilePath:0x7fc693266360:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ActionKit.framework'>'>: {
+}
+2019-08-19 12:56:18 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc684553820 'org.cocoapods.ActionKit' '<DVTFilePath:0x7fc693266360:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ActionKit.framework'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~l0lQl1
+2019-08-19 12:56:18 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~l0lQl1' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework'
+2019-08-19 12:56:18 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.ActionKit]
+2019-08-19 12:56:18 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:18 +0000  Entitlements for <IDEDistributionItem: 0x7fc69099bcc0 'org.cocoapods.Alamofire' '<DVTFilePath:0x7fc6983110b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/Alamofire.framework'>'>: {
+}
+2019-08-19 12:56:18 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc69099bcc0 'org.cocoapods.Alamofire' '<DVTFilePath:0x7fc6983110b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/Alamofire.framework'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~iDDe8X
+2019-08-19 12:56:18 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~iDDe8X' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework'
+2019-08-19 12:56:18 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.Alamofire]
+2019-08-19 12:56:18 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:18 +0000  Entitlements for <IDEDistributionItem: 0x7fc68682fa50 'org.cocoapods.GoogleUtilities' '<DVTFilePath:0x7fc68fdec670:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework'>'>: {
+}
+2019-08-19 12:56:18 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc68682fa50 'org.cocoapods.GoogleUtilities' '<DVTFilePath:0x7fc68fdec670:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~18joq3
+2019-08-19 12:56:18 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~18joq3' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework'
+2019-08-19 12:56:18 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.GoogleUtilities]
+2019-08-19 12:56:18 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:18 +0000  Entitlements for <IDEDistributionItem: 0x7fc6913a6550 'org.cocoapods.IQKeyboardManagerSwift' '<DVTFilePath:0x7fc69fa0cb80:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework'>'>: {
+}
+2019-08-19 12:56:18 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6913a6550 'org.cocoapods.IQKeyboardManagerSwift' '<DVTFilePath:0x7fc69fa0cb80:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~RQ4r0c
+2019-08-19 12:56:18 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~RQ4r0c' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework'
+2019-08-19 12:56:18 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.IQKeyboardManagerSwift]
+2019-08-19 12:56:18 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:18 +0000  Entitlements for <IDEDistributionItem: 0x7fc689307550 'org.cocoapods.ImagePicker' '<DVTFilePath:0x7fc688cde470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ImagePicker.framework'>'>: {
+}
+2019-08-19 12:56:18 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc689307550 'org.cocoapods.ImagePicker' '<DVTFilePath:0x7fc688cde470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/ImagePicker.framework'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~KN5PsH
+2019-08-19 12:56:18 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~KN5PsH' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework'
+2019-08-19 12:56:18 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.ImagePicker]
+2019-08-19 12:56:18 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:18 +0000  Entitlements for <IDEDistributionItem: 0x7fc6869650a0 'org.cocoapods.SDWebImage' '<DVTFilePath:0x7fc684f39470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/SDWebImage.framework'>'>: {
+}
+2019-08-19 12:56:18 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6869650a0 'org.cocoapods.SDWebImage' '<DVTFilePath:0x7fc684f39470:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/SDWebImage.framework'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~OGkzQc
+2019-08-19 12:56:18 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~OGkzQc' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework'
+2019-08-19 12:56:18 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.SDWebImage]
+2019-08-19 12:56:18 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:18 +0000  Entitlements for <IDEDistributionItem: 0x7fc69ec2bf60 'com.apple.dt.runtime.swiftAVFoundation' '<DVTFilePath:0x7fc69fdb8720:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib'>'>: {
+}
+2019-08-19 12:56:19 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc69ec2bf60 'com.apple.dt.runtime.swiftAVFoundation' '<DVTFilePath:0x7fc69fdb8720:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~IKHH0h
+2019-08-19 12:56:19 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~IKHH0h' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib'
+2019-08-19 12:56:19 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftAVFoundation]
+2019-08-19 12:56:19 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:19 +0000  Entitlements for <IDEDistributionItem: 0x7fc69138b9a0 'com.apple.dt.runtime.swiftAssetsLibrary' '<DVTFilePath:0x7fc69fbac710:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib'>'>: {
+}
+2019-08-19 12:56:19 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc69138b9a0 'com.apple.dt.runtime.swiftAssetsLibrary' '<DVTFilePath:0x7fc69fbac710:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~yktvSm
+2019-08-19 12:56:19 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~yktvSm' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib'
+2019-08-19 12:56:19 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftAssetsLibrary]
+2019-08-19 12:56:19 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:19 +0000  Entitlements for <IDEDistributionItem: 0x7fc672570bd0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7fc68989ce60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCore.dylib'>'>: {
+}
+2019-08-19 12:56:19 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc672570bd0 'com.apple.dt.runtime.swiftCore' '<DVTFilePath:0x7fc68989ce60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCore.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~lx4Rpl
+2019-08-19 12:56:19 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~lx4Rpl' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCore.dylib'
+2019-08-19 12:56:19 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCore.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCore]
+2019-08-19 12:56:19 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:19 +0000  Entitlements for <IDEDistributionItem: 0x7fc6913883d0 'com.apple.dt.runtime.swiftCoreAudio' '<DVTFilePath:0x7fc69841aec0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib'>'>: {
+}
+2019-08-19 12:56:19 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6913883d0 'com.apple.dt.runtime.swiftCoreAudio' '<DVTFilePath:0x7fc69841aec0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~BflFVv
+2019-08-19 12:56:19 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~BflFVv' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib'
+2019-08-19 12:56:19 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreAudio]
+2019-08-19 12:56:19 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:19 +0000  Entitlements for <IDEDistributionItem: 0x7fc6913b1f40 'com.apple.dt.runtime.swiftCoreData' '<DVTFilePath:0x7fc6870d1070:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib'>'>: {
+}
+2019-08-19 12:56:19 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6913b1f40 'com.apple.dt.runtime.swiftCoreData' '<DVTFilePath:0x7fc6870d1070:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~Nr2FFw
+2019-08-19 12:56:19 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~Nr2FFw' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib'
+2019-08-19 12:56:19 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreData]
+2019-08-19 12:56:19 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:19 +0000  Entitlements for <IDEDistributionItem: 0x7fc6724dd060 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7fc688bd8970:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib'>'>: {
+}
+2019-08-19 12:56:19 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6724dd060 'com.apple.dt.runtime.swiftCoreFoundation' '<DVTFilePath:0x7fc688bd8970:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~7YDICb
+2019-08-19 12:56:19 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~7YDICb' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib'
+2019-08-19 12:56:20 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreFoundation]
+2019-08-19 12:56:20 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:20 +0000  Entitlements for <IDEDistributionItem: 0x7fc684513b70 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7fc68d66c6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib'>'>: {
+}
+2019-08-19 12:56:20 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc684513b70 'com.apple.dt.runtime.swiftCoreGraphics' '<DVTFilePath:0x7fc68d66c6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~WdiGtK
+2019-08-19 12:56:20 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~WdiGtK' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib'
+2019-08-19 12:56:20 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreGraphics]
+2019-08-19 12:56:20 +0000  
+2019-08-19 12:56:20 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:20 +0000  Entitlements for <IDEDistributionItem: 0x7fc69c04d450 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7fc69f528b70:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib'>'>: {
+}
+2019-08-19 12:56:20 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc69c04d450 'com.apple.dt.runtime.swiftCoreImage' '<DVTFilePath:0x7fc69f528b70:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~WFxeU2
+2019-08-19 12:56:20 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~WFxeU2' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib'
+2019-08-19 12:56:20 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreImage]
+2019-08-19 12:56:20 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:20 +0000  Entitlements for <IDEDistributionItem: 0x7fc688c86e00 'com.apple.dt.runtime.swiftCoreLocation' '<DVTFilePath:0x7fc69808fdf0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib'>'>: {
+}
+2019-08-19 12:56:20 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc688c86e00 'com.apple.dt.runtime.swiftCoreLocation' '<DVTFilePath:0x7fc69808fdf0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~nrbHbK
+2019-08-19 12:56:20 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~nrbHbK' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib'
+2019-08-19 12:56:20 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreLocation]
+2019-08-19 12:56:20 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:20 +0000  Entitlements for <IDEDistributionItem: 0x7fc68fd20460 'com.apple.dt.runtime.swiftCoreMedia' '<DVTFilePath:0x7fc6883dcdd0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib'>'>: {
+}
+2019-08-19 12:56:20 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc68fd20460 'com.apple.dt.runtime.swiftCoreMedia' '<DVTFilePath:0x7fc6883dcdd0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~oFF2y0
+2019-08-19 12:56:20 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~oFF2y0' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib'
+2019-08-19 12:56:20 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftCoreMedia]
+2019-08-19 12:56:20 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:20 +0000  Entitlements for <IDEDistributionItem: 0x7fc68f58e260 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7fc6b1a31190:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib'>'>: {
+}
+2019-08-19 12:56:20 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc68f58e260 'com.apple.dt.runtime.swiftDarwin' '<DVTFilePath:0x7fc6b1a31190:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~UgbShn
+2019-08-19 12:56:20 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~UgbShn' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib'
+2019-08-19 12:56:20 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftDarwin]
+2019-08-19 12:56:20 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:20 +0000  Entitlements for <IDEDistributionItem: 0x7fc68721e270 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7fc6910ac6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib'>'>: {
+}
+2019-08-19 12:56:20 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc68721e270 'com.apple.dt.runtime.swiftDispatch' '<DVTFilePath:0x7fc6910ac6e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~zOYKEg
+2019-08-19 12:56:20 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~zOYKEg' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib'
+2019-08-19 12:56:20 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftDispatch]
+2019-08-19 12:56:20 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:20 +0000  Entitlements for <IDEDistributionItem: 0x7fc69099c260 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7fc69c8bc100:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib'>'>: {
+}
+2019-08-19 12:56:20 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc69099c260 'com.apple.dt.runtime.swiftFoundation' '<DVTFilePath:0x7fc69c8bc100:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~JabdKE
+2019-08-19 12:56:20 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~JabdKE' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib'
+2019-08-19 12:56:21 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftFoundation]
+2019-08-19 12:56:21 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:21 +0000  Entitlements for <IDEDistributionItem: 0x7fc6913a82d0 'com.apple.dt.runtime.swiftMediaPlayer' '<DVTFilePath:0x7fc68c6c40b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib'>'>: {
+}
+2019-08-19 12:56:21 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6913a82d0 'com.apple.dt.runtime.swiftMediaPlayer' '<DVTFilePath:0x7fc68c6c40b0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~2EIaN3
+2019-08-19 12:56:21 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~2EIaN3' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib'
+2019-08-19 12:56:21 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftMediaPlayer]
+2019-08-19 12:56:21 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:21 +0000  Entitlements for <IDEDistributionItem: 0x7fc685729c50 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7fc68bb76c40:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib'>'>: {
+}
+2019-08-19 12:56:21 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc685729c50 'com.apple.dt.runtime.swiftMetal' '<DVTFilePath:0x7fc68bb76c40:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~gof5pC
+2019-08-19 12:56:21 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~gof5pC' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib'
+2019-08-19 12:56:21 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftMetal]
+2019-08-19 12:56:21 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:21 +0000  Entitlements for <IDEDistributionItem: 0x7fc6913856e0 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7fc6905dd0f0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib'>'>: {
+}
+2019-08-19 12:56:21 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6913856e0 'com.apple.dt.runtime.swiftObjectiveC' '<DVTFilePath:0x7fc6905dd0f0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~D5VcWq
+2019-08-19 12:56:21 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~D5VcWq' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib'
+2019-08-19 12:56:21 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftObjectiveC]
+2019-08-19 12:56:21 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:21 +0000  Entitlements for <IDEDistributionItem: 0x7fc6889c1240 'com.apple.dt.runtime.swiftPhotos' '<DVTFilePath:0x7fc6985778a0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib'>'>: {
+}
+2019-08-19 12:56:21 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6889c1240 'com.apple.dt.runtime.swiftPhotos' '<DVTFilePath:0x7fc6985778a0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~yfVyMH
+2019-08-19 12:56:21 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~yfVyMH' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib'
+2019-08-19 12:56:21 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftPhotos]
+2019-08-19 12:56:21 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:21 +0000  Entitlements for <IDEDistributionItem: 0x7fc6869bcb20 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7fc68fb25c60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib'>'>: {
+}
+2019-08-19 12:56:21 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6869bcb20 'com.apple.dt.runtime.swiftQuartzCore' '<DVTFilePath:0x7fc68fb25c60:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~IElObZ
+2019-08-19 12:56:21 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~IElObZ' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib'
+2019-08-19 12:56:21 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftQuartzCore]
+2019-08-19 12:56:21 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:21 +0000  Entitlements for <IDEDistributionItem: 0x7fc68869ed00 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7fc68b467b00:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib'>'>: {
+}
+2019-08-19 12:56:21 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc68869ed00 'com.apple.dt.runtime.swiftUIKit' '<DVTFilePath:0x7fc68b467b00:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~Qi9QYr
+2019-08-19 12:56:21 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~Qi9QYr' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib'
+2019-08-19 12:56:22 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftUIKit]
+2019-08-19 12:56:22 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:22 +0000  Entitlements for <IDEDistributionItem: 0x7fc6a63f5440 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7fc69860b7e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftos.dylib'>'>: {
+}
+2019-08-19 12:56:22 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6a63f5440 'com.apple.dt.runtime.swiftos' '<DVTFilePath:0x7fc69860b7e0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftos.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~TQEXOl
+2019-08-19 12:56:22 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~TQEXOl' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftos.dylib'
+2019-08-19 12:56:22 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftos.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftos]
+2019-08-19 12:56:22 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:22 +0000  Entitlements for <IDEDistributionItem: 0x7fc6913c6570 'com.apple.dt.runtime.swiftsimd' '<DVTFilePath:0x7fc697eee0d0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib'>'>: {
+}
+2019-08-19 12:56:22 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc6913c6570 'com.apple.dt.runtime.swiftsimd' '<DVTFilePath:0x7fc697eee0d0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~v976Ne
+2019-08-19 12:56:22 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~v976Ne' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib'
+2019-08-19 12:56:22 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib: signed Mach-O universal (armv7 armv7s arm64) [com.apple.dt.runtime.swiftsimd]
+2019-08-19 12:56:22 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:22 +0000  Entitlements for <IDEDistributionItem: 0x7fc690910480 'org.cocoapods.nanopb' '<DVTFilePath:0x7fc6abf84690:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/nanopb.framework'>'>: {
+}
+2019-08-19 12:56:22 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc690910480 'org.cocoapods.nanopb' '<DVTFilePath:0x7fc6abf84690:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app/Frameworks/nanopb.framework'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~hUct6n
+2019-08-19 12:56:22 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~hUct6n' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/nanopb.framework'
+2019-08-19 12:56:22 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app/Frameworks/nanopb.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.nanopb]
+2019-08-19 12:56:22 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:22 +0000  Entitlements for <IDEDistributionItem: 0x7fc67251d420 'com.app.TakeStockInChildren' '<DVTFilePath:0x7fc6b20728c0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app'>'>: {
+    "application-identifier" = "X2WK6QAS2Y.com.app.TakeStockInChildren";
+    "com.apple.developer.team-identifier" = X2WK6QAS2Y;
+    "get-task-allow" = 1;
+    "keychain-access-groups" =     (
+        "X2WK6QAS2Y.com.app.TakeStockInChildren"
+    );
+}
+2019-08-19 12:56:22 +0000  Writing entitlements for <IDEDistributionItem: 0x7fc67251d420 'com.app.TakeStockInChildren' '<DVTFilePath:0x7fc6b20728c0:'/Users/administrator/Library/Developer/Xcode/Archives/2019-08-19/TakeStockInChildren 19-08-19, 6.25 PM.xcarchive/Products/Applications/TakeStockInChildren.app'>'> to: /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~gXOiuN
+2019-08-19 12:56:22 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '9259C709CFC267786B3387368D48F245DCD00ECF' '--entitlements' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/entitlements~~~gXOiuN' '--preserve-metadata=identifier,flags,runtime' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app'
+2019-08-19 12:56:22 +0000  /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root/Payload/TakeStockInChildren.app: signed app bundle with Mach-O thin (arm64) [com.app.TakeStockInChildren]
+2019-08-19 12:56:22 +0000  /usr/bin/codesign exited with 0
+2019-08-19 12:56:22 +0000  Processing step: IDEDistributionZipODRItemStep
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2019-08-19 12:56:22 +0000  Processing step: IDEDistributionCreateIPAStep
+2019-08-19 12:56:22 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root' '/var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Packages/TakeStockInChildren.ipa'
+2019-08-19 12:56:22 +0000  >>> Copying /var/folders/rd/wc1c2v_52575mbh6trnrlkq00000gn/T/XcodeDistPipeline.~~~K3RqeO/Root 
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Raleway-Bold_0.ttf ... 
+2019-08-19 12:56:22 +0000  179244 bytes for ./Payload/TakeStockInChildren.app/Raleway-Bold_0.ttf
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:22 +0000  48243 bytes for ./Payload/TakeStockInChildren.app/_CodeSignature/CodeResources
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Profile.storyboardc/ProfileViewController.nib ... 
+2019-08-19 12:56:22 +0000  1014 bytes for ./Payload/TakeStockInChildren.app/Profile.storyboardc/ProfileViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Profile.storyboardc/08l-qF-fhO-view-3ww-Ze-QGi.nib ... 
+2019-08-19 12:56:22 +0000  19274 bytes for ./Payload/TakeStockInChildren.app/Profile.storyboardc/08l-qF-fhO-view-3ww-Ze-QGi.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Profile.storyboardc/Info.plist ... 
+167 bytes for ./Payload/TakeStockInChildren.app/Profile.storyboardc/Info.plist
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Raleway-Light_0.ttf ... 
+2019-08-19 12:56:22 +0000  182376 bytes for ./Payload/TakeStockInChildren.app/Raleway-Light_0.ttf
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/AppIcon60x60@2x.png ... 
+2019-08-19 12:56:22 +0000  10523 bytes for ./Payload/TakeStockInChildren.app/AppIcon60x60@2x.png
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/EditMentorProfileViewController.nib ... 
+1152 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/EditMentorProfileViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/SelectTypeViewController.nib ... 
+2019-08-19 12:56:22 +0000  1138 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/SelectTypeViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/qjt-xT-peo-view-mOY-Fa-pe8.nib ... 
+2019-08-19 12:56:22 +0000  3165 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/qjt-xT-peo-view-mOY-Fa-pe8.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MyMenteeListViewController.nib ... 
+1142 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MyMenteeListViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MyMenteeDetailsViewController.nib ... 
+2019-08-19 12:56:22 +0000  1148 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MyMenteeDetailsViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/rdy-Pd-Wj7-view-cFh-i3-lYL.nib ... 
+2019-08-19 12:56:22 +0000  12729 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/rdy-Pd-Wj7-view-cFh-i3-lYL.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/gaS-fv-AAc-view-mxl-5w-Xqk.nib ... 
+2019-08-19 12:56:22 +0000  10986 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/gaS-fv-AAc-view-mxl-5w-Xqk.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MentorForgotPasswordViewController.nib ... 
+2019-08-19 12:56:22 +0000  1158 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MentorForgotPasswordViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/9la-3U-DOm-view-5rJ-C8-S3u.nib ... 
+2019-08-19 12:56:22 +0000  16789 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/9la-3U-DOm-view-5rJ-C8-S3u.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MentorProfileViewController.nib ... 
+2019-08-19 12:56:22 +0000  1144 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MentorProfileViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MentorTabBarViewController.nib ... 
+2019-08-19 12:56:22 +0000  4835 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/MentorTabBarViewController.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/jiZ-1f-Vzg-view-8cv-PS-Omm.nib ... 
+2019-08-19 12:56:22 +0000  13452 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/jiZ-1f-Vzg-view-8cv-PS-Omm.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/SessionViewController.nib ... 
+2019-08-19 12:56:22 +0000  1084 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/SessionViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/h1b-9o-Cf8-view-PyA-tj-cRD.nib ... 
+2019-08-19 12:56:22 +0000  11121 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/h1b-9o-Cf8-view-PyA-tj-cRD.nib
+copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/1BC-QK-SGL-view-75G-u4-tBl.nib ... 
+2019-08-19 12:56:22 +0000  6473 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/1BC-QK-SGL-view-75G-u4-tBl.nib
+2019-08-19 12:56:22 +0000  copying file ./Payload/TakeStockInChildren.app/Mentor.storyboardc/Info.plist ... 
+652 bytes for ./Payload/TakeStockInChildren.app/Mentor.storyboardc/Info.plist
+copying file ./Payload/TakeStockInChildren.app/TakeStockInChildren ... 
+2019-08-19 12:56:23 +0000  2754208 bytes for ./Payload/TakeStockInChildren.app/TakeStockInChildren
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/GoogleService-Info.plist ... 
+760 bytes for ./Payload/TakeStockInChildren.app/GoogleService-Info.plist
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/qlF-MV-brN-view-8d6-1X-ydN.nib ... 
+2019-08-19 12:56:23 +0000  18365 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/qlF-MV-brN-view-8d6-1X-ydN.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/HelpTabViewController.nib ... 
+2019-08-19 12:56:23 +0000  1084 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/HelpTabViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JobViewController.nib ... 
+1046 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JobViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/pTb-gW-MU0-view-c6F-ac-axS.nib ... 
+2019-08-19 12:56:23 +0000  4389 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/pTb-gW-MU0-view-c6F-ac-axS.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Pcs-tK-iwR-view-llc-yx-SXB.nib ... 
+2019-08-19 12:56:23 +0000  4398 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Pcs-tK-iwR-view-llc-yx-SXB.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/crQ-QG-V8T-view-sQw-8u-ZC9.nib ... 
+2019-08-19 12:56:23 +0000  12000 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/crQ-QG-V8T-view-sQw-8u-ZC9.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ResetPasswordViewController.nib ... 
+2019-08-19 12:56:23 +0000  1144 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ResetPasswordViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/gZU-kU-juL-view-DS4-Cl-OxQ.nib ... 
+2019-08-19 12:56:23 +0000  22390 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/gZU-kU-juL-view-DS4-Cl-OxQ.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/EfU-pQ-smn-view-YeP-O8-Vmf.nib ... 
+2019-08-19 12:56:23 +0000  23219 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/EfU-pQ-smn-view-YeP-O8-Vmf.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/YR8-PM-uDU-view-eTc-LX-inZ.nib ... 
+2019-08-19 12:56:23 +0000  19453 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/YR8-PM-uDU-view-eTc-LX-inZ.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/5Mx-iz-i9B-view-6Bm-R8-iGP.nib ... 
+2019-08-19 12:56:23 +0000  13240 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/5Mx-iz-i9B-view-6Bm-R8-iGP.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/1pr-lH-dQf-view-vfQ-7h-zDs.nib ... 
+2019-08-19 12:56:23 +0000  30845 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/1pr-lH-dQf-view-vfQ-7h-zDs.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ResourceViewController.nib ... 
+1134 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ResourceViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/PendingAddFilesViewController.nib ... 
+2019-08-19 12:56:23 +0000  1070 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/PendingAddFilesViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/2JN-WU-jBt-view-hXJ-ER-EBI.nib ... 
+2019-08-19 12:56:23 +0000  10200 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/2JN-WU-jBt-view-hXJ-ER-EBI.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Aea-Dr-u88-view-C6X-nZ-Al0.nib ... 
+2019-08-19 12:56:23 +0000  12312 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Aea-Dr-u88-view-C6X-nZ-Al0.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/BaseLoginViewController.nib ... 
+1136 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/BaseLoginViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/CompletedDetailsViewController.nib ... 
+2019-08-19 12:56:23 +0000  1072 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/CompletedDetailsViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/2dq-zX-ybL-view-jqc-4l-c55.nib ... 
+2019-08-19 12:56:23 +0000  13203 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/2dq-zX-ybL-view-jqc-4l-c55.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/p58-4N-SdT-view-ILe-FM-53Z.nib ... 
+2019-08-19 12:56:23 +0000  4266 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/p58-4N-SdT-view-ILe-FM-53Z.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Yso-OM-Skv-view-yFl-Vu-l0A.nib ... 
+2019-08-19 12:56:23 +0000  4395 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Yso-OM-Skv-view-yFl-Vu-l0A.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/UploadViewController.nib ... 
+2019-08-19 12:56:23 +0000  1130 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/UploadViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ProfileViewController.nib ... 
+2019-08-19 12:56:23 +0000  1132 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ProfileViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/GoalViewController.nib ... 
+2019-08-19 12:56:23 +0000  1126 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/GoalViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/c8x-AH-nNk-view-CwB-Id-vsU.nib ... 
+2019-08-19 12:56:23 +0000  8143 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/c8x-AH-nNk-view-CwB-Id-vsU.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ElearningDetailsVideoViewController.nib ... 
+2019-08-19 12:56:23 +0000  1160 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ElearningDetailsVideoViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ihM-Nl-hPp-view-Dmt-2j-VfV.nib ... 
+2019-08-19 12:56:23 +0000  14995 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ihM-Nl-hPp-view-Dmt-2j-VfV.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/aH1-x2-Uhu-view-lWE-wb-yZV.nib ... 
+2019-08-19 12:56:23 +0000  4712 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/aH1-x2-Uhu-view-lWE-wb-yZV.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/NoteListViewController.nib ... 
+2019-08-19 12:56:23 +0000  1056 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/NoteListViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JournalsListingViewController.nib ... 
+2019-08-19 12:56:23 +0000  1148 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JournalsListingViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ChatViewController.nib ... 
+2019-08-19 12:56:23 +0000  1283 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ChatViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/UINavigationController-BLk-nm-evG.nib ... 
+2019-08-19 12:56:23 +0000  1805 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/UINavigationController-BLk-nm-evG.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/AUp-Sg-dLA-view-RvA-Ue-6Ny.nib ... 
+2019-08-19 12:56:23 +0000  13864 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/AUp-Sg-dLA-view-RvA-Ue-6Ny.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JournalsViewController.nib ... 
+2019-08-19 12:56:23 +0000  1056 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JournalsViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ImageElearningViewController.nib ... 
+2019-08-19 12:56:23 +0000  1146 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ImageElearningViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/LogInViewController.nib ... 
+2019-08-19 12:56:23 +0000  1128 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/LogInViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/cZh-Q5-KzC-view-mfX-HJ-BMo.nib ... 
+2019-08-19 12:56:23 +0000  36660 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/cZh-Q5-KzC-view-mfX-HJ-BMo.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Tcu-ZT-7Iv-view-8Bi-oM-pFb.nib ... 
+2019-08-19 12:56:23 +0000  10772 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Tcu-ZT-7Iv-view-8Bi-oM-pFb.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/DetaliViewController.nib ... 
+1052 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/DetaliViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MenuViewController.nib ... 
+2019-08-19 12:56:23 +0000  1126 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MenuViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/AttachFileListViewController.nib ... 
+2019-08-19 12:56:23 +0000  1068 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/AttachFileListViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ElearningViewController.nib ... 
+2019-08-19 12:56:23 +0000  1136 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ElearningViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/PendingDetailsViewController.nib ... 
+2019-08-19 12:56:23 +0000  1068 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/PendingDetailsViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/dhz-JP-wx1-view-jCy-f1-PMe.nib ... 
+2019-08-19 12:56:23 +0000  16587 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/dhz-JP-wx1-view-jCy-f1-PMe.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/nbC-LS-Soy-view-Yca-2P-IsZ.nib ... 
+2019-08-19 12:56:23 +0000  4388 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/nbC-LS-Soy-view-Yca-2P-IsZ.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JOU-DS-aAU-view-tT8-2x-FGp.nib ... 
+2019-08-19 12:56:23 +0000  10958 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/JOU-DS-aAU-view-tT8-2x-FGp.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/V58-4V-vas-view-X3C-Ns-Bwi.nib ... 
+2019-08-19 12:56:23 +0000  9568 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/V58-4V-vas-view-X3C-Ns-Bwi.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MentorViewController.nib ... 
+1130 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MentorViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ResourceDetailsViewController.nib ... 
+2019-08-19 12:56:23 +0000  1070 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/ResourceDetailsViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/QpN-cp-le1-view-s0Q-3A-Of6.nib ... 
+2019-08-19 12:56:23 +0000  14699 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/QpN-cp-le1-view-s0Q-3A-Of6.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/bd3-r5-a5Z-view-3JG-UU-kMh.nib ... 
+2019-08-19 12:56:23 +0000  11470 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/bd3-r5-a5Z-view-3JG-UU-kMh.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Info.plist ... 
+1889 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/Info.plist
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MeetingViewController.nib ... 
+2019-08-19 12:56:23 +0000  1132 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MeetingViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/TabBarViewController.nib ... 
+2019-08-19 12:56:23 +0000  5842 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/TabBarViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MenteeEditProfileViewController.nib ... 
+1152 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/Main.storyboardc/MenteeEditProfileViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2019-08-19 12:56:23 +0000  2812 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+copying file ./Payload/TakeStockInChildren.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2019-08-19 12:56:23 +0000  832 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+258 bytes for ./Payload/TakeStockInChildren.app/Base.lproj/LaunchScreen.storyboardc/Info.plist
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Assets.car ... 
+2019-08-19 12:56:23 +0000  8799080 bytes for ./Payload/TakeStockInChildren.app/Assets.car
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/TakeStockInChildren.momd/TakeStockInChildren.omo ... 
+2019-08-19 12:56:23 +0000  696 bytes for ./Payload/TakeStockInChildren.app/TakeStockInChildren.momd/TakeStockInChildren.omo
+copying file ./Payload/TakeStockInChildren.app/TakeStockInChildren.momd/VersionInfo.plist ... 
+2019-08-19 12:56:23 +0000  179 bytes for ./Payload/TakeStockInChildren.app/TakeStockInChildren.momd/VersionInfo.plist
+copying file ./Payload/TakeStockInChildren.app/TakeStockInChildren.momd/TakeStockInChildren.mom ... 
+2019-08-19 12:56:23 +0000  513 bytes for ./Payload/TakeStockInChildren.app/TakeStockInChildren.momd/TakeStockInChildren.mom
+copying file ./Payload/TakeStockInChildren.app/Challenge.png ... 
+2019-08-19 12:56:23 +0000  8140 bytes for ./Payload/TakeStockInChildren.app/Challenge.png
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Task.storyboardc/ChallengeViewController.nib ... 
+2019-08-19 12:56:23 +0000  1136 bytes for ./Payload/TakeStockInChildren.app/Task.storyboardc/ChallengeViewController.nib
+copying file ./Payload/TakeStockInChildren.app/Task.storyboardc/KDV-3p-cDh-view-gHA-qM-86x.nib ... 
+2019-08-19 12:56:23 +0000  18665 bytes for ./Payload/TakeStockInChildren.app/Task.storyboardc/KDV-3p-cDh-view-gHA-qM-86x.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Task.storyboardc/ErU-io-4w2-view-NWt-zM-S0C.nib ... 
+2019-08-19 12:56:23 +0000  18704 bytes for ./Payload/TakeStockInChildren.app/Task.storyboardc/ErU-io-4w2-view-NWt-zM-S0C.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Task.storyboardc/TaskViewController.nib ... 
+1126 bytes for ./Payload/TakeStockInChildren.app/Task.storyboardc/TaskViewController.nib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Task.storyboardc/Info.plist ... 
+2019-08-19 12:56:23 +0000  265 bytes for ./Payload/TakeStockInChildren.app/Task.storyboardc/Info.plist
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:23 +0000  1798 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework/_CodeSignature/CodeResources
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework/ActionKit ... 
+2019-08-19 12:56:23 +0000  174496 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework/ActionKit
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework/Info.plist ... 
+2019-08-19 12:56:23 +0000  742 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ActionKit.framework/Info.plist
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib ... 
+2019-08-19 12:56:23 +0000  255152 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftPhotos.dylib
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib ... 
+2019-08-19 12:56:23 +0000  253632 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreImage.dylib
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib ... 
+2019-08-19 12:56:23 +0000  302640 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftObjectiveC.dylib
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:23 +0000  4398 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/_CodeSignature/CodeResources
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker ... 
+2019-08-19 12:56:23 +0000  880784 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/selectedImageGallery@3x.png ... 
+2019-08-19 12:56:23 +0000  2231 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/selectedImageGallery@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/focusIcon@3x.png ... 
+2019-08-19 12:56:23 +0000  1261 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/focusIcon@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/ON@3x.png ... 
+2019-08-19 12:56:23 +0000  839 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/ON@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/OFF@3x.png ... 
+2019-08-19 12:56:23 +0000  760 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/OFF@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/AUTO@3x.png ... 
+2019-08-19 12:56:23 +0000  760 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/AUTO@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/video@3x.png ... 
+2019-08-19 12:56:23 +0000  795 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/video@3x.png
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/cameraIcon@3x.png ... 
+2019-08-19 12:56:23 +0000  1722 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/cameraIcon@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/Info.plist ... 
+2019-08-19 12:56:23 +0000  721 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/ImagePicker.bundle/Info.plist
+2019-08-19 12:56:23 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/Info.plist ... 
+2019-08-19 12:56:23 +0000  746 bytes for ./Payload/TakeStockInChildren.app/Frameworks/ImagePicker.framework/Info.plist
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCore.dylib ... 
+2019-08-19 12:56:24 +0000  16915040 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCore.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib ... 
+2019-08-19 12:56:24 +0000  646848 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreGraphics.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib ... 
+2019-08-19 12:56:24 +0000  477152 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftUIKit.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib ... 
+2019-08-19 12:56:24 +0000  298096 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftMetal.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib ... 
+2019-08-19 12:56:24 +0000  354928 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreData.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib ... 
+2019-08-19 12:56:24 +0000  1018912 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftDispatch.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftos.dylib ... 
+2019-08-19 12:56:24 +0000  299424 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftos.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework/_CodeSignature/CodeResources
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework/GoogleUtilities ... 
+2019-08-19 12:56:24 +0000  263760 bytes for ./Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework/GoogleUtilities
+copying file ./Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework/Info.plist ... 
+2019-08-19 12:56:24 +0000  756 bytes for ./Payload/TakeStockInChildren.app/Frameworks/GoogleUtilities.framework/Info.plist
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib ... 
+2019-08-19 12:56:24 +0000  302464 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftMediaPlayer.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib ... 
+2019-08-19 12:56:24 +0000  253776 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreFoundation.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib ... 
+2019-08-19 12:56:24 +0000  369728 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftDarwin.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/nanopb.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:24 +0000  1798 bytes for ./Payload/TakeStockInChildren.app/Frameworks/nanopb.framework/_CodeSignature/CodeResources
+copying file ./Payload/TakeStockInChildren.app/Frameworks/nanopb.framework/nanopb ... 
+2019-08-19 12:56:24 +0000  127904 bytes for ./Payload/TakeStockInChildren.app/Frameworks/nanopb.framework/nanopb
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/nanopb.framework/Info.plist ... 
+738 bytes for ./Payload/TakeStockInChildren.app/Frameworks/nanopb.framework/Info.plist
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib ... 
+2019-08-19 12:56:24 +0000  256864 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftQuartzCore.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/_CodeSignature/CodeResources ... 
+4698 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/_CodeSignature/CodeResources
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@2x.png ... 
+2019-08-19 12:56:24 +0000  1786 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@2x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@3x.png ... 
+2019-08-19 12:56:24 +0000  2164 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@3x.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@2x.png ... 
+2019-08-19 12:56:24 +0000  1769 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowUp@2x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@3x.png ... 
+2019-08-19 12:56:24 +0000  1844 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowRight@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@3x.png ... 
+2019-08-19 12:56:24 +0000  1815 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@3x.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@3x.png ... 
+2019-08-19 12:56:24 +0000  2177 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@3x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@2x.png ... 
+1764 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowDown@2x.png
+copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@2x.png ... 
+1793 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManager.bundle/IQButtonBarArrowLeft@2x.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManagerSwift ... 
+2019-08-19 12:56:24 +0000  867888 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/IQKeyboardManagerSwift
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/Info.plist ... 
+770 bytes for ./Payload/TakeStockInChildren.app/Frameworks/IQKeyboardManagerSwift.framework/Info.plist
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib ... 
+2019-08-19 12:56:24 +0000  254272 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftAssetsLibrary.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib ... 
+2019-08-19 12:56:24 +0000  311312 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreAudio.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib ... 
+2019-08-19 12:56:24 +0000  503456 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftAVFoundation.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:24 +0000  1798 bytes for ./Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework/_CodeSignature/CodeResources
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework/Alamofire ... 
+2019-08-19 12:56:24 +0000  1400592 bytes for ./Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework/Alamofire
+copying file ./Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework/Info.plist ... 
+2019-08-19 12:56:24 +0000  742 bytes for ./Payload/TakeStockInChildren.app/Frameworks/Alamofire.framework/Info.plist
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework/_CodeSignature/CodeResources ... 
+2019-08-19 12:56:24 +0000  1798 bytes for ./Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework/_CodeSignature/CodeResources
+copying file ./Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework/SDWebImage ... 
+2019-08-19 12:56:24 +0000  348320 bytes for ./Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework/SDWebImage
+copying file ./Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework/Info.plist ... 
+2019-08-19 12:56:24 +0000  744 bytes for ./Payload/TakeStockInChildren.app/Frameworks/SDWebImage.framework/Info.plist
+copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib ... 
+2019-08-19 12:56:24 +0000  8479536 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftFoundation.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib ... 
+2019-08-19 12:56:24 +0000  302640 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreMedia.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib ... 
+2019-08-19 12:56:24 +0000  304112 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftCoreLocation.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib ... 
+2019-08-19 12:56:24 +0000  1013296 bytes for ./Payload/TakeStockInChildren.app/Frameworks/libswiftsimd.dylib
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/embedded.mobileprovision ... 
+2019-08-19 12:56:24 +0000  8120 bytes for ./Payload/TakeStockInChildren.app/embedded.mobileprovision
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/info.png ... 
+2019-08-19 12:56:24 +0000  3527 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/info.png
+copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/error@3x.png ... 
+2019-08-19 12:56:24 +0000  2315 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/error@3x.png
+copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/angle-mask@3x.png ... 
+2019-08-19 12:56:24 +0000  9389 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/angle-mask@3x.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/angle-mask@2x.png ... 
+2019-08-19 12:56:24 +0000  5614 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/angle-mask@2x.png
+copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/error@2x.png ... 
+2019-08-19 12:56:24 +0000  1137 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/error@2x.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/info@3x.png ... 
+2019-08-19 12:56:24 +0000  6585 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/info@3x.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/success@2x.png ... 
+811 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/success@2x.png
+copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/success@3x.png ... 
+2019-08-19 12:56:24 +0000  1576 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/success@3x.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/info@2x.png ... 
+2019-08-19 12:56:24 +0000  4852 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/info@2x.png
+copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/error.png ... 
+2019-08-19 12:56:24 +0000  455 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/error.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/success.png ... 
+349 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/success.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/angle-mask.png ... 
+2019-08-19 12:56:24 +0000  3482 bytes for ./Payload/TakeStockInChildren.app/SVProgressHUD.bundle/angle-mask.png
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/Info.plist ... 
+2019-08-19 12:56:24 +0000  1734 bytes for ./Payload/TakeStockInChildren.app/Info.plist
+2019-08-19 12:56:24 +0000  copying file ./Payload/TakeStockInChildren.app/PkgInfo ... 
+8 bytes for ./Payload/TakeStockInChildren.app/PkgInfo
+2019-08-19 12:56:24 +0000  /usr/bin/ditto exited with 0
+2019-08-19 12:56:24 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2019-08-19 12:56:24 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2019-08-19 12:56:24 +0000  Processing step: IDEDistributionCreateManifestStep

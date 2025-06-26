@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TakeStockInChildren.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+				<key>dateExpires</key>
+				<string>28/07/20</string>
+				<key>type</key>
+				<string>iOS Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+						<key>dateExpires</key>
+						<string>28/07/20</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>ActionKit.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>X2WK6QAS2Y</string>
+						<key>name</key>
+						<string>TSIC, INC</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+						<key>dateExpires</key>
+						<string>28/07/20</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>Alamofire.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>X2WK6QAS2Y</string>
+						<key>name</key>
+						<string>TSIC, INC</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+						<key>dateExpires</key>
+						<string>28/07/20</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>GoogleUtilities.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>X2WK6QAS2Y</string>
+						<key>name</key>
+						<string>TSIC, INC</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+						<key>dateExpires</key>
+						<string>28/07/20</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>IQKeyboardManagerSwift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>X2WK6QAS2Y</string>
+						<key>name</key>
+						<string>TSIC, INC</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+						<key>dateExpires</key>
+						<string>28/07/20</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>ImagePicker.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>X2WK6QAS2Y</string>
+						<key>name</key>
+						<string>TSIC, INC</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+						<key>dateExpires</key>
+						<string>28/07/20</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>SDWebImage.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>X2WK6QAS2Y</string>
+						<key>name</key>
+						<string>TSIC, INC</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>9259C709CFC267786B3387368D48F245DCD00ECF</string>
+						<key>dateExpires</key>
+						<string>28/07/20</string>
+						<key>type</key>
+						<string>iOS Development</string>
+					</dict>
+					<key>name</key>
+					<string>nanopb.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>X2WK6QAS2Y</string>
+						<key>name</key>
+						<string>TSIC, INC</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>X2WK6QAS2Y.com.app.TakeStockInChildren</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>X2WK6QAS2Y</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>X2WK6QAS2Y.com.app.TakeStockInChildren</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>TakeStockInChildren.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>3d9c06b4-2adf-43b9-8a98-e507c4a9c3ab</string>
+				<key>name</key>
+				<string>TSIC_DEV_29-07-2019</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>X2WK6QAS2Y</string>
+				<key>name</key>
+				<string>TSIC, INC</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

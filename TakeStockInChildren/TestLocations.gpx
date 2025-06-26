@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Xcode">
+  <wpt lat="23.006761" lon="88.136722">
+    <name>Google</name>
+  </wpt>
+  <wpt lat="22.554741" lon="88.201267">
+      <name>Apple</name>
+  </wpt>
+<!--  <wpt lat="22.54606" lon="88.35144">-->
+<!--      <name>Apple</name>-->
+<!--  </wpt>-->
+<!--  <wpt lat="37.331695" lon="-122.0322801">-->
+<!--<wpt lat="22.54600" lon="88.34820">-->
+<!--    <name>Apple</name>-->
+<!--  </wpt>-->
+<!--<wpt lat="22.54437" lon="88.35145">-->
+<!--    <name>Apple</name>-->
+<!--</wpt>-->
+<!--<wpt lat="22.55231" lon="87.04554">-->
+<!--    <name>Apple</name>-->
+<!--</wpt>-->
+<wpt lat="22.59019" lon="88.26743">
+    <name>Apple</name>
+</wpt>
+<wpt lat="22.54437" lon="88.35145">
+    <name>Apple</name>
+</wpt>
+<wpt lat="22.54600" lon="88.34820">
+    <name>Apple</name>
+</wpt>
+<!--<wpt lat="22.54606" lon="88.35144">-->
+<!--    <name>Apple</name>-->
+<!--</wpt>-->
+<wpt lat="22.54574" lon="88.35183">
+    <name>Apple</name>
+</wpt>
+<wpt lat="22.54309" lon="88.35199">
+    <name>Google</name>
+</wpt>
+</gpx>

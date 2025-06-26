@@ -1,0 +1,378 @@
+//
+//  TaskViewController.swift
+//  TakeStockInChildren
+//
+//  Created by Aquarious Technology on 15/07/19.
+//  Copyright © 2019 Aquarious Technology. All rights reserved.
+//
+
+import UIKit
+import Alamofire
+protocol backrefreshseven {
+    func backrefreshseven(name: String)
+}
+class TaskViewController: BaseViewController{
+    
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var topheaderImage: UIImageView!
+    @IBOutlet weak var backgroundimage: UIImageView!
+    @IBOutlet weak var buttonTaskMenu: UIButton!
+    @IBOutlet weak var collectionViewStatusTask: UICollectionView!
+    @IBOutlet weak var tableViewTask: UITableView!
+    @IBOutlet weak var topHeightConstraintCollectionView: NSLayoutConstraint!
+    
+    var arrTaskStaus = ["Pending","Completed"]
+    var arrtableStatus = [NSDictionary]()
+    var isPending: Bool = true
+    var selectedIndex : Int?
+    var presentWorkStatus : Int?
+    var cell = TaskCollectionViewCell()
+    var valueMode : String?
+    
+    var delegate : backrefreshseven!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+      //  self.valueMode =  UserDefaults.standard.value(forKey: "mode") as? String
+        // manageAutoLayOut()
+        selectedIndex = 0
+       // darkModechanged()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        tableViewTask.setContentOffset(.zero, animated:true)
+        //arrtableStatus.removeAll()
+        
+        if(selectedIndex == 0){
+            isPending = true
+            pendingApiCalling()
+        }
+        else{
+            isPending = false
+            pendingApiCalling()
+        }
+        collectionViewStatusTask.reloadData()
+    }
+    
+    
+    func darkModechanged() {
+        if self.valueMode == "dark" {
+            backgroundimage.image = UIImage(named: "BG4")
+            topheaderImage.image = UIImage(named: "Arcdark11")
+            mainView.backgroundColor =  UIColor(hex: "#0E0F27")
+        }
+        else if self.valueMode == "light" {
+            topheaderImage.image = UIImage(named: "Arc")
+            backgroundimage.image = UIImage(named: "BackgroundImage")
+            mainView.backgroundColor =  .white
+        }
+    }
+    
+    // MARK:: UIStatusBar
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    //MARK: Button Action
+    @IBAction func buttonBackAction(_ sender: Any) {
+        self.delegate?.backrefreshseven(name: "Hello")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK:- Api Calling for Loading Goal Table
+    func pendingApiCalling(){
+        let userDetails:NSMutableDictionary = [
+            "type" : "task",
+            "search_text" :""
+        ]
+        if self.connectedToNetwork() {
+            if(isPending == true){
+                self.startActivityIndicator()
+                ApiManager.sharedInstance.getgGoalList(userDetails: userDetails, onSuccess: { json in
+                    DispatchQueue.main.async {
+                        
+                        //print("JSON\(json)")
+                        DispatchQueue.main.async(execute: {() -> Void in
+                            let dataTemp = json["data"]! as! NSDictionary
+                            self.arrtableStatus = (dataTemp["datalist"] as? [NSDictionary])!
+                            
+                            if(self.arrtableStatus.count > 0){
+                                self.tableViewTask.reloadData()
+                                self.stopActivityIndicator()
+                            }
+                            else{
+                                self.tableViewTask.reloadData()
+                                self.showAlert(_sourceController: self, _msg: "No pending Assignments")
+                                self.stopActivityIndicator()
+                            }
+                        })
+                    }
+                }, onFailure: { error in
+                    DispatchQueue.main.sync(execute: {() -> Void in
+                        self.stopActivityIndicator()
+                        self.logOutMentee()
+                        /*
+                        let alert = UIAlertController(title: "Error", message: error["message"] as? String, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss" , style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        */
+                    })
+                })
+            }
+            else{
+                self.startActivityIndicator()
+                ApiManager.sharedInstance.getCompleteGoalList(userDetails: userDetails, onSuccess: { json in
+                    DispatchQueue.main.async {
+                        
+                        DispatchQueue.main.async(execute: {() -> Void in
+                            let dataTemp = json["data"]! as! NSDictionary
+                            self.arrtableStatus.removeAll()
+                            self.arrtableStatus = dataTemp["datalist"] as! [NSDictionary]
+                            if(self.arrtableStatus.count > 0){
+                                print(self.arrtableStatus.count)
+                                self.tableViewTask.reloadData()
+                                self.stopActivityIndicator()
+                            }
+                            else{
+                                self.stopActivityIndicator()
+                                self.showAlert(_sourceController: self, _msg: "No Assignments completed")
+                            }
+                        })
+                    }
+                }, onFailure: { error in
+                    DispatchQueue.main.sync(execute: {() -> Void in
+                        self.stopActivityIndicator()
+                        self.logOutMentee()
+                        /*
+                        let alert = UIAlertController(title: "Error", message: error["message"] as? String, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok" , style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        */
+                    })
+                })
+            }
+        }
+        else {
+            showAlert(_sourceController: self, _msg: "Unable to connect")
+        }
+    }
+    
+    
+    
+    
+    func logOutMentee() {
+        if self.connectedToNetwork() {
+            // self.startActivityIndicator()
+            let token  = UserDefaults.standard.string(forKey: "token")!
+            
+            let headers = [
+                "Authorizations": token,
+                "Content-Type": "application/x-www-form-urlencoded"
+            ]
+            //let header
+            print(headers)
+            
+            let url = TakeStockInChildrenConstant.BaseURL.appending(TakeStockInChildrenConstant.MenteeLogOut)
+            print("MENTEELISTURL\(url)")
+            Alamofire.request(url, method:.get, parameters: nil , headers: headers).responseJSON { response in
+                switch response.result {
+                case .success:
+                    print(response)
+                    let dictVal = response.result.value
+                    print("dictVal\(String(describing: dictVal))")
+                    let dictMain:NSDictionary = dictVal as! NSDictionary
+                    let status = dictMain["status"] as? Bool
+                    print("Status\(String(describing: status))")
+                    if(status == true){
+                        DispatchQueue.main.async{
+                            UserDefaults.standard.setValue(nil, forKey: "userDetails")
+                            UserDefaults.standard.setValue(nil, forKey: "loginMode")
+                            //print("TakeStockInChildrenConstant.mentorUserData\(TakeStockInChildrenConstant.mentorUserData)")
+                            /*
+                            let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BaseLoginViewController")
+                            self.navigationController?.popToViewController(loginVC, animated: true)
+                            */
+                            /*
+                            DispatchQueue.main.async(execute: { () -> Void in
+                                //  self.stopActivityIndicator()
+                                let alert = UIAlertController(title: "Success", message: dictMain["message"] as? String, preferredStyle: UIAlertController.Style.alert)
+                                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                                        
+                                    
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                            })
+                            */
+                            
+                            let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstViewController")
+                            let nav = UINavigationController(rootViewController: loginVC)
+                            nav.navigationBar.isHidden = true;
+                            nav.navigationBar.barStyle = .default
+                            appDelegate.window?.rootViewController = nav
+                            
+                        }
+                    }else{
+                        //self.stopActivityIndicator()
+                        let alert = UIAlertController(title: "Alert", message: dictMain["message"] as? String, preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                case .failure(let error):
+                    print(error)
+                    // self.stopActivityIndicator()
+                    // self.showAlertAction(withTitle: "Alert", message: "Something is going wrong")
+                }
+            }
+        } else
+        {
+            // showAlert(_sourceController: self, _msg: "Unable to connect")
+        }
+    }
+    
+    
+    
+    @IBAction func buttonCompletedDetailsTap(_ sender: Any) {
+        let getbtnDeleteIndex = sender as! UIButton
+        let index = Int(getbtnDeleteIndex.tag)
+        
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CompletedDetailsViewController") as? CompletedDetailsViewController
+        if(arrtableStatus.count > 0){
+            let assign = self.arrtableStatus[index]["assign_id"] as! Int
+            vc?.strAssignId = String(assign) ?? ""
+            vc?.strGoalName = (arrtableStatus[index]["name"] as? String ?? "")
+            vc?.strDescription = (arrtableStatus[index]["description"] as? String ?? "")
+            vc?.strStartDate = (arrtableStatus[index]["start_date"] as? String ?? "")
+            vc?.strEndDate = (arrtableStatus[index]["end_date"] as? String ?? "")
+            vc?.isType = 2
+        }
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+}
+
+
+// MARK:: UICollectionViewViewDatasource
+extension TaskViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        return arrTaskStaus.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TaskCollectionViewCell", for: indexPath) as! TaskCollectionViewCell
+        if arrTaskStaus.count > 0 {
+            cell.labelTaskStatusCell.text = arrTaskStaus[indexPath.item]
+        }
+        if (indexPath.row == selectedIndex) {
+            cell.labelTaskStatusCell.textColor = UIColor(red: 167.0/255.0, green: 174.0/255.0, blue: 59.0/255.0, alpha: 1.0)
+        } else {
+            cell.labelTaskStatusCell.textColor = UIColor.black
+        }
+        //  cell.labelSelectedGoalStatus.text = arrGoalStaus[indexPath.item]
+        
+        return cell
+    }
+}
+
+// MARK:: UICollectionViewViewDelegate
+extension TaskViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath.row == 0) {
+            selectedIndex = indexPath.row
+            print("CurrentIndex1\(String(describing: selectedIndex))")
+            arrtableStatus.removeAll()
+            collectionViewStatusTask.reloadData()
+            isPending = true
+            pendingApiCalling()
+            tableViewTask.reloadData()
+        } else {
+            selectedIndex = indexPath.row
+            print("CurrentIndex\(String(describing: selectedIndex))")
+            arrtableStatus.removeAll()
+            collectionViewStatusTask.reloadData()
+            isPending = false
+            pendingApiCalling()
+            tableViewTask.reloadData()
+        }
+    }
+}
+
+extension TaskViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = ((collectionView.frame.size.width - 30) / 2)
+        return CGSize(width: width, height: 36)
+    }
+}
+
+// MARK:: UITableViewDatasource
+extension TaskViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrtableStatus.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell") as! TaskTableViewCell
+        if self.valueMode == "dark" {
+            cell.labelHeadCell.textColor = .white
+            cell.labelDescriptionCell.textColor = .white
+        }
+        else if self.valueMode == "light" {
+            cell.labelHeadCell.textColor = .black
+            cell.labelDescriptionCell.textColor = .black
+        }
+        cell.labelHeadCell.text = ""
+        cell.labelDescriptionCell.text = ""
+        if arrtableStatus.count > 0 {
+            if (isPending == true) {
+                cell.imageViewCompletedGoalCell.isHidden = true
+                cell.buttonCompleted.isHidden = true
+                cell.buttonCompleted.isUserInteractionEnabled = false
+                presentWorkStatus = arrtableStatus[indexPath.item]["datastatus"] as? Int
+                
+                if (presentWorkStatus == 1) {
+                    cell.imageViewInProgress.isHidden = false
+                } else {
+                    cell.imageViewInProgress.isHidden = true
+                }
+                print("presentWorkStatus\(presentWorkStatus)")
+            } else {
+                cell.imageViewInProgress.isHidden = true
+                cell.imageViewCompletedGoalCell.isHidden = false
+                cell.buttonCompleted.isHidden = false
+                cell.buttonCompleted.isUserInteractionEnabled = true
+                cell.buttonCompleted.tag = indexPath.row
+                cell.buttonCompleted.addTarget(self, action: #selector(buttonCompletedDetailsTap(_:)), for: .touchUpInside)
+            }
+            cell.labelHeadCell.text = arrtableStatus[indexPath.item]["name"] as? String
+            cell.labelDescriptionCell.text = arrtableStatus[indexPath.item]["description"] as? String
+        } else {
+            
+        }
+        //self.actInd.stopAnimating()
+        return cell
+    }
+}
+
+// MARK:: UITextFieldDelegate
+extension TaskViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PendingDetailsViewController") as? PendingDetailsViewController
+        if (arrtableStatus.count > 0) {
+            let assign = self.arrtableStatus[indexPath.item]["assign_id"] as! Int
+            vc?.strAssignId = String(assign) ?? ""
+            vc?.strGoalName = (arrtableStatus[indexPath.item]["name"] as? String ?? "")
+            vc?.strDescription = (arrtableStatus[indexPath.item]["description"] as? String ?? "")
+            vc?.strStartDate = (arrtableStatus[indexPath.item]["start_date"] as? String ?? "")
+            vc?.strEndDate = (arrtableStatus[indexPath.item]["end_date"] as? String ?? "")
+            vc?.isType = 2
+            vc?.presentedWorkStatusOnDetailsScreen = arrtableStatus[indexPath.item]["datastatus"] as? Int
+        }
+        //print("Task.presentedWorkStatusOnDetailsScreen\(vc?.presentedWorkStatusOnDetailsScreen)")
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+    
+}
+

@@ -22,7 +22,7 @@ target 'TakeStockInChildren' do
   pod 'Siren', :git => 'https://github.com/ArtSabintsev/Siren.git', :branch => 'swift5.0'
   pod 'ReverseExtension','0.6.0'
   pod 'ShimmerSwift','2.1.1'
-  pod 'TwilioChatClient', '~> 5.0'
+  pod 'TwilioChatClient'
   pod 'FirebaseCrashlytics'
   pod 'ZoomVideoSDK'
 
@@ -43,6 +43,24 @@ target 'TakeStockInChildren' do
               project.targets.each do |target|
                   target.build_configurations.each do |config|
                       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+                      config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+                                  config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+                                  config.build_settings['ENABLE_BITCODE'] = 'NO'
+                                  # Find bitcode_strip
+                                   bitcode_strip_path = `xcrun -sdk iphoneos --find bitcode_strip`.chop!
+
+                                   # Find path to TwilioVideo dependency
+                                   path = Dir.pwd
+                                   framework_path = "#{path}/Pods/TwilioVideo/TwilioVideo.framework/TwilioVideo"
+
+                                   # Strip Bitcode sections from the framework
+                                   strip_command = "#{bitcode_strip_path} #{framework_path} -m -o #{framework_path}"
+                                   puts "About to strip: #{strip_command}"
+                                   system(strip_command)
+                      xcconfig_path = config.base_configuration_reference.real_path
+                           xcconfig = File.read(xcconfig_path)
+                           xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
+                           File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
                    end
               end
        end

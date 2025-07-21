@@ -99,6 +99,7 @@ class VideoViewController: BaseViewController, ZoomVideoSDKDelegate {
        // NotificationCenter.default.addObserver(self, selector: #selector(endCall), name: .callEnd, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(willterminateApp), name: .terminateApp, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onTimerFiresincomg), name: .disconnectcall, object: nil)
         UIApplication.shared.isIdleTimerDisabled = true
         callingUserimg.layer.cornerRadius = callingUserimg.frame.size.width/2
         print("img",self.receiverImgUrl)
@@ -123,7 +124,19 @@ class VideoViewController: BaseViewController, ZoomVideoSDKDelegate {
         
         ZoomVideoSDK.shareInstance()?.delegate = self
     }
-    
+    @objc func onTimerFiresincomg()
+    {
+        self.navigationController?.popViewController(animated: true)
+        /*
+        participantOutincomg += 1
+        print("count--",participantOutincomg)
+        if participantOutincomg == 48 {
+            self.timer?.invalidate()
+            self.navigationController?.popViewController(animated: true)
+      1  }
+        */
+        
+    }
     //MARK:// Video Call Socket
     func videoSocket() {
         print("Socket function called")
@@ -301,7 +314,7 @@ class VideoViewController: BaseViewController, ZoomVideoSDKDelegate {
         parameter["room_sid"] = rsid
         parameter["unique_name"] = self.roomname
         if self.callReceievedOrnot {
-            parameter["disconnect_type"] = "end_call"
+            parameter["disconnect_type"] = "denied_call"
         }
         else  {
             parameter["disconnect_type"] = "miss_call"
@@ -352,7 +365,7 @@ class VideoViewController: BaseViewController, ZoomVideoSDKDelegate {
         parameter["room_sid"] = rsid
         parameter["unique_name"] = rsid
         if self.callReceievedOrnot {
-            parameter["disconnect_type"] = "end_call"
+            parameter["disconnect_type"] = "denied_call"
         }
         else  {
             parameter["disconnect_type"] = "miss_call"
@@ -719,7 +732,7 @@ class VideoViewController: BaseViewController, ZoomVideoSDKDelegate {
          parameter["room_sid"] = rsid
         parameter["unique_name"] = self.roomname
         if self.callReceievedOrnot {
-            parameter["disconnect_type"] = "end_call"
+            parameter["disconnect_type"] = "denied_call"
         }
         else  {
             parameter["disconnect_type"] = "miss_call"

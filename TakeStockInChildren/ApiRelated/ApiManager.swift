@@ -1644,7 +1644,7 @@ class ApiManager: NSObject {
 
             if let resData = data {
                 let jsonResponse = try? JSONSerialization.jsonObject(with: resData, options: []) as? NSDictionary
-                print("My Journal jsonResponse:: \(String(describing: jsonResponse!))")
+               // print("My Journal jsonResponse:: \(String(describing: jsonResponse!))")
                 if (error != nil) {
                     onFailure(jsonResponse!)
                 } else {

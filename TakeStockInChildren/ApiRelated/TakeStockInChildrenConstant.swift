@@ -24,9 +24,15 @@ class TakeStockInChildrenConstant {
     static var menteeTimeZone: String = ""
 //    //set Url's 5August:-
 ////    PROD
-    static let BaseURL = "https://tsicmentorapp.org/api/v1/"
-    static let PREURL = "https://tsicmentorapp.org/api/"
-    static let SocketURL = "https://tsicmentorapp.org:3000/"
+//    static let BaseURL = "https://tsicmentorapp.org/api/v1/"
+//    static let PREURL = "https://tsicmentorapp.org/api/"
+//    static let SocketURL = "https://tsicmentorapp.org:3000/"
+//
+    //Live url 12June2025
+    static let BaseURL = "https://live.tsicmentorapp.org/api/v1/"
+    static let PREURL = "https://live.tsicmentorapp.org/api/"
+    static let SocketURL = "https://live.tsicmentorapp.org:3000/"
+    
     
     //UAT
 //    static let BaseURL = "https://uat.tsicmentorapp.org/api/v1/"
@@ -37,7 +43,7 @@ class TakeStockInChildrenConstant {
 //    static let BaseURL = "https://test.tsicmentorapp.org/api/v1/"
 //    static let PREURL = "https://test.tsicmentorapp.org/api/"
 //    static let SocketURL = "https://test.tsicmentorapp.org:3000/"
-    
+//    
     static let IMAGE_REPORT_BASEURL = "https://tsic.s3.us-east-2.amazonaws.com/"
 //    static let HOST = "http://3.134.155.0/"
 // //DEV
@@ -211,6 +217,7 @@ class TakeStockInChildrenConstant {
     //TODO:Mentor School List
     static let getMentorSchoolList  = "mentor/schoollist"
     static let schoolList = "mentor/schoollist"
+    static let getChatHistory = "chat/history"
 }
 
 class TakeStockInChildrenConstantVariables {

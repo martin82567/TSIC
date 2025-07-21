@@ -486,7 +486,7 @@ class MentorApiManager: NSObject {
         let loginMode = UserDefaults.standard.value(forKey: "loginMode") as? String
         if let checkLoginMode = loginMode {
             if checkLoginMode == "Mentee" {
-                urlString = "https://tsicmentorapp.org/api/v1/faq/index"
+                urlString = TakeStockInChildrenConstant.BaseURL + "faq/index"
                 if(token != "") {
                     Common().showAlertView(title: "Alert!", msg:  "Token missing", controller: (APP_DELEGATE.window?.rootViewController)!, okClicked: {
                       
@@ -497,7 +497,7 @@ class MentorApiManager: NSObject {
                 }
                 
             } else {
-                urlString = "https://tsicmentorapp.org/api/v1/mentor/faq/index"
+                urlString = TakeStockInChildrenConstant.BaseURL + "mentor/faq/index"
                 if(token != "") {
                     Common().showAlertView(title: "Alert!", msg:  "Token missing", controller: (APP_DELEGATE.window?.rootViewController)!, okClicked: {
                       

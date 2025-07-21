@@ -1142,7 +1142,8 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-       
+        print(payload.dictionaryPayload)
+
         var type_Video: String = ""
         var accesToken: String = ""
         var sendername: String = ""
@@ -1191,7 +1192,7 @@ extension AppDelegate: PKPushRegistryDelegate {
         os_log("Here at after push")
        // print("Overall data voip",CommonValue.shared.SRaccestoken,CommonValue.shared.roomname,CommonValue.shared.senderName,CommonValue.shared.roomSid,CommonValue.shared.remainingTime)
        // print("type video",type_Video)
-        if type_Video == "miss_call" {
+        if type_Video == "miss_call"  || type_Video == "denied_call" {
              
             denyCall()
         }
@@ -1225,7 +1226,8 @@ extension AppDelegate: CXProviderDelegate {
         print("uid----deny",CommonValue.shared.uid)
         os_log("Reported missed call")
         provider.reportCall(with: CommonValue.shared.uid, endedAt: nil, reason: .remoteEnded)
-        NotificationCenter.default.post(name: .notanswered, object: nil)
+        NotificationCenter.default.post(name: .disconnectcall, object: nil)
+       // NotificationCenter.default.post(name: .notanswered, object: nil)
         CommonValue.shared.roomname = ""
         CommonValue.shared.SRaccestoken = ""
         CommonValue.shared.senderName = ""
@@ -1307,9 +1309,10 @@ extension AppDelegate: CXProviderDelegate {
         
         var parameter: [String: String] = [:]
         let dicUserDetails = UserDefaults.standard.value(forKey: "userDetails") as! NSDictionary
+        let loginm = UserDefaults.standard.value(forKey: "loginMode") as? String ?? ""
         parameter["unique_name"] = CommonValue.shared.roomname
         parameter["denied_by"] = "\(dicUserDetails["id"] as? Int ?? 0)"
-        parameter["denied_by_type"] = UserDefaults.standard.value(forKey: "loginMode") as? String ?? ""
+        parameter["denied_by_type"] = loginm.lowercased()
         MentorApiManager().deniedVideoCall(parameter: parameter) { (json) in
             
             let status = json["status"] as! Bool

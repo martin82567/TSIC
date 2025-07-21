@@ -8,6 +8,8 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import Alamofire
+
 class TwilloTextChatViewController: BaseViewController, QuickstartChatManagerDelegate,UITextFieldDelegate,UITextViewDelegate {
     @IBOutlet weak var videoBtn: UIButton!
     @IBOutlet var safearacolor: UIView!
@@ -50,6 +52,8 @@ class TwilloTextChatViewController: BaseViewController, QuickstartChatManagerDel
     var receiverTypeCheck: String?
     var receiverimageUrl: String?
     var strUrl: String?
+    var arrChatHistory = [Chats]()
+    var loginAuther = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,7 +80,8 @@ class TwilloTextChatViewController: BaseViewController, QuickstartChatManagerDel
         print("channelname",chatManager.uniqueChannelName)
         chatManager.delegate = self
         
-        
+        loginAuther = UserDefaults.standard.value(forKey: "loginMode") as! String
+       
         self.lblUserName.text = self.OtheruserName
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -115,7 +120,7 @@ class TwilloTextChatViewController: BaseViewController, QuickstartChatManagerDel
             videoBtn.isHidden = false
 
         }
-        
+        getChatHistroy()
     
     }
     
@@ -285,6 +290,8 @@ class TwilloTextChatViewController: BaseViewController, QuickstartChatManagerDel
 
     // Scroll to bottom of table view for messages
     func receivedNewMessage() {
+        getChatHistroy()
+        
         scrollTableViewToBottom()
     }
    
@@ -358,6 +365,7 @@ class TwilloTextChatViewController: BaseViewController, QuickstartChatManagerDel
                     print("msg======",result.resultText,result.resultCode,self.chatManager.client?.isReachabilityEnabled())
                     self.sendPushNotification(msg: msg)
                     if result.isSuccessful() {
+                        self.getChatHistroy()
                         self.txtViewChat.text = ""
                         self.txtViewChat.resignFirstResponder()
                     } else {
@@ -387,51 +395,56 @@ extension TwilloTextChatViewController: UITableViewDataSource,UITableViewDelegat
     // Return number of rows in the table
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return chatManager.dummymessage.count
+       // return chatManager.dummymessage.count
+        return arrChatHistory.count
     }
 
     // Create table view rows
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
         var cell = ChatTableViewCell()
-        if chatManager.messages.count > 0 {
-            let obj = chatManager.dummymessage[indexPath.row]
-            print("msg=============",obj.author.lowercased(), self.concate?.lowercased())
-            if obj.author.lowercased() == self.concate?.lowercased() {
+        if arrChatHistory.count > 0 {
+            let obj = arrChatHistory[indexPath.row]
+            let authorName: String? = obj.author ?? ""
+            print("msg=============", authorName?.lowercased(), self.concate?.lowercased())
+            let authorName1 = loginAuther.lowercased() == "mentor" ? "mentor" : "mentee"
+            if (authorName!.contains(authorName1)) {
+           // if indexPath.row % 2 == 0 {
                 cell = tableView.dequeueReusableCell(withIdentifier: "User",
                                                              for: indexPath) as! ChatTableViewCell
                // let trimmedStr = (obj.body).trimmingCharacters(in: .whitespaces)
               //  print("trimmed string",trimmedStr)
-                cell.lblUser.text = obj.body
+                cell.lblUser.text = obj.message ?? ""
                 cell.lblUser.numberOfLines = 0
                 
-                _ = Date()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "MM-dd-yyyy"   //"MM-dd-yyyy"
-                let result = formatter.date(from: obj.dateCreated ?? "")
+         //       _ = Date()
+//                let formatter = DateFormatter()
+//                formatter.dateFormat = "MM-dd-yyyy"   //"MM-dd-yyyy"
+//                let result = formatter.date(from: obj.date ?? "")
+//
+//                cell.lblTime.text = result?.dateString()
                 
-                cell.lblTime.text = result?.dateString()
                 
                 
-                /*
-                let date = obj.dateCreated ?? ""
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-                let outdate = dateFormatter.date(from: date) ?? Date()
+//                let date = obj.date ?? ""
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//                dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//                let outdate = dateFormatter.date(from: date) ?? Date()
+//
+//                let format = DateFormatter()
+//                format.dateFormat = "MM-dd-yyyy"
+//                let stringdate = format.string(from: outdate)
+//
+//                cell.lblTime.text = stringdate
 
-                let format = DateFormatter()
-                format.dateFormat = "dd-MM-yyyy"
-                let stringdate = format.string(from: outdate)
-                */
                 
-                
-                let date = NSDate.dateWithISO8601String(dateString: obj.dateCreated)
-                let timestamp = DateTodayFormatter().stringFromDate(date: date)
+                let date1 = NSDate.dateWithISO8601String(dateString: obj.date ?? "")
+                let timestamp = DateTodayFormatter().stringFromDate(date: date1)
                 
                 cell.lblTime.text = timestamp
                 
-                if obj.isread {
+                if obj.isSeen ?? true {
                     print("msg seen")
                     cell.imgSeen.image = UIImage(named: "MessageSeen")
                 }
@@ -446,7 +459,7 @@ extension TwilloTextChatViewController: UITableViewDataSource,UITableViewDelegat
             else {
                 cell = (tableView.dequeueReusableCell(withIdentifier: "Other", for: indexPath) as! ChatTableViewCell)
            // let trimmedStr = (obj.body).trimmingCharacters(in: .whitespaces)
-                cell.lblOther.text = obj.body
+                cell.lblOther.text = obj.message ?? ""
                 cell.lblOther.numberOfLines = 0
              //   print("trimmed string",trimmedStr)
                
@@ -463,7 +476,7 @@ extension TwilloTextChatViewController: UITableViewDataSource,UITableViewDelegat
                 let stringdate = format.string(from: outdate)
                 */
                 
-                let date = NSDate.dateWithISO8601String(dateString: obj.dateCreated)
+                let date = NSDate.dateWithISO8601String(dateString: obj.date ?? "")
                 let timestamp = DateTodayFormatter().stringFromDate(date: date)
                 
                 cell.lblTime.text = timestamp
@@ -481,12 +494,12 @@ extension TwilloTextChatViewController: UITableViewDataSource,UITableViewDelegat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height : CGFloat = 0.0
         
-        if self.chatManager.dummymessage.count > 0 {
-            let dictChatData = self.chatManager.dummymessage[indexPath.row]
+        if self.arrChatHistory.count > 0 {
+            let dictChatData = self.arrChatHistory[indexPath.row]
             let lblText = UILabel()
             lblText.numberOfLines = 0
             lblText.lineBreakMode = .byWordWrapping//.byWordWrapping
-            let trimmedStr = (dictChatData.body).trimmingCharacters(in: .whitespaces)//replacingOccurrences(of: "^\\s*+$", with: "", options: .regularExpression)// (dictChatData["message"] as? String)?.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
+            let trimmedStr = (dictChatData.message ?? "").trimmingCharacters(in: .whitespaces)//replacingOccurrences(of: "^\\s*+$", with: "", options: .regularExpression)// (dictChatData["message"] as? String)?.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
             lblText.text = trimmedStr
             
             let attributedText = NSAttributedString(string:trimmedStr, attributes:  [NSAttributedString.Key.font : lblText.font!])
@@ -507,3 +520,104 @@ extension TwilloTextChatViewController: UITableViewDataSource,UITableViewDelegat
     
     
 }
+
+
+extension TwilloTextChatViewController {
+    func getChatHistroy() {
+        if self.connectedToNetwork() {
+            var token = ""
+            let loginMode = UserDefaults.standard.value(forKey: "loginMode") as! String
+            print("login mode",loginMode)
+            if loginMode == "Mentor"{
+                token = UserDefaults.standard.string(forKey: "mentorToken")!
+            }else{
+                token = UserDefaults.standard.string(forKey: "token")!
+            }
+            
+            let headers = [
+                "Authorizations": token,
+                "Content-Type": "application/x-www-form-urlencoded"
+            ]
+            print(headers)
+            var parameter = [String:Any]()
+            parameter["chat_type"] = loginMode.lowercased()
+            parameter["chat_code"] = OtherchatCode//47260
+            print(parameter)
+
+            let url = TakeStockInChildrenConstant.PREURL.appending(TakeStockInChildrenConstant.getChatHistory)
+            print("MENTEELISTURL\(url)")
+            Alamofire.request(url, method:.post, parameters: parameter , headers: headers).responseJSON { response in
+                switch response.result {
+                case .success:
+                    print(response)
+                    let dictVal = response.result.value
+                    print("dictVal\(String(describing: dictVal))")
+                    let dictMain:NSDictionary = dictVal as! NSDictionary
+                    let status = dictMain["status"] as? Bool
+                    print("Status\(String(describing: status))")
+                    if(status == true){
+                        if dictMain["status"] as! Bool == true {
+                            if let arrData = dictMain["data"] as? [String:Any] {
+                                self.arrChatHistory.removeAll()
+                                let arrChat = arrData["chats"] as? [[String: Any]] ?? [[:]]
+                                for item in arrChat {
+                                    do {
+                                        let data = try JSONSerialization.data(withJSONObject: item, options: [])
+                                        let user = try JSONDecoder().decode(Chats.self, from: data)
+                                        
+                                        self.arrChatHistory.append(user)
+                                    } catch {
+                                        print("Failed to convert: \(error)")
+                                    }
+                                }
+                                
+                                self.reloadMessages()
+                                self.scrollTableViewToBottom()
+                                //self.receivedNewMessage()
+                            }
+                        }
+                    } else {
+                        //self.stopActivityIndicator()
+                        let alert = UIAlertController(title: "Alert", message: dictMain["message"] as? String, preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                case .failure(let error):
+                    print(error)
+                    // self.stopActivityIndicator()
+                    // self.showAlertAction(withTitle: "Alert", message: "Something is going wrong")
+                }
+            }
+        } else
+        {
+            // showAlert(_sourceController: self, _msg: "Unable to connect")
+        }
+    }
+}
+
+
+struct Chats : Codable {
+    let author : String?
+    let date : String?
+    let isSeen : Bool?
+    let message : String?
+
+    enum CodingKeys: String, CodingKey {
+
+        case author = "author"
+        case date = "date"
+        case isSeen = "isSeen"
+        case message = "message"
+    }
+
+     init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        author = try values.decodeIfPresent(String.self, forKey: .author)
+        date = try values.decodeIfPresent(String.self, forKey: .date)
+         isSeen = try values.decodeIfPresent(Bool.self, forKey: .isSeen)
+        message = try values.decodeIfPresent(String.self, forKey: .message)
+    }
+
+}
+

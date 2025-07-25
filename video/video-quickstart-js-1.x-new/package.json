@@ -1,0 +1,56 @@
+{
+  "name": "video-quickstart-js",
+  "version": "1.0.0-dev",
+  "description": "Twilio Video SDK Quick Start for JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:quickstart": "browserify -t [ localenvify --envfile ../../.env  ] quickstart/src/index.js > quickstart/public/index.js",
+    "clean": "npm-run-all clean:*",
+    "clean:quickstart": "rimraf quickstart/public/index.js",
+    "start": "npm run clean && npm run build && pm2 start server --exp-backoff-restart-delay=100",
+    "stop": "pm2 stop all",
+    "startold": "npm run clean && npm run build && node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twilio/video-quickstart-js.git"
+  },
+  "keywords": [
+    "twilio",
+    "video",
+    "chat",
+    "ip",
+    "real",
+    "time",
+    "diggity"
+  ],
+  "author": "Twilio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twilio/video-quickstart-js/issues"
+  },
+  "homepage": "https://github.com/twilio/video-quickstart-js#readme",
+  "dependencies": {
+    "@zoom/videosdk": "^1.10.8",
+    "apn": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "localenvify": "^1.0.1",
+    "localtunnel": "^2.0.2",
+    "node-gcm": "^1.0.4",
+    "pm2": "^5.1.0",
+    "prismjs": "^1.6.0",
+    "socket.io": "^2.1.1",
+    "stackblur-canvas": "^1.4.0",
+    "twilio": "^3.19.1",
+    "twilio-video": "^2.18.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "copyfiles": "^1.2.0",
+    "npm-run-all": "^4.0.2",
+    "rimraf": "^2.6.1"
+  }
+}

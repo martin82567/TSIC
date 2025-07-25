@@ -1,0 +1,4 @@
+[21-Nov-2019 05:41:22 UTC] PHP Fatal error:  Cannot use Hash as Hash because the name is already in use in /home/tsicdev/public_html/app/Http/Controllers/Api/V1/GoaltaskController.php on line 18
+[06-Feb-2020 11:17:32 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 4194312 bytes) in /home/tsicdev/public_html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php on line 2349
+[06-Feb-2020 11:28:59 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 126976 bytes) in /home/tsicdev/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 449
+[07-Feb-2020 04:40:53 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 1110016 bytes) in /home/tsicdev/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 449

@@ -1,0 +1,273 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700|Open+Sans+Condensed:700');
+
+.clr:after {
+    content: "";
+    display: table;
+    clear: both
+}
+
+.transform-middle {
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -moz-transform: translateY(-50%)
+}
+
+body {
+    font-size: 14px;
+    background: none;
+    color: #454543;
+    font-family: 'open sans', sans-serif;
+}
+
+a {
+    color: inherit
+}
+
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none
+}
+
+ul {
+    margin: auto
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+p {
+    margin: auto
+}
+
+h2.h1 {
+    line-height: 45px;
+    font-weight: 700;
+    color: #000
+}
+
+.image {
+    width: 100%;
+    height: 100%
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 400;
+    outline: none !important
+}
+
+a {
+    cursor: pointer
+}
+
+::-webkit-input-placeholder {
+    color: inherit !important;
+    opacity: 1
+}
+
+::-moz-placeholder {
+    color: inherit !important;
+    opacity: 1
+}
+
+:-ms-input-placeholder {
+    color: inherit !important;
+    opacity: 1
+}
+
+.col-centered {
+    margin: auto;
+    float: none
+}
+
+a,
+button {
+    transition: .3s
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=number] {
+    padding: 0 10px
+}
+
+textarea {
+    padding: 5px 10px
+}
+
+input,
+textarea,
+select,
+button,
+a {
+    font-family: 'open sans', sans-serif
+}
+
+select {
+    border: 1px solid #e1e11e
+}
+
+.select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #dfdfdf;
+    background: #fbfbfb;
+    background-position: center right 5px;
+    background-repeat: no-repeat;
+    position: relative
+}
+
+.select select {
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    padding: 0 30px 0 10px;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    background: none;
+    position: relative;
+    z-index: 9
+}
+
+.select:after {
+    font-family: "fontawesome";
+    content: '\f0d7';
+    width: 30px;
+    font-size: 14px;
+    color: #72ab40;
+    position: absolute;
+    text-align: center;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.check {
+    display: inline-block
+}
+
+.check label {
+    font-size: 16px;
+    margin-bottom: 0;
+    line-height: 27px;
+    vertical-align: middle;
+    padding-left: 24px
+}
+
+.check input[type=checkbox] {
+    width: 16px;
+    height: 20px;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    background: url(../icon/uncheck.png) no-repeat center;
+    background-size: contain;
+    margin-left: -25px;
+    margin-right: 10px
+}
+
+.check input[type=checkbox]:checked {
+    background-image: url(../icon/check.png)
+}
+
+.radio-btn {
+    display: inline-block
+}
+
+.radio-btn label {
+    font-size: 16px;
+    margin-bottom: 0;
+    line-height: 27px;
+    vertical-align: middle;
+    padding-left: 20px
+}
+
+.radio-btn input[type=radio] {
+    width: 16px;
+    height: 20px;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    background: url(../icon/yv-uncheck.png) no-repeat center;
+    background-size: contain;
+    margin-left: -20px;
+    margin-right: 5px
+}
+
+.radio-btn input[type=radio]:checked {
+    background-image: url(../icon/yv-check.png)
+}
+
+a,
+button {
+    cursor: pointer;
+    transition: .3s
+}
+
+.heading-sec {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.heading-sec h4 {
+    font-size: 22px;
+    font-weight: 300;
+    color: #9b752b;
+    margin-bottom: 15px;
+}
+
+.heading-sec h3 {
+    font-size: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9b752b;
+    margin-bottom: 20px;
+}
+
+.heading-sec h5 {
+    font-size: 34px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9b752b;
+    margin-bottom: 20px;
+}
+
+.heading-sec p {
+    font-size: 14px;
+    line-height: 25px;
+    color: #858686;
+}
